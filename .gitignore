@@ -1,0 +1,17 @@
+# venv
+*-venv/
+
+# applications for capturing
+applications/
+
+# QR code
+qr-codes/
+
+# response
+*.json
+
+# personal data:
+openid.txt
+
+# test
+get_email.py
