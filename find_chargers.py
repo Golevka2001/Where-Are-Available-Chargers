@@ -2,18 +2,20 @@
 # -*- coding:utf-8 -*-
 '''Where-Are-Available-Chargers:
     希望这个脚本可以帮助你更容易给小电驴找到充电桩。
+@File: find_chargers.py
+@Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 1.1.0
+@Version: 2.0.0
 @Created Date: 2022/11/01
 @Last Modified Date: 2022/11/03
 '''
 
 # TODO: 现在只存了少数几个充电桩的码，还有很多二维码需要之后添加进来
-# TODO: 之后会想一个更方便查询的方法，比如邮件、网页什么的
 
 import requests
 import yaml
 import os
+import time
 
 
 class FindChargers:
@@ -40,6 +42,14 @@ class FindChargers:
                                  headers=self.config['headers'],
                                  allow_redirects=False).json()
         self.token = response['data']['token']
+
+    def get_time(self) -> str:
+        '''Return current time(used for the web page)
+
+        Returns:
+            str: current time
+        '''
+        return time.strftime("%Y-%m-%d %H:%M:%S")
 
     def where_are_you(self):
         '''Traverse all the charging stations in the list
@@ -73,7 +83,7 @@ class FindChargers:
         # delete the authorization key:
         del [self.config['headers']['authorization']]
 
-    def tell_me(self, type: str) -> dict:
+    def tell_me(self, type: str):
         '''Return different result using different line break character
 
         Args:
@@ -99,4 +109,4 @@ if __name__ == '__main__':
                                'config.yml')
     test = FindChargers(config_path)
     test.where_are_you()
-    print(test.tell_me('html'))
+    print(test.tell_me('str'))

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="static\\css\style.css">
+    <title>Where Are Availabe Chargers?!</title>
+</head>
+
+<body>
+    <script src="static\\js\\script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <h1 align="center">&#x1F50C;&#x1F621; Where Are Available Chargers?!</h1>
+    <p align="center">
+        <span class="plug">&#x1F50C;</span>
+        <span class="hand">&#x1F90F;</span>
+        <span class="face">&#x1F605;</span>
+        <span class="hand">&#x1F595;&nbsp&nbsp&nbsp</span>
+        <br />
+        <span class="motor">&#x1F6F5;</span>
+    </p>
+    <hr />
+
+    <h2 align="center">查询结果</h2>
+
+    <p align="center" class="text">充电桩序号排序方法为从北向南、从西向东（即地图上从上到下、从左到右）</p>
+
+    <p align="center">
+        数据获取时间：{{ last_time }}
+        <!--<br />
+        <button class="refresh_button" id="swap">重新获取</button>-->
+    </p>
+
+    <h3 align="center">东门</h3>
+    <table>
+        <tr>
+            <th class="charger_column">充电桩</th>
+            <th>空闲插座</th>
+        </tr>
+        {% for charger in east_gate %}
+        <tr>
+            <td>{{ charger[0]}}</td>
+            <td>{{ charger[1]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3 align="center">西门</h3>
+    <table>
+        <tr>
+            <th class="charger_column">充电桩</th>
+            <th>空闲插座</th>
+        </tr>
+        {% for charger in west_gate %}
+        <tr>
+            <td>{{ charger[0]}}</td>
+            <td>{{ charger[1]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3 align="center">北门</h3>
+    <p align="center">待更新</p>
+
+    <br />
+
+    <h2 align="center">提供二维码</h2>
+    <p align="center">您可以将二维码发送到我的邮箱</p>
+    <p align="center" style="font-size: 1.2em; font-weight: bolder;">gol3vka@163.com</p>
+    <p align="center">或在 GitHub 上的&nbsp
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers/issues">
+            Issues 页面
+        </a>
+        &nbsp提交
+    </p>
+    <p align="center">麻烦您在发送时备注好充电桩所在位置</p>
+    <p align="center">感谢您的帮助与支持&#x1F389;&#x1F389;&#x1F389;</p>
+
+    <br /><br />
+    <p align="center">
+        <a href="https://github.com/Golevka2001">
+            Copyright © Gol3vka
+        </a>
+    </p>
+</body>
+
+</html>
