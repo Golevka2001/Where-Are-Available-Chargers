@@ -9,7 +9,7 @@ charger_list:
       - 'XYV5mv5tnKHV9'
   east_gate:
     - - '北侧-1'
-      - 'XYvlqZM8oCmT19' # fault
+      - 'XYvIqZM8oCmT19' # fault
     - - '北侧-2'
       - 'XYnfw8BeyiXS16'
     - - '北侧-3'
@@ -18,6 +18,10 @@ charger_list:
       - 'XYxN6z9ZETBZ17'
     - - '北侧-5'
       - 'XYBGw4c88NWd21'
+    - - '南侧-1'
+      - 'XYSfeYzOvLwN5'
+    - - '南侧-2'
+      - 'XYDSUGrzkRfX6'
 
 # use this header to fake a visit by android mobile
 headers:
