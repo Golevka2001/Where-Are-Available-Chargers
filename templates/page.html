@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+    <title>My Webpage</title>
+</head>
+
+<body>
+    <table border="1" style="border-collapse: collapse;">
+        <caption>东门</caption>
+        <tr>
+            <td>充电桩</td>
+            <td>空闲插座</td>
+        </tr>
+        {% for charger in west_gate %}
+        <tr>
+            <td>{{charger[0]}}</td>
+            <td>{{charger[1]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table border="1" style="border-collapse: collapse;">
+        <caption>西门</caption>
+        <tr>
+            <td>充电桩</td>
+            <td>空闲插座</td>
+        </tr>
+        {% for charger in west_gate %}
+        <tr>
+            <td>{{charger[0]}}</td>
+            <td>{{charger[1]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

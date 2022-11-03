@@ -1,21 +1,23 @@
 # location & number
 charger_list:
-  - - '西门南侧-1'
-    - 'XYcjSf9nqvK612'
-  - - '西门南侧-2'
-    - 'XY31g0OtIZA711'
-  - - '西门南侧-3'
-    - 'XYV5mv5tnKHV9'
-  - - '东门北侧-1'
-    - 'XYvlqZM8oCmT19' # fault
-  - - 东门北侧-2
-    - XYnfw8BeyiXS16
-  - - 东门北侧-3
-    - XYEogTrLdXZx14
-  - - 东门北侧-4
-    - XYxN6z9ZETBZ17
-  - - 东门北侧-5
-    - XYBGw4c88NWd21
+  west_gate:
+    - - '南侧-1'
+      - 'XYcjSf9nqvK612'
+    - - '南侧-2'
+      - 'XY31g0OtIZA711'
+    - - '南侧-3'
+      - 'XYV5mv5tnKHV9'
+  east_gate:
+    - - '北侧-1'
+      - 'XYvlqZM8oCmT19' # fault
+    - - '北侧-2'
+      - 'XYnfw8BeyiXS16'
+    - - '北侧-3'
+      - 'XYEogTrLdXZx14'
+    - - '北侧-4'
+      - 'XYxN6z9ZETBZ17'
+    - - '北侧-5'
+      - 'XYBGw4c88NWd21'
 
 # use this header to fake a visit by android mobile
 headers:
@@ -34,3 +36,9 @@ phone: '01'
 
 # maybe useful someday...
 appid: 'wx26caa1e6b60d4ef5'
+
+en2zh:
+  'east_gate': '东门'
+  'west_gate': '西门'
+  'south_gate': '南门'
+  'north_gate': '北门'

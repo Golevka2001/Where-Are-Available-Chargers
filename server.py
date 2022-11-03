@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from find_chargers import FindChargers
 
 app = Flask(__name__)
@@ -8,7 +8,8 @@ app = Flask(__name__)
 def index():
     chargers = FindChargers()
     chargers.where_are_you()
-    return chargers.tell_me('html')
+    result = chargers.tell_me('html')
+    return render_template('index.html', east_gate=result['east_gate'])
 
 
 if __name__ == "__main__":
