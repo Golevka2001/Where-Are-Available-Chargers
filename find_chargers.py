@@ -5,9 +5,9 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.0.0
+@Version: 2.0.1
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/03
+@Last Modified Date: 2022/11/04
 '''
 
 # TODO: 现在只存了少数几个充电桩的码，还有很多二维码需要之后添加进来
