@@ -1,6 +1,9 @@
 # venv
 *-venv/
 
+# cache
+__pycache__/
+
 # applications for capturing
 applications/
 
@@ -15,3 +18,4 @@ openid.txt
 
 # test
 get_email.py
+server.py
