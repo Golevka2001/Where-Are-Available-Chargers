@@ -1,6 +1,12 @@
 # location & number
 charger_list:
   west_gate:
+    - - '北侧-1'
+      - 'XYS2hOWumHDa13'
+    - - '北侧-2'
+      - 'XYp5iHwheZvf18'
+    - - '北侧-3'
+      - 'XY9HNPbegRgV15'
     - - '南侧-1'
       - 'XYcjSf9nqvK612'
     - - '南侧-2'
@@ -9,7 +15,7 @@ charger_list:
       - 'XYV5mv5tnKHV9'
   east_gate:
     - - '北侧-1'
-      - 'XYvIqZM8oCmT19' # fault
+      - 'XYvIqZM8oCmT19'
     - - '北侧-2'
       - 'XYnfw8BeyiXS16'
     - - '北侧-3'
@@ -22,6 +28,15 @@ charger_list:
       - 'XYSfeYzOvLwN5'
     - - '南侧-2'
       - 'XYDSUGrzkRfX6'
+  north_gate:
+    - - '东侧-1'
+      - 'XYeo2IsT1Sx61'
+    - - '东侧-2'
+      - 'XYKCwwkZXBW62'
+    - - '东侧-3'
+      - 'XYTbok829tYo8'
+    - - '东侧-4'
+      - 'XYo7UstSCeu64'
 
 # use this header to fake a visit by android mobile
 headers:

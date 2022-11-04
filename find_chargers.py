@@ -5,17 +5,18 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.0.1
+@Version: 2.1.0
 @Created Date: 2022/11/01
 @Last Modified Date: 2022/11/04
 '''
 
-# TODO: 现在只存了少数几个充电桩的码，还有很多二维码需要之后添加进来
+# TODO: 现有的大部分充电桩已经添加进来啦，还差西门北侧3个
 
 import requests
 import yaml
 import os
 import time
+from datetime import datetime, timedelta
 
 
 class FindChargers:
@@ -25,6 +26,7 @@ class FindChargers:
     def __init__(self, config_path: str) -> None:
         self.token = str()
         self.available = dict()
+        self.last_time = datetime.now() - timedelta(days=1)  # yesterday
         with open(config_path, 'r', encoding='utf-8') as config_file:
             self.config = yaml.safe_load(config_file)
             config_file.close()
@@ -43,22 +45,18 @@ class FindChargers:
                                  allow_redirects=False).json()
         self.token = response['data']['token']
 
-    def get_time(self) -> str:
-        '''Return current time(used for the web page)
-
-        Returns:
-            str: current time
+    def _update_time(self) -> None:
+        '''Record current time
         '''
-        return time.strftime("%Y-%m-%d %H:%M:%S")
+        self.last_time = datetime.now()
 
-    def where_are_you(self):
+    def where_are_you(self) -> None:
         '''Traverse all the charging stations in the list
         '''
         self._get_token()
         url_pri = 'https://mapi.7mate.cn/api/chargers/'
         self.config['headers'][
             'authorization'] = 'Bearer ' + self.token  # authorization key is needed
-
         # traverse all stations:
         for area, chargers in self.config['charger_list'].items():
             charger_list = list()
@@ -79,11 +77,12 @@ class FindChargers:
                         available_sockets = ' * 无 * '
                 charger_list.append([charger_name, available_sockets])
             self.available.update({self.config['en2zh'][area]: charger_list})
-
+        # update time:
+        self._update_time()
         # delete the authorization key:
         del [self.config['headers']['authorization']]
 
-    def tell_me(self, type: str):
+    def tell_me(self, type: str) -> str | dict:
         '''Return different result using different line break character
 
         Args:

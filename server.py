@@ -5,7 +5,7 @@
 @File: find_chargers.py
 @Brief: 使用 flask 框架搭建的简单服务，将爬取的信息显示在网页上。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.0.1
+@Version: 2.1.0
 @Created Date: 2022/11/01
 @Last Modified Date: 2022/11/04
 '''
@@ -13,23 +13,34 @@
 from flask import Flask, render_template
 from find_chargers import FindChargers
 import os
+import time
+from datetime import datetime, timedelta
 
+config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                           'config.yml')
+min_duration = timedelta(minutes=5)  # minimum refresh duration
+
+chargers = FindChargers(config_path)
 app = Flask(__name__)
 
 
 # page & pass result in
 @app.route("/")
 def index():
-    config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                               'config.yml')
-    chargers = FindChargers(config_path)
-    chargers.where_are_you()
+    duration = datetime.now() - chargers.last_time
+    # if exceed minimum refresh interval: request & refresh:
+    if duration > min_duration:
+        chargers.where_are_you()
     result = chargers.tell_me('html')
-    last_time = chargers.get_time()
+    # format time:
+    last_time = chargers.last_time.strftime('%Y-%m-%d %H:%M:%S')
+    duration = time.strftime("%H:%M:%S", time.gmtime(duration.seconds))
     return render_template('index.html',
                            east_gate=result['东门'],
                            west_gate=result['西门'],
-                           last_time=last_time)
+                           north_gate=result['北门'],
+                           last_time=last_time,
+                           duration=duration)
 
 
 # run server
