@@ -31,6 +31,8 @@
 
     <p align="center">
         数据获取时间：{{ last_time }}
+        <br />
+        距上次获取已过去：{{ duration }}
         <!--<br />
         <button class="refresh_button" id="swap">重新获取</button>-->
     </p>
@@ -64,7 +66,18 @@
     </table>
 
     <h3 align="center">北门</h3>
-    <p align="center">待更新</p>
+    <table>
+        <tr>
+            <th class="charger_column">充电桩</th>
+            <th>空闲插座</th>
+        </tr>
+        {% for charger in north_gate %}
+        <tr>
+            <td>{{ charger[0]}}</td>
+            <td>{{ charger[1]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
     <br />
 
