@@ -10,13 +10,10 @@
 @Last Modified Date: 2022/11/04
 '''
 
-# TODO: 现有的大部分充电桩已经添加进来啦，还差西门北侧3个
-
+from datetime import datetime, timedelta
+import os
 import requests
 import yaml
-import os
-import time
-from datetime import datetime, timedelta
 
 
 class FindChargers:
