@@ -16,4 +16,6 @@ qr-codes/
 # personal data:
 openid.txt
 
-# test
+# local
+*.bat
+*.Ink
