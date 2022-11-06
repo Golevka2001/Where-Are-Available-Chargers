@@ -6,12 +6,12 @@
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
     <title>Where Are Availabe Chargers?!</title>
 </head>
 
 <body>
-    <script src="../static/js/script.js"></script>
+    <script src="static/js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <h1 align="center">&#x1F50C;&#x1F621; Where Are Available Chargers?!</h1>
@@ -31,9 +31,11 @@
     <h2 align="center">查询结果</h2>
     <p align="center" class="text">充电桩序号排序方法为从北向南、从西向东（即地图上从上到下、从左到右）</p>
     <p align="center">
-        数据获取时间：{{ last_time }}
+        数据获取时间：{{ last_time }}(UTC时间)
         <br />
         距上次获取已过去：{{ duration }}
+		<br />
+		（数据刷新间隔约为3分钟）
         <!--<br />
         <button class="refresh_button" id="swap">重新获取</button>-->
     </p>
@@ -99,9 +101,6 @@
     <br />
 
     <p align="center">
-        &#x1F339;在此特别感谢刘同学提供的域名与服务器&#x1F339;
-        <br />
-        <br />
         <a href="https://github.com/Golevka2001">
             Copyright © Gol3vka
         </a>
