@@ -5,7 +5,7 @@
 @File: find_chargers.py
 @Brief: 使用 flask 框架搭建的简单服务，将爬取的信息显示在网页上。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.1.2
+@Version: 2.1.3
 @Created Date: 2022/11/01
 @Last Modified Date: 2022/11/06
 '''
@@ -33,8 +33,8 @@ def index():
     duration = datetime.now() - chargers.last_time
     # if exceed minimum refresh interval: request & refresh:
     if duration > min_duration:
-        thread = Thread(target=chargers.where_are_you, kwargs={})
-        thread.start()
+        update_thread = Thread(target=chargers.where_are_you, kwargs={})
+        update_thread.start()
     if duration > max_duration:
         return render_template('loading.html')
     
