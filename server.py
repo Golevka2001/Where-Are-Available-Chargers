@@ -5,10 +5,12 @@
 @File: find_chargers.py
 @Brief: 使用 flask 框架搭建的简单服务，将爬取的信息显示在网页上。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.1.3
+@Version: 2.1.4
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/06
+@Last Modified Date: 2022/11/07
 '''
+
+# NOTE: 时间的获取和计算都改成了UTC，传到html显示前做了一下+08:00
 
 from find_chargers import FindChargers
 
@@ -30,31 +32,30 @@ app = Flask(__name__)
 # page & pass result in
 @app.route("/")
 def index():
-    duration = datetime.now() - chargers.last_time
+    duration = datetime.utcnow() - chargers.last_time
     # if exceed minimum refresh interval: request & refresh:
     if duration > min_duration:
         update_thread = Thread(target=chargers.where_are_you, kwargs={})
         update_thread.start()
     if duration > max_duration:
         return render_template('loading.html')
-    
-    result = chargers.tell_me('html')
-    # format time:
-    last_time = chargers.last_time.strftime('%Y-%m-%d %H:%M:%S')
-    duration = time.strftime("%H:%M:%S", time.gmtime(duration.seconds))
-    
 
-    
+    result = chargers.tell_me('html')
+    # UTC+08:00 and format time:
+    display_last_time = (chargers.last_time +
+                         timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S')
+    duration = time.strftime("%H:%M:%S", time.gmtime(duration.seconds))
+
     try:
-      retpage = render_template('index.html',
-                           east_gate=result['东门'],
-                           west_gate=result['西门'],
-                           north_gate=result['北门'],
-                           last_time=last_time,
-                           duration=duration)
+        retpage = render_template('index.html',
+                                  east_gate=result['东门'],
+                                  west_gate=result['西门'],
+                                  north_gate=result['北门'],
+                                  last_time=display_last_time,
+                                  duration=duration)
     except:
-      return render_template('loading.html')
-    
+        return render_template('loading.html')
+
     return retpage
 
 

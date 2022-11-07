@@ -5,10 +5,12 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.1.1
+@Version: 2.1.4
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/04
+@Last Modified Date: 2022/11/07
 '''
+
+# NOTE: 时间的获取都改成了UTC
 
 from datetime import datetime, timedelta
 import os
@@ -23,7 +25,8 @@ class FindChargers:
     def __init__(self, config_path: str) -> None:
         self.token = str()
         self.available = dict()
-        self.last_time = datetime.now() - timedelta(days=1)  # yesterday
+        # initialize as yesterday, ensure refresh:
+        self.last_time = datetime.utcnow() - timedelta(days=1)
         with open(config_path, 'r', encoding='utf-8') as config_file:
             self.config = yaml.safe_load(config_file)
             config_file.close()
@@ -45,7 +48,7 @@ class FindChargers:
     def _update_time(self) -> None:
         '''Record current time
         '''
-        self.last_time = datetime.now()
+        self.last_time = datetime.utcnow()
 
     def where_are_you(self) -> None:
         '''Traverse all the charging stations in the list
