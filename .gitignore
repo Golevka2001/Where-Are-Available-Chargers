@@ -10,9 +10,6 @@ applications/
 # QR code
 qr-codes/
 
-# response
-*.json
-
 # personal data:
 openid.txt
 
