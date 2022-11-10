@@ -7,52 +7,48 @@
 @Author: Golevka2001<gol3vka@163.com>
 @Version: 2.1.4
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/07
+@Last Modified Date: 2022/11/10
 '''
-
-# NOTE: 时间的获取和计算都改成了UTC，传到html显示前做了一下+08:00
 
 from find_chargers import FindChargers
 
 from datetime import datetime, timedelta
 from flask import Flask, render_template
-from threading import Thread
+#from threading import Thread
 import os
 import time
 
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                            'config.yml')
-min_duration = timedelta(minutes=1)  # minimum refresh duration
-max_duration = timedelta(minutes=3)
+min_interval = timedelta(minutes=1)
+#max_interval = timedelta(minutes=3)
 
 chargers = FindChargers(config_path)
+chargers.get_status()
 app = Flask(__name__)
 
 
-# page & pass result in
 @app.route("/")
 def index():
-    duration = datetime.utcnow() - chargers.last_time
+    interval = datetime.utcnow() + timedelta(hours=8) - chargers.local_time
     # if exceed minimum refresh interval: request & refresh:
-    if duration > min_duration:
-        update_thread = Thread(target=chargers.where_are_you, kwargs={})
+    if interval > min_interval:
+        chargers.get_status()
+    '''
+    if interval > min_interval:
+        update_thread = Thread(target=chargers.get_status(), kwargs={})
         update_thread.start()
-    if duration > max_duration:
+    if interval > max_interval:
         return render_template('loading.html')
-
-    result = chargers.tell_me('html')
-    # UTC+08:00 and format time:
-    display_last_time = (chargers.last_time +
-                         timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S')
-    duration = time.strftime("%H:%M:%S", time.gmtime(duration.seconds))
+    '''
+    last_update_time = chargers.local_time.strftime('%Y-%m-%d %H:%M:%S')
+    interval = time.strftime("%H:%M:%S", time.gmtime(interval.seconds))
 
     try:
         retpage = render_template('index.html',
-                                  east_gate=result['东门'],
-                                  west_gate=result['西门'],
-                                  north_gate=result['北门'],
-                                  last_time=display_last_time,
-                                  duration=duration)
+                                  result=chargers.status,
+                                  last_update_time=last_update_time,
+                                  interval=interval)
     except:
         return render_template('loading.html')
 
@@ -61,5 +57,4 @@ def index():
 
 # run server
 if __name__ == "__main__":
-    while True:
-        app.run(host='0.0.0.0', port=3000, debug=False)
+    app.run(host='0.0.0.0', port=3000, debug=False)

@@ -7,105 +7,151 @@
 @Author: Golevka2001<gol3vka@163.com>
 @Version: 2.1.4
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/07
+@Last Modified Date: 2022/11/10
 '''
 
-# NOTE: 时间的获取都改成了UTC
-
+from concurrent.futures import ThreadPoolExecutor, wait
 from datetime import datetime, timedelta
+from threading import Lock
 import os
 import requests
+import time
 import yaml
 
 
 class FindChargers:
-    '''Traverse all the charging stations, print available ones
-    '''
 
     def __init__(self, config_path: str) -> None:
-        self.token = str()
-        self.available = dict()
-        # initialize as yesterday, ensure refresh:
-        self.last_time = datetime.utcnow() - timedelta(days=1)
+        '''Initialize the class
+
+        Args:
+            config_path (str): path of 'config.yml'
+        '''
+        # load config:
+        self.config = dict()
         with open(config_path, 'r', encoding='utf-8') as config_file:
             self.config = yaml.safe_load(config_file)
             config_file.close()
+        # token:
+        self.token = str()
+        # local time (UTC+08:00):
+        self.local_time = datetime.utcnow()
+        # thread pool:
+        self.thread_pool = ThreadPoolExecutor(
+            max_workers=9, thread_name_prefix='inquiry_thread_')
+        # mutex :
+        self.mutex = Lock()
+        # store all status:
+        # {东门:{北侧-1:[[1, 0, 00:30:00, 90%],...],...},...}
+        self.status = dict()
+        for area, stations in self.config['stations'].items():
+            self.status[area] = dict()
+            for station in stations:
+                self.status[area][station] = list()
 
-    def _get_token(self) -> None:
-        '''Use openid and phone number to login and get a token
+    def update_time(self) -> None:
+        '''Update local time (UTC+08:00)
         '''
-        url = 'https://mapi.7mate.cn/api/authorizations'
+        self.local_time = datetime.utcnow() + timedelta(hours=8)
+
+    def get_token(self) -> None:
+        '''Send 'openid' and 'phone' to get token
+
+        Raises:
+            Exception: if token is not received
+        '''
+        # send request:
         login_data = {
             'openid': self.config['openid'],
             'phone': self.config['phone']
         }
-        response = requests.post(url=url,
+        response = requests.post(url=self.config['login_url'],
                                  json=login_data,
                                  headers=self.config['headers'],
                                  allow_redirects=False).json()
-        self.token = response['data']['token']
+        # check:
+        if 'data' not in response:
+            raise Exception('[Error] Login failed!')
+        else:
+            self.token = response['data']['token']
 
-    def _update_time(self) -> None:
-        '''Record current time
-        '''
-        self.last_time = datetime.utcnow()
-
-    def where_are_you(self) -> None:
-        '''Traverse all the charging stations in the list
-        '''
-        self._get_token()
-        url_pri = 'https://mapi.7mate.cn/api/chargers/'
-        self.config['headers'][
-            'authorization'] = 'Bearer ' + self.token  # authorization key is needed
-        # traverse all stations:
-        for area, chargers in self.config['charger_list'].items():
-            charger_list = list()
-            for charger_name, url_post in chargers:
-                available_sockets = str()
-                response = requests.get(url=url_pri + url_post,
-                                        headers=self.config['headers']).json()
-                if response['status_code'] == 500:
-                    available_sockets = ' * 查询失败 * '
-                else:
-                    # traverse 10 sockets:
-                    content = response['data']
-                    for socket in content['channels']:
-                        if socket['status'] == 1:
-                            available_sockets += (' [%d] ' % socket['channel'])
-                    # no available sockets:
-                    if len(available_sockets) == 0:
-                        available_sockets = ' * 无 * '
-                charger_list.append([charger_name, available_sockets])
-            self.available.update({self.config['en2zh'][area]: charger_list})
-        # update time:
-        self._update_time()
-        # delete the authorization key:
-        del [self.config['headers']['authorization']]
-
-    def tell_me(self, type: str) -> str | dict:
-        '''Return different result using different line break character
+    def get_response(self, args) -> None:
+        '''Inquire the status of each station
 
         Args:
-            type (str): type: 'str', 'html'
-
-        Returns:
-            str: result
+            args (list): [area, station_name, station_url]
         '''
-        if type == 'str':
-            result = str()
-            for area, chargers in self.available.items():
-                result += '%s: \n' % area
-                for charger_name, status in chargers:
-                    result += '  %s:%s\n' % (charger_name, status)
-            return result
-        if type == 'html':
-            return self.available
+        area, station_name, station_url = args
+        # send request:
+        response = requests.get(url=(self.config['inquiry_url'] + station_url),
+                                headers=self.config['headers']).json()
+        # check:
+        if 'data' in response:
+            data = response['data']
+            # traverse 10 sockets:
+            for socket in data['channels']:
+
+                # check status:
+                if socket['status'] == 1:
+                    # finished:
+                    remain_time = '00:00:00'
+                    percentage = '100%'
+                else:
+                    # charging:
+                    # calculate the remaining time and percent complete:
+                    #NOTE: 无法判断是5h还是10h，默认为5h，超出5h当作10h来计算，结果仅供参考。
+                    #NOTE: 不确定 'updated_at' 是不是充电开始时间，看起来像，暂时当作这个来算。
+                    start_time = datetime.strptime(socket['updated_at'],
+                                                   '%Y-%m-%d %H:%M:%S')
+                    duration = self.local_time - start_time
+                    if duration > timedelta(hours=5):
+                        remain_time = timedelta(hours=10) - duration
+                        remain_time = time.strftime(
+                            "%H:%M:%S", time.gmtime(remain_time.seconds))
+                        percentage = duration.seconds / timedelta(
+                            hours=10).seconds
+                        percentage = str(round(percentage * 100)) + '%'
+                    else:
+                        remain_time = timedelta(hours=5) - duration
+                        remain_time = time.strftime(
+                            "%H:%M:%S", time.gmtime(remain_time.seconds))
+                        percentage = duration.seconds / timedelta(
+                            hours=5).seconds
+                        percentage = str(round(percentage * 100)) + '%'
+                # record:
+                self.mutex.acquire()
+                self.status[area][station_name].append([
+                    socket['channel'], socket['status'], remain_time,
+                    percentage
+                ])
+                self.mutex.release()
+
+    def get_status(self) -> None:
+        '''Multithreading, traverse all stations, call get_response()
+        '''
+        thread_list = list()
+        self.get_token()
+        # add authorization key:
+        self.config['headers']['authorization'] = 'Bearer ' + self.token
+        self.update_time()
+        # traverse all stations:
+        for area, stations in self.config['stations'].items():
+            for station_name, station_url in stations.items():
+                # multithreading:
+                thread_list.append(
+                    self.thread_pool.submit(self.get_response,
+                                            [area, station_name, station_url]))
+        wait(thread_list)
+        # delete authorization key:
+        del self.config['headers']['authorization']
 
 
-# test:
 if __name__ == '__main__':
     config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                'config.yml')
-    test = FindChargers(config_path)
-    test.where_are_you()
-    print(test.tell_me('str'))
+    fc = FindChargers(config_path)
+    start = time.time()
+    fc.get_status()
+    end = time.time()
+    print(end - start)
+    print(fc.return_result)
