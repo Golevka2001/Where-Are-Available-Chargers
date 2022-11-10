@@ -154,4 +154,4 @@ if __name__ == '__main__':
     fc.get_status()
     end = time.time()
     print(end - start)
-    print(fc.return_result)
+    print(fc.status)
