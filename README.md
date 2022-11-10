@@ -63,19 +63,19 @@ s(开始)
 
 ### 文件解释
 
-``` requirements.txt ```：用于安装依赖；
+```requirements.txt```：用于安装依赖；
 
-``` example_response.json ```：一个响应的例子；
+```example_response.json```：一个响应的例子；
 
-``` config.yml ```：存储每个充电桩的url、请求头等信息；
+```config.yml```：存储每个充电桩的url、请求头等信息；
 
-``` find_chargers.py ```：FindChargers 类，执行请求、获取结果的主要实现；
+```find_chargers.py```：FindChargers 类，执行请求、获取结果的主要实现；
 
-``` server.py ```：构建 web 服务；
+```server.py```：构建 web 服务；
 
-``` static/ ```：存放 web 静态资源的文件夹，包含 css、js、img 等；
+```static/```：存放 web 静态资源的文件夹，包含 css、js、img 等；
 
-``` templates/ ```：存放 web 模板的文件夹；
+```templates/```：存放 web 模板的文件夹；
 
 ### 安装 Python 环境
 
@@ -94,11 +94,7 @@ pip install .\requirements.txt
 
 ### 运行
 
-在编译器里运行，或者在脚本所在路径下进入终端输入以下命令：
-
-```shell
-python .\main.py
-```
+略。参照前面的文件解释按照您需要的方式运行。
 
 ## 提供二维码
 
