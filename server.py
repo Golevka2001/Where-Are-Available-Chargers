@@ -20,7 +20,7 @@ import time
 
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                            'config.yml')
-min_interval = timedelta(minutes=1)
+min_interval = timedelta(minutes=2)
 #max_interval = timedelta(minutes=3)
 
 chargers = FindChargers(config_path)
