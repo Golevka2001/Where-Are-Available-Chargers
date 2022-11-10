@@ -2,25 +2,24 @@
 
 ---
 
-## 查询网址：<http://charges.injs.eu>
+## 查询网址：<http://chargers.injs.eu>
 
-这是一个脚本用来查询校园内各个充电桩的可用情况。
+这是一个用来查询校园内各个充电桩的使用情况的小工具，希望它可以帮你更方便给小电驴找到充电桩。
 
-希望它可以帮你更方便给小电驴找到充电桩。
-
-目前还在更新中，查询暂时还不是很方便，之后可能会对接到公众号，也可能用网页。
+目前还在更新中，您可以在上面的 Issues 页面反馈遇到的问题，或者希望未来加入的功能。
 
 如果它对你有帮助的话，可以点击右上角的 :star:**Star** 按钮（~~或者**v我50**~~）感谢您的支持！ :tada::tada::tada:
 
 ## 目录
 
 - [:electric_plug::rage:Where Are Available Chargers?](#electric_plugragewhere-are-available-chargers)
-  - [查询网址：<http://charges.injs.eu>](#查询网址httpchargesinjseu)
+  - [查询网址：<http://chargers.injs.eu>](#查询网址httpchargersinjseu)
   - [目录](#目录)
   - [背景](#背景)
   - [工作流程](#工作流程)
   - [使用说明](#使用说明)
     - [下载 & 解压](#下载--解压)
+    - [文件解释](#文件解释)
     - [安装 Python 环境](#安装-python-环境)
     - [安装依赖库](#安装依赖库)
     - [运行](#运行)
@@ -52,13 +51,31 @@ s(开始)
 
 ## 使用说明
 
-本项目使用 Python 和 requests 、flask 库。
+***注：本部分内容面向有在本地构建项目的需求的用户。
+如果您只想查询数据，请直接访问本文档最上方提供的网址。***
+
+本项目使用 Python 编写，依赖 requests 库爬取数据、使用 flask 框架构建 web 服务。
 
 ### 下载 & 解压
 
 点击右上方的绿色 ```Code``` 按钮，在下拉菜单中点击 ```Download ZIP```
-
 下载完成后，把它解压到你想要的位置。
+
+### 文件解释
+
+``` requirements.txt ```：用于安装依赖；
+
+``` example_response.json ```：一个响应的例子；
+
+``` config.yml ```：存储每个充电桩的url、请求头等信息；
+
+``` find_chargers.py ```：FindChargers 类，执行请求、获取结果的主要实现；
+
+``` server.py ```：构建 web 服务；
+
+``` static/ ```：存放 web 静态资源的文件夹，包含 css、js、img 等；
+
+``` templates/ ```：存放 web 模板的文件夹；
 
 ### 安装 Python 环境
 
@@ -66,7 +83,7 @@ s(开始)
 
 ### 安装依赖库
 
-按 ```Windows``` + ```X```，点击菜单中的 ```Windows PowerShell```，输入以下命令：
+在命令行中输入以下命令安装依赖库：
 
 *（注：下面命令中的 “/.../Where-Are-Available-Chargers/” 表示项目在您本地的路径）*
 
@@ -89,7 +106,9 @@ python .\main.py
 
 ~~是因为我还没来得及去挨个拍照啦，平时不充电的时候也没空跑去拍个照。~~
 
-~~所以欢迎大家提供一些充电桩上的二维码！:tada::tada::tada:~~
+~~所以欢迎大家提供一些充电桩上的二维码！~~
+
+:tada::tada::tada:
 
 现在我已经把我知道位置的充电桩都加进查询列表啦！
 
@@ -115,6 +134,11 @@ python .\main.py
 :rose::rose::rose:
 
 ## 更新日志
+
+**2022-11-10:**
+
+1. 新增充电进度与剩余时间显示（由于无法判断5h还是10h，所以结果仅供参考）；
+2. 修改请求方式为多线程，提高响应速度。
 
 **2022-11-07:**
 
