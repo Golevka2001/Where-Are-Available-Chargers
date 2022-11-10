@@ -2,26 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link rel="stylesheet" href="static/css/style.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="static/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Where Are Availabe Chargers?!</title>
 </head>
 
 <body>
-    <script src="static/js/script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <h1 align="center">&#x1F50C;&#x1F621; Where Are Available Chargers?!</h1>
     <p align="center">
-        <span class="plug">&#x1F50C;</span>
-        <span class="hand">&#x1F90F;</span>
-        <span class="face">&#x1F605;</span>
-        <span class="hand">&#x1F595;&nbsp&nbsp&nbsp</span>
+        <span id="plug">&#x1F50C;</span>
+        <span id="hand">&#x1F90F;</span>
+        <span id="face">&#x1F605;</span>
+        <span id="hand">&#x1F595;&nbsp&nbsp&nbsp</span>
         <br />
-        <span class="motor">&#x1F6F5;</span>
+        <span id="motor">&#x1F6F5;</span>
     </p>
 
     <br />
@@ -29,61 +27,74 @@
     <br />
 
     <h2 align="center">查询结果</h2>
-    <p align="center" class="text">充电桩序号排序方法为从北向南、从西向东 (即地图上从上到下、从左到右)</p>
+    <p align="center" class="text">充电桩序号排序方法为从北向南、从西向东（即地图上从上到下、从左到右）</p>
     <p align="center">
-        数据获取时间：{{ last_time }}
+        数据获取时间：{{ last_update_time }}
         <br />
-        距上次获取已过去：{{ duration }}
+        距上次获取已过去：{{ interval }}
         <br />
-        (数据刷新间隔约为3分钟)
-        <!--<br />
-        <button class="refresh_button" id="swap">重新获取</button>-->
+        （数据刷新间隔约为3分钟）
     </p>
 
-    <h3 align="center">东门</h3>
+    <!-- traverse all areas: -->
+    {% for area,station_list in result.items() %}
+    <h3 align="center">{{ area }}</h3>
     <table>
         <tr>
             <th class="charger_column">充电桩</th>
-            <th>空闲插座</th>
+            <th colspan="5">使用情况（插座编号、剩余时间）</th>
         </tr>
-        {% for charger in east_gate %}
+        <!-- traverse each station: -->
+        {% for station_name, socket_list in station_list.items() %}
+        {% if socket_list|length == 0 %}
+        <!-- failed to inquire station status: -->
         <tr>
-            <td>{{ charger[0]}}</td>
-            <td>{{ charger[1]}}</td>
+            <th>{{ station_name }}</th>
+            <td colspan="5" bgcolor="#fffacc">* 查询失败 *</td>
         </tr>
-        {% endfor %}
-    </table>
+        {% else %}
+        <tr>
+            <th rowspan="2">{{ station_name }}</th>
+            {% for i in range(0, 5) %}
+            {% if socket_list[i][1] == 1 %}
+            <!-- available -->
+            <td bgcolor="#d9ead3">[{{ socket_list[i][0] }}]</td>
+            {% else %}
+            <!-- occupied -->
+            <td class="occupied">
+                <span class="percent">{{ socket_list[i][3] }}</span>
+                [{{ socket_list[i][0] }}]
+                <br />
+                {{ socket_list[i][2] }}
+            </td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for i in range(5, 10) %}
+            {% if socket_list[i][1] == 1 %}
+            <td bgcolor="#d9ead3">[{{ socket_list[i][0] }}]</td>
+            {% else %}
+            <td class="occupied">
+                <span class="percent">{{ socket_list[i][3] }}</span>
+                [{{ socket_list[i][0] }}]
+                <br />
+                {{ socket_list[i][2] }}
+            </td>
+            {% endif %}
+            {% endfor %}
+        </tr>
 
-    <h3 align="center">西门</h3>
-    <table>
-        <tr>
-            <th class="charger_column">充电桩</th>
-            <th>空闲插座</th>
-        </tr>
-        {% for charger in west_gate %}
-        <tr>
-            <td>{{ charger[0]}}</td>
-            <td>{{ charger[1]}}</td>
-        </tr>
+        {% endif %}
         {% endfor %}
     </table>
-
-    <h3 align="center">北门</h3>
-    <table>
-        <tr>
-            <th class="charger_column">充电桩</th>
-            <th>空闲插座</th>
-        </tr>
-        {% for charger in north_gate %}
-        <tr>
-            <td>{{ charger[0]}}</td>
-            <td>{{ charger[1]}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    {% endfor %}
+    <script src="static/js/index.js"></script>
 
     <br />
+    <br />
 
+    <!--
     <h2 align="center">提供二维码</h2>
     <p align="center">您可以将二维码发送到我的邮箱</p>
     <p align="center" style="font-size: 1.2em; font-weight: bolder;">gol3vka@163.com</p>
@@ -95,6 +106,19 @@
     </p>
     <p align="center">麻烦您在发送时备注好充电桩所在位置</p>
     <p align="center">感谢您的帮助与支持&#x1F389;&#x1F389;&#x1F389;</p>
+    -->
+
+    <p align="center">
+        GitHub项目地址：
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers/issues">
+            Where-Are-Available-Chargers
+        </a>
+        <br />
+        <br />
+        您可以在 Issues 页面反馈遇到的问题
+        <br />
+        也可以提出希望加入的功能或加入开发
+    </p>
 
     <br />
     <hr />
