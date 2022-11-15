@@ -1,4 +1,4 @@
-$('span.percent').each(function () {
+$('span.percentage').each(function () {
     var percent = $(this).text() + ' 100%';
     $(this).parent().css('background-size', percent);
 });

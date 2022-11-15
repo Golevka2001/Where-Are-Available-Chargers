@@ -5,9 +5,9 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.2.0
+@Version: 2.3.0
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/10
+@Last Modified Date: 2022/11/15
 '''
 
 from concurrent.futures import ThreadPoolExecutor, wait
@@ -87,44 +87,43 @@ class FindChargers:
                                 headers=self.config['headers']).json()
         # check:
         if 'data' in response:
+            total = 0
             data = response['data']
             # traverse 10 sockets:
             for socket in data['channels']:
-
                 # check status:
                 if socket['status'] == 1:
                     # finished:
-                    remain_time = '00:00:00'
+                    status = '00:00:00'
                     percentage = '100%'
+                    total += 1
                 else:
                     # charging:
                     # calculate the remaining time and percent complete:
-                    #NOTE: 无法判断是5h还是10h，默认为5h，超出5h当作10h来计算，结果仅供参考。
-                    #NOTE: 不确定 'updated_at' 是不是充电开始时间，看起来像，暂时当作这个来算。
+                    # NOTE: 无法判断是5h还是10h，结果仅供参考。
+                    # NOTE: 不确定 'updated_at' 是不是充电开始时间，看起来像，暂时当作这个来算。
                     start_time = datetime.strptime(socket['updated_at'],
                                                    '%Y-%m-%d %H:%M:%S')
                     duration = self.local_time - start_time
-                    if duration > timedelta(hours=5):
+                    percentage = duration.seconds / timedelta(hours=10).seconds
+                    percentage = str(round(percentage * 100)) + '%'
+                    if duration < timedelta(minutes=530):
+                        status = '充电中'
+                    elif duration < timedelta(minutes=550):
+                        status = '约半小时'
+                    else:
                         remain_time = timedelta(hours=10) - duration
                         remain_time = time.strftime(
-                            "%H:%M:%S", time.gmtime(remain_time.seconds))
-                        percentage = duration.seconds / timedelta(
-                            hours=10).seconds
-                        percentage = str(round(percentage * 100)) + '%'
-                    else:
-                        remain_time = timedelta(hours=5) - duration
-                        remain_time = time.strftime(
-                            "%H:%M:%S", time.gmtime(remain_time.seconds))
-                        percentage = duration.seconds / timedelta(
-                            hours=5).seconds
-                        percentage = str(round(percentage * 100)) + '%'
+                            "%M", time.gmtime(remain_time.seconds))
+                        status = '约%smin' % remain_time
                 # record:
                 self.mutex.acquire()
-                self.status[area][station_name].append([
-                    socket['channel'], socket['status'], remain_time,
-                    percentage
-                ])
+                self.status[area][station_name].append(
+                    [socket['channel'], socket['status'], status, percentage])
                 self.mutex.release()
+            self.mutex.acquire()
+            self.status[area][station_name].append(total)
+            self.mutex.release()
 
     def get_status(self) -> None:
         '''Multithreading, traverse all stations, call get_response()
@@ -154,4 +153,4 @@ if __name__ == '__main__':
     fc.get_status()
     end = time.time()
     print(end - start)
-    print(fc.return_result)
+    print(fc.status)
