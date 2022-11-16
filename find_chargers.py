@@ -5,14 +5,14 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.3.0
+@Version: 2.3.2
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/15
+@Last Modified Date: 2022/11/16
 '''
 
-from concurrent.futures import ThreadPoolExecutor, wait
+from aiohttp import ClientSession
 from datetime import datetime, timedelta
-from threading import Lock
+import asyncio
 import os
 import requests
 import time
@@ -27,6 +27,8 @@ class FindChargers:
         Args:
             config_path (str): path of 'config.yml'
         '''
+        # https:
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         # load config:
         self.config = dict()
         with open(config_path, 'r', encoding='utf-8') as config_file:
@@ -36,11 +38,6 @@ class FindChargers:
         self.token = str()
         # local time (UTC+08:00):
         self.local_time = datetime.utcnow()
-        # thread pool:
-        self.thread_pool = ThreadPoolExecutor(
-            max_workers=9, thread_name_prefix='inquiry_thread_')
-        # mutex :
-        self.mutex = Lock()
         # store all status:
         # {东门:{北侧-1:[[1, 0, 00:30:00, 90%],...],...},...}
         self.status = dict()
@@ -49,12 +46,12 @@ class FindChargers:
             for station in stations:
                 self.status[area][station] = list()
 
-    def update_time(self) -> None:
+    def _update_time(self) -> None:
         '''Update local time (UTC+08:00)
         '''
         self.local_time = datetime.utcnow() + timedelta(hours=8)
 
-    def get_token(self) -> None:
+    def _get_token(self) -> None:
         '''Send 'openid' and 'phone' to get token
 
         Raises:
@@ -75,72 +72,91 @@ class FindChargers:
         else:
             self.token = response['data']['token']
 
-    def get_response(self, args) -> None:
-        '''Inquire the status of each station
+    async def _get_response(self, args: list) -> list:
+        '''[ASYNC]Inquire the status of a station
 
         Args:
             args (list): [area, station_name, station_url]
+
+        Returns:
+            list: [response, area, station_name]
         '''
+        # parse arguments:
         area, station_name, station_url = args
-        # send request:
-        response = requests.get(url=(self.config['inquiry_url'] + station_url),
-                                headers=self.config['headers']).json()
+        # request:
+        async with ClientSession() as session:
+            async with await session.get(
+                    url=(self.config['inquiry_url'] + station_url),
+                    headers=self.config['headers']) as response:
+                response = await response.json()
+                return [response, area, station_name]
+
+    def process_response(self, task: asyncio.Task) -> None:
+        '''Callback function of get_response(), process response
+
+        Args:
+            task (asyncio.Task): task returned by get_response()
+        '''
+        # parse arguments:
+        response, area, station_name = task.result()
         # check:
         if 'data' in response:
             total = 0
             data = response['data']
             # traverse 10 sockets:
             for socket in data['channels']:
+                remain_time = str()
+                percentage = str()
                 # check status:
                 if socket['status'] == 1:
                     # finished:
-                    status = '00:00:00'
+                    remain_time = '00:00:00'
                     percentage = '100%'
                     total += 1
                 else:
                     # charging:
                     # calculate the remaining time and percent complete:
                     # NOTE: 无法判断是5h还是10h，结果仅供参考。
-                    # NOTE: 不确定 'updated_at' 是不是充电开始时间，看起来像，暂时当作这个来算。
                     start_time = datetime.strptime(socket['updated_at'],
                                                    '%Y-%m-%d %H:%M:%S')
                     duration = self.local_time - start_time
                     percentage = duration.seconds / timedelta(hours=10).seconds
                     percentage = str(round(percentage * 100)) + '%'
-                    if duration < timedelta(minutes=530):
-                        status = '充电中'
-                    elif duration < timedelta(minutes=550):
-                        status = '约半小时'
-                    else:
-                        remain_time = timedelta(hours=10) - duration
-                        remain_time = time.strftime(
-                            "%M", time.gmtime(remain_time.seconds))
-                        status = '约%smin' % remain_time
+                    remain_time = timedelta(hours=10) - duration
+                    remain_time = time.strftime(
+                        "%M", time.gmtime(remain_time.seconds))
                 # record:
-                self.mutex.acquire()
-                self.status[area][station_name].append(
-                    [socket['channel'], socket['status'], status, percentage])
-                self.mutex.release()
-            self.mutex.acquire()
+                self.status[area][station_name].append([
+                    socket['channel'], socket['status'], remain_time,
+                    percentage
+                ])
             self.status[area][station_name].append(total)
-            self.mutex.release()
 
-    def get_status(self) -> None:
-        '''Multithreading, traverse all stations, call get_response()
+    async def traverse_stations(self) -> None:
+        '''[ASYNC]Traverse all stations, call get_response()
         '''
-        thread_list = list()
-        self.get_token()
-        # add authorization key:
-        self.config['headers']['authorization'] = 'Bearer ' + self.token
-        self.update_time()
+        tasks = set()
+        self._update_time()
         # traverse all stations:
         for area, stations in self.config['stations'].items():
             for station_name, station_url in stations.items():
-                # multithreading:
-                thread_list.append(
-                    self.thread_pool.submit(self.get_response,
-                                            [area, station_name, station_url]))
-        wait(thread_list)
+                # create task, add to set(keep strong reference), discard when done:
+                task = asyncio.create_task(
+                    self._get_response([area, station_name, station_url]))
+                tasks.add(task)
+                task.add_done_callback(self.process_response)
+        # FIXME: 这里我不确定该怎么做，不await一遍会提前结束
+        # FIXME：也不太确定对响应的判断处理是还在原来函数里好还是现在这样另写一个好
+        for task in tasks:
+            await task
+        tasks.clear()
+
+    def get_status(self) -> None:
+        # add authorization key:
+        self._get_token()
+        self.config['headers']['authorization'] = 'Bearer ' + self.token
+        # async tasks:
+        asyncio.run(self.traverse_stations())
         # delete authorization key:
         del self.config['headers']['authorization']
 

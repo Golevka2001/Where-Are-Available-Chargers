@@ -33,7 +33,7 @@
         <br />
         距上次获取已过去：{{ interval }}
         <br />
-        （数据刷新间隔约为2分钟）
+        （数据刷新间隔约为3分钟）
     </p>
 
     <!-- traverse all areas: -->
@@ -60,7 +60,6 @@
             <td>* 无 *</td>
             {% else %}
             <td>
-                &nbsp;
                 {% for i in range(0, 10) %}
                 {% if socket_list[i][1] == 1 %}
                 [{{ socket_list[i][0] }}]&nbsp;
