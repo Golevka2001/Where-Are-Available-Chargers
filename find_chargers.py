@@ -91,7 +91,7 @@ class FindChargers:
                 response = await response.json()
                 return [response, area, station_name]
 
-    def process_response(self, task: asyncio.Task) -> None:
+    def _process_response(self, task: asyncio.Task) -> None:
         '''Callback function of get_response(), process response
 
         Args:
@@ -132,7 +132,7 @@ class FindChargers:
                 ])
             self.status[area][station_name].append(total)
 
-    async def traverse_stations(self) -> None:
+    async def _traverse_stations(self) -> None:
         '''[ASYNC]Traverse all stations, call get_response()
         '''
         tasks = set()
@@ -144,7 +144,7 @@ class FindChargers:
                 task = asyncio.create_task(
                     self._get_response([area, station_name, station_url]))
                 tasks.add(task)
-                task.add_done_callback(self.process_response)
+                task.add_done_callback(self._process_response)
         # FIXME: 这里我不确定该怎么做，不await一遍会提前结束
         # FIXME：也不太确定对响应的判断处理是还在原来函数里好还是现在这样另写一个好
         for task in tasks:
@@ -152,11 +152,13 @@ class FindChargers:
         tasks.clear()
 
     def get_status(self) -> None:
+        '''Run asyncio loop, get status
+        '''
         # add authorization key:
         self._get_token()
         self.config['headers']['authorization'] = 'Bearer ' + self.token
         # async tasks:
-        asyncio.run(self.traverse_stations())
+        asyncio.run(self._traverse_stations())
         # delete authorization key:
         del self.config['headers']['authorization']
 
