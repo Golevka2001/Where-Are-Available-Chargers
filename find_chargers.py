@@ -5,9 +5,9 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.3.2
+@Version: 2.3.3
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/16
+@Last Modified Date: 2022/11/17
 '''
 
 from aiohttp import ClientSession
@@ -27,13 +27,10 @@ class FindChargers:
         Args:
             config_path (str): path of 'config.yml'
         '''
-        # https:
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         # load config:
         self.config = dict()
         with open(config_path, 'r', encoding='utf-8') as config_file:
             self.config = yaml.safe_load(config_file)
-            config_file.close()
         # token:
         self.token = str()
         # local time (UTC+08:00):
@@ -45,6 +42,7 @@ class FindChargers:
             self.status[area] = dict()
             for station in stations:
                 self.status[area][station] = list()
+        self.event_loop = asyncio.new_event_loop()
 
     def _update_time(self) -> None:
         '''Update local time (UTC+08:00)
@@ -62,24 +60,32 @@ class FindChargers:
             'openid': self.config['openid'],
             'phone': self.config['phone']
         }
-        response = requests.post(url=self.config['login_url'],
-                                 json=login_data,
-                                 headers=self.config['headers'],
-                                 allow_redirects=False).json()
-        # check:
-        if 'data' not in response:
-            raise Exception('[Error] Login failed!')
-        else:
-            self.token = response['data']['token']
+        with requests.Session() as session:
+            # retry 3 times:
+            session.adapters.DEFAULT_RETRIES = 3
+            session.keep_alive = False
+            # request:
+            with session.post(url=self.config['login_url'],
+                              json=login_data,
+                              headers=self.config['headers'],
+                              allow_redirects=False,
+                              stream=False,
+                              timeout=5) as response:
+                response = response.json()
+                # check:
+                if 'data' not in response:
+                    raise Exception('[Error] Login failed!')
+                else:
+                    self.token = response['data']['token']
 
-    async def _get_response(self, args: list) -> list:
+    async def _get_response(self, args: tuple) -> tuple:
         '''[ASYNC]Inquire the status of a station
 
         Args:
-            args (list): [area, station_name, station_url]
+            args (tuple): (area, station_name, station_url)
 
         Returns:
-            list: [response, area, station_name]
+            tuple: (response, area, station_name)
         '''
         # parse arguments:
         area, station_name, station_url = args
@@ -89,7 +95,7 @@ class FindChargers:
                     url=(self.config['inquiry_url'] + station_url),
                     headers=self.config['headers']) as response:
                 response = await response.json()
-                return [response, area, station_name]
+        return (response, area, station_name)
 
     def _process_response(self, task: asyncio.Task) -> None:
         '''Callback function of get_response(), process response
@@ -115,16 +121,17 @@ class FindChargers:
                     total += 1
                 else:
                     # charging:
-                    # calculate the remaining time and percent complete:
                     # NOTE: 无法判断是5h还是10h，结果仅供参考。
                     start_time = datetime.strptime(socket['updated_at'],
                                                    '%Y-%m-%d %H:%M:%S')
                     duration = self.local_time - start_time
+                    # calculate percent complete:
                     percentage = duration.seconds / timedelta(hours=10).seconds
                     percentage = str(round(percentage * 100)) + '%'
+                    # calculate remaining time:
                     remain_time = timedelta(hours=10) - duration
                     remain_time = time.strftime(
-                        "%M", time.gmtime(remain_time.seconds))
+                        "%H:%M:%S", time.gmtime(remain_time.seconds))
                 # record:
                 self.status[area][station_name].append([
                     socket['channel'], socket['status'], remain_time,
@@ -132,33 +139,27 @@ class FindChargers:
                 ])
             self.status[area][station_name].append(total)
 
-    async def _traverse_stations(self) -> None:
-        '''[ASYNC]Traverse all stations, call get_response()
-        '''
-        tasks = set()
-        self._update_time()
-        # traverse all stations:
-        for area, stations in self.config['stations'].items():
-            for station_name, station_url in stations.items():
-                # create task, add to set(keep strong reference), discard when done:
-                task = asyncio.create_task(
-                    self._get_response([area, station_name, station_url]))
-                tasks.add(task)
-                task.add_done_callback(self._process_response)
-        # FIXME: 这里我不确定该怎么做，不await一遍会提前结束
-        # FIXME：也不太确定对响应的判断处理是还在原来函数里好还是现在这样另写一个好
-        for task in tasks:
-            await task
-        tasks.clear()
-
     def get_status(self) -> None:
         '''Run asyncio loop, get status
         '''
+        tasks = set()
         # add authorization key:
         self._get_token()
         self.config['headers']['authorization'] = 'Bearer ' + self.token
-        # async tasks:
-        asyncio.run(self._traverse_stations())
+        self._update_time()
+        # traverse all stations:
+        asyncio.set_event_loop(self.event_loop)
+        for area, stations in self.config['stations'].items():
+            for station_name, station_url in stations.items():
+                task = asyncio.ensure_future(self._get_response(
+                    (area, station_name, station_url)),
+                                             loop=self.event_loop)
+                task.add_done_callback(self._process_response)
+                tasks.add(task)
+        # run loop:
+        self.event_loop.run_until_complete(asyncio.wait(tasks))
+        # clear set:
+        tasks.clear()
         # delete authorization key:
         del self.config['headers']['authorization']
 
