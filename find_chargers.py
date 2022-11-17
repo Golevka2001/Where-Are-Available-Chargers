@@ -5,7 +5,7 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.3.3
+@Version: 2.3.4
 @Created Date: 2022/11/01
 @Last Modified Date: 2022/11/17
 '''
@@ -140,8 +140,13 @@ class FindChargers:
             self.status[area][station_name].append(total)
 
     def get_status(self) -> None:
-        '''Run asyncio loop, get status
+        '''Traversal all stations, get status
         '''
+        # clear status:
+        for area, stations in self.status.items():
+            for station in stations:
+                self.status[area][station].clear()
+        # all tasks:
         tasks = set()
         # add authorization key:
         self._get_token()
@@ -170,6 +175,6 @@ if __name__ == '__main__':
     fc = FindChargers(config_path)
     start = time.time()
     fc.get_status()
+    print(fc.status)
     end = time.time()
     print(end - start)
-    print(fc.status)

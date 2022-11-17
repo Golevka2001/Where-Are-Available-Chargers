@@ -5,9 +5,9 @@
 @File: find_chargers.py
 @Brief: 使用 flask 框架搭建的简单服务，将爬取的信息显示在网页上。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.3.2
+@Version: 2.3.4
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/16
+@Last Modified Date: 2022/11/17
 '''
 
 from find_chargers import FindChargers
@@ -20,8 +20,8 @@ import time
 
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                            'config.yml')
-min_interval = timedelta(minutes=1)
-max_interval = timedelta(minutes=3)
+min_interval = timedelta(minutes=0.1)
+max_interval = timedelta(minutes=0.2)
 
 chargers = FindChargers(config_path)
 chargers.get_status()
