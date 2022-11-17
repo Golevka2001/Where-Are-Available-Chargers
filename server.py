@@ -1,6 +1,6 @@
 #!user/bin/env python
 # -*- coding:utf-8 -*-
-'''Where-Are-Available-Chargers:
+"""Where-Are-Available-Chargers:
     希望这个脚本可以帮助你更容易给小电驴找到充电桩。
 @File: find_chargers.py
 @Brief: 使用 flask 框架搭建的简单服务，将爬取的信息显示在网页上。
@@ -8,50 +8,93 @@
 @Version: 2.3.4
 @Created Date: 2022/11/01
 @Last Modified Date: 2022/11/17
-'''
+"""
 
 from find_chargers import FindChargers
 
 from datetime import datetime, timedelta
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, abort, request
 from threading import Thread
 import os
 import time
 
-config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                           'config.yml')
-min_interval = timedelta(minutes=0.1)
-max_interval = timedelta(minutes=0.2)
+config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
+min_interval = timedelta(minutes=1)
+max_interval = timedelta(minutes=3)
 
 chargers = FindChargers(config_path)
 chargers.get_status()
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "HEAD", "POST"])
 def index():
-    interval = datetime.utcnow() + timedelta(hours=8) - chargers.local_time
+    interval = datetime.utcnow() - chargers.utc_time
     # if exceed minimum refresh interval: request & refresh:
     if interval > min_interval:
         update_thread = Thread(target=chargers.get_status)
         update_thread.start()
     if interval > max_interval:
-        return render_template('loading.html')
+        return render_template("loading.html")
 
-    last_update_time = chargers.local_time.strftime('%Y-%m-%d %H:%M:%S')
+    last_update_time = chargers.cn_time.strftime("%Y-%m-%d %H:%M:%S")
     interval = time.strftime("%H:%M:%S", time.gmtime(interval.seconds))
 
     try:
-        retpage = render_template('index.html',
-                                  result=chargers.status,
-                                  last_update_time=last_update_time,
-                                  interval=interval)
+        retpage = render_template(
+            "index.html",
+            result=chargers.status,
+            last_update_time=last_update_time,
+            interval=interval,
+        )
     except:
-        return render_template('error.html')
+        return redirect("/error")
 
     return retpage
 
 
+@app.route("/show", methods=["GET", "HEAD", "POST"])
+def show():
+    interval = datetime.utcnow() + timedelta(hours=8) - chargers.cn_time
+    last_update_time = chargers.cn_time.strftime("%Y-%m-%d %H:%M:%S")
+    interval = time.strftime("%H:%M:%S", time.gmtime(interval.seconds))
+
+    try:
+        retpage = render_template(
+            "index.html",
+            result=chargers.status,
+            last_update_time=last_update_time,
+            interval=interval,
+        )
+    except:
+        return redirect("/error")
+
+    return retpage
+
+
+@app.route("/error", methods=["GET", "HEAD", "POST"])
+def error():
+    return render_template("error.html")
+
+
+@app.route("/force_update", methods=["GET"])
+def force_update():
+    if not ("UPDATE_KEY" in os.environ and "key" in request.args):
+        abort(401)
+    elif os.environ["UPDATE_KEY"] == request.args["key"]:
+        start = time.time()
+        chargers.get_status()
+        end = time.time()
+        return str(end - start)
+    else:
+        abort(401)
+
+
+@app.route("/favicon.ico", methods=["GET", "HEAD", "POST"])
+def favicon():
+    return redirect("/static/favicon.ico")
+
+
 # run server
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=3000, debug=False)
+    app.run(host="0.0.0.0", port=3000, debug=False)
