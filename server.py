@@ -18,6 +18,8 @@ from threading import Thread
 import os
 import time
 
+version = "dev"
+
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
 min_interval = timedelta(minutes=1)
 max_interval = timedelta(minutes=3)
@@ -34,7 +36,7 @@ def index():
     if interval > min_interval:
         update_thread = Thread(target=chargers.get_status)
         update_thread.start()
-    if interval > max_interval:
+        # if interval > max_interval:
         return render_template("loading.html")
 
     last_update_time = chargers.cn_time.strftime("%Y-%m-%d %H:%M:%S")
@@ -46,6 +48,7 @@ def index():
             result=chargers.status,
             last_update_time=last_update_time,
             interval=interval,
+            version=version,
         )
     except:
         return redirect("/error")
@@ -65,6 +68,7 @@ def show():
             result=chargers.status,
             last_update_time=last_update_time,
             interval=interval,
+            version=version,
         )
     except:
         return redirect("/error")
