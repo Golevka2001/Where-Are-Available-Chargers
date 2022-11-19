@@ -37,7 +37,10 @@ def index():
         update_thread = Thread(target=chargers.get_status)
         update_thread.start()
         # if interval > max_interval:
-        return render_template("loading.html")
+        return render_template(
+            "loading.html",
+            version=version,
+        )
 
     last_update_time = chargers.cn_time.strftime("%Y-%m-%d %H:%M:%S")
     interval = time.strftime("%H:%M:%S", time.gmtime(interval.seconds))
