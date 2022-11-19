@@ -22,7 +22,8 @@ from flask import Flask, abort, redirect, render_template, request
 def update_func() -> None:
     global chargers
     global status
-    status = chargers.get_status()
+    if chargers.process_over:
+        status = chargers.get_status()
 
 
 version = "dev"
@@ -110,4 +111,4 @@ def favicon():
 
 # run server
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000, debug=True)
+    app.run(host="0.0.0.0", port=3000, debug=False)

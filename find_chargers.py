@@ -35,11 +35,12 @@ class FindChargers:
         self.token = str()
         self.utc_time = datetime.utcnow()
         self.cn_time = datetime.utcnow() + timedelta(hours=8)
-        self.timeout = ClientTimeout(total=10,
+        self.timeout = ClientTimeout(total=5,
                                      connect=None,
                                      sock_connect=None,
                                      sock_read=None)
         self.event_loop = asyncio.new_event_loop()
+        self.process_over = True
         # store all status:
         # {东门:{北侧-1:[[1, 0, 00:30:00, 90%],...],...},...}
         self.status = dict()
@@ -104,7 +105,8 @@ class FindChargers:
                         url=(self.config["inquiry_url"] + station_url),
                         headers=self.config["headers"]) as response:
                     response = await response.json()
-        except asyncio.TimeoutError:
+        except:
+            # TODO: 异常处理，待解决
             response = dict()
         return (response, area, station_name)
 
@@ -158,6 +160,7 @@ class FindChargers:
         Returns:
             dict: {东门:{北侧-1:[[1, 0, 00:30:00, 90%],...],...},...}
         """
+        self.process_over = False
         tasks = set()
         # add authorization key:
         self._get_token()
@@ -178,6 +181,7 @@ class FindChargers:
         # delete authorization key:
         del self.config["headers"]["authorization"]
         self._update_time()
+        self.process_over = True
         return self.status
 
 
