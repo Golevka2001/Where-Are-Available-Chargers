@@ -7,7 +7,7 @@
 @Author: Golevka2001<gol3vka@163.com>
 @Version: 2.3.4
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/17
+@Last Modified Date: 2022/11/19
 """
 
 import os
@@ -25,6 +25,7 @@ def update_func() -> None:
     status = chargers.get_status()
 
 
+version = "dev"
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                            "config.yml")
 min_interval = timedelta(minutes=1)
@@ -42,8 +43,10 @@ def index():
     if interval > min_interval:
         update_thread = Thread(target=update_func)
         update_thread.start()
-    if interval > max_interval:
-        return render_template("loading.html")
+        return render_template(
+            "loading.html",
+            version=version,
+        )
 
     last_update_time = chargers.cn_time.strftime("%Y-%m-%d %H:%M:%S")
     interval = time.strftime("%H:%M:%S", time.gmtime(interval.seconds))
@@ -54,6 +57,7 @@ def index():
             result=status,
             last_update_time=last_update_time,
             interval=interval,
+            version=version,
         )
     except:
         return redirect("/error")
@@ -73,6 +77,7 @@ def show():
             result=chargers.status,
             last_update_time=last_update_time,
             interval=interval,
+            version=version,
         )
     except:
         return redirect("/error")
