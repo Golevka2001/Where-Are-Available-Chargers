@@ -10,20 +10,28 @@
 @Last Modified Date: 2022/11/17
 """
 
-from find_chargers import FindChargers
-
-from datetime import datetime, timedelta
-from flask import Flask, render_template, redirect, abort, request
-from threading import Thread
 import os
 import time
+from datetime import datetime, timedelta
+from threading import Thread
 
-config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
+from find_chargers import FindChargers
+from flask import Flask, abort, redirect, render_template, request
+
+
+def update_func() -> None:
+    global chargers
+    global status
+    status = chargers.get_status()
+
+
+config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                           "config.yml")
 min_interval = timedelta(minutes=1)
 max_interval = timedelta(minutes=3)
 
 chargers = FindChargers(config_path)
-chargers.get_status()
+status = chargers.get_status()
 app = Flask(__name__)
 
 
@@ -32,7 +40,7 @@ def index():
     interval = datetime.utcnow() - chargers.utc_time
     # if exceed minimum refresh interval: request & refresh:
     if interval > min_interval:
-        update_thread = Thread(target=chargers.get_status)
+        update_thread = Thread(target=update_func)
         update_thread.start()
     if interval > max_interval:
         return render_template("loading.html")
@@ -43,7 +51,7 @@ def index():
     try:
         retpage = render_template(
             "index.html",
-            result=chargers.status,
+            result=status,
             last_update_time=last_update_time,
             interval=interval,
         )
@@ -97,4 +105,4 @@ def favicon():
 
 # run server
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000, debug=False)
+    app.run(host="0.0.0.0", port=3000, debug=True)

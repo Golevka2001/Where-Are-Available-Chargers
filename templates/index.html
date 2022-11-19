@@ -47,28 +47,26 @@
         </tr>
         <!-- traverse each station: -->
         {% for station_name, socket_list in station_list.items() %}
-        {% if socket_list|length == 0 %}
-        <!-- failed to inquire station status: -->
         <tr>
             <th>{{ station_name }}</th>
-            <td class="error" colspan="10">* 查询失败 *</td>
-        </tr>
-        {% else %}
-        <tr>
-            <th>{{ station_name }}</th>
-            {% if socket_list[10] == 0 %}
-            <td>* 无 *</td>
-            {% else %}
             <td>
+                {% if socket_list[10] == -1 %}
+                <!-- failed to inquire station status: -->
+                * 查询失败 *
+                {% elif socket_list[10] == 0 %}
+                <!-- all occupied: -->
+                * 无 *
+                {% else %}
+                <!-- some available: -->
+                &nbsp;
                 {% for i in range(0, 10) %}
                 {% if socket_list[i][1] == 1 %}
                 [{{ socket_list[i][0] }}]&nbsp;
                 {% endif %}
                 {% endfor %}
+                {% endif %}
             </td>
-            {% endif %}
         </tr>
-        {% endif %}
         {% endfor %}
     </table>
     {% endfor %}
