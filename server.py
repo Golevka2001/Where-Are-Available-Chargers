@@ -29,8 +29,8 @@ def update_func() -> None:
 version = "dev"
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                            "config.yml")
-min_interval = timedelta(minutes=1)
-max_interval = timedelta(minutes=3)
+min_interval = timedelta(minutes=1, seconds=30)
+# max_interval = timedelta(minutes=3)
 
 chargers = FindChargers(config_path)
 status = chargers.get_status()
