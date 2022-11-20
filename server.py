@@ -27,18 +27,19 @@ def update_func() -> None:
 
 
 version = "dev"
-config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+'''config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                            "config.yml")
 min_interval = timedelta(minutes=1, seconds=30)
 # max_interval = timedelta(minutes=3)
 
 chargers = FindChargers(config_path)
-status = chargers.get_status()
+status = chargers.get_status()'''
 app = Flask(__name__)
 
 
 @app.route("/", methods=["GET", "HEAD", "POST"])
 def index():
+    return render_template("history.html", version=version)
     interval = datetime.utcnow() - chargers.utc_time
     # if exceed minimum refresh interval: request & refresh:
     if interval > min_interval:
@@ -111,4 +112,4 @@ def favicon():
 
 # run server
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000, debug=False)
+    app.run(host="0.0.0.0", port=3000, debug=True)
