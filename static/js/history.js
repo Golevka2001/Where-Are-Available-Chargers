@@ -1,137 +1,191 @@
-(function () {
-    var date_obj = (function () {
-        var _date = new Date();
-        console.log(_date);
-        return {
-            getDate: function () {
-                return _date;
-            },
-            setDate: function (date) {
-                _date = date;
+function CalendarControl() {
+    const calendar = new Date(moment().tz("Australia/Sydney").format("YYYY-MM-DD HH:mm:ss"));
+    const calendarControl = {
+        localDate: new Date(moment().tz("Australia/Sydney").format("YYYY-MM-DD HH:mm:ss")),
+        prevMonthLastDate: null,
+        daysInMonth: function (month, year) {
+            return new Date(year, month, 0).getDate();
+        },
+        firstDay: function () {
+            return new Date(calendar.getFullYear(), calendar.getMonth(), 1);
+        },
+        lastDay: function () {
+            return new Date(calendar.getFullYear(), calendar.getMonth() + 1, 0);
+        },
+        firstDayNumber: function () {
+            return calendarControl.firstDay().getDay() + 1;
+        },
+        lastDayNumber: function () {
+            return calendarControl.lastDay().getDay() + 1;
+        },
+        getPreviousMonthLastDate: function () {
+            return new Date(
+                calendar.getFullYear(),
+                calendar.getMonth(),
+                0
+            ).getDate();
+        },
+        navigateToPreviousMonth: function () {
+            calendar.setMonth(calendar.getMonth() - 1);
+            calendarControl.attachEventsOnNextPrev();
+        },
+        navigateToNextMonth: function () {
+            calendar.setMonth(calendar.getMonth() + 1);
+            calendarControl.attachEventsOnNextPrev();
+        },
+        navigateToCurrentMonth: function () {
+            calendar.setYear(calendarControl.localDate.getFullYear());
+            calendar.setMonth(calendarControl.localDate.getMonth());
+            calendarControl.attachEventsOnNextPrev();
+        },
+        displayYear: function () {
+            document.querySelector(".calendar .calendar-year-label").innerHTML = calendar.getFullYear();
+        },
+        displayMonth: function () {
+            document.querySelector(".calendar .calendar-month-label").innerHTML = moment(calendar).format("MMM");
+        },
+        displayToday: function () {
+            document.querySelector(".calendar .calendar-today-date").innerHTML = "Today:&nbsp;&nbsp;&nbsp;" +
+                moment(calendarControl.localDate).format("YYYY年MM月DD日");
+        },
+        selectDate: function (e) {
+            let selDate = moment([calendar.getFullYear(), calendar.getMonth(), e.target.textContent]).format("YYYYMMDD");
+            document.querySelector(".history").innerHTML = `<div class="image">
+            <a href="/static/img/history/${selDate}.png">
+            <img src="/static/img/history/${selDate}.png" />
+            </a></div>`;
+        },
+        plotDayNames: function () {
+            document.querySelector(
+                ".calendar .calendar-body"
+            ).innerHTML += `
+                <div>日</div>
+                <div>一</div>
+                <div>二</div>
+                <div>三</div>
+                <div>四</div>
+                <div>五</div>
+                <div>六</div>`;
+
+        },
+        plotDates: function () {
+            document.querySelector(".calendar .calendar-body").innerHTML = "";
+            calendarControl.displayYear();
+            calendarControl.displayMonth();
+            calendarControl.displayToday();
+            calendarControl.plotDayNames();
+            let count = 1;
+            let prevDateCount = 0;
+
+            calendarControl.prevMonthLastDate = calendarControl.getPreviousMonthLastDate();
+            let prevMonthDatesArray = [];
+            let calendarDays = calendarControl.daysInMonth(
+                calendar.getMonth() + 1,
+                calendar.getFullYear()
+            );
+            // dates of current month
+            for (let i = 1; i < calendarDays; i++) {
+                if (i < calendarControl.firstDayNumber()) {
+                    prevDateCount += 1;
+                    document.querySelector(
+                        ".calendar .calendar-body"
+                    ).innerHTML += `<div class="prev-dates"></div>`;
+                    prevMonthDatesArray.push(calendarControl.prevMonthLastDate--);
+                } else {
+                    document.querySelector(
+                        ".calendar .calendar-body"
+                    ).innerHTML += `<div class="number-item" data-num=${count}>
+                    <a class="dateNumber" href="#">${count++}</a></div>`;
+                }
             }
-        };
-    })();
-
-    renderHtml();
-    showCalendarData();
-    bindEvent();
-
-    function renderHtml() {
-        var calendar = document.getElementById("calendar");
-        var titleBox = document.createElement("div");
-        var bodyBox = document.createElement("div");
-
-        titleBox.className = 'title_box';
-        titleBox.innerHTML = "<span class='title_box' id='prev_month_button'></span>" +
-            "<span class='calendar_title' id='calendar_title'></span>" +
-            "<span class='title_box' id='next_month_button'></span>";
-        calendar.appendChild(titleBox);
-
-        bodyBox.className = 'calendar_body_box';
-        var _headHtml = "<tr>" +
-            "<th>日</th>" +
-            "<th>一</th>" +
-            "<th>二</th>" +
-            "<th>三</th>" +
-            "<th>四</th>" +
-            "<th>五</th>" +
-            "<th>六</th>" +
-            "</tr>";
-        var _bodyHtml = "";
-
-        for (var i = 0; i < 6; i++) {
-            _bodyHtml += "<tr>" +
-                "<td></td>" +
-                "<td></td>" +
-                "<td></td>" +
-                "<td></td>" +
-                "<td></td>" +
-                "<td></td>" +
-                "<td></td>" +
-                "</tr>";
-        }
-        bodyBox.innerHTML = "<table class='calendar_table' id='calendar_table'>" +
-            _headHtml + _bodyHtml +
-            "</table>";
-        calendar.appendChild(bodyBox);
-    }
-
-    function showCalendarData() {
-        var _year = date_obj.getDate().getFullYear();
-        var _month = date_obj.getDate().getMonth() + 1;
-        var _dateStr = getDateStr(date_obj.getDate());
-
-        var calendar_title = document.getElementById("calendar_title");
-        var titleStr = _dateStr.substr(0, 4) + "年 " + _dateStr.substr(4, 2) + "月";
-        calendar_title.innerText = titleStr;
-
-        var _table = document.getElementById("calendar_table");
-        var _tds = _table.getElementsByTagName("td");
-        var _firstDay = new Date(_year, _month - 1, 1);
-        for (var i = 0; i < _tds.length; i++) {
-            var _thisDay = new Date(_year, _month - 1, i + 1 - _firstDay.getDay());
-            var _thisDayStr = getDateStr(_thisDay);
-            _tds[i].innerText = _thisDay.getDate();
-            _tds[i].setAttribute('data', _thisDayStr);
-            if (_thisDayStr == getDateStr(new Date())) {
-                _tds[i].className = 'today';
-            } else if (_thisDayStr.substr(0, 6) == getDateStr(_firstDay).substr(0, 6)) {
-                _tds[i].className = 'cur_month';
-            } else {
-                _tds[i].className = 'other_month';
+            //remaining dates after month dates
+            for (let j = 0; j < prevDateCount + 1; j++) {
+                document.querySelector(
+                    ".calendar .calendar-body"
+                ).innerHTML += `<div class="number-item" data-num=${count}>
+                <a class="dateNumber" href="#">${count++}</a></div>`;
             }
-        }
-    }
-
-    function bindEvent() {
-        var prev_month_button = document.getElementById("prev_month_button");
-        var next_month_button = document.getElementById("next_month_button");
-        addEvent(prev_month_button, 'click', clickPrevMonth);
-        addEvent(next_month_button, 'click', clickNextMonth);
-        var table = document.getElementById("calendar_table");
-        var tds = table.getElementsByTagName('td');
-        for (var i = 0; i < tds.length; i++) {
-            addEvent(tds[i], 'click', function (e) {
-                console.log(e.target.getAttribute('data'));
-            });
-        }
-    }
-
-    function addEvent(dom, eType, func) {
-        if (dom.addEventListener) {
-            dom.addEventListener(eType, function (e) {
-                func(e);
-            });
-        } else if (dom.attachEvent) {
-            dom.attachEvent('on' + eType, function (e) {
-                func(e);
-            });
-        } else {
-            dom['on' + eType] = function (e) {
-                func(e);
+            calendarControl.highlightToday();
+            calendarControl.plotPrevMonthDates(prevMonthDatesArray);
+            calendarControl.plotNextMonthDates();
+        },
+        attachEvents: function () {
+            let prevBtn = document.querySelector(".calendar .calendar-prev a");
+            let nextBtn = document.querySelector(".calendar .calendar-next a");
+            let todayDate = document.querySelector(".calendar .calendar-today-date");
+            let dateNumber = document.querySelectorAll(".calendar .dateNumber");
+            prevBtn.addEventListener(
+                "click",
+                calendarControl.navigateToPreviousMonth
+            );
+            nextBtn.addEventListener("click", calendarControl.navigateToNextMonth);
+            todayDate.addEventListener(
+                "click",
+                calendarControl.navigateToCurrentMonth
+            );
+            for (var i = 0; i < dateNumber.length; i++) {
+                dateNumber[i].addEventListener(
+                    "click",
+                    calendarControl.selectDate,
+                    false
+                );
             }
+        },
+        highlightToday: function () {
+            let currentMonth = calendarControl.localDate.getMonth() + 1;
+            let changedMonth = calendar.getMonth() + 1;
+            let currentYear = calendarControl.localDate.getFullYear();
+            let changedYear = calendar.getFullYear();
+            if (
+                currentYear === changedYear &&
+                currentMonth === changedMonth &&
+                document.querySelectorAll(".number-item")
+            ) {
+                document
+                    .querySelectorAll(".number-item")
+                [calendar.getDate() - 1].classList.add("calendar-today");
+            }
+        },
+        plotPrevMonthDates: function (dates) {
+            dates.reverse();
+            for (let i = 0; i < dates.length; i++) {
+                if (document.querySelectorAll(".prev-dates")) {
+                    document.querySelectorAll(".prev-dates")[i].textContent = dates[i];
+                }
+            }
+        },
+        plotNextMonthDates: function () {
+            let childElemCount = document.querySelector('.calendar-body').childElementCount;
+            //7 lines
+            if (childElemCount > 42) {
+                let diff = 49 - childElemCount;
+                calendarControl.loopThroughNextDays(diff);
+            }
+
+            //6 lines
+            if (childElemCount > 35 && childElemCount <= 42) {
+                let diff = 42 - childElemCount;
+                calendarControl.loopThroughNextDays(42 - childElemCount);
+            }
+
+        },
+        loopThroughNextDays: function (count) {
+            if (count > 0) {
+                for (let i = 1; i <= count; i++) {
+                    document.querySelector('.calendar-body').innerHTML += `<div class="next-dates">${i}</div>`;
+                }
+            }
+        },
+        attachEventsOnNextPrev: function () {
+            calendarControl.plotDates();
+            calendarControl.attachEvents();
+        },
+        init: function () {
+            calendarControl.plotDates();
+            calendarControl.attachEvents();
         }
-    }
+    };
+    calendarControl.init();
+}
 
-    function clickPrevMonth() {
-        var date = date_obj.getDate();
-        date_obj.setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
-        showCalendarData();
-    }
-
-    function clickNextMonth() {
-        var date = date_obj.getDate();
-        date_obj.setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
-        showCalendarData();
-    }
-
-    function getDateStr(date) {
-        var _year = date.getFullYear();
-        var _month = date.getMonth() + 1;
-        var _d = date.getDate();
-
-        _month = (_month > 9) ? ("" + _month) : ("0" + _month);
-        _d = (_d > 9) ? ("" + _d) : ("0" + _d);
-        return _year + _month + _d;
-    }
-})();
+const calendarControl = new CalendarControl();
