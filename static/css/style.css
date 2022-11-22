@@ -29,16 +29,28 @@ th {
 }
 
 th.charger_column {
-    width: 20%;
+    width: 30%;
+}
+
+td.available {
+    background-color: #c5eba3;
 }
 
 td.occupied {
-    background-color: #ffffff;
+    background-color: #e6b8af;
+    /*background-color: #ffffff;
     background-image: linear-gradient(to right, #e6b8af, #e6b8af);
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;*/
 }
 
-span.percent {
+td.soon {
+    background-color: #fff2cc;
+    /*background-color: #ffffff;
+    background-image: linear-gradient(to right, #fff2cc, #fff2cc);
+    background-repeat: no-repeat;*/
+}
+
+span.percentage {
     display: none;
 }
 

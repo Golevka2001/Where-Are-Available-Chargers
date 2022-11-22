@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3" />
     <link rel="stylesheet" href="static/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Where Are Availabe Chargers?!</title>
@@ -17,7 +17,7 @@
         <span id="plug">&#x1F50C;</span>
         <span id="hand">&#x1F90F;</span>
         <span id="face">&#x1F605;</span>
-        <span id="hand">&#x1F595;&nbsp&nbsp&nbsp</span>
+        <span id="hand">&#x1F595;&nbsp;&nbsp;&nbsp;</span>
         <br />
         <span id="motor">&#x1F6F5;</span>
     </p>
@@ -38,79 +38,42 @@
 
     <!-- traverse all areas: -->
     {% for area,station_list in result.items() %}
+    <br />
     <h3 align="center">{{ area }}</h3>
     <table>
         <tr>
             <th class="charger_column">充电桩</th>
-            <th colspan="5">使用情况（插座编号、剩余时间）</th>
+            <th>空闲插座</th>
         </tr>
         <!-- traverse each station: -->
         {% for station_name, socket_list in station_list.items() %}
-        {% if socket_list|length == 0 %}
-        <!-- failed to inquire station status: -->
         <tr>
             <th>{{ station_name }}</th>
-            <td colspan="5" bgcolor="#fffacc">* 查询失败 *</td>
-        </tr>
-        {% else %}
-        <tr>
-            <th rowspan="2">{{ station_name }}</th>
-            {% for i in range(0, 5) %}
-            {% if socket_list[i][1] == 1 %}
-            <!-- available -->
-            <td bgcolor="#d9ead3">[{{ socket_list[i][0] }}]</td>
-            {% else %}
-            <!-- occupied -->
-            <td class="occupied">
-                <span class="percent">{{ socket_list[i][3] }}</span>
-                [{{ socket_list[i][0] }}]
-                <br />
-                {{ socket_list[i][2] }}
+            <td>
+                {% if socket_list[10] == -1 %}
+                <!-- failed to inquire station status: -->
+                * 查询失败 *
+                {% elif socket_list[10] == 0 %}
+                <!-- all occupied: -->
+                * 无 *
+                {% else %}
+                <!-- some available: -->
+                &nbsp;
+                {% for i in range(0, 10) %}
+                {% if socket_list[i][1] == 1 %}
+                [{{ socket_list[i][0] }}]&nbsp;
+                {% endif %}
+                {% endfor %}
+                {% endif %}
             </td>
-            {% endif %}
-            {% endfor %}
         </tr>
-        <tr>
-            {% for i in range(5, 10) %}
-            {% if socket_list[i][1] == 1 %}
-            <td bgcolor="#d9ead3">[{{ socket_list[i][0] }}]</td>
-            {% else %}
-            <td class="occupied">
-                <span class="percent">{{ socket_list[i][3] }}</span>
-                [{{ socket_list[i][0] }}]
-                <br />
-                {{ socket_list[i][2] }}
-            </td>
-            {% endif %}
-            {% endfor %}
-        </tr>
-
-        {% endif %}
         {% endfor %}
     </table>
     {% endfor %}
-    <script src="static/js/index.js"></script>
-
-    <p align="center">
-        注：剩余时间与充电进度仅作参考，可能与实际情况有出入
-    </p>
+    <!--<script src="static/js/index.js"></script>-->
 
     <br />
     <br />
-
-    <!--
-    <h2 align="center">提供二维码</h2>
-    <p align="center">您可以将二维码发送到我的邮箱</p>
-    <p align="center" style="font-size: 1.2em; font-weight: bolder;">gol3vka@163.com</p>
-    <p align="center">或在 GitHub 上的&nbsp
-        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers/issues">
-            Issues 页面
-        </a>
-        &nbsp提交
-    </p>
-    <p align="center">麻烦您在发送时备注好充电桩所在位置</p>
-    <p align="center">感谢您的帮助与支持&#x1F389;&#x1F389;&#x1F389;</p>
-    -->
 
     <p align="center">
         GitHub项目地址：
@@ -132,6 +95,10 @@
         <a href="https://github.com/Golevka2001">
             Copyright © Gol3vka
         </a>
+        <br><br>
+        当前网页基于
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers">Where-Are-Available-Chargers</a> @
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/{{ version }}">{{ version[:7] }}</a>
     </p>
 </body>
 

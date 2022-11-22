@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <link rel="stylesheet" href="static/css/style.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=3" />
+    <meta http-equiv="refresh" content="2">
+    <link rel="stylesheet" href="/static/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/loading.js"></script>
     <title>Where Are Availabe Chargers?!</title>
 </head>
 
@@ -26,11 +28,13 @@
     <hr />
     <br />
 
-    <h2 align="center">正在获取最新数据，请稍等</h2>
-    <p align="center" class="text">获取数据约需10秒</p>
+    <h2 align="center">正在获取最新数据，请稍等...</h2>
+    <marquee behavior="scroll" direction="left" scrollamount="20" hspace="85" onMouseOut="this.start()"
+        onMouseOver="this.stop()">
+        <h1>&#x1F6F5;&#x1F4A8;</h1>
+    </marquee>
+    <p align="center" class="text">获取数据约需3秒</p>
     <p align="center" class="text">获取完成后，本页会自动刷新</p>
-
-    <br />
 
     <br />
     <hr />
@@ -40,6 +44,10 @@
         <a href="https://github.com/Golevka2001">
             Copyright © Gol3vka
         </a>
+        <br><br>
+        当前网页基于
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers">Where-Are-Available-Chargers</a> @
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/{{ version }}">{{ version[:7] }}</a>
     </p>
 </body>
 
