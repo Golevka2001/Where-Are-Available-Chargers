@@ -2,29 +2,28 @@
 
 ---
 
-## 查询网址：<http://charges.injs.eu>
+## 查询网址：<http://chargers.injs.eu>
 
 这是一个脚本用来查询校园内各个充电桩的可用情况。
 
 希望它可以帮你更方便给小电驴找到充电桩。
 
-目前还在更新中，查询暂时还不是很方便，之后可能会对接到公众号，也可能用网页。
-
 如果它对你有帮助的话，可以点击右上角的 :star:**Star** 按钮（~~或者**v我50**~~）感谢您的支持！ :tada::tada::tada:
 
 ## 目录
 
-- [:electric_plug::rage:Where Are Available Chargers?](#electric_plugragewhere-are-available-chargers)
-  - [查询网址：<http://charges.injs.eu>](#查询网址httpchargesinjseu)
+- [:electric\_plug::rage:Where Are Available Chargers?](#electric_plugragewhere-are-available-chargers)
+  - [查询网址：http://chargers.injs.eu](#查询网址httpchargersinjseu)
   - [目录](#目录)
   - [背景](#背景)
   - [工作流程](#工作流程)
   - [使用说明](#使用说明)
-    - [下载 & 解压](#下载--解压)
+    - [下载 \& 解压](#下载--解压)
     - [安装 Python 环境](#安装-python-环境)
+    - [创建虚拟环境（可选）](#创建虚拟环境可选)
     - [安装依赖库](#安装依赖库)
     - [运行](#运行)
-  - [提供二维码](#提供二维码)
+  - [反馈与建议](#反馈与建议)
   - [致谢](#致谢)
   - [更新日志](#更新日志)
   - [使用许可](#使用许可)
@@ -64,14 +63,25 @@ s(开始)
 
 略。
 
+### 创建虚拟环境（可选）
+
+创建虚拟环境：
+
+```bash
+cd /path/to/Where-Are-Available-Chargers
+python -m venv waac-venv
+```
 ### 安装依赖库
 
-按 ```Windows``` + ```X```，点击菜单中的 ```Windows PowerShell```，输入以下命令：
+激活虚拟环境（可选）：
 
-*（注：下面命令中的 “/.../Where-Are-Available-Chargers/” 表示项目在您本地的路径）*
+```bash
+.\waac-venv\Scripts\activate
+```
 
-```shell
-cd "/.../Where-Are-Available-Chargers/"
+安装依赖库：
+
+```bash
 pip install .\requirements.txt
 ```
 
@@ -79,11 +89,14 @@ pip install .\requirements.txt
 
 在编译器里运行，或者在脚本所在路径下进入终端输入以下命令：
 
-```shell
-python .\main.py
-```
+*（注：如创建了虚拟环境需要在激活虚拟环境后运行）*
 
-## 提供二维码
+```bash
+python .\server.py
+```
+在浏览器中访问 ```http://127.0.0.1:3000``` 查看页面。
+
+## 反馈与建议
 
 ~~也许您也发现了，“为啥才能查到这么几个充电桩？”。~~
 
@@ -115,6 +128,21 @@ python .\main.py
 :rose::rose::rose:
 
 ## 更新日志
+
+**2022-11-16:**
+
+1. 新增加载页面、错误页面；
+2. 改为异步请求；
+3. 超时与异常处理。
+
+**2022-11-15:**
+
+1. 新增南门充电桩（在校外）4个。
+
+**2022-11-10:**
+
+1. ~~新增剩余时间和完成百分比的显示；~~（无法做到准确，暂时弃用）
+2. 改为多线程发送请求。
 
 **2022-11-07:**
 
