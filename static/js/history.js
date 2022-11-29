@@ -1,7 +1,10 @@
 function CalendarControl() {
-    const calendar = new Date(moment().tz("Australia/Sydney").format("YYYY-MM-DD HH:mm:ss"));
+    // NOTE：Date和moment混用的原因是，Date在时区、格式化输出上不方便，但是moment居然不支持一个月31天，现在可能在31号的时候还是有些问题，待测试。
+    const imgUrlPri = "https://cdn.jsdelivr.net/gh/Golevka2001/Resources-for-Webpages/chargers_history/charts/";
+    const startDate = new Date(2022, 10, 20);  // 2022-11-20
+    const calendar = new Date(moment().tz("Asia/Shanghai").format("YYYY-MM-DD HH:mm:ss"));
     const calendarControl = {
-        localDate: new Date(moment().tz("Australia/Sydney").format("YYYY-MM-DD HH:mm:ss")),
+        localDate: new Date(moment().tz("Asia/Shanghai").format("YYYY-MM-DD HH:mm:ss")),
         prevMonthLastDate: null,
         daysInMonth: function (month, year) {
             return new Date(year, month, 0).getDate();
@@ -49,11 +52,31 @@ function CalendarControl() {
                 moment(calendarControl.localDate).format("YYYY年MM月DD日");
         },
         selectDate: function (e) {
-            let selDate = moment([calendar.getFullYear(), calendar.getMonth(), e.target.textContent]).format("YYYYMMDD");
-            document.querySelector(".history").innerHTML = `<div class="image">
-            <a href="/static/img/history/${selDate}.png">
-            <img src="/static/img/history/${selDate}.png" />
-            </a></div>`;
+            let selDate = moment([calendar.getFullYear(), calendar.getMonth(), e.target.textContent]);
+            if (selDate.valueOf() > calendarControl.localDate.getTime() || selDate.valueOf() < startDate.getTime())
+                alert("有效日期范围为：2022/11/20-今天");
+            else {
+                let imgUrl = imgUrlPri + selDate.format("YYYYMMDD") + ".png";
+                document.querySelector(".history").innerHTML = `<marquee behavior="scroll" direction="left" scrollamount="20" hspace="85" onMouseOut="this.start()" onMouseOver="this.stop()">
+                <h1>&#x1F6F5;&#x1F4A8;</h1>
+                </marquee><br />
+                图片加载中,请稍等...`;
+                let imgRequest = new XMLHttpRequest();
+                imgRequest.open('Get', imgUrl, true);
+                imgRequest.onreadystatechange = function () {
+                    console.log(this.status);
+                    if (this.status == 404) {
+                        alert("暂无当日数据");
+                    }
+                    else {
+                        document.querySelector(".history").innerHTML = `<div class="image">
+                            <a href="${imgUrl}">
+                            <img src="${imgUrl}" />
+                            </a></div>`;
+                    }
+                }
+                imgRequest.send()
+            }
         },
         plotDayNames: function () {
             document.querySelector(

@@ -5,9 +5,9 @@
 @File: find_chargers.py
 @Brief: 使用 flask 框架搭建的简单服务，将爬取的信息显示在网页上。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.4.0
+@Version: 2.4.1
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/21
+@Last Modified Date: 2022/11/29
 """
 
 import os
@@ -30,7 +30,7 @@ version = "dev"
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                            "config.yml")
 min_interval = timedelta(minutes=1, seconds=30)
-# max_interval = timedelta(minutes=3)
+max_interval = timedelta(minutes=3)
 
 chargers = FindChargers(config_path)
 status = chargers.get_status()
@@ -86,7 +86,6 @@ def show():
     return retpage
 
 
-# TODO: 图片暂时放static里，测试用
 @app.route("/history", methods=["GET", "HEAD", "POST"])
 def history():
     return render_template(
@@ -120,4 +119,4 @@ def favicon():
 
 # run server
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000, debug=True)
+    app.run(host="0.0.0.0", port=3000, debug=False)
