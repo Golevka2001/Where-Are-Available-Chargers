@@ -5,15 +5,15 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.3.5
+@Version: 2.3.6
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/11/20
+@Last Modified Date: 2022/12/07
 """
 
 import asyncio
 import os
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import requests
 import yaml
@@ -21,7 +21,6 @@ from aiohttp import ClientSession, ClientTimeout
 
 
 class FindChargers:
-
     def __init__(self, config_path: str) -> None:
         """Initialize the class
 
@@ -33,12 +32,10 @@ class FindChargers:
         with open(config_path, "r", encoding="utf-8") as config_file:
             self.config = yaml.safe_load(config_file)
         self.token = str()
-        self.utc_time = datetime.utcnow()
-        self.cn_time = datetime.utcnow() + timedelta(hours=8)
-        self.timeout = ClientTimeout(total=5,
-                                     connect=None,
-                                     sock_connect=None,
-                                     sock_read=None)
+        self.refresh_time = datetime.now(timezone.utc)
+        self.timeout = ClientTimeout(
+            total=5, connect=None, sock_connect=None, sock_read=None
+        )
         self.event_loop = asyncio.new_event_loop()
         self.process_over = True
         # store all status:
@@ -48,13 +45,12 @@ class FindChargers:
             self.status[area] = dict()
             for station in stations:
                 self.status[area][station] = list()
-                for i in range(10):
+                for _ in range(10):
                     self.status[area][station].append(list())
                 self.status[area][station].append(0)
 
     def _update_time(self) -> None:
-        self.utc_time = datetime.utcnow()
-        self.cn_time = datetime.utcnow() + timedelta(hours=8)
+        self.refresh_time = datetime.now(timezone.utc)
 
     def _get_token(self) -> None:
         """Send 'openid' and 'phone' to get token
@@ -63,22 +59,19 @@ class FindChargers:
             Exception: if token is not received
         """
         # send request:
-        login_data = {
-            "openid": self.config["openid"],
-            "phone": self.config["phone"]
-        }
+        login_data = {"openid": self.config["openid"], "phone": self.config["phone"]}
         with requests.Session() as session:
             # retry 3 times:
             session.adapters.DEFAULT_RETRIES = 3
-            session.keep_alive = False
+            # session.keep_alive = False
             # request:
             with session.post(
-                    url=self.config["login_url"],
-                    json=login_data,
-                    headers=self.config["headers"],
-                    allow_redirects=False,
-                    stream=False,
-                    timeout=5,
+                url=self.config["login_url"],
+                json=login_data,
+                headers=self.config["headers"],
+                allow_redirects=False,
+                stream=False,
+                timeout=5,
             ) as response:
                 response = response.json()
                 # check:
@@ -102,8 +95,9 @@ class FindChargers:
         try:
             async with ClientSession(timeout=self.timeout) as session:
                 async with await session.get(
-                        url=(self.config["inquiry_url"] + station_url),
-                        headers=self.config["headers"]) as response:
+                    url=(self.config["inquiry_url"] + station_url),
+                    headers=self.config["headers"],
+                ) as response:
                     response = await response.json()
         except:
             # TODO: 异常处理，待解决
@@ -137,30 +131,35 @@ class FindChargers:
                 else:
                     # charging:
                     # NOTE: 无法判断是5h还是10h，结果仅供参考。
-                    start_time = datetime.strptime(socket["updated_at"],
-                                                   "%Y-%m-%d %H:%M:%S")
-                    duration = self.cn_time - start_time
+                    start_time = datetime.strptime(
+                        socket["updated_at"], "%Y-%m-%d %H:%M:%S"
+                    ).replace(tzinfo=timezone(timedelta(hours=8)))
+                    duration = self.refresh_time - start_time
                     # calculate percent complete:
                     percentage = duration.seconds / timedelta(hours=10).seconds
                     percentage = str(round(percentage * 100)) + "%"
                     # calculate remaining time:
                     remain_time = timedelta(hours=10) - duration
                     remain_time = time.strftime(
-                        "%H:%M:%S", time.gmtime(remain_time.seconds))
+                        "%H:%M:%S", time.gmtime(remain_time.seconds)
+                    )
                 # record:
-                self.status[area][station_name][socket["channel"] - 1] = ([
-                    socket["channel"], socket["status"], remain_time,
-                    percentage
-                ])
+                self.status[area][station_name][socket["channel"] - 1] = [
+                    socket["channel"],
+                    socket["status"],
+                    remain_time,
+                    percentage,
+                ]
             self.status[area][station_name][10] = total
 
-    def get_status(self) -> dict:
+    def get_status(self) -> tuple:
         """Traversal all stations, get status
 
         Returns:
             dict: {东门:{北侧-1:[[1, 0, 00:30:00, 90%],...],...},...}
         """
         self.process_over = False
+        self.refresh_start_time = datetime.now(timezone.utc)
         tasks = set()
         # add authorization key:
         self._get_token()
@@ -180,18 +179,22 @@ class FindChargers:
         tasks.clear()
         # delete authorization key:
         del self.config["headers"]["authorization"]
-        self._update_time()
-        self.process_over = True
-        return self.status
+
+        if datetime.now(timezone.utc) - self.refresh_start_time < timedelta(seconds=45):
+            self._update_time()
+            self.process_over = True
+            return (self.status, True)
+        else:
+            self.process_over = True
+            return (self.status, False)
 
 
 if __name__ == "__main__":
-    config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                               "config.yml")
+    config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
     fc = FindChargers(config_path)
     while True:
         start = time.time()
-        status = fc.get_status()
+        status, _ = fc.get_status()
         print(status)
         end = time.time()
         print(end - start)
