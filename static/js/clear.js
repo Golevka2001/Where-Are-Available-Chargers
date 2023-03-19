@@ -1,0 +1,1 @@
+sessionStorage.removeItem('waitCycle');

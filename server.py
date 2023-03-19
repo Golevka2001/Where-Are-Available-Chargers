@@ -19,6 +19,7 @@ from find_chargers import FindChargers
 from flask import Flask, abort, redirect, render_template, request
 
 version = "dev"
+start_time = datetime.now(timezone.utc)
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
 min_interval = timedelta(minutes=1, seconds=30)
 # max_interval = timedelta(minutes=3)
@@ -29,6 +30,10 @@ max_refresh_waiting_time = timedelta(minutes=5)
 chargers = FindChargers(config_path)
 status, _ = chargers.get_status()
 app = Flask(__name__)
+
+
+def provider() -> str:
+    return request.headers.get("Host")
 
 
 def update_func() -> None:
@@ -64,6 +69,7 @@ def index(enable_refresh: bool = True):
         return render_template(
             "loading.html",
             version=version,
+            provider=provider(),
         )
 
     interval = time.strftime("%H:%M:%S", time.gmtime(interval.seconds))
@@ -75,6 +81,7 @@ def index(enable_refresh: bool = True):
             last_update_time=last_update_time,
             interval=interval,
             version=version,
+            provider=provider(),
         )
     except:
         return redirect("/error")
@@ -89,7 +96,17 @@ def show():
 
 @app.route("/error", methods=["GET", "HEAD", "POST"])
 def error(message: str = "请求错误，请稍后重试 ..."):
-    return render_template("error.html", message=message), 508
+    run_time = (datetime.now(timezone.utc) - start_time).total_seconds()
+    return (
+        render_template(
+            "error.html",
+            message=message,
+            run_time=run_time,
+            version=version,
+            provider=provider(),
+        ),
+        508,
+    )
 
 
 @app.route("/force_update", methods=["GET"])
@@ -101,6 +118,16 @@ def force_update():
         update_func()
         end = time.time()
         return str(end - start)
+    else:
+        abort(401)
+
+
+@app.route("/force_exit", methods=["GET"])
+def force_exit():
+    if not ("EXIT_KEY" in os.environ and "key" in request.args):
+        abort(401)
+    elif os.environ["EXIT_KEY"] == request.args["key"]:
+        os._exit(0)
     else:
         abort(401)
 
