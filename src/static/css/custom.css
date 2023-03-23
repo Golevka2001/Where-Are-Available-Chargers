@@ -1,3 +1,38 @@
+.num_style {
+    border-radius: 10%;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    background: #fff;
+    line-height: 17px;
+    text-align: center;
+    border: 1px solid #000;
+    white-space: nowrap;
+    padding: 1px 3px 1px 1px;
+    font-weight: bold;
+    font-size: 18px;
+    transform: scale(.8)
+}
+
+.num_style_example {
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    height: 20px;
+    width: 40px;
+    display: inline-block;
+    background: #fff;
+    line-height: 17px;
+    text-align: center;
+    border: 1px solid #000;
+    white-space: nowrap;
+    padding: 1px 3px 1px 1px;
+    font-size: 18px;
+    font-weight: bold;
+    transform: scale(.8)
+}
+
 table.gridtable {
     color: #444444;
     border-width: 1px;
@@ -38,7 +73,6 @@ table.gridtable td {
     text-align: center;
     border: 0px solid black;
     white-space: nowrap;
-    /*给外边框内距限制数字的位置*/
     padding: 1px 3px 1px 1px;
     font-size: 19px;
     transform: scale(0.80);
@@ -55,7 +89,6 @@ table.gridtable td {
     text-align: center;
     border: 0px solid black;
     white-space: nowrap;
-    /*给外边框内距限制数字的位置*/
     padding: 1px 3px 1px 1px;
     font-size: 19px;
     transform: scale(0.80);
