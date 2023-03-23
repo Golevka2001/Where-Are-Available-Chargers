@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- force IE browsers in compatibility mode to use their most aggressive rendering engine -->
+
+    <meta charset="utf-8">
+    <title>Where Are Available Chargers?!</title>
+
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link rel="stylesheet" href="./static/css/styles.pure.css">
+
+</head>
+
+
+<body class="status index status-none" data-breakpoint-reached="false">
+
+    <div class="layout-content status status-index starter">
+        <div class="custom-header-container">
+            <div
+                class="header d-md-flex flex-md-justify-between flex-md-items-center px-4 py-3 text-center text-md-left bg-white box-shadow-large">
+                <a href="/" class="text-gray-dark" style="font-size: 1.3rem; white-space: nowrap;">
+                    &#x1F50C;&#x1F621; Where Are Available Chargers
+                </a>
+            </div>
+
+        </div>
+
+        <div id="head-status-1" class="container">
+            {{#error}}
+            <div class="page-status status-major" style="padding-bottom: 0.5rem;">
+                <span class="status font-large">
+                    存在部分充电桩未获取到数据
+                </span>
+            </div>
+            {{/error}}
+            {{#chongzu}}
+            <div class="page-status status-none" style="padding-bottom: 0.5rem;">
+                <span class="status font-large">
+                    充电桩余量充足
+                </span>
+            </div>
+            {{/chongzu}}
+            {{^chongzu}}
+            <div class="page-status status-minor" style="padding-bottom: 0.5rem;">
+                <span class="status font-large">
+                    充电桩余量紧张
+                </span>
+            </div>
+            {{/chongzu}}
+
+            <span
+                style="color: gray;font-size: smaller;">充电桩序号排序方法为从北向南、从西向东（即地图上从上到下、从左到右）。当前数据刷新间隔为200秒。单击充电桩位置可跳转到详情。</span>
+
+            <div class="components-section font-regular">
+                <div class="components-container two-columns">
+                    {{{ stations }}}
+                </div>
+
+
+
+            </div>
+
+            <link rel="stylesheet" href="./static/css/table.css">
+
+            <div style="display: flex; flex-direction:column;">
+                <div style="max-width: 68rem; text-align: center;">
+                    数据有延迟，刷新间隔为200秒<br>请在确认实际占用情况后再充电<br>
+                    图例：
+                    <span class="num_green">1</span><span style="color: #28a745;">空闲</span>
+                    <span class="num_orange">-</span><span style="color: #e67e22;">占用</span><br>
+                </div>
+                <div class="detail_box">
+                    {{{ station_detail }}}
+                </div>
+            </div>
+
+
+            <div class="page-footer border-color font-small">
+                <a href="#" class="history-footer-link"><span style="font-family:arial">←</span> 返回旧版 </a>
+                <div>结果编号: {{ query_id }}</div> · <div>渲染耗时: {{ rendering_time }}</div>
+            </div>
+        </div>
+
+        <div class="custom-footer-container">
+            <div class="footer mt-6 border-top" role="contentinfo">
+
+
+
+                <div class="container-lg p-responsive f6 py-4 flex-justify-between flex-row-reverse flex-items-center">
+                    <ul class="list-style-none d-flex text-gray">
+                        <li class="mr-3">2022 - 2023 © Gol3vka and Csimide</li>
+                        <li class="mr-3"><a href="https://github.com/Golevka2001/Where-Are-Available-Chargers"
+                                class="link-gray">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>

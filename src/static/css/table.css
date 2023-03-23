@@ -1,0 +1,90 @@
+table.gridtable {
+    color: #444444;
+    border-width: 1px;
+    border-radius: 10%;
+    border-color: #777;
+    border-collapse: collapse;
+}
+
+table.gridtable th {
+    border-width: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-style: solid;
+    border-color: #777;
+    background-color: #dedede;
+}
+
+table.gridtable td {
+    border-width: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+    /*text-align: center;*/
+}
+
+.num_green {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    background: #28a745;
+    line-height: 19px;
+    color: #fff;
+    text-align: center;
+    border: 0px solid black;
+    white-space: nowrap;
+    /*给外边框内距限制数字的位置*/
+    padding: 1px 3px 1px 1px;
+    font-size: 19px;
+    transform: scale(0.80);
+}
+
+.num_orange {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    background: #e67e22;
+    line-height: 19px;
+    color: #e67e22;
+    text-align: center;
+    border: 0px solid black;
+    white-space: nowrap;
+    /*给外边框内距限制数字的位置*/
+    padding: 1px 3px 1px 1px;
+    font-size: 19px;
+    transform: scale(0.80);
+}
+
+.table_box {
+    align-items: center;
+    margin-top: 10px;
+    width: 20rem;
+}
+
+.detail_box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 auto;
+}
+
+@media (max-width: 62rem) {
+    .detail_box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 41rem) {
+    .detail_box {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+    }
+}

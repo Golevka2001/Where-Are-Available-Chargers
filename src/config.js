@@ -1,0 +1,67 @@
+const CONFIG = {
+    "cache": {
+        "survival_time": 4, //分钟
+        "refuse_time": 8, //分钟
+    },
+    "stations": {
+        "东门北侧": ["XYvIqZM8oCmT19", "XYnfw8BeyiXS16", "XYEogTrLdXZx14", "XYxN6z9ZETBZ17", "XYBGw4c88NWd21"],
+        "东门南侧": ["XYSfeYzOvLwN5", "XYDSUGrzkRfX6"],
+        "西门北侧": ["XYS2hOWumHDa13", "XYp5iHwheZvf18", "XY9HNPbegRgV15"],
+        "西门南侧": ["XYcjSf9nqvK612", "XY31g0OtIZA711", "XYV5mv5tnKHV9"],
+        "南门西侧": ["XY679RB8P35Y10", "XYOGaVYy7OHu7"],
+        "南门东侧": ["XY1eANYJoWM620", "XYlFl6DnfgZH3"],
+        "北门东侧": ["XYeo2IsT1Sx61", "XYKCwwkZXBW62", "XYTbok829tYo8", "XYo7UstSCeu64"],
+    },
+    "stations_r": {
+        "XYvIqZM8oCmT19": { station: "东门北侧", station_EN: "EN", num: 0 },
+        "XYnfw8BeyiXS16": { station: "东门北侧", station_EN: "EN", num: 1 },
+        "XYEogTrLdXZx14": { station: "东门北侧", station_EN: "EN", num: 2 },
+        "XYxN6z9ZETBZ17": { station: "东门北侧", station_EN: "EN", num: 3 },
+        "XYBGw4c88NWd21": { station: "东门北侧", station_EN: "EN", num: 4 },
+        "XYSfeYzOvLwN5": { station: "东门南侧", station_EN: "ES", num: 0 },
+        "XYDSUGrzkRfX6": { station: "东门南侧", station_EN: "ES", num: 1 },
+        "XYS2hOWumHDa13": { station: "西门北侧", station_EN: "WN", num: 0 },
+        "XYp5iHwheZvf18": { station: "西门北侧", station_EN: "WN", num: 1 },
+        "XY9HNPbegRgV15": { station: "西门北侧", station_EN: "WN", num: 2 },
+        "XYcjSf9nqvK612": { station: "西门南侧", station_EN: "WS", num: 0 },
+        "XY31g0OtIZA711": { station: "西门南侧", station_EN: "WS", num: 1 },
+        "XYV5mv5tnKHV9": { station: "西门南侧", station_EN: "WS", num: 2 },
+        "XY679RB8P35Y10": { station: "南门西侧", station_EN: "SW", num: 0 },
+        "XYOGaVYy7OHu7": { station: "南门西侧", station_EN: "SW", num: 1 },
+        "XY1eANYJoWM620": { station: "南门东侧", station_EN: "SE", num: 0 },
+        "XYlFl6DnfgZH3": { station: "南门东侧", station_EN: "SE", num: 1 },
+        "XYeo2IsT1Sx61": { station: "北门东侧", station_EN: "NE", num: 0 },
+        "XYKCwwkZXBW62": { station: "北门东侧", station_EN: "NE", num: 1 },
+        "XYTbok829tYo8": { station: "北门东侧", station_EN: "NE", num: 2 },
+        "XYo7UstSCeu64": { station: "北门东侧", station_EN: "NE", num: 3 },
+    },
+    "station_ENs": {
+        "东门北侧": "EN",
+        "东门南侧": "ES",
+        "西门北侧": "WN",
+        "西门南侧": "WS",
+        "南门西侧": "SW",
+        "南门东侧": "SE",
+        "北门东侧": "NE",
+    },
+    "station_ENs_r": {
+        "EN": "东门北侧",
+        "ES": "东门南侧",
+        "WN": "西门北侧",
+        "WS": "西门南侧",
+        "SW": "南门西侧",
+        "SE": "南门东侧",
+        "NE": "北门东侧",
+    },
+    "station_EN": {
+        "东门北侧": "East Gate - North",
+        "东门南侧": "East Gate - South",
+        "西门北侧": "West Gate - North",
+        "西门南侧": "West Gate - South",
+        "南门西侧": "South Gate - West",
+        "南门东侧": "South Gate - East",
+        "北门东侧": "Nouth Gate - East",
+    },
+}
+
+export default CONFIG
