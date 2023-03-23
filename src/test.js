@@ -1,7 +1,6 @@
-import { render_chinese, render_chinese_error } from "./rend.js";
-import mustache from "mustache/mustache.mjs";
+import { render_chinese, render_chinese_error, render_old, render_old_error } from "./rend.js";
 
-const all_infomation = {
+const ALL_INFOMATION = {
     "update_message": { "last_success_query_id": 528710393, "last_success_num": 21 },
     "status_sum": { "东门北侧": 2, "东门南侧": 0, "西门北侧": 19, "西门南侧": 14, "南门西侧": 14, "南门东侧": 20, "北门东侧": 27 },
     "status_detail": {
@@ -24,5 +23,10 @@ const all_infomation = {
     }
 }
 
+console.log(render_chinese(ALL_INFOMATION))
 
-console.log(await render_chinese_error("发生错误，请稍后再试"))
+console.log(render_chinese_error())
+
+console.log(render_old(ALL_INFOMATION))
+
+console.log(render_old_error())

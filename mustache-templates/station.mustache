@@ -1,9 +1,10 @@
 <a href="#{{ station_name }}">
     <div class="component-container border-color">
         <div class="component-inner-container" style="color: black">
-            <span class="name" style="font-size: 1.2rem">
-                {{station_name}}
-            </span>
+            <div class="name" style="font-size: 1.2rem">
+                {{station_name}} <span style="color:gray; font-size: medium;"> 查看详情 <img
+                        src="./static/img/right_arrow.svg" alt=">" width="10"></span>
+            </div>
 
             <div style="display: flex; float: right; justify-content: center">
                 <span style="margin-right: 5px; color: gray;">空插座数 </span>
@@ -11,7 +12,8 @@
                 {{^enough}}<span class="fa-2x" style="color: #e67e22">{{available_num}} </span>{{/enough}}
             </div>
 
-            <span class="status-msg">余量：{{{remain}}}</span>
+            <span class="status-msg" style="margin-top: 0.5rem;"><span
+                    class="num_style_example">桩号</span>·余量：{{{remain}}}
         </div>
     </div>
 </a>

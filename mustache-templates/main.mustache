@@ -19,11 +19,12 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     <link rel="stylesheet" href="./static/css/styles.pure.css">
+    <link rel="stylesheet" href="./static/css/custom.css">
 
 </head>
 
 
-<body class="status index status-none" data-breakpoint-reached="false">
+<body class="status index status-none" data-breakpoint-reached="false" id="page-top">
 
     <div class="layout-content status status-index starter">
         <div class="custom-header-container">
@@ -36,7 +37,7 @@
 
         </div>
 
-        <div id="head-status-1" class="container">
+        <div class="container">
             {{#error}}
             <div class="page-status status-major" style="padding-bottom: 0.5rem;">
                 <span class="status font-large">
@@ -58,10 +59,13 @@
                 </span>
             </div>
             {{/chongzu}}
-
-            <span
-                style="color: gray;font-size: smaller;">充电桩序号排序方法为从北向南、从西向东（即地图上从上到下、从左到右）。当前数据刷新间隔为200秒。单击充电桩位置可跳转到详情。</span>
-
+            <div style="overflow: auto;">
+                <span style="color: gray;font-size: smaller;">
+                    数据刷新间隔为200秒，请在确认实际占用情况后再充电。<br>
+                    点击充电站后“详情”可以跳转到每个充电插口的详情。
+                </span>
+                <a href="./old" style="font-size: smaller; float: right;">切换到旧版界面</a>
+            </div>
             <div class="components-section font-regular">
                 <div class="components-container two-columns">
                     {{{ stations }}}
@@ -70,8 +74,6 @@
 
 
             </div>
-
-            <link rel="stylesheet" href="./static/css/table.css">
 
             <div style="display: flex; flex-direction:column;">
                 <div style="max-width: 68rem; text-align: center;">
@@ -87,8 +89,9 @@
 
 
             <div class="page-footer border-color font-small">
-                <a href="#" class="history-footer-link"><span style="font-family:arial">←</span> 返回旧版 </a>
-                <div>结果编号: {{ query_id }}</div> · <div>渲染耗时: {{ rendering_time }}</div>
+                <a href="./old" class="history-footer-link"><span
+                        style="font-family:arial">←</span> 返回旧版 </a>
+                <div>结果编号: {{ query_id }}</div>
             </div>
         </div>
 

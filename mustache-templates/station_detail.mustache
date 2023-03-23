@@ -1,5 +1,10 @@
 <div class="table_box" id="{{ station_name }}">
-    {{ station_name }} · <a href="#head-status-1">回到顶部</a>
+    <div style="overflow: auto;">
+        {{ station_name }} ·
+        {{#enough}}<span style="color: #28a745;">空插座 {{available_num}} 个</span>{{/enough}}
+        {{^enough}}<span style="color: #e67e22;">空插座 {{available_num}} 个</span>{{/enough}}
+        <a href="#page-top" style="float: right; margin-right: 0.35rem;">回到顶部</a>
+    </div>
     <table class="gridtable">
         <tbody>
             <tr>
