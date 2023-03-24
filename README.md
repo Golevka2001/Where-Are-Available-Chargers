@@ -17,6 +17,9 @@
   - [查询网址：http://chargers.injs.eu](#查询网址httpchargersinjseu)
   - [目录](#目录)
   - [使用方法](#使用方法)
+    - [准备工作](#准备工作)
+    - [修改模板](#修改模板)
+    - [渲染 HTML](#渲染-html)
   - [更新日志](#更新日志)
   - [使用许可](#使用许可)
 
@@ -25,12 +28,23 @@
 
 **本工具获取原始数据的部分在 [`main`](https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/main) 和 [`dev`](https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/dev) 分支。本分支是 version 3 新界面的渲染模板与代码，需要使用位于 `main` 或 `dev` 分支的代码获取充电桩状态，再传入本部分代码渲染。**
 
-0. 预处理：运行 `pretreat.py` 生成 `src/mustache_templates.js`
-1. 通过 `dev` 分支的代码获取充电桩数据。
-2. 将数据处理为格式与 `example/all_information.json` 相同的 Map。`0` 表示占用，`1` 表示空闲。
-3. 调用 `src/rend.js` 中的方法渲染 HTML 文件。注意异步函数需要 `await`。
-
 本分支采用 ES modules，您可以在 `src/test.js` 中查看使用样例。
+
+### 准备工作
+0. 安装 `node` 和 `yarn`。开发时使用的是 `node@18` 和 `yarn@4`。目前依赖项目较少，您也可以尝试迁移依赖链到 `npm`。
+1. 克隆项目 `git clone https://github.com/Golevka2001/Where-Are-Available-Chargers.git&&cd Where-Are-Available-Chargers`
+2. 检出分支 `git checkout version-3`
+3. 安装依赖 `yarn install` 
+
+### 修改模板
+您可以按 HTML 语法和 mustache 语法修改 `./src/mustache-templates` 下的模板。
+
+**初次运行或每次修改模板后均需要运行 `pretreat.py` 重新生成 `src/mustache_templates.js`**
+
+### 渲染 HTML
+0. 通过 `dev` 分支的代码获取充电桩数据。
+1. 将数据处理为格式与 `example/all_information.json` 相同的 Map。`0` 表示占用，`1` 表示空闲。
+2. 调用 `src/rend.js` 中的方法渲染 HTML 文件。注意异步函数需要 `await`。
 
 ## 更新日志
 
