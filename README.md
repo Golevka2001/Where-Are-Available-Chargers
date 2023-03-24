@@ -4,6 +4,8 @@
 
 ## 查询网址：<http://chargers.injs.eu>
 
+![screenshot](./README.assets/screenshot.png)
+
 这是一个用来查询校园内各个充电桩的使用情况的小工具，希望它可以帮你更方便给小电驴找到充电桩。
 
 希望它可以帮你更方便给小电驴找到充电桩。
@@ -19,7 +21,8 @@
   - [工作流程](#工作流程)
   - [使用说明](#使用说明)
     - [下载 \& 解压](#下载--解压)
-    - [安装 Python 环境](#安装-python-环境)
+    - [文件说明](#文件说明)
+    - [配置 Python 环境](#配置-python-环境)
     - [创建虚拟环境（可选）](#创建虚拟环境可选)
     - [安装依赖库](#安装依赖库)
     - [运行](#运行)
@@ -61,7 +64,7 @@ s(开始)
 点击右上方的绿色 ```Code``` 按钮，在下拉菜单中点击 ```Download ZIP```
 下载完成后，把它解压到你想要的位置。
 
-### 文件解释
+### 文件说明
 
 ```requirements.txt```：用于安装依赖；
 
@@ -73,11 +76,11 @@ s(开始)
 
 ```server.py```：构建 web 服务；
 
-```static/```：存放 web 静态资源的文件夹，包含 css、js、img 等；
+```static/```：存放 web 静态资源的目录，包含 css、js、img 等；
 
-```templates/```：存放 web 模板的文件夹；
+```templates/```：存放 web 模板的目录；
 
-### 安装 Python 环境
+### 配置 Python 环境
 
 略。
 
@@ -89,6 +92,7 @@ s(开始)
 cd /path/to/Where-Are-Available-Chargers
 python -m venv waac-venv
 ```
+
 ### 安装依赖库
 
 激活虚拟环境（可选）：
@@ -112,6 +116,7 @@ pip install .\requirements.txt
 ```bash
 python .\server.py
 ```
+
 在浏览器中访问 ```http://127.0.0.1:3000``` 查看页面。
 
 ## 反馈与建议
