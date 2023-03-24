@@ -49,7 +49,6 @@
 
 ### 备注
 1. 结果编号（`ALL_INFORMATION["update_message"]["last_success_query_id"]`）可自行生成。建议使用严格递增的数字作为结果编号。公共实例中返回的结果编号规则可见其 API 文档。
-2. 公共实例提供的 API 返回的 JSON 可经 `JSON.parse()` 后当作 `ALL_INFOMATION` 使用。
 
 ## 更新日志
 
