@@ -3,6 +3,25 @@ const CONFIG = {
         "survival_time": 4, //分钟
         "refuse_time": 8, //分钟
     },
+    "conditions": {
+        "enough_sum_num": 70, //小于这个数提示紧张
+        "enough_socket_num": 2.5, //每个充电桩低于这个数字提示紧张
+    },
+    "login": {
+        "openid": "01",
+        "phone": "01",
+        "survival_time": 1, //小时
+    },
+    "headers": {
+        "Host": "mapi.7mate.cn",
+        "Connection": "keep-alive",
+        "accept": "application/vnd.ws.v1+json",
+        "User-Agent": "Mozilla/5.0 (Linux; Android 7.1.2; MI 9 Build/N2G48C; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.198 Mobile Safari/537.36 MicroMessenger/8.0.2.1860(0x28000234) Process/appbrand2 WeChat/arm32 Weixin NetType/WIFI Language/zh_CN ABI/arm32 MiniProgramEnv/android",
+        "charset": "utf-8",
+        "Accept-Encoding": "gzip,compress,br,deflate",
+        "content-type": "application/json",
+        "Referer": "https://servicewechat.com/wx26caa1e6b60d4ef5/32/page-frame.html"
+    },
     "stations": {
         "东门北侧": ["XYvIqZM8oCmT19", "XYnfw8BeyiXS16", "XYEogTrLdXZx14", "XYxN6z9ZETBZ17", "XYBGw4c88NWd21"],
         "东门南侧": ["XYSfeYzOvLwN5", "XYDSUGrzkRfX6"],

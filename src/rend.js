@@ -16,46 +16,6 @@ import mustache from "mustache/mustache.mjs";
     async function render_classical(ALL_INFOMATION) -> String: HTML 结果页（经典版）
 */
 
-export async function data_process(ALL_INFOMATION) {
-    /*
-    we need
-    const chongzu = true;
-    const stations = {
-        "Bei": {
-            "available_num": 12,
-            "en": "BBBEI",
-            "chargers": { 1: 3, 2: 5 }
-        },
-        "Nan": {
-            "available_num": 12,
-            "en": "BBBBB",
-            "chargers": { 1: 3, 2: 5 }
-        }
-    }
-    */
-    let stations_map = new Map();
-    let available_num_sum = 0;
-    for (let station in ALL_INFOMATION["status_sum"]) {
-        available_num_sum += ALL_INFOMATION["status_sum"][station];
-        stations_map[station] = { "available_num": ALL_INFOMATION["status_sum"][station] };
-        stations_map[station]["chargers"] = ALL_INFOMATION["status_summary"][station];
-        stations_map[station]["en"] = CONFIG.station_EN["station"];
-    }
-    let error = false
-    if (ALL_INFOMATION["update_message"]["last_success_num"] !== 21) {
-        error = true;
-    }
-    let chongzu = true
-    if (available_num_sum < 75) {
-        chongzu = false;
-    }
-    return {
-        "chongzu": chongzu,
-        "error": error,
-        "stations": stations_map
-    }
-}
-
 export async function render_chinese_error(message = "发生错误，请稍后再试") {
     return mustache.render(mtemplate.error, {
         error_message: message
@@ -63,70 +23,86 @@ export async function render_chinese_error(message = "发生错误，请稍后�
 }
 
 export async function render_chinese(ALL_INFOMATION) {
-    const render_start_time = (new Date()).getTime()
-    const info = await data_process(ALL_INFOMATION)
-    console.log(JSON.stringify(info));
-    let stations_message = Array();
-    for (let station in info.stations) {
-        let charger_message = Array();
-        for (let charger in info.stations[station]["chargers"]) {
-            charger_message.push(mustache.render(mtemplate.remain, {
-                charger_no: charger,
-                charger_a_num: info.stations[station]["chargers"][charger]
-            }))
-        }
-        stations_message.push(
-            mustache.render(mtemplate.station, {
-                station_name: station,
-                available_num: info.stations[station]["available_num"],
-                remain: charger_message.join(" "),
-                enough: (info.stations[station]["available_num"] > 2.5 * CONFIG.stations[station].length)
-            })
-        )
-    }
 
-    let stations_detail_arr = Array()
-    for (let station in ALL_INFOMATION["status_detail"]) {
+    // 命名方便使用
+    const Raw_Detail = ALL_INFOMATION["status_detail"]
+
+    // detail 表示详细信息表格
+    // message 表示总览表格
+    let stations_detail_arr = Array();
+    let stations_message = Array();
+    let available_num_in_all_station = 0;
+    let success_chargers_num = 0;
+    let all_chargers_num = 0;
+    for (let station in Raw_Detail) {
         // 遍历充电桩
         let charger_detail_arr = new Array()
-        for (let charger_no in ALL_INFOMATION["status_detail"][station]) {
-            // 充电桩失败，直接写入充电桩Array
-            if (ALL_INFOMATION["status_detail"][station][charger_no].length === 0) {
+        let charger_message = Array();
+        let available_num_in_a_station = 0;
+        for (let charger_no in Raw_Detail[station]) {
+            // 充电桩失败，直接写入充电桩Array和总览表格充电桩Array
+            if (Raw_Detail[station][charger_no].length === 0) {
+                // 渲染充电桩表格 (detail) -Error
                 charger_detail_arr.push(mustache.render(mtemplate.charger_detail, {
-                    charger_no: charger_no + 1,
+                    charger_no: parseInt(charger_no) + 1,
                     socket_detail: "* 获取失败 *"
+                }))
+                // 渲染充电桩总览 (message) - Error
+                charger_message.push(mustache.render(mtemplate.remain, {
+                    charger_no: parseInt(charger_no) + 1,
+                    charger_a_num: "Error"
                 }))
             }
             else {
                 // 遍历插座
-                let socket_detail_arr = new Array()
-                for (let socket_no in ALL_INFOMATION["status_detail"][station][charger_no]) {
-                    // 插座信息写入插座Array
+                let socket_detail_arr = new Array() // 插座Array (detail)
+                let available_num_in_a_charger = 0 // 充电桩的可用插座数量
+                for (let socket_no in Raw_Detail[station][charger_no]) {
+                    // 插座信息写入插座Array (detail)
                     socket_detail_arr.push(mustache.render(mtemplate.socket_detail, {
-                        socket_status: ALL_INFOMATION["status_detail"][station][charger_no][socket_no],
+                        socket_status: ((Raw_Detail[station][charger_no][socket_no] == 1) ? 1 : 0),
                         socket_num: parseInt(socket_no) + 1
                     }))
+                    // 增加充电桩的可用插座数量
+                    if (Raw_Detail[station][charger_no][socket_no] == 1) {
+                        ++available_num_in_a_charger
+                    }
                 }
-                // 插座Array拼装成充电桩Array
+                // 插座Array拼装成充电桩Array，渲染充电桩表格 (detail)
                 charger_detail_arr.push(mustache.render(mtemplate.charger_detail, {
                     charger_no: parseInt(charger_no) + 1,
-                    socket_detail: socket_detail_arr.join(" ")
+                    socket_detail: socket_detail_arr.join("  ")
                 }))
+                // 插座Array拼装成充电桩总览Array，渲染充电桩总览 (message)
+                charger_message.push(mustache.render(mtemplate.remain, {
+                    charger_no: parseInt(charger_no) + 1,
+                    charger_a_num: available_num_in_a_charger
+                }))
+                available_num_in_a_station += available_num_in_a_charger
             }
         }
+        // 充电桩Array拼装成充电桩Array，渲染充电桩表格 (detail)
         stations_detail_arr.push(mustache.render(mtemplate.station_detail, {
             station_name: station,
-            available_num: info.stations[station]["available_num"],
-            enough: (info.stations[station]["available_num"] > 2.5 * CONFIG.stations[station].length),
+            available_num: available_num_in_a_station,
+            enough: (available_num_in_a_station > CONFIG["conditions"]["enough_socket_num"] * CONFIG.stations[station].length),
             charger_detail: charger_detail_arr.join("\n")
         }))
+        // 充电桩Array拼装成充电桩Array，渲染充电桩总览 (message)
+        stations_message.push(
+            mustache.render(mtemplate.station, {
+                station_name: station,
+                available_num: available_num_in_a_station,
+                remain: charger_message.join(" "),
+                enough: (available_num_in_a_station > CONFIG["conditions"]["enough_socket_num"] * CONFIG.stations[station].length)
+            })
+        )
     }
 
-    console.log(JSON.stringify(stations_detail_arr));
-
+    //渲染完整页面
     let ret_page = mustache.render(mtemplate.main, {
-        chongzu: info.chongzu,
-        error: info.error,
+        chongzu: (available_num_in_all_station > CONFIG["conditions"]["enough_sum_num"]),
+        error: (success_chargers_num != all_chargers_num),
         stations: stations_message.join("\n"),
         station_detail: stations_detail_arr.join("\n"),
         query_id: ALL_INFOMATION["update_message"]["last_success_query_id"]
@@ -140,14 +116,17 @@ export async function render_classical_error(message = "发生错误，请稍后
     })
 }
 
-export function render_classical(ALL_INFOMATION) {
+export async function render_classical(ALL_INFOMATION) {
+    // 命名方便使用
+    const Raw_Detail = ALL_INFOMATION["status_detail"]
+
     let stations_detail_arr = Array()
-    for (let station in ALL_INFOMATION["status_detail"]) {
+    for (let station in Raw_Detail) {
         // 遍历充电桩
         let charger_detail_arr = new Array()
-        for (let charger_no in ALL_INFOMATION["status_detail"][station]) {
+        for (let charger_no in Raw_Detail[station]) {
             // 充电桩失败，直接写入充电桩Array
-            if (ALL_INFOMATION["status_detail"][station][charger_no].length === 0) {
+            if (Raw_Detail[station][charger_no].length === 0) {
                 charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
                     charger_no: parseInt(charger_no) + 1,
                     socket_detail: "* 获取失败 *"
@@ -157,8 +136,8 @@ export function render_classical(ALL_INFOMATION) {
                 // 遍历插座
                 let socket_detail_arr = new Array()
                 let no_available_socket = true;
-                for (let socket_no in ALL_INFOMATION["status_detail"][station][charger_no]) {
-                    if (ALL_INFOMATION["status_detail"][station][charger_no][socket_no] == 1) {
+                for (let socket_no in Raw_Detail[station][charger_no]) {
+                    if (Raw_Detail[station][charger_no][socket_no] == 1) {
                         socket_detail_arr.push(`[${parseInt(socket_no) + 1}]`)
                         no_available_socket = false
                     }

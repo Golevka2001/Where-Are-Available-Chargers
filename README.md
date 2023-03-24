@@ -20,6 +20,7 @@
     - [准备工作](#准备工作)
     - [修改模板](#修改模板)
     - [渲染 HTML](#渲染-html)
+    - [备注](#备注)
   - [更新日志](#更新日志)
   - [使用许可](#使用许可)
 
@@ -43,10 +44,18 @@
 
 ### 渲染 HTML
 0. 通过 `dev` 分支的代码获取充电桩数据。
-1. 将数据处理为格式与 `example/all_information.json` 相同的 Map。`0` 表示占用，`1` 表示空闲。
-2. 调用 `src/rend.js` 中的方法渲染 HTML 文件。注意异步函数需要 `await`。
+1. 将数据处理为格式与 `example/all_information.json` 类似的 Map ，记为 `ALL_INFORMATION`。`0` 表示占用，`1` 表示空闲。
+2. 调用 `src/rend.js` 中的方法，传入 `ALL_INFORMATION` 参数或相应字符串渲染 HTML 文件。注意异步函数需要 `await`。
+
+### 备注
+1. 结果编号（`ALL_INFORMATION["update_message"]["last_success_query_id"]`）可自行生成。建议使用严格递增的数字作为结果编号。公共实例中返回的结果编号规则可见其 API 文档。
+2. 公共实例提供的 API 返回的 JSON 可经 `JSON.parse()` 后当作 `ALL_INFOMATION` 使用。
 
 ## 更新日志
+
+**2023-03-24** Version `3.3.0-RC.2`
+1. 清理 `rend.js` 中无用循环。
+2. 修改 `example/all_information.json` 和 `test.js` 以符合新 `rend.js`。
 
 **2023-03-24** Version `3.2.1`
 1. 修改 HTML 元数据：
@@ -54,7 +63,7 @@
    - 添加了 `description`。
 2. 浏览器兼容性：
    - 测试了 IE 的浏览器兼容性，略有错位但是能用。
-   - 待测试腾讯 V5、远古 Android Webview 的兼容性。
+   - 待测试腾讯 X5、远古 Android Webview 的兼容性。
 3. 无障碍：
    - 先前的版本考虑了红绿色盲问题，仍需测试。
    - 考虑了缩放倍数（大字号、页面放大）问题，略有错位但是不影响使用。
