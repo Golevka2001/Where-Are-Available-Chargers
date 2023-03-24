@@ -26,13 +26,46 @@
     <hr />
     <br />
 
-    <h2 align="center">&#x1F630; 请求错误，请稍后重试 ...</h2>
+    <h2 align="center">&#x1F630; {{ message }}</h2>
     <p align="center">
         <a href="/">
             点此重试
         </a>
     </p>
 
+    <br />
+    <hr />
+    <br />
+
+    <p align="center">
+        GitHub项目地址：
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers/issues">
+            Where-Are-Available-Chargers
+        </a>
+        <br />
+        <br />
+        您可以在 Issues 页面反馈遇到的问题
+        <br />
+        也可以提出希望加入的功能或加入开发
+    </p>
+    <br />
+    <p align="center">
+        <a href="https://github.com/Golevka2001">
+            Copyright © Gol3vka
+        </a>
+        <br><br>
+        当前网页基于
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers">Where-Are-Available-Chargers</a> @
+        <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/{{ version }}">{{ version[:7] }}</a>
+        <br>
+        由 {{ provider }} 部署
+    </p>
+
 </body>
+
+<!--
+    Some things for Debug:
+    CID: {{ run_time }}
+-->
 
 </html>
