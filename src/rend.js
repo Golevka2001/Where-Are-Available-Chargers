@@ -81,6 +81,7 @@ export async function render_chinese(ALL_INFOMATION) {
                 available_num_in_a_station += available_num_in_a_charger
             }
         }
+        available_num_in_all_station += available_num_in_a_station
         // 充电桩Array拼装成充电桩Array，渲染充电桩表格 (detail)
         stations_detail_arr.push(mustache.render(mtemplate.station_detail, {
             station_name: station,
