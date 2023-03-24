@@ -1,4 +1,4 @@
-import { render_chinese, render_chinese_error, render_old, render_old_error } from "./rend.js";
+import { render_chinese, render_chinese_error, render_classical, render_classical_error } from "./rend.js";
 
 const ALL_INFOMATION = {
     "update_message": { "last_success_query_id": 528710393, "last_success_num": 21 },
@@ -23,10 +23,16 @@ const ALL_INFOMATION = {
     }
 }
 
-console.log(render_chinese(ALL_INFOMATION))
+// 以下所有调用均返回 String
 
-console.log(render_chinese_error())
+await render_chinese(ALL_INFOMATION) // 渲染新版结果页面
 
-console.log(render_old(ALL_INFOMATION))
+await render_chinese_error() // 渲染新版错误页面（默认错误提示文字）
 
-console.log(render_old_error())
+await render_chinese_error("发生了错误") // 渲染新版错误页面（自定义错误提示文字）
+
+await render_classical(ALL_INFOMATION) // 渲染经典结果页面
+
+await render_classical_error() // 渲染经典错误页面（默认错误提示文字）
+
+await render_classical_error("发生了错误") // 渲染经典错误页面（自定义错误提示文字）

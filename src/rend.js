@@ -8,10 +8,12 @@ import mustache from "mustache/mustache.mjs";
     but it works well 所以并没有改。
     请先运行 pretreat.py 生成 mustache_templates.js
 
-    用法： ALL_INFOMATION 是一个 map，可由 example/all_information.json 进行 JSON.parse() 得到。
-    async function data_process(ALL_INFOMATION) -> map: 一种中间 map
-    async function render_chinese_error(str?: 错误信息) -> str: HTML 错误页
-    async function render_chinese(ALL_INFOMATION) -> str: HTML 结果页
+    用法： ALL_INFOMATION 是一个 Map，可由 example/all_information.json 进行 JSON.parse() 得到。
+    async function data_process(ALL_INFOMATION) -> Map: 一种中间 Map
+    async function render_chinese_error(String?: 错误信息) -> String: HTML 错误页（新版）
+    async function render_chinese(ALL_INFOMATION) -> String: HTML 结果页（新版）
+    async function render_classical_error(String?: 错误信息) -> String: HTML 错误页（经典版）
+    async function render_classical(ALL_INFOMATION) -> String: HTML 结果页（经典版）
 */
 
 export async function data_process(ALL_INFOMATION) {
@@ -132,13 +134,13 @@ export async function render_chinese(ALL_INFOMATION) {
     return ret_page;
 }
 
-export function render_old_error(message = "发生错误，请稍后再试") {
-    return mustache.render(mtemplate.old_error, {
+export async function render_classical_error(message = "发生错误，请稍后再试") {
+    return mustache.render(mtemplate.classical_error, {
         message: message
     })
 }
 
-export function render_old(ALL_INFOMATION) {
+export function render_classical(ALL_INFOMATION) {
     let stations_detail_arr = Array()
     for (let station in ALL_INFOMATION["status_detail"]) {
         // 遍历充电桩
@@ -146,7 +148,7 @@ export function render_old(ALL_INFOMATION) {
         for (let charger_no in ALL_INFOMATION["status_detail"][station]) {
             // 充电桩失败，直接写入充电桩Array
             if (ALL_INFOMATION["status_detail"][station][charger_no].length === 0) {
-                charger_detail_arr.push(mustache.render(mtemplate.old_charger, {
+                charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
                     charger_no: parseInt(charger_no) + 1,
                     socket_detail: "* 获取失败 *"
                 }))
@@ -162,25 +164,25 @@ export function render_old(ALL_INFOMATION) {
                     }
                 }
                 if (no_available_socket) {
-                    charger_detail_arr.push(mustache.render(mtemplate.old_charger, {
+                    charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
                         charger_no: parseInt(charger_no) + 1,
                         socket_detail: "* 无 *"
                     }))
                 } else {
-                    charger_detail_arr.push(mustache.render(mtemplate.old_charger, {
+                    charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
                         charger_no: parseInt(charger_no) + 1,
                         socket_detail: socket_detail_arr.join("  ")
                     }))
                 }
             }
         }
-        stations_detail_arr.push(mustache.render(mtemplate.old_station, {
+        stations_detail_arr.push(mustache.render(mtemplate.classical_station, {
             station_name: station,
             charger_detail: charger_detail_arr.join("\n")
         }))
     }
 
-    let ret_page = mustache.render(mtemplate.old_main, {
+    let ret_page = mustache.render(mtemplate.classical_main, {
         query_id: ALL_INFOMATION["update_message"]["last_success_query_id"],
         station_detail: stations_detail_arr.join("\n")
     })

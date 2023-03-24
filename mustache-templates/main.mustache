@@ -8,15 +8,19 @@
     <meta charset="utf-8">
     <title>Where Are Available Chargers?!</title>
 
+    <meta name="description" content="Find an available charger easily!" />
+
     <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">-->
 
     <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
     <meta http-equiv="cleartype" content="on">
 
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-
     <link rel="shortcut icon" href="/favicon.ico">
+
+    <link rel="apple-touch-icon" href="./static/img/apple-touch-icon.png">
 
     <link rel="stylesheet" href="./static/css/styles.pure.css">
     <link rel="stylesheet" href="./static/css/custom.css">
@@ -61,10 +65,9 @@
             {{/chongzu}}
             <div style="overflow: auto;">
                 <span style="color: gray;font-size: smaller;">
-                    数据刷新间隔为200秒，请在确认实际占用情况后再充电。<br>
-                    点击充电站后“详情”可以跳转到每个充电插口的详情。
+                    数据刷新间隔为200秒，请在确认实际占用情况后再充电。
                 </span>
-                <a href="./old" style="font-size: smaller; float: right;">切换到旧版界面</a>
+                <a href="./classical" style="font-size: smaller; float: right;">切换到经典界面</a>
             </div>
             <div class="components-section font-regular">
                 <div class="components-container two-columns">
@@ -89,9 +92,8 @@
 
 
             <div class="page-footer border-color font-small">
-                <a href="./old" class="history-footer-link"><span
-                        style="font-family:arial">←</span> 返回旧版 </a>
-                <div>结果编号: {{ query_id }}</div>
+                <a href="./classical" class="history-footer-link"><span style="font-family:arial">←</span> 切换经典界面 </a>
+                <div>"🌊Water Wave" Ver 3 · 结果编号: {{ query_id }}</div>
             </div>
         </div>
 
