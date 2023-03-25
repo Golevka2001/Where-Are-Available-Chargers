@@ -52,6 +52,12 @@
 
 ## 更新日志
 
+**2023-03-25** Version `3.3.2`
+1. 支持夜间模式。
+
+**2023-03-25** Version `3.3.1`
+1. 修复总览条一直显示`充电桩余量紧张`的 bug。
+
 **2023-03-24** Version `3.3.0-RC.2`
 1. 清理 `rend.js` 中无用循环。
 2. 修改 `example/all_information.json` 和 `test.js` 以符合新 `rend.js`。

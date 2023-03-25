@@ -121,3 +121,13 @@ table.gridtable td {
         margin: 0 auto;
     }
 }
+
+@media screen and (prefers-color-scheme: dark) {
+    html {
+        filter: invert(0.88) hue-rotate(180deg);
+    }
+
+    .no-dark-mode {
+        filter: invert(0.88) hue-rotate(180deg);
+    }
+}
