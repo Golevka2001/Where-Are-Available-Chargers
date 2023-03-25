@@ -20,6 +20,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="shortcut icon" href="/favicon.ico">
 
+    <meta name="format-detection" content="telephone=no">
     <link rel="apple-touch-icon" href="./static/img/apple-touch-icon.png">
 
     <link rel="stylesheet" href="./static/css/styles.pure.css">
@@ -90,10 +91,21 @@
             </div>
 
 
-            <div class="page-footer border-color font-small">
-                <a href="./classical" class="history-footer-link"><span style="font-family:arial">←</span> 切换经典界面 </a>
-                <div>"🌊Water Wave" Ver 3 · 结果编号: {{ query_id }}</div>
+            <div class="page-footer border-color font-small" style="margin-bottom: 0px;">
+                <a href="https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/version-3"
+                    class="history-footer-link"><span style="font-family:arial">←</span>GitHub Repo</a>
+                <div>Ver 3 "🌊Water Wave" · 欢迎加入开发</div>
+                <div>结果编号: {{ query_id }}</div>
             </div>
+
+            <a href="" id="expired_tip_a" style="display: none;">
+                <div id="expired_tip_d" class="page-status status-major">
+                    <span id="expired_tip_s" class="status font-large expired_tip_message">
+                        结果已过期，请点此刷新
+                    </span>
+                </div>
+            </a>
+
         </div>
 
         <div class="custom-footer-container">
@@ -116,5 +128,7 @@
 
     </div>
 </body>
+
+<script src="./static/js/check_time.js"></script>
 
 </html>

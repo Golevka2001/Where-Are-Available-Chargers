@@ -150,3 +150,11 @@ table.gridtable td {
 	}
 	
 }
+
+
+#expired_tip_a {
+    display: block;
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1rem;
+}

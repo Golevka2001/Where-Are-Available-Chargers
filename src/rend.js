@@ -40,6 +40,7 @@ export async function render_chinese(ALL_INFOMATION) {
         let charger_message = Array();
         let available_num_in_a_station = 0;
         for (let charger_no in Raw_Detail[station]) {
+            ++all_chargers_num;
             // 充电桩失败，直接写入充电桩Array和总览表格充电桩Array
             if (Raw_Detail[station][charger_no].length === 0) {
                 // 渲染充电桩表格 (detail) -Error
@@ -54,6 +55,7 @@ export async function render_chinese(ALL_INFOMATION) {
                 }))
             }
             else {
+                ++success_chargers_num
                 // 遍历插座
                 let socket_detail_arr = new Array() // 插座Array (detail)
                 let available_num_in_a_charger = 0 // 充电桩的可用插座数量
