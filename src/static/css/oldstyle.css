@@ -1,3 +1,7 @@
+:root {
+	color-scheme: light dark;
+}
+
 @media (max-width:768px) {
     html {
         font-size: 55%;
@@ -9,6 +13,14 @@ th,
 td {
     border: 0.1em solid #000000;
     height: 2em;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	table,
+	th,
+	td {
+		border: 0.1em solid #fff;
+	}
 }
 
 table {

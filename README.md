@@ -48,9 +48,13 @@
 2. 调用 `src/rend.js` 中的方法，传入 `ALL_INFORMATION` 参数或相应字符串渲染 HTML 文件。注意异步函数需要 `await`。
 
 ### 备注
-1. 结果编号（`ALL_INFORMATION["update_message"]["last_success_query_id"]`）可自行生成。建议使用严格递增的数字作为结果编号。公共实例中返回的结果编号规则可见其 API 文档。
+1. 结果编号（`ALL_INFORMATION["update_message"]["last_success_query_id"]`）可自行生成。建议使用严格递增的数字作为结果编号。公共实例中返回的结果编号规则可见其文档。
 
 ## 更新日志
+
+**2023-03-25** Version `3.3.3`
+1. 尝试修复夜间模式的兼容性问题。
+2. 经典页面支持夜间模式。
 
 **2023-03-25** Version `3.3.2`
 1. 支持夜间模式。

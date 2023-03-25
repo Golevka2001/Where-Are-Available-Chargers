@@ -1,3 +1,7 @@
+:root {
+	color-scheme: light dark;
+}
+
 .num_style {
     border-radius: 10%;
     height: 20px;
@@ -106,6 +110,16 @@ table.gridtable td {
     margin: 0 auto;
 }
 
+.remain_socket_green {
+	font-size: 2em;
+	color: #28a745;
+}
+
+.remain_socket_orange {
+	font-size: 2em;
+	color: #b0611a;
+}
+
 @media (max-width: 62rem) {
     .detail_box {
         display: grid;
@@ -123,11 +137,16 @@ table.gridtable td {
 }
 
 @media screen and (prefers-color-scheme: dark) {
-    html {
-        filter: invert(0.88) hue-rotate(180deg);
-    }
-
-    .no-dark-mode {
-        filter: invert(0.88) hue-rotate(180deg);
-    }
+	html {
+		filter: invert(0.88) hue-rotate(180deg);
+	}
+	
+	.no-dark-mode {
+		filter: invert(1) hue-rotate(180deg);
+	}
+	
+	.page-status {
+		filter: invert(1) hue-rotate(180deg);
+	}
+	
 }
