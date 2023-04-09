@@ -1,3 +1,15 @@
+# venv
+*-venv/
+
+# cache
+__pycache__/
+
+
+# for Version 3
+# local
+.idea/
+.vscode/
+
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
