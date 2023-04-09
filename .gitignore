@@ -4,7 +4,6 @@
 # cache
 __pycache__/
 
-
 # for Version 3
 # local
 .idea/
