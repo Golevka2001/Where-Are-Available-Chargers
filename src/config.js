@@ -4,7 +4,7 @@ const CONFIG = {
         "refuse_time": 8, //分钟
     },
     "conditions": {
-        "enough_sum_num": 70, //小于这个数提示紧张
+        "enough_sum_num": 100, //小于这个数提示紧张
         "enough_socket_num": 2.5, //每个充电桩低于这个数字提示紧张
     },
     "login": {
