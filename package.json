@@ -1,6 +1,6 @@
 {
   "name": "chargers-v3",
-  "version": "3.3.4",
+  "version": "3.4.0-RC.1",
   "type": "module",
   "packageManager": "yarn@4.0.0-rc.40",
   "license": "AGPL-3.0",

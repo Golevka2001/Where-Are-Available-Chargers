@@ -41,9 +41,24 @@ export async function render_chinese(ALL_INFOMATION) {
         let available_num_in_a_station = 0;
         for (let charger_no in Raw_Detail[station]) {
             ++all_chargers_num;
+            // 判断参数缺失，直接写入充电桩Array和总览表格充电桩Array
+            // 使用场景是充电桩ID没有获取全就上线
+            if (Raw_Detail[station][charger_no] == undefined) { // 注：没使用 type of，可以同时判断 null 与 undefined
+                // 渲染充电桩表格 (detail) - undefined
+                charger_detail_arr.push(mustache.render(mtemplate.charger_detail, {
+                    charger_no: parseInt(charger_no) + 1,
+                    socket_detail: "* 充电桩参数缺失 *"
+                }))
+                // 渲染充电桩总览 (message) - undefined
+                charger_message.push(mustache.render(mtemplate.remain, {
+                    charger_no: parseInt(charger_no) + 1,
+                    charger_a_num: "N/A"
+                }))
+                --all_chargers_num; //不计入查询失败
+            }
             // 充电桩失败，直接写入充电桩Array和总览表格充电桩Array
-            if (Raw_Detail[station][charger_no].length === 0) {
-                // 渲染充电桩表格 (detail) -Error
+            else if (Raw_Detail[station][charger_no].length === 0) {
+                // 渲染充电桩表格 (detail) - Error
                 charger_detail_arr.push(mustache.render(mtemplate.charger_detail, {
                     charger_no: parseInt(charger_no) + 1,
                     socket_detail: "* 获取失败 *"
@@ -91,12 +106,12 @@ export async function render_chinese(ALL_INFOMATION) {
             enough: (available_num_in_a_station > CONFIG["conditions"]["enough_socket_num"] * CONFIG.stations[station].length),
             charger_detail: charger_detail_arr.join("\n")
         }))
-        // 充电桩Array拼装成充电桩Array，渲染充电桩总览 (message)
+        // 渲染充电站总览 (message) 推入 充电站Array
         stations_message.push(
             mustache.render(mtemplate.station, {
                 station_name: station,
                 available_num: available_num_in_a_station,
-                remain: charger_message.join(" "),
+                remain: charger_message.join(", "),
                 enough: (available_num_in_a_station > CONFIG["conditions"]["enough_socket_num"] * CONFIG.stations[station].length)
             })
         )
@@ -128,8 +143,16 @@ export async function render_classical(ALL_INFOMATION) {
         // 遍历充电桩
         let charger_detail_arr = new Array()
         for (let charger_no in Raw_Detail[station]) {
+            // 判断参数缺失，直接写入充电桩Array和总览表格充电桩Array
+            // 使用场景是充电桩ID没有获取全就上线
+            if (Raw_Detail[station][charger_no] == undefined) { // 注：没使用 type of，可以同时判断 null 与 undefined
+                charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
+                    charger_no: parseInt(charger_no) + 1,
+                    socket_detail: "* 充电桩参数缺失 *"
+                }))
+            }
             // 充电桩失败，直接写入充电桩Array
-            if (Raw_Detail[station][charger_no].length === 0) {
+            else if (Raw_Detail[station][charger_no].length === 0) {
                 charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
                     charger_no: parseInt(charger_no) + 1,
                     socket_detail: "* 获取失败 *"
