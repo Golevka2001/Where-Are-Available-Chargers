@@ -144,19 +144,19 @@ python .\server.py
 
 ## 致谢
 
-在这里特别感谢 [@csimide](https://github.com/csimide) 提供了现在使用的域名与服务器；
-
-徐同学帮忙联系了网信中心的老师（如果通过的话，之后有可能会放到信息化中啦）
-
-感谢这些同学的帮助与支持！
+在这里特别感谢 [@csimide](https://github.com/csimide) 提供了现在使用的域名、服务器，以及共同开发。
 
 :rose::rose::rose:
 
 ## 更新日志
 
 **2023-04-09:**
-1. 新增充电桩：北门东侧B组（5个）
-2. 调整已有充电桩：南门东侧->东门北侧
+
+1. 同步充电桩布局调整：包括北门新增6个，南门东侧2个移至东门北侧（现1、2）。
+
+**2023-03-23:**
+
+1. 全新界面样式（by [@csimide](https://github.com/csimide)）。新版本相关代码将会放在新的分支 [`version-3`](https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/version-3)。
 
 **2022-11-16:**
 

@@ -4,16 +4,6 @@
 # cache
 __pycache__/
 
-# applications for capturing
-applications/
-
-# QR code
-qr-codes/
-
-# personal data:
-openid.txt
-
 # local
-*.bat
-*.lnk
-README.assets/psd/
+.idea/
+.vscode/

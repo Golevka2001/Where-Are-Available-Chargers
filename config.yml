@@ -1,56 +1,54 @@
 # location & number
 stations:
   东门:
-    北侧-1: 'XYlFl6DnfgZH3'
-    北侧-2: 'XY1eANYJoWM620'
-    北侧-3: 'XYvIqZM8oCmT19'
-    北侧-4: 'XYnfw8BeyiXS16'
-    北侧-5: 'XYEogTrLdXZx14'
-    北侧-6: 'XYxN6z9ZETBZ17'
-    北侧-7: 'XYBGw4c88NWd21'
-    南侧-1: 'XYSfeYzOvLwN5'
-    南侧-2: 'XYDSUGrzkRfX6'
+    北侧-1: "XYlFl6DnfgZH3"
+    北侧-2: "XY1eANYJoWM620"
+    北侧-3: "XYvIqZM8oCmT19"
+    北侧-4: "XYnfw8BeyiXS16"
+    北侧-5: "XYEogTrLdXZx14"
+    北侧-6: "XYxN6z9ZETBZ17"
+    北侧-7: "XYBGw4c88NWd21"
+    南侧-1: "XYSfeYzOvLwN5"
+    南侧-2: "XYDSUGrzkRfX6"
   西门:
-    北侧-1: 'XYS2hOWumHDa13'
-    北侧-2: 'XYp5iHwheZvf18'
-    北侧-3: 'XY9HNPbegRgV15'
-    南侧-1: 'XYcjSf9nqvK612'
-    南侧-2: 'XY31g0OtIZA711'
-    南侧-3: 'XYV5mv5tnKHV9'
+    北侧-1: "XYS2hOWumHDa13"
+    北侧-2: "XYp5iHwheZvf18"
+    北侧-3: "XY9HNPbegRgV15"
+    南侧-1: "XYcjSf9nqvK612"
+    南侧-2: "XY31g0OtIZA711"
+    南侧-3: "XYV5mv5tnKHV9"
   南门:
-    西侧-1: 'XY679RB8P35Y10'
-    西侧-2: 'XYOGaVYy7OHu7'
-    # 东侧-1: 'XY1eANYJoWM620' # 已移动至东门北侧
-    # 东侧-2: 'XYlFl6DnfgZH3' # 已移动至东门北侧
+    西侧-1: "XY679RB8P35Y10"
+    西侧-2: "XYOGaVYy7OHu7"
   北门:
-    东侧A组-1: 'XYeo2IsT1Sx61'
-    东侧A组-2: 'XYKCwwkZXBW62'
-    东侧A组-3: 'XYTbok829tYo8'
-    东侧A组-4: 'XYo7UstSCeu64'
-    东侧B组-1: 'XYbwFHY40PZK3'
-    东侧B组-2: 'XYgbwesjiMEy6'
-    东侧B组-3: 'XYnT1V47gbvQ5'
-    东侧B组-4: 'XYwgYSUv41Ve2'
-    东侧B组-5: 'XYWOjzU06jWc1'
-    东侧B组-6: 'XYG9NcgUXBlg4'
+    北侧-1: "XYeo2IsT1Sx61"
+    北侧-2: "XYKCwwkZXBW62"
+    北侧-3: "XYTbok829tYo8"
+    北侧-4: "XYo7UstSCeu64"
+    南侧-1: "XYbwFHY40PZK3"
+    南侧-2: "XYgbwesjiMEy6"
+    南侧-3: "XYnT1V47gbvQ5"
+    南侧-4: "XYwgYSUv41Ve2"
+    南侧-5: "XYWOjzU06jWc1"
+    南侧-6: "XYG9NcgUXBlg4"
 
 # use this header to fake a visit by android mobile
 headers:
-  Host: 'mapi.7mate.cn'
-  Connection: 'keep-alive'
-  accept: 'application/vnd.ws.v1+json'
-  User-Agent: 'Mozilla/5.0 (Linux; Android 7.1.2; MI 9 Build/N2G48C; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.198 Mobile Safari/537.36 MicroMessenger/8.0.2.1860(0x28000234) Process/appbrand2 WeChat/arm32 Weixin NetType/WIFI Language/zh_CN ABI/arm32 MiniProgramEnv/android'
-  charset: 'utf-8'
-  Accept-Encoding: 'gzip,compress,br,deflate'
-  content-type: 'application/json'
-  Referer: 'https://servicewechat.com/wx26caa1e6b60d4ef5/32/page-frame.html'
+  Host: "mapi.7mate.cn"
+  Connection: "keep-alive"
+  accept: "application/vnd.ws.v1+json"
+  User-Agent: "Mozilla/5.0 (Linux; Android 7.1.2; MI 9 Build/N2G48C; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.198 Mobile Safari/537.36 MicroMessenger/8.0.2.1860(0x28000234) Process/appbrand2 WeChat/arm32 Weixin NetType/WIFI Language/zh_CN ABI/arm32 MiniProgramEnv/android"
+  charset: "utf-8"
+  Accept-Encoding: "gzip,compress,br,deflate"
+  content-type: "application/json"
+  Referer: "https://servicewechat.com/wx26caa1e6b60d4ef5/32/page-frame.html"
 
-login_url: 'https://mapi.7mate.cn/api/authorizations'
-inquiry_url: 'https://mapi.7mate.cn/api/chargers/'
+login_url: "https://mapi.7mate.cn/api/authorizations"
+inquiry_url: "https://mapi.7mate.cn/api/chargers/"
 
 # I find it unnecessary to use real openid and phone!
-openid: '01'
-phone: '01'
+openid: "01"
+phone: "01"
 
 # maybe useful someday...
-appid: 'wx26caa1e6b60d4ef5'
+appid: "wx26caa1e6b60d4ef5"

@@ -5,9 +5,9 @@
 @File: find_chargers.py
 @Brief: 使用 requests 爬取充电桩信息，返回字典或字符串类型数据。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.3.6
+@Version: 3.4.0
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/12/07
+@Last Modified Date: 2024/04/09
 """
 
 import asyncio
@@ -66,12 +66,12 @@ class FindChargers:
             # session.keep_alive = False
             # request:
             with session.post(
-                url=self.config["login_url"],
-                json=login_data,
-                headers=self.config["headers"],
-                allow_redirects=False,
-                stream=False,
-                timeout=5,
+                    url=self.config["login_url"],
+                    json=login_data,
+                    headers=self.config["headers"],
+                    allow_redirects=False,
+                    stream=False,
+                    timeout=5,
             ) as response:
                 response = response.json()
                 # check:
@@ -95,14 +95,14 @@ class FindChargers:
         try:
             async with ClientSession(timeout=self.timeout) as session:
                 async with await session.get(
-                    url=(self.config["inquiry_url"] + station_url),
-                    headers=self.config["headers"],
+                        url=(self.config["inquiry_url"] + station_url),
+                        headers=self.config["headers"],
                 ) as response:
                     response = await response.json()
         except:
             # TODO: 异常处理，待解决
             response = dict()
-        return (response, area, station_name)
+        return response, area, station_name
 
     def _process_response(self, task: asyncio.Task) -> None:
         """Callback function of get_response(), process response
@@ -120,8 +120,8 @@ class FindChargers:
             data = response["data"]
             # traverse 10 sockets:
             for socket in data["channels"]:
-                remain_time = str()
-                percentage = str()
+                # remain_time = str()
+                # percentage = str()
                 # check status:
                 if socket["status"] == 1:
                     # finished:
@@ -183,10 +183,10 @@ class FindChargers:
         if datetime.now(timezone.utc) - self.refresh_start_time < timedelta(seconds=45):
             self._update_time()
             self.process_over = True
-            return (self.status, True)
+            return self.status, True
         else:
             self.process_over = True
-            return (self.status, False)
+            return self.status, False
 
 
 if __name__ == "__main__":
