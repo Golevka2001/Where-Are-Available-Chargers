@@ -1,11 +1,13 @@
 # location & number
 stations:
   东门:
-    北侧-1: 'XYvIqZM8oCmT19'
-    北侧-2: 'XYnfw8BeyiXS16'
-    北侧-3: 'XYEogTrLdXZx14'
-    北侧-4: 'XYxN6z9ZETBZ17'
-    北侧-5: 'XYBGw4c88NWd21'
+    北侧-1: 'XYlFl6DnfgZH3'
+    北侧-2: 'XY1eANYJoWM620'
+    北侧-3: 'XYvIqZM8oCmT19'
+    北侧-4: 'XYnfw8BeyiXS16'
+    北侧-5: 'XYEogTrLdXZx14'
+    北侧-6: 'XYxN6z9ZETBZ17'
+    北侧-7: 'XYBGw4c88NWd21'
     南侧-1: 'XYSfeYzOvLwN5'
     南侧-2: 'XYDSUGrzkRfX6'
   西门:
@@ -18,13 +20,17 @@ stations:
   南门:
     西侧-1: 'XY679RB8P35Y10'
     西侧-2: 'XYOGaVYy7OHu7'
-    东侧-1: 'XY1eANYJoWM620'
-    东侧-2: 'XYlFl6DnfgZH3'
   北门:
-    东侧-1: 'XYeo2IsT1Sx61'
-    东侧-2: 'XYKCwwkZXBW62'
-    东侧-3: 'XYTbok829tYo8'
-    东侧-4: 'XYo7UstSCeu64'
+    北侧-1: 'XYeo2IsT1Sx61'
+    北侧-2: 'XYKCwwkZXBW62'
+    北侧-3: 'XYTbok829tYo8'
+    北侧-4: 'XYo7UstSCeu64'
+    南侧-1: 'XYbwFHY40PZK3'
+    南侧-2: 'XYgbwesjiMEy6'
+    南侧-3: 'XYnT1V47gbvQ5'
+    南侧-4: 'XYwgYSUv41Ve2'
+    南侧-5: 'XYWOjzU06jWc1'
+    南侧-6: 'XYG9NcgUXBlg4'
 
 # use this header to fake a visit by android mobile
 headers:
