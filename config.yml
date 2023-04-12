@@ -29,8 +29,8 @@ stations:
     南侧-2: "XYgbwesjiMEy6"
     南侧-3: "XYnT1V47gbvQ5"
     南侧-4: "XYwgYSUv41Ve2"
-    南侧-5: "XYWOjzU06jWc1"
-    南侧-6: "XYG9NcgUXBlg4"
+    南侧-5: "XYG9NcgUXBlg4"
+    南侧-6: "XYWOjzU06jWc1"
 
 # use this header to fake a visit by android mobile
 headers:
