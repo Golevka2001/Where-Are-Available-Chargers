@@ -30,7 +30,7 @@ const CONFIG = {
         "南门西侧": ["XY679RB8P35Y10", "XYOGaVYy7OHu7"],
         //"南门东侧": ["XY1eANYJoWM620", "XYlFl6DnfgZH3"],
         "北门东北侧": ["XYeo2IsT1Sx61", "XYKCwwkZXBW62", "XYTbok829tYo8", "XYo7UstSCeu64"],
-        "北门东南侧": ["XYbwFHY40PZK3","XYgbwesjiMEy6","XYnT1V47gbvQ5","XYwgYSUv41Ve2","XYWOjzU06jWc1","XYG9NcgUXBlg4"]
+        "北门东南侧": ["XYbwFHY40PZK3","XYgbwesjiMEy6","XYnT1V47gbvQ5","XYwgYSUv41Ve2","XYG9NcgUXBlg4", "XYWOjzU06jWc1"]
     },
     "stations_r": {
         "XYlFl6DnfgZH3": { station: "东门北侧", station_EN: "SE", num: 0 },
@@ -58,8 +58,8 @@ const CONFIG = {
         "XYgbwesjiMEy6": { station: "北门东南侧", station_EN: "NEB", num: 1 },
         "XYnT1V47gbvQ5": { station: "北门东南侧", station_EN: "NEB", num: 2 },
         "XYwgYSUv41Ve2": { station: "北门东南侧", station_EN: "NEB", num: 3 },
-        "XYWOjzU06jWc1": { station: "北门东南侧", station_EN: "NEB", num: 4 },
-        "XYG9NcgUXBlg4": { station: "北门东南侧", station_EN: "NEB", num: 5 },
+        "XYG9NcgUXBlg4": { station: "北门东南侧", station_EN: "NEB", num: 4 },
+        "XYWOjzU06jWc1": { station: "北门东南侧", station_EN: "NEB", num: 5 },
     },
     "station_ENs": {
         "东门北侧": "EN",
