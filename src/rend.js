@@ -39,33 +39,46 @@ export async function render_chinese(ALL_INFOMATION) {
         let charger_detail_arr = new Array()
         let charger_message = Array();
         let available_num_in_a_station = 0;
-        for (let charger_no in Raw_Detail[station]) {
+
+        /*
+            Feat - 支持用 Map 指定充电桩名。
+            station 可能为 Array 或 Map.
+            Array: 系统自动将充电桩编号为 1, 2, 3, 4,...
+                {"LocationFoo": [[0,0,0,1,1,1,0,0,0,0], [0,0,0,1,1,1,0,0,0,0]]}
+                                  ^ LocationFoo 1 ^      ^ LocationFoo 2 ^
+            Map: 以 Key 作为充电桩编号
+                {"LocationFoo": {"A": [0,0,0,1,1,1,0,0,0,0], "B": [0,0,0,1,1,1,0,0,0,0]}}
+                                       ^ LocationFoo A ^           ^ LocationFoo A ^
+        */
+        const get_charger_name = Array.isArray(Raw_Detail[station]) ? function (charger_key) {return (parseInt(charger_key) + 1)} : function (charger_key) {return charger_key} 
+
+        for (let charger_key in Raw_Detail[station]) {
             ++all_chargers_num;
             // 判断参数缺失，直接写入充电桩Array和总览表格充电桩Array
             // 使用场景是充电桩ID没有获取全就上线
-            if (Raw_Detail[station][charger_no] == undefined) { // 注：没使用 type of，可以同时判断 null 与 undefined
+            if (Raw_Detail[station][charger_key] == undefined) { // 注：没使用 type of，可以同时判断 null 与 undefined
                 // 渲染充电桩表格 (detail) - undefined
                 charger_detail_arr.push(mustache.render(mtemplate.charger_detail, {
-                    charger_no: parseInt(charger_no) + 1,
+                    charger_no: get_charger_name(charger_key),
                     socket_detail: "* 充电桩参数缺失 *"
                 }))
                 // 渲染充电桩总览 (message) - undefined
                 charger_message.push(mustache.render(mtemplate.remain, {
-                    charger_no: parseInt(charger_no) + 1,
+                    charger_no: get_charger_name(charger_key),
                     charger_a_num: "N/A"
                 }))
                 --all_chargers_num; //不计入查询失败
             }
             // 充电桩失败，直接写入充电桩Array和总览表格充电桩Array
-            else if (Raw_Detail[station][charger_no].length === 0) {
+            else if (Raw_Detail[station][charger_key].length === 0) {
                 // 渲染充电桩表格 (detail) - Error
                 charger_detail_arr.push(mustache.render(mtemplate.charger_detail, {
-                    charger_no: parseInt(charger_no) + 1,
+                    charger_no: get_charger_name(charger_key),
                     socket_detail: "* 获取失败 *"
                 }))
                 // 渲染充电桩总览 (message) - Error
                 charger_message.push(mustache.render(mtemplate.remain, {
-                    charger_no: parseInt(charger_no) + 1,
+                    charger_no: get_charger_name(charger_key),
                     charger_a_num: "Error"
                 }))
             }
@@ -74,25 +87,25 @@ export async function render_chinese(ALL_INFOMATION) {
                 // 遍历插座
                 let socket_detail_arr = new Array() // 插座Array (detail)
                 let available_num_in_a_charger = 0 // 充电桩的可用插座数量
-                for (let socket_no in Raw_Detail[station][charger_no]) {
+                for (let socket_no in Raw_Detail[station][charger_key]) {
                     // 插座信息写入插座Array (detail)
                     socket_detail_arr.push(mustache.render(mtemplate.socket_detail, {
-                        socket_status: ((Raw_Detail[station][charger_no][socket_no] == 1) ? 1 : 0),
+                        socket_status: ((Raw_Detail[station][charger_key][socket_no] == 1) ? 1 : 0),
                         socket_num: parseInt(socket_no) + 1
                     }))
                     // 增加充电桩的可用插座数量
-                    if (Raw_Detail[station][charger_no][socket_no] == 1) {
+                    if (Raw_Detail[station][charger_key][socket_no] == 1) {
                         ++available_num_in_a_charger
                     }
                 }
                 // 插座Array拼装成充电桩Array，渲染充电桩表格 (detail)
                 charger_detail_arr.push(mustache.render(mtemplate.charger_detail, {
-                    charger_no: parseInt(charger_no) + 1,
+                    charger_no: get_charger_name(charger_key),
                     socket_detail: socket_detail_arr.join("  ")
                 }))
                 // 插座Array拼装成充电桩总览Array，渲染充电桩总览 (message)
                 charger_message.push(mustache.render(mtemplate.remain, {
-                    charger_no: parseInt(charger_no) + 1,
+                    charger_no: get_charger_name(charger_key),
                     charger_a_num: available_num_in_a_charger
                 }))
                 available_num_in_a_station += available_num_in_a_charger
@@ -142,19 +155,32 @@ export async function render_classical(ALL_INFOMATION) {
     for (let station in Raw_Detail) {
         // 遍历充电桩
         let charger_detail_arr = new Array()
-        for (let charger_no in Raw_Detail[station]) {
+
+        /*
+            Feat - 支持用 Map 指定充电桩名。
+            station 可能为 Array 或 Map.
+            Array: 系统自动将充电桩编号为 1, 2, 3, 4,...
+                {"LocationFoo": [[0,0,0,1,1,1,0,0,0,0], [0,0,0,1,1,1,0,0,0,0]]}
+                                  ^ LocationFoo 1 ^      ^ LocationFoo 2 ^
+            Map: 以 Key 作为充电桩编号
+                {"LocationFoo": {"A": [0,0,0,1,1,1,0,0,0,0], "B": [0,0,0,1,1,1,0,0,0,0]}}
+                                       ^ LocationFoo A ^           ^ LocationFoo A ^
+        */
+        const get_charger_name = Array.isArray(Raw_Detail[station]) ? function (charger_key) {return (parseInt(charger_key) + 1)} : function (charger_key) {return charger_key} 
+
+        for (let charger_key in Raw_Detail[station]) {
             // 判断参数缺失，直接写入充电桩Array和总览表格充电桩Array
             // 使用场景是充电桩ID没有获取全就上线
-            if (Raw_Detail[station][charger_no] == undefined) { // 注：没使用 type of，可以同时判断 null 与 undefined
+            if (Raw_Detail[station][charger_key] == undefined) { // 注：没使用 type of，可以同时判断 null 与 undefined
                 charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
-                    charger_no: parseInt(charger_no) + 1,
+                    charger_no: get_charger_name(charger_key),
                     socket_detail: "* 充电桩参数缺失 *"
                 }))
             }
             // 充电桩失败，直接写入充电桩Array
-            else if (Raw_Detail[station][charger_no].length === 0) {
+            else if (Raw_Detail[station][charger_key].length === 0) {
                 charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
-                    charger_no: parseInt(charger_no) + 1,
+                    charger_no: get_charger_name(charger_key),
                     socket_detail: "* 获取失败 *"
                 }))
             }
@@ -162,20 +188,20 @@ export async function render_classical(ALL_INFOMATION) {
                 // 遍历插座
                 let socket_detail_arr = new Array()
                 let no_available_socket = true;
-                for (let socket_no in Raw_Detail[station][charger_no]) {
-                    if (Raw_Detail[station][charger_no][socket_no] == 1) {
+                for (let socket_no in Raw_Detail[station][charger_key]) {
+                    if (Raw_Detail[station][charger_key][socket_no] == 1) {
                         socket_detail_arr.push(`[${parseInt(socket_no) + 1}]`)
                         no_available_socket = false
                     }
                 }
                 if (no_available_socket) {
                     charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
-                        charger_no: parseInt(charger_no) + 1,
+                        charger_no: get_charger_name(charger_key),
                         socket_detail: "* 无 *"
                     }))
                 } else {
                     charger_detail_arr.push(mustache.render(mtemplate.classical_charger, {
-                        charger_no: parseInt(charger_no) + 1,
+                        charger_no: get_charger_name(charger_key),
                         socket_detail: socket_detail_arr.join("  ")
                     }))
                 }
