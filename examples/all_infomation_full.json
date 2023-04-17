@@ -1,27 +1,20 @@
-import {
-    render_chinese,
-    render_chinese_error,
-    render_classical,
-    render_classical_error,
-} from "./rend.js";
-
-const ALL_INFOMATION = {
-    update_message: {
-        last_success_end_time: 1681720271630,
-        last_success_query_id: 123456789,
-        last_success_num: 27,
-        update_success_time: "16:31",
+{
+    "update_message": {
+        "last_success_end_time": 1681720271630,
+        "last_success_query_id": 123456789,
+        "last_success_num": 27,
+        "update_success_time": "16:31"
     },
-    status_sum: {
+    "status_sum": {
         "\u4e1c\u95e8\u5317\u4fa7": 58,
         "\u4e1c\u95e8\u5357\u4fa7": 9,
         "\u897f\u95e8\u5317\u4fa7": 21,
         "\u897f\u95e8\u5357\u4fa7": 11,
         "\u5357\u95e8\u897f\u4fa7": 12,
         "\u5317\u95e8\u4e1c\u5317\u4fa7": 27,
-        "\u5317\u95e8\u4e1c\u5357\u4fa7": 56,
+        "\u5317\u95e8\u4e1c\u5357\u4fa7": 56
     },
-    status_detail: {
+    "status_detail": {
         "\u4e1c\u95e8\u5317\u4fa7": [
             [1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -29,31 +22,31 @@ const ALL_INFOMATION = {
             [1, 1, 1, 0, 1, 1, 1, 0, 1, 0],
             [1, 1, 1, 1, 1, 1, 1, 0, 0, 1],
             [1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
-            [1, 1, 1, 0, 1, 0, 1, 0, 1, 1],
+            [1, 1, 1, 0, 1, 0, 1, 0, 1, 1]
         ],
         "\u4e1c\u95e8\u5357\u4fa7": [
             [0, 0, 1, 0, 1, 1, 1, 0, 1, 1],
-            [0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 0, 0, 0, 0, 0, 0]
         ],
         "\u897f\u95e8\u5317\u4fa7": [
             [0, 0, 0, 0, 1, 1, 1, 0, 1, 1],
             [1, 0, 1, 1, 0, 0, 1, 1, 0, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ],
         "\u897f\u95e8\u5357\u4fa7": [
             [0, 0, 0, 0, 0, 1, 0, 1, 0, 0],
             [0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-            [1, 1, 1, 0, 0, 1, 0, 0, 0, 0],
+            [1, 1, 1, 0, 0, 1, 0, 0, 0, 0]
         ],
         "\u5357\u95e8\u897f\u4fa7": [
             [1, 0, 0, 1, 1, 1, 0, 1, 0, 1],
-            [0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+            [0, 0, 0, 1, 1, 1, 1, 1, 0, 1]
         ],
         "\u5317\u95e8\u4e1c\u5317\u4fa7": [
             [1, 1, 0, 0, 1, 1, 1, 0, 1, 1],
             [1, 0, 0, 1, 1, 0, 1, 0, 0, 1],
             [0, 1, 1, 1, 1, 0, 0, 1, 1, 1],
-            [1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
+            [1, 0, 1, 0, 1, 1, 1, 1, 1, 1]
         ],
         "\u5317\u95e8\u4e1c\u5357\u4fa7": [
             [1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
@@ -61,20 +54,7 @@ const ALL_INFOMATION = {
             [1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        ],
-    },
-};
-// 以下所有调用均返回 HTML String
-
-await render_chinese(ALL_INFOMATION); // 渲染新版结果页面
-
-await render_chinese_error(); // 渲染新版错误页面（默认错误提示文字）
-
-await render_chinese_error("发生了错误"); // 渲染新版错误页面（自定义错误提示文字）
-
-await render_classical(ALL_INFOMATION); // 渲染经典结果页面
-
-await render_classical_error(); // 渲染经典错误页面（默认错误提示文字）
-
-await render_classical_error("发生了错误"); // 渲染经典错误页面（自定义错误提示文字）
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        ]
+    }
+}

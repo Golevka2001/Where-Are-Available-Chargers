@@ -43,14 +43,18 @@
 **初次运行或每次修改模板后均需要运行 `pretreat.py` 重新生成 `src/mustache_templates.js`**
 
 ### 渲染 HTML
-0. 通过 `dev` 分支的代码获取充电桩数据。
+0. 通过 `dev` 分支的代码获取充电桩数据。您可以使用 `dev` 分支的 `status_converter.py` 文件处理。
 1. 将数据处理为格式与 `example/all_information.json` 类似的 Map ，记为 `ALL_INFORMATION`。`0` 表示占用，`1` 表示空闲。
 2. 调用 `src/rend.js` 中的方法，传入 `ALL_INFORMATION` 参数或相应字符串渲染 HTML 文件。注意异步函数需要 `await`。
 
 ### 备注
 1. 结果编号（`ALL_INFORMATION["update_message"]["last_success_query_id"]`）可自行生成。建议使用严格递增的数字作为结果编号。公共实例中返回的结果编号规则可见其文档。
+2. `example/all_information.json` 是渲染必须的最小数据，`example/all_information_full.json` 是使用 `status_converter.py` 得到的完整数据。仅需最小数据即可渲染。
 
 ## 更新日志
+
+**2023-04-17**
+1. 补充 `example/all_information_full.json`。
 
 **2023-04-14** Version `3.4.3`
 1. `status_detail[充电站名]` 现在可以使用 `Object` 或 `Array`。
