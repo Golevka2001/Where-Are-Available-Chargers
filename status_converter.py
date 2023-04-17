@@ -15,8 +15,7 @@ def v2status_to_v3allinfo(status: dict, list=False, Array=False) -> dict:
     Argument: `status`
         dict: {东门:{北侧-1:[[1, 0, 00:30:00, 90%],...],...},...}
     Return:
-        dict: {东门:{北侧-1:[1,0,0,0,1,0,0,0,0,0],...},...}
-        dict: {东门:[[1,0,0,0,1,0,0,0,0,0],...],...}
+        dict, like `all_information_full.json` in `version-3` branch
 
     推荐将`东门:北侧-1`改为`东门北侧:1`，因为`北侧-1`这种显示方法在 Version 3 的网页里空间不够。
     将调用 find_chargers.py 得到的 dict 喂给它，即可得到适用于 Version 3 的 `ALL_INFORMATION`。
