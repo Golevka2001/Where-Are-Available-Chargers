@@ -12,13 +12,17 @@
 
 import os
 import time
+import asyncio
 from datetime import datetime, timedelta, timezone
 from threading import Thread
 
 from find_chargers import FindChargers
-from flask import Flask, abort, redirect, render_template, request
+from flask import Flask, abort, redirect, render_template, request, Response
 
-version = "dev"
+import ver2tree_rend
+import status_converter
+
+version = "dev-ver2tree"
 start_time = datetime.now(timezone.utc)
 config_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "config.yml")
 min_interval = timedelta(minutes=1, seconds=30)
@@ -52,8 +56,8 @@ def update_func() -> None:
             refresh_times = refresh_times + 1
 
 
-@app.route("/", methods=["GET", "HEAD", "POST"])
-def index(enable_refresh: bool = True):
+@app.route("/classical", methods=["GET", "HEAD", "POST"])
+def classical_index(enable_refresh: bool = True):
     # if refresh_times > 5 and enable_refresh:
     #    pass  # 还没想好要怎么办
 
@@ -89,13 +93,13 @@ def index(enable_refresh: bool = True):
     return retpage
 
 
-@app.route("/show", methods=["GET", "HEAD", "POST"])
-def show():
-    return index(enable_refresh=False)
+@app.route("/classical_show", methods=["GET", "HEAD", "POST"])
+def classical_show():
+    return classical_index(enable_refresh=False)
 
 
-@app.route("/error", methods=["GET", "HEAD", "POST"])
-def error(message: str = "请求错误，请稍后重试 ..."):
+@app.route("/classical_error", methods=["GET", "HEAD", "POST"])
+def classical_error(message: str = "请求错误，请稍后重试 ..."):
     run_time = (datetime.now(timezone.utc) - start_time).total_seconds()
     return (
         render_template(
@@ -106,6 +110,54 @@ def error(message: str = "请求错误，请稍后重试 ..."):
             provider=provider(),
         ),
         508,
+    )
+
+
+@app.route("/", methods=["GET", "HEAD", "POST"])
+async def index(enable_refresh: bool = True):
+    # if refresh_times > 5 and enable_refresh:
+    #    pass  # 还没想好要怎么办
+
+    interval = datetime.now(timezone.utc) - chargers.refresh_time
+    last_update_time = chargers.refresh_time.astimezone(
+        timezone(timedelta(hours=8))
+    ).strftime("%Y-%m-%d %H:%M:%S")
+
+    # if exceed minimum refresh interval: request & refresh:
+    if interval > min_interval and enable_refresh:
+        update_thread = Thread(target=update_func)
+        update_thread.start()
+        return Response(
+            response=await ver2tree_rend.render_loading(),
+            status=200,
+            mimetype="text/html;charset=utf-8",
+        )
+
+    interval = time.strftime("%H:%M:%S", time.gmtime(interval.seconds))
+
+    try:
+        return Response(
+            response=await ver2tree_rend.render_chinese(
+                status_converter.v2status_to_v3allinfo(status)
+            ),
+            status=200,
+            mimetype="text/html;charset=utf-8",
+        )
+    except:
+        return redirect("/error")
+
+
+@app.route("/show", methods=["GET", "HEAD", "POST"])
+async def show():
+    return await index(enable_refresh=False)
+
+
+@app.route("/error", methods=["GET", "HEAD", "POST"])
+async def error():
+    return Response(
+        response=await ver2tree_rend.render_error(),
+        status=508,
+        mimetype="text/html;charset=utf-8",
     )
 
 

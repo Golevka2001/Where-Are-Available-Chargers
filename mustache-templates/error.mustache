@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- force IE browsers in compatibility mode to use their most aggressive rendering engine -->
+
+    <meta charset="utf-8" />
+    <title>Where Are Available Chargers?!</title>
+
+    <meta name="description" content="Find an available charger easily!" />
+
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">-->
+
+    <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+    <meta http-equiv="cleartype" content="on" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" href="./static/img/apple-touch-icon.png" />
+
+    <link rel="stylesheet" href="./static/css/styles.pure.css" />
+    <link rel="stylesheet" href="./static/css/custom.css" />
+  </head>
+
+  <body class="status index status-none" data-breakpoint-reached="false">
+    <div class="layout-content status status-index starter">
+      <div class="custom-header-container">
+        <div
+          class="header d-md-flex flex-md-justify-between flex-md-items-center px-4 py-3 text-center text-md-left bg-white box-shadow-large"
+        >
+          <a
+            href="/"
+            class="text-gray-dark"
+            style="font-size: 1.3rem; white-space: nowrap"
+          >
+            <span class="no-dark-mode">&#x1F50C;&#x1F621;</span> Where Are
+            Available Chargers
+          </a>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="page-status status-major" style="padding-bottom: 0.5rem">
+          <span class="status font-large">
+            {{ error_message }}
+          </span>
+        </div>
+        <!--
+            <div class="page-footer border-color font-small" style="margin-bottom: 0px;">
+                <a href="" class="history-footer-link"><span
+                        style="font-family:arial">←</span> 返回旧版 </a>
+                <div>如持续出现问题，请与实例维护者联系，或尝试使用旧版</div>
+            </div>-->
+      </div>
+
+      <div class="custom-footer-container">
+        <div class="footer mt-6 border-top" role="contentinfo">
+          <div
+            class="container-lg p-responsive f6 py-4 flex-justify-between flex-row-reverse flex-items-center"
+          >
+            <ul class="list-style-none d-flex text-gray">
+              <li class="mr-3">2022 - 2023 © Gol3vka and Csimide</li>
+              <li class="mr-3">
+                <a
+                  href="https://github.com/Golevka2001/Where-Are-Available-Chargers"
+                  class="link-gray"
+                  >GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

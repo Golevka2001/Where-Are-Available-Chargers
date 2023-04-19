@@ -4,6 +4,7 @@
     希望这个脚本可以帮助你更容易给小电驴找到充电桩。
 @File: status_converter.py
 @Brief: 将 Ver 2 `get_status()` 返回的 `status` 转换为 Ver 3 使用的格式
+@Version: 2.4.0+Tree-3.4.3
 """
 
 from datetime import datetime, timezone, timedelta

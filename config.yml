@@ -1,36 +1,39 @@
 # location & number
 stations:
-  东门:
-    北侧-1: "XYlFl6DnfgZH3"
-    北侧-2: "XY1eANYJoWM620"
-    北侧-3: "XYvIqZM8oCmT19"
-    北侧-4: "XYnfw8BeyiXS16"
-    北侧-5: "XYEogTrLdXZx14"
-    北侧-6: "XYxN6z9ZETBZ17"
-    北侧-7: "XYBGw4c88NWd21"
-    南侧-1: "XYSfeYzOvLwN5"
-    南侧-2: "XYDSUGrzkRfX6"
-  西门:
-    北侧-1: "XYS2hOWumHDa13"
-    北侧-2: "XYp5iHwheZvf18"
-    北侧-3: "XY9HNPbegRgV15"
-    南侧-1: "XYcjSf9nqvK612"
-    南侧-2: "XY31g0OtIZA711"
-    南侧-3: "XYV5mv5tnKHV9"
-  南门:
-    西侧-1: "XY679RB8P35Y10"
-    西侧-2: "XYOGaVYy7OHu7"
-  北门:
-    北侧-1: "XYeo2IsT1Sx61"
-    北侧-2: "XYKCwwkZXBW62"
-    北侧-3: "XYTbok829tYo8"
-    北侧-4: "XYo7UstSCeu64"
-    南侧-1: "XYbwFHY40PZK3"
-    南侧-2: "XYgbwesjiMEy6"
-    南侧-3: "XYnT1V47gbvQ5"
-    南侧-4: "XYwgYSUv41Ve2"
-    南侧-5: "XYG9NcgUXBlg4"
-    南侧-6: "XYWOjzU06jWc1"
+  东门北侧:
+    "1": "XYlFl6DnfgZH3"
+    "2": "XY1eANYJoWM620"
+    "3": "XYvIqZM8oCmT19"
+    "4": "XYnfw8BeyiXS16"
+    "5": "XYEogTrLdXZx14"
+    "6": "XYxN6z9ZETBZ17"
+    "7": "XYBGw4c88NWd21"
+  东门南侧:
+    "1": "XYSfeYzOvLwN5"
+    "2": "XYDSUGrzkRfX6"
+  西门北侧:
+    "1": "XYS2hOWumHDa13"
+    "2": "XYp5iHwheZvf18"
+    "3": "XY9HNPbegRgV15"
+  西门南侧:
+    "1": "XYcjSf9nqvK612"
+    "2": "XY31g0OtIZA711"
+    "3": "XYV5mv5tnKHV9"
+  南门西侧:
+    "1": "XY679RB8P35Y10"
+    "2": "XYOGaVYy7OHu7"
+  北门东北侧:
+    "1": "XYeo2IsT1Sx61"
+    "2": "XYKCwwkZXBW62"
+    "3": "XYTbok829tYo8"
+    "4": "XYo7UstSCeu64"
+  北门东南侧:
+    "1": "XYbwFHY40PZK3"
+    "2": "XYgbwesjiMEy6"
+    "3": "XYnT1V47gbvQ5"
+    "4": "XYwgYSUv41Ve2"
+    "5": "XYG9NcgUXBlg4"
+    "6": "XYWOjzU06jWc1"
 
 # use this header to fake a visit by android mobile
 headers:
@@ -52,3 +55,8 @@ phone: "01"
 
 # maybe useful someday...
 appid: "wx26caa1e6b60d4ef5"
+
+# version 3
+conditions:
+  enough_sum_num: 100
+  enough_socket_num: 2.5
