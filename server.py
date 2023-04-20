@@ -5,7 +5,7 @@
 @File: find_chargers.py
 @Brief: 使用 flask 框架搭建的简单服务，将爬取的信息显示在网页上。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.4.1+Tree-3.4.3
+@Version: 2.4.2+Tree-3.4.3
 @Created Date: 2022/11/01
 @Last Modified Date: 2023/04/20
 """
@@ -137,7 +137,9 @@ async def index(enable_refresh: bool = True):
     try:
         return Response(
             response=ver2tree_rend.render_chinese(
-                status_converter.v2status_to_v3allinfo(status)
+                status_converter.v2status_to_v3allinfo(
+                    status, chargers.refresh_time.timestamp()
+                )
             ),
             status=200,
             mimetype="text/html;charset=utf-8",
