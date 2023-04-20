@@ -5,14 +5,13 @@
 @File: find_chargers.py
 @Brief: 使用 flask 框架搭建的简单服务，将爬取的信息显示在网页上。
 @Author: Golevka2001<gol3vka@163.com>
-@Version: 2.3.6
+@Version: 2.4.1+Tree-3.4.3
 @Created Date: 2022/11/01
-@Last Modified Date: 2022/12/07
+@Last Modified Date: 2023/04/20
 """
 
 import os
 import time
-import asyncio
 from datetime import datetime, timedelta, timezone
 from threading import Thread
 
@@ -128,7 +127,7 @@ async def index(enable_refresh: bool = True):
         update_thread = Thread(target=update_func)
         update_thread.start()
         return Response(
-            response=await ver2tree_rend.render_loading(),
+            response=ver2tree_rend.render_loading(),
             status=200,
             mimetype="text/html;charset=utf-8",
         )
@@ -137,7 +136,7 @@ async def index(enable_refresh: bool = True):
 
     try:
         return Response(
-            response=await ver2tree_rend.render_chinese(
+            response=ver2tree_rend.render_chinese(
                 status_converter.v2status_to_v3allinfo(status)
             ),
             status=200,
@@ -149,13 +148,13 @@ async def index(enable_refresh: bool = True):
 
 @app.route("/show", methods=["GET", "HEAD", "POST"])
 async def show():
-    return await index(enable_refresh=False)
+    return index(enable_refresh=False)
 
 
 @app.route("/error", methods=["GET", "HEAD", "POST"])
 async def error():
     return Response(
-        response=await ver2tree_rend.render_error(),
+        response=ver2tree_rend.render_error(),
         status=508,
         mimetype="text/html;charset=utf-8",
     )

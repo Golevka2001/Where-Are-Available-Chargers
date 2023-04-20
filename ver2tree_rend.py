@@ -4,7 +4,7 @@
     希望这个脚本可以帮助你更容易给小电驴找到充电桩。
 @File: ver2tree_rend.py
 @Brief: 使用 Python 和 Version 2 的主要程序渲染 Version 3 的界面
-@Version: 2.4.0+Tree-3.4.3
+@Version: 2.4.1+Tree-3.4.3
 """
 
 import chevron as mustache
@@ -23,7 +23,7 @@ def mtemplate(template_name: str):
         return template.read()
 
 
-async def render_chinese(ALL_INFOMATION, config_path=config_path):
+def render_chinese(ALL_INFOMATION, config_path=config_path):
     config = dict()
     with open(config_path, "r", encoding="utf-8") as config_file:
         config = yaml.safe_load(config_file)
@@ -192,9 +192,9 @@ async def render_chinese(ALL_INFOMATION, config_path=config_path):
     return ret_page
 
 
-async def render_error(message="发生错误，请稍后再试"):
+def render_error(message="发生错误，请稍后再试"):
     return mustache.render(mtemplate("error"), {message: message})
 
 
-async def render_loading():
+def render_loading():
     return mustache.render(mtemplate("loading"))
