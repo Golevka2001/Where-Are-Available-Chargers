@@ -10,7 +10,9 @@
 from datetime import datetime, timezone, timedelta
 
 
-def v2status_to_v3allinfo(status: dict, list=False, Array=False) -> dict:
+def v2status_to_v3allinfo(
+    status: dict, timestamp=None, list=False, Array=False
+) -> dict:
     """Convert `status` (ver 2 `get_status()`) to `ALL_INFORMATION` (ver 3)
 
     Argument: `status`
@@ -23,18 +25,21 @@ def v2status_to_v3allinfo(status: dict, list=False, Array=False) -> dict:
     `list=True` 或 `Array=True` 时，输出将使用编号法而不是原样命名。**推荐使用此模式**。
     """
 
+    if timestamp is None:
+        last_success_datetime = datetime.now(timezone(timedelta(hours=8)))
+    else:
+        last_success_datetime = datetime.fromtimestamp(
+            timestamp, tz=timezone(timedelta(hours=8))
+        )
+
     output_in_list: bool = list or Array
 
     all_information: dict = {
         "update_message": {
-            "last_success_end_time": int(
-                datetime.now(timezone(timedelta(hours=8))).timestamp() * 1000
-            ),
+            "last_success_end_time": int(last_success_datetime.timestamp() * 1000),
             "last_success_query_id": 123456789,  # 请自行定义一个生成方式，建议使用严格增长的 64 位以下的整数
             "last_success_num": 0,
-            "update_success_time": datetime.now(timezone(timedelta(hours=8))).strftime(
-                "%H:%M"
-            ),
+            "update_success_time": last_success_datetime.strftime("%H:%M"),
         },
         "status_sum": dict(),
         "status_detail": dict(),
