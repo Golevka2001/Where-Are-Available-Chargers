@@ -53,6 +53,9 @@
 
 ## 更新日志
 
+**2023-04-23** Version `3.4.3-2`
+1. 支持显示更新日期。
+
 **2023-04-17**
 1. 补充 `example/all_information_full.json`。
 

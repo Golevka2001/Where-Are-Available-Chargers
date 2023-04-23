@@ -1,10 +1,10 @@
 {
-  "name": "chargers-v3",
-  "version": "3.4.3",
-  "type": "module",
-  "packageManager": "yarn@4.0.0-rc.40",
-  "license": "AGPL-3.0",
-  "dependencies": {
-    "mustache": "^4.2.0"
-  }
+    "name": "chargers-v3",
+    "version": "3.4.3-2",
+    "type": "module",
+    "packageManager": "yarn@4.0.0-rc.40",
+    "license": "AGPL-3.0",
+    "dependencies": {
+        "mustache": "^4.2.0"
+    }
 }

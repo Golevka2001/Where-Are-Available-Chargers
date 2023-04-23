@@ -165,6 +165,7 @@ export async function render_chinese(ALL_INFOMATION) {
             available_num_in_all_station >
             CONFIG["conditions"]["enough_sum_num"],
         error: success_chargers_num != all_chargers_num,
+        update_time: ALL_INFOMATION["update_message"]["update_success_time"],
         stations: stations_message.join("\n"),
         station_detail: stations_detail_arr.join("\n"),
         query_id: ALL_INFOMATION["update_message"]["last_success_query_id"],
