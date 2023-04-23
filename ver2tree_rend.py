@@ -184,6 +184,7 @@ def render_chinese(ALL_INFOMATION, config_path=config_path):
             "chongzu": available_num_in_all_station
             > config["conditions"]["enough_sum_num"],
             "error": success_chargers_num != all_chargers_num,
+            "update_time": ALL_INFOMATION["update_message"]["update_success_time"],
             "stations": "\n".join(stations_message),
             "station_detail": "\n".join(stations_detail_arr),
             "query_id": ALL_INFOMATION["update_message"]["last_success_query_id"],
