@@ -4,13 +4,13 @@
 
 ## 查询网址：<http://chargers.injs.eu>
 
+:wave: 由于获取到了正式的接口，本分支所使用的数据获取方式**不再使用**，且本分支中的前端是老版本的，新的数据获取方式和前端代码可移步 [`main`](https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/main) 查看。
+
 ![screenshot](./README.assets/screenshot.png)
 
-这是一个用来查询校园内各个充电桩的使用情况的小工具，希望它可以帮你更方便给小电驴找到充电桩。
+这是一个用来查询校园内各个充电桩的使用情况的小工具，希望它可以帮您更方便给小电驴找到充电桩。
 
-希望它可以帮你更方便给小电驴找到充电桩。
-
-如果它对你有帮助的话，可以点击右上角的 :star:**Star** 按钮（~~或者**v我50**~~）感谢您的支持！ :tada::tada::tada:
+如果它对您有帮助的话，可以点击右上角的 :star:**Star** 按钮，感谢您的支持！ :tada::tada::tada:
 
 ## 目录
 
@@ -21,7 +21,7 @@
   - [工作流程](#工作流程)
   - [使用说明](#使用说明)
     - [下载 \& 解压](#下载--解压)
-    - [文件说明](#文件说明)
+    - [项目结构](#项目结构)
     - [配置 Python 环境](#配置-python-环境)
     - [创建虚拟环境（可选）](#创建虚拟环境可选)
     - [安装依赖库](#安装依赖库)
@@ -57,28 +57,35 @@ s(开始)
 ***注：本部分内容面向有在本地构建项目的需求的用户。
 如果您只想查询数据，请直接访问本文档最上方提供的网址。***
 
-本项目使用 Python 编写，依赖 requests 库爬取数据、使用 flask 框架构建 web 服务。
+本项目使用 Python 编写，依赖 aiohttp 库异步爬取数据、使用 flask 框架构建 web 服务。
 
 ### 下载 & 解压
 
 点击右上方的绿色 ```Code``` 按钮，在下拉菜单中点击 ```Download ZIP```
 下载完成后，把它解压到你想要的位置。
 
-### 文件说明
+### 项目结构
 
-```requirements.txt```：用于安装依赖；
-
-```example_response.json```：一个响应的例子；
-
-```config.yml```：存储每个充电桩的url、请求头等信息；
-
-```find_chargers.py```：FindChargers 类，执行请求、获取结果的主要实现；
-
-```server.py```：构建 web 服务；
-
-```static/```：存放 web 静态资源的目录，包含 css、js、img 等；
-
-```templates/```：存放 web 模板的目录；
+```bash
+Where-Are-Available-Chargers
+├── config.yml              # 配置文件，包含url、请求头等信息
+├── example_response.json   # 一个响应的例子
+├── find_chargers.py        # FindChargers 类，执行请求、获取结果的主要实现
+├── requirements.txt        # 依赖库
+├── server.py               # 构建 web 服务
+├── static                  # 静态资源目录
+│   ├── css
+│   │   └── style.css
+│   ├── favicon.ico
+│   └── js
+│       ├── clear.js
+│       ├── index.js
+│       └── loading.js
+└── templates               # 模板目录
+    ├── error.html
+    ├── index.html
+    └── loading.html
+```
 
 ### 配置 Python 环境
 
@@ -121,24 +128,10 @@ python .\server.py
 
 ## 反馈与建议
 
-~~也许您也发现了，“为啥才能查到这么几个充电桩？”。~~
-
-~~是因为我还没来得及去挨个拍照啦，平时不充电的时候也没空跑去拍个照。~~
-
-~~所以欢迎大家提供一些充电桩上的二维码！~~
-
-:tada::tada::tada:
-
-现在我已经把我知道位置的充电桩都加进查询列表啦！
-
-如果还有别的遗漏的大家可以继续反馈给我。
-
-您可以通过以下方式提供：
+如在使用中遇到什么问题（如：数据获取不及时、网页无法打开、响应慢等），或想要提出一些改进建议、新功能，欢迎通过以下方式反馈：
 
 - 点击页面上方的 [**Issues**](https://github.com/Golevka2001/Where-Are-Available-Chargers/issues) 提交；
-- 通过**邮件**发送到 gol3vka@163.com。
-
-希望您在提交时选择清晰的图片，并备注清楚充电桩的位置，如 “*西门南侧-东1*”。
+- 通过**邮件**发送到 <gol3vka@163.com>。
 
 感谢您的帮助与支持！
 
@@ -149,6 +142,11 @@ python .\server.py
 :rose::rose::rose:
 
 ## 更新日志
+
+**2023-05-11:**
+
+1. 拿到正式接口，旧的数据获取方式不再使用；
+2. 分支调整：原 `main` 分支迁移到 `deprecated`，不再更新。
 
 **2023-04-09:**
 

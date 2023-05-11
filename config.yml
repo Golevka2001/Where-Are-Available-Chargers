@@ -49,6 +49,3 @@ inquiry_url: "https://mapi.7mate.cn/api/chargers/"
 # I find it unnecessary to use real openid and phone!
 openid: "01"
 phone: "01"
-
-# maybe useful someday...
-appid: "wx26caa1e6b60d4ef5"
