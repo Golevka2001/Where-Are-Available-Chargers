@@ -42,7 +42,7 @@ export async function render_chinese(KV_ALL) {
             KV_ALL["update_message"]["last_success_start_time"]
         )
             .utcOffset(8)
-            .format("HH:mm:ss");
+            .format("YYYY-MM-DD HH:mm:ss");
         console.log(for_display_update_time);
     }
 
@@ -223,7 +223,7 @@ export async function render_classical(KV_ALL) {
             KV_ALL["update_message"]["last_success_start_time"]
         )
             .utcOffset(8)
-            .format("HH:mm:ss");
+            .format("YYYY-MM-DD HH:mm:ss");
     }
     // 命名方便使用
     const Raw_Detail = KV_ALL["status_detail"];
@@ -307,7 +307,6 @@ export async function render_classical(KV_ALL) {
     }
 
     const ret_page = mustache.render(await mtemplate("classical_main"), {
-        query_id: KV_ALL["update_message"]["id"],
         update_time: for_display_update_time,
         station_detail: stations_detail_arr.join("\n"),
     });
