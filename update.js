@@ -1,7 +1,11 @@
 import CONFIG from "./auto_gen/config.js";
 import api_query from "./api_query.js";
 
-window.is_first_start = true;
+async function kv_update(api_endpoint, sign_key, kv) {
+    const ALL_INFORMATION = await api_query(api_endpoint, sign_key);
+    kv.set(["KV_ALL"], ALL_INFORMATION);
+    return ALL_INFORMATION;
+}
 
 async function update(api_endpoint, sign_key) {
     switch (CONFIG["cache"]["cache_mode"]) {
@@ -11,31 +15,21 @@ async function update(api_endpoint, sign_key) {
             const result = await kv.get(["KV_ALL"]);
             let ALL_INFORMATION = null;
             try {
-                if (result.value == null) {
-                    window.is_first_start = true;
-                } else {
+                if (!(result.value == null)) {
                     ALL_INFORMATION = result.value;
-                }
-                if (
-                    !window.is_first_start &&
-                    new Date().getTime() -
-                        ALL_INFORMATION["update_message"][
-                            "last_success_start_time"
-                        ] <
+
+                    if (
+                        new Date().getTime() -
+                            ALL_INFORMATION["update_message"][
+                                "last_success_start_time"
+                            ] <
                         CONFIG["cache"]["refresh_time"] * 1000 * 60
-                ) {
-                    console.log("cache hit!");
-                    return ALL_INFORMATION;
-                } else {
-                    const ALL_INFORMATION = await api_query(
-                        api_endpoint,
-                        sign_key
-                    );
-                    console.log("cache miss!");
-                    window.is_first_start = false;
-                    kv.set(["KV_ALL"], ALL_INFORMATION);
-                    return ALL_INFORMATION;
+                    ) {
+                        console.log("cache hit!");
+                        return ALL_INFORMATION;
+                    }
                 }
+                return await kv_update(api_endpoint, sign_key, kv);
             } catch {
                 console.log("case 1 err");
                 return await api_query(api_endpoint, sign_key);

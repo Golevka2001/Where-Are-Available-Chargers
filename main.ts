@@ -16,6 +16,10 @@ import update from "./update.js";
 const api_endpoint = Deno.env.get("API_ENDPOINT");
 const sign_key = Deno.env.get("SIGN_KEY");
 
+if (api_endpoint == null || sign_key == null) {
+  throw new Error("Env null!");
+}
+
 const router = new Router();
 
 router.get("/favicon.ico", async (ctx) => {

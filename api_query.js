@@ -52,7 +52,7 @@ export async function api_query(api_endpoint, sign_key) {
             last_success_start_time: new Date().getTime(),
             last_success_end_time: 0,
         },
-        status_detail: CONFIG["status_detail_template"],
+        status_detail: structuredClone(CONFIG["status_detail_template"]),
     };
 
     const chargers_raw_data = api_raw_json["data"];
