@@ -25,3 +25,6 @@ src/mustache_templates.js
 
 #!.yarn/cache
 .pnp.*
+
+# Ver 4
+.env

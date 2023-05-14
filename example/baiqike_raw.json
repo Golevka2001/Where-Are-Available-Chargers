@@ -1,0 +1,1300 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "address": "新设备1",
+            "location_name": "东门北侧",
+            "name": "北门东侧 XYbwFHY40PZK3号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 0
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "address": "新设备6",
+            "location_name": "东门北侧",
+            "name": "北门东侧 XYG9NcgUXBlg4号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 0
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "address": "新设备5",
+            "location_name": "北门东侧",
+            "name": "北门东侧 XYWOjzU06jWc1号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "address": "新设备4",
+            "location_name": "北门东侧",
+            "name": "北门东侧 XYwgYSUv41Ve2号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 0
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 0
+                },
+                {
+                    "channel": 10,
+                    "status": 0
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "address": "新设备3",
+            "location_name": "北门东侧",
+            "name": "北门东侧 XYnT1V47gbvQ5号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 0
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "address": "新设备2",
+            "location_name": "北门东侧",
+            "name": "北门东侧 XYgbwesjiMEy6号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 0
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 0
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "address": "东南大学",
+            "location_name": "东门北侧",
+            "name": "东门北侧 XYvIqZM8oCmT19号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "address": "东南大学",
+            "location_name": "东门北侧",
+            "name": "东门北侧 XYxN6z9ZETBZ17号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 0
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 0
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "address": "东南大学",
+            "location_name": "东门北侧",
+            "name": "东门北侧 XYEogTrLdXZx14号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 0
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 0
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 0
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "address": "东南大学",
+            "location_name": "东门北侧",
+            "name": "东门北侧 XYnfw8BeyiXS16号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 0
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 0
+                },
+                {
+                    "channel": 10,
+                    "status": 0
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "address": "东南大学",
+            "location_name": "东门北侧",
+            "name": "东门北侧 XYBGw4c88NWd21号设备",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 0
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 0
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "address": "东南大学",
+            "location_name": "北门东侧",
+            "name": "XYo7UstSCeu64",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "address": "东南大学",
+            "location_name": "东门南侧",
+            "name": "XYDSUGrzkRfX6",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 0
+                },
+                {
+                    "channel": 4,
+                    "status": 0
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 0
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "address": "东南大学",
+            "location_name": "西门南侧",
+            "name": "XY31g0OtIZA711",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 0
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 0
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "address": "东南大学",
+            "location_name": "北门东侧",
+            "name": "XYeo2IsT1Sx61",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 0
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "address": "东南大学",
+            "location_name": "北门东侧",
+            "name": "XYKCwwkZXBW62",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 0
+                },
+                {
+                    "channel": 9,
+                    "status": 0
+                },
+                {
+                    "channel": 10,
+                    "status": 0
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "address": "东南大学",
+            "location_name": "北门东侧",
+            "name": "XYTbok829tYo8",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "address": "东南大学",
+            "location_name": "东门南侧",
+            "name": "XYSfeYzOvLwN5",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "address": "东南大学",
+            "location_name": "南门外东侧",
+            "name": "XYlFl6DnfgZH3",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 0
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 0
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "address": "东南大学",
+            "location_name": "南门外东侧",
+            "name": "XY1eANYJoWM620",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "address": "东南大学",
+            "location_name": "南门外西侧",
+            "name": "XYOGaVYy7OHu7",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 0
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 0
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "address": "东南大学",
+            "location_name": "南门外西侧",
+            "name": "XY679RB8P35Y10",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 0
+                },
+                {
+                    "channel": 4,
+                    "status": 0
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 0
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 0
+                },
+                {
+                    "channel": 10,
+                    "status": 0
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "address": "东南大学",
+            "location_name": "西门北侧",
+            "name": "XY9HNPbegRgV15",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 0
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "address": "东南大学",
+            "location_name": "西门北侧",
+            "name": "XYp5iHwheZvf18",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 25,
+            "address": "东南大学",
+            "location_name": "西门北侧",
+            "name": "XYS2hOWumHDa13",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 0
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 26,
+            "address": "东南大学",
+            "location_name": "西门南侧",
+            "name": "XYcjSf9nqvK612",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 0
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 0
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 1
+                },
+                {
+                    "channel": 9,
+                    "status": 0
+                },
+                {
+                    "channel": 10,
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 27,
+            "address": "东南大学",
+            "location_name": "西门南侧",
+            "name": "XYV5mv5tnKHV9",
+            "channels": [
+                {
+                    "channel": 1,
+                    "status": 1
+                },
+                {
+                    "channel": 2,
+                    "status": 1
+                },
+                {
+                    "channel": 3,
+                    "status": 1
+                },
+                {
+                    "channel": 4,
+                    "status": 1
+                },
+                {
+                    "channel": 5,
+                    "status": 1
+                },
+                {
+                    "channel": 6,
+                    "status": 1
+                },
+                {
+                    "channel": 7,
+                    "status": 1
+                },
+                {
+                    "channel": 8,
+                    "status": 0
+                },
+                {
+                    "channel": 9,
+                    "status": 1
+                },
+                {
+                    "channel": 10,
+                    "status": 0
+                }
+            ]
+        }
+    ]
+}

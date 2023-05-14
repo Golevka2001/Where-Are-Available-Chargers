@@ -1,0 +1,24 @@
+<div class="table_box" id="{{ station_name }}">
+    <div style="overflow: auto">
+        {{ station_name }} ·
+        {{ #enough }}
+        <span style="color: #28a745">空插座 {{ available_num }} 个</span
+        >{{/enough}}
+        {{^enough}}
+        <span style="color: #e67e22">空插座 {{ available_num }} 个</span
+        >{{/enough}}
+        <a href="#page-top" style="float: right; margin-right: 0.35rem"
+            >回到顶部</a
+        >
+    </div>
+    <table class="gridtable">
+        <tbody>
+            <tr>
+                <th>编号</th>
+                <th>插座状态</th>
+            </tr>
+            {{{charger_detail
+            }}}
+        </tbody>
+    </table>
+</div>
