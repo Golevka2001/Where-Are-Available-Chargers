@@ -1,6 +1,5 @@
 import mustache from "https://deno.land/x/mustache_ts@v0.4.1.1/mustache.ts";
 import CONFIG from "./auto_gen/config.js";
-//import { mtemplate } from "./auto_gen/mustache_templates.js";
 import moment from "https://deno.land/x/momentjs@2.29.1-deno/mod.ts";
 
 async function mtemplate(template_name) {
@@ -15,7 +14,7 @@ function cache_mode_to_string(cache_mode) {
         1: "智能缓存",
         2: "自动更新",
     };
-    return cache_mode_map[cache_mode];
+    return cache_mode_map[cache_mode] || "fallback";
 }
 
 export async function render_maintenance() {
@@ -43,7 +42,6 @@ export async function render_chinese(KV_ALL) {
         )
             .utcOffset(8)
             .format("YYYY-MM-DD HH:mm:ss");
-        console.log(for_display_update_time);
     }
 
     // 过期判定
@@ -51,6 +49,7 @@ export async function render_chinese(KV_ALL) {
         new Date().getTime() -
             KV_ALL["update_message"]["last_success_start_time"] >
         CONFIG.cache.survival_time * 60 * 1000;
+
     // 命名方便使用
     const Raw_Detail = KV_ALL["status_detail"];
 
@@ -67,16 +66,6 @@ export async function render_chinese(KV_ALL) {
         const charger_message = [];
         let available_num_in_a_station = 0;
 
-        /*
-            Feat - 支持用 Map 指定充电桩名。
-            station 可能为 Array 或 Map.
-            Array: 系统自动将充电桩编号为 1, 2, 3, 4,...
-                {"LocationFoo": [[0,0,0,1,1,1,0,0,0,0], [0,0,0,1,1,1,0,0,0,0]]}
-                                  ^ LocationFoo 1 ^      ^ LocationFoo 2 ^
-            Map: 以 Key 作为充电桩编号
-                {"LocationFoo": {"A": [0,0,0,1,1,1,0,0,0,0], "B": [0,0,0,1,1,1,0,0,0,0]}}
-                                       ^ LocationFoo A ^           ^ LocationFoo A ^
-        */
         const get_charger_name = Array.isArray(Raw_Detail[station])
             ? function (charger_key) {
                   return parseInt(charger_key) + 1;
@@ -192,10 +181,9 @@ export async function render_chinese(KV_ALL) {
     const ret_page = mustache.render(await mtemplate("main"), {
         outdate: Is_Outdated,
         update_time: for_display_update_time,
-        chongzu:
+        all_enough:
             available_num_in_all_station >
             CONFIG["conditions"]["enough_sum_num"],
-        error: success_chargers_num != all_chargers_num,
         stations: stations_message.join("\n"),
         station_detail: stations_detail_arr.join("\n"),
         display_version: CONFIG["system"]["display_version"],
@@ -211,7 +199,7 @@ export async function render_classical_error(message = "发生错误，请稍后
 }
 
 export async function render_classical(KV_ALL) {
-    let for_display_update_time = null;
+    let for_display_update_time = "Unknown";
     if (
         new Date().getTime() -
             KV_ALL["update_message"]["last_success_start_time"] >
@@ -233,16 +221,6 @@ export async function render_classical(KV_ALL) {
         // 遍历充电桩
         const charger_detail_arr = [];
 
-        /*
-            Feat - 支持用 Map 指定充电桩名。
-            station 可能为 Array 或 Map.
-            Array: 系统自动将充电桩编号为 1, 2, 3, 4,...
-                {"LocationFoo": [[0,0,0,1,1,1,0,0,0,0], [0,0,0,1,1,1,0,0,0,0]]}
-                                  ^ LocationFoo 1 ^      ^ LocationFoo 2 ^
-            Map: 以 Key 作为充电桩编号
-                {"LocationFoo": {"A": [0,0,0,1,1,1,0,0,0,0], "B": [0,0,0,1,1,1,0,0,0,0]}}
-                                       ^ LocationFoo A ^           ^ LocationFoo A ^
-        */
         const get_charger_name = Array.isArray(Raw_Detail[station])
             ? function (charger_key) {
                   return parseInt(charger_key) + 1;

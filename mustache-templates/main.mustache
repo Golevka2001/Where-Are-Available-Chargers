@@ -62,32 +62,22 @@
                     </span>
                 </div>
                 {{/outdate}}
-                {{#error}}
-                <div
-                    class="page-status status-major"
-                    style="padding-bottom: 0.5rem"
-                >
-                    <span class="status font-large">
-                        存在部分充电桩未获取到数据
-                    </span>
-                </div>
-                {{/error}}
-                {{#chongzu}}
+                {{#all_enough}}
                 <div
                     class="page-status status-none"
                     style="padding-bottom: 0.5rem"
                 >
                     <span class="status font-large"> 充电桩余量充足 </span>
                 </div>
-                {{/chongzu}}
-                {{^chongzu}}
+                {{/all_enough}}
+                {{^all_enough}}
                 <div
                     class="page-status status-minor"
                     style="padding-bottom: 0.5rem"
                 >
                     <span class="status font-large"> 充电桩余量紧张 </span>
                 </div>
-                {{/chongzu}}
+                {{/all_enough}}
                 <div style="overflow: auto">
                     <span style="color: gray; font-size: smaller">
                         更新于 {{ update_time }}

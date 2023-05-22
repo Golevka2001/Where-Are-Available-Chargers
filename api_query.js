@@ -18,7 +18,7 @@ async function hmac_sha256(message, secret) {
     return [...new Uint8Array(result)]
         .map((x) => x.toString(16).padStart(2, "0"))
         .join("")
-        .toUpperCase();
+        .toUpperCase(); // 转为 Hex 并大写
 }
 
 export async function api_query(api_endpoint, sign_key) {
@@ -44,8 +44,6 @@ export async function api_query(api_endpoint, sign_key) {
                 return response.data;
             }
         });
-
-    //console.log(api_raw_json);
 
     const ret_all = {
         update_message: {
@@ -78,8 +76,6 @@ export async function api_query(api_endpoint, sign_key) {
     }
 
     ret_all["update_message"]["last_success_end_time"] = new Date().getTime();
-
-    //console.log(ret_all);
 
     return ret_all;
 }
