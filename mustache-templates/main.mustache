@@ -97,7 +97,7 @@
 
                 <div style="display: flex; flex-direction: column">
                     <div style="max-width: 68rem; text-align: center">
-                        充电桩序号排序方法为从北向南、从西向东
+                        充电桩序号为从北向南、从西向东排序
                         <br />
                         图例：
                         <span class="num_green">1</span
@@ -117,14 +117,9 @@
                         class="history-footer-link"
                         ><span style="font-family: arial">←</span>历史数据</a
                     >
-                    <div>
-                        Ver {{ display_version }} "🌌Milky Way" · 欢迎加入开发
+                    <div class="text-gray">
+                        <b>仅供参考 / For Reference Only</b>
                     </div>
-                    <div>
-                        查询结果仅供参考 · 模式:
-                        {{ cache_mode }}
-                    </div>
-                    <div>数据源由常州百骑客公司提供</div>
                 </div>
 
                 <a href="" id="expired_tip_a" style="display: none">
@@ -140,40 +135,30 @@
             </div>
 
             <div class="custom-footer-container">
-                <div class="footer mt-6 border-top" role="contentinfo">
+                <div class="mt-6 border-top" role="contentinfo">
                     <div
                         class="container-lg p-responsive f6 py-4 flex-justify-between flex-row-reverse flex-items-center"
                     >
-                        <ul class="list-style-none d-flex text-gray">
-                            <li class="mr-3">
-                                © 2022-2023 Gol3vka and Csimide
-                            </li>
-                            <li class="mr-3">
+                        <div
+                            class="list-style-none text-gray"
+                            style="display: flex; flex-flow: row wrap"
+                        >
+                            <div class="mr-3">
+                                © 2022-{{ copyright_year }} Gol3vka and Csimide
+                            </div>
+                            <div class="mr-3">Ver {{ display_version }}</div>
+                        </div>
+                        <div
+                            class="list-style-none text-gray"
+                            style="display: flex; flex-flow: row wrap"
+                        >
+                            <div class="mr-3">
                                 <a
                                     href="https://github.com/Golevka2001/Where-Are-Available-Chargers"
-                                    class="link-gray"
-                                    >GitHub</a
+                                    >Source Code</a
                                 >
-                            </li>
-                            {{!
-                            <li class="mr-3">
-                                <a
-                                    href="./doc/"
-                                    class="link-gray"
-                                    target="_blank"
-                                    >文档</a
-                                >
-                            </li>
-                            <li class="mr-3">
-                                <a
-                                    href="./doc/public-instance/api/"
-                                    class="link-gray"
-                                    target="_blank"
-                                    >API</a
-                                >
-                            </li>
-                            }}
-                        </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

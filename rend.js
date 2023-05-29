@@ -187,7 +187,7 @@ export async function render_chinese(KV_ALL) {
         stations: stations_message.join("\n"),
         station_detail: stations_detail_arr.join("\n"),
         display_version: CONFIG["system"]["display_version"],
-        cache_mode: cache_mode_to_string(CONFIG["cache"]["cache_mode"]),
+        copyright_year: moment().utcOffset(8).format("YYYY"),
     });
     return ret_page;
 }
