@@ -28,6 +28,9 @@
 
         <link rel="stylesheet" href="./static/css/styles.pure.css" />
         <link rel="stylesheet" href="./static/css/custom.css" />
+
+        <script src="./static/js/weather.js" async></script>
+        <script src="./static/js/check_time.js" defer></script>
     </head>
 
     <body
@@ -78,17 +81,26 @@
                     <span class="status font-large"> 充电桩余量紧张 </span>
                 </div>
                 {{/all_enough}}
-                <div style="overflow: auto">
-                    <span style="color: gray; font-size: smaller">
-                        更新于 {{ update_time }}
-                    </span>
-                    <span style="color: gray; font-size: smaller"></span>
-                    <a
-                        href="./classical"
-                        style="font-size: smaller; float: right"
-                        >切换到经典界面</a
-                    >
+
+                <div style="overflow: auto; color: gray; font-size: smaller">
+                    <div style="display: none" id="weather-div">
+                        <span style="color: darkturquoise">湖区天气 · </span>
+                        <span id="weather-span">Loading</span>
+                        <a
+                            href="https://www.qweather.com/weather/jiangning-101190104.html"
+                            style="float: right"
+                            target="_blank"
+                            >天气详情</a
+                        >
+                        <br />
+                    </div>
+
+                    <span> 更新于 {{ update_time }} </span>
+                    <div style="float: right">
+                        <a href="./classical">经典界面</a>
+                    </div>
                 </div>
+
                 <div class="components-section font-regular">
                     <div class="components-container two-columns">
                         {{{ stations }}}
@@ -164,6 +176,4 @@
             </div>
         </div>
     </body>
-
-    <script src="./static/js/check_time.js"></script>
 </html>

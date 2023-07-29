@@ -8,15 +8,6 @@ async function mtemplate(template_name) {
     return await Deno.readTextFile(template_url);
 }
 
-function cache_mode_to_string(cache_mode) {
-    const cache_mode_map = {
-        0: "实时查询",
-        1: "智能缓存",
-        2: "自动更新",
-    };
-    return cache_mode_map[cache_mode] || "fallback";
-}
-
 export async function render_maintenance() {
     return mustache.render(await mtemplate("maintenance"));
 }
@@ -49,7 +40,6 @@ export async function render_chinese(KV_ALL) {
         new Date().getTime() -
             KV_ALL["update_message"]["last_success_start_time"] >
         CONFIG.cache.survival_time * 60 * 1000;
-
     // 命名方便使用
     const Raw_Detail = KV_ALL["status_detail"];
 
