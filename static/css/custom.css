@@ -141,11 +141,10 @@ table.gridtable td {
 		filter: invert(0.88) hue-rotate(180deg);
 	}
 	
-	.no-dark-mode {
-		filter: invert(1) hue-rotate(180deg);
-	}
-	
-	.page-status {
+	.no-dark-mode,
+    .incident-title,
+    .page-status
+    {
 		filter: invert(1) hue-rotate(180deg);
 	}
 	
@@ -157,4 +156,214 @@ table.gridtable td {
     position: fixed;
     right: 1.5rem;
     bottom: 1rem;
+}
+
+
+/*20230910 Add Incident Tips*/
+
+.layout-content.status.status-index .unresolved-incidents {
+    margin-bottom: 10px
+}
+
+@media screen and (max-width: 650px) {
+    .layout-content.status.status-index .unresolved-incidents {
+        margin-bottom:60px
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .layout-content.status.status-index .unresolved-incidents {
+        margin-bottom:10px
+    }
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident {
+    margin-top: 25px
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident:first-of-type {
+    margin-top: 0px
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-none .incident-title {
+    background-color: #333
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-none .updates {
+    border-color: #ccc
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title {
+    text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+    padding: 0.85rem 1.25rem 0.75rem
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title a {
+    color: #fff
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title a:hover {
+    color: #fff
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title .actual-title.with-ellipsis {
+    vertical-align: middle;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 75%;
+    display: inline-block;
+    white-space: pre
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title .subscribe {
+    float: right;
+    font-size: 0.875rem
+}
+
+@media screen and (max-width: 650px) {
+    .layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title {
+        padding:0.75rem 1rem 0.65rem
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title {
+        padding:0.65rem 0.75rem 0.55rem
+    }
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .updates {
+    padding: 1.25rem;
+    border-style: solid;
+    border-width: 1px;
+    border-top: none
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .updates .update {
+    margin-bottom: 20px;
+    overflow-wrap: break-word
+}
+
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .updates .update:last-of-type {
+    margin-bottom: 0px
+}
+
+@media screen and (max-width: 650px) {
+    .layout-content.status.status-index .unresolved-incidents .unresolved-incident .updates {
+        padding:1rem
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .layout-content.status.status-index .unresolved-incidents .unresolved-incident .updates {
+        padding:0.75rem
+    }
+}
+
+.unresolved-incident,.page-status {
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.05)
+}
+
+body.status .layout-content.status .border-color,hr,.tooltip-base,.markdown-display table,.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-none .updates {
+    border-color: rgba(0,0,0,0.125)
+}
+
+.incident-title {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px
+}
+
+.incident-title+.updates {
+    background-color: #fff;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px
+}
+
+.incident-container .incident-title {
+    position: relative;
+    display: inline-block;
+    padding-top: .125rem;
+    padding-bottom: .125rem
+}
+
+.incident-container .incident-title::before {
+    position: absolute;
+    top: -2px;
+    left: -46px;
+    display: block;
+    content: "";
+    width: 32px;
+    height: 32px;
+    background-color: #e6ebf1;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='14' height='16' viewBox='0 0 14 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6.99999 2.3C10.14 2.3 12.7 4.86 12.7 8C12.7 11.14 10.14 13.7 6.99999 13.7C3.85999 13.7 1.29999 11.14 1.29999 8C1.29999 4.86 3.85999 2.3 6.99999 2.3ZM7 1C3.14 1 0 4.14 0 8C0 11.86 3.14 15 7 15C10.86 15 14 11.86 14 8C14 4.14 10.86 1 7 1ZM8 4H6V9H8V4ZM8 10H6V12H8V10Z' fill='%236a737d'/%3E%3C/svg%3e");
+    border: 2px solid #f6f8fa;
+    border-radius: 50%
+}
+
+.updates-dropdown-container {
+    text-align: left
+}
+
+.updates-dropdown-container .updates-dropdown {
+    background-color: #fff
+}
+
+@media (min-width: 451px) {
+    .updates-dropdown-container .updates-dropdown {
+        top:100%;
+        left: auto;
+        right: 0;
+        margin-top: .5rem
+    }
+}
+
+.updates-dropdown-container .updates-dropdown-nav::before {
+    display: block;
+    padding: .5rem 1rem;
+    font-size: .875rem;
+    font-weight: 500;
+    color: #24292e;
+    content: "Subscribe to status updates";
+    border-bottom: 1px solid rgba(0,0,0,0.125)
+}
+
+.updates-dropdown-container .updates-dropdown-nav>a {
+    width: calc(100% / 6) !important;
+    border-radius: 0 !important
+}
+
+.updates-dropdown-container .updates-dropdown-nav #updates-dropdown-atom-btn {
+    border-right: 0 !important
+}
+
+.updates-dropdown-container #updates-dropdown-close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    text-indent: -999em;
+    line-height: 1;
+    background: transparent url("data:image/svg+xml;charset=utf8,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.48 5.99999L11.23 9.74999L9.75 11.23L6 7.47999L2.25 11.23L0.770004 9.74999L4.52 5.99999L0.770004 2.24999L2.25 0.769989L6 4.51999L9.75 0.769989L11.23 2.24999L7.48 5.99999Z' fill='%2324292e'/%3E%3C/svg%3e") no-repeat center center/12px auto;
+    border: 0;
+    opacity: .4;
+    transition: ease-in-out .2s opacity
+}
+
+.updates-dropdown-container #updates-dropdown-close-btn:hover {
+    opacity: 1
+}
+
+.updates-dropdown-container .updates-dropdown-section {
+    font-size: .8125rem !important;
+    line-height: 1.4 !important
+}
+
+.updates-dropdown-container .privacy_policy_information,.updates-dropdown-container .terms_and_privacy_information {
+    margin-bottom: 0 !important
 }
