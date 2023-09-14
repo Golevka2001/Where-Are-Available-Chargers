@@ -27,6 +27,17 @@
 
 ## 更新日志
 
+**2023-09-13** Version `4.1.3`
+
+1. 整理页首页脚。
+
+**2023-09-12** Version `4.1.2`
+
+1. 标题栏支持自适应显示。在显示环境较窄时，改为显示 ":electric_plug::rage:SEU Chargers" 以免长标题溢出。
+2. 启用菜单栏，加入充电桩位置示意图。
+3. 新增“提示”等样式，需要自行改 HTML 代码（文档之后补，咕咕咕）。
+4. 修复 Bug 并为未来添加新充电桩准备: 现在 `chargers_raw_data` 中出现不在 `config` 里的充电桩时，会打印 log 但不会报错中止。
+
 **2023-07-29** Version `4.1.1`
 
 1. 天气，使用方法见文档 （`doc` 目录）。
@@ -84,6 +95,9 @@ You should have received a copy of the GNU Affero General Public License along w
 -   `src/static/img/favicon.ico` 来自 [Google Fonts - Noto Emoji](https://github.com/googlefonts/noto-emoji)。该项目的 Emoji 图像按 [Apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0) 授权。
 
 -   `src/static/img/apple-touch-icon.png` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
+
     -   `Copyright (C) 2023 Gol3vka and Csimide`
     -   该文件采用了来自 [Twemoji](https://github.com/twitter/twemoji) 的 Emoji 字形。Twemoji 按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权使用。
     -   文件采用了来自 Segoe UI Emoji (Version `1.29`) 的 Emoji 字形。Segoe UI Emoji 按微软文档 [Font redistribution FAQ (Frequently Asked Questions) for Windows](https://learn.microsoft.com/en-us/typography/fonts/font-faq) 使用。
+
+-   `src/static/img/map202308.webp` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。

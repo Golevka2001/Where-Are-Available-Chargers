@@ -19,7 +19,7 @@
         <link
             rel="shortcut icon"
             type="image/x-icon"
-            href="./static/favicon.ico"
+            href="./static/img/favicon.ico"
         />
         <link rel="shortcut icon" href="./static/img/favicon.ico" />
 
@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="./static/css/styles.pure.css" />
         <link rel="stylesheet" href="./static/css/custom.css" />
 
-        <script src="./static/js/weather.js" async></script>
+        <!-- <script src="./static/js/weather.js" async></script> -->
         <script src="./static/js/check_time.js" defer></script>
     </head>
 
@@ -43,18 +43,85 @@
                 <div
                     class="header d-md-flex flex-md-justify-between flex-md-items-center px-4 py-3 text-center text-md-left bg-white box-shadow-large"
                 >
-                    <a
-                        href="/"
-                        class="text-gray-dark"
-                        style="font-size: 1.3rem; white-space: nowrap"
-                    >
+                    <a class="text-gray-dark title-wide" href="">
                         <span class="no-dark-mode">&#x1F50C;&#x1F621;</span>
                         Where Are Available Chargers
                     </a>
+
+                    <a class="text-gray-dark title-narrow" href="">
+                        <span class="no-dark-mode">&#x1F50C;&#x1F621;</span>
+                        SEU Chargers
+                    </a>
+
+                    <nav class="f4 list-style-none mt-2 mt-md-0">
+                        <!--手机访问的时候是窄版-->
+                        <div class="nav-left-narrow">
+                            <a
+                                class="mr-3 mr-lg-4 py-2"
+                                href="static/img/map202308.webp"
+                                >充电桩位置示意图</a
+                            >
+                            <a
+                                class="py-2 text-gray"
+                                href="https://github.com/Golevka2001/Where-Are-Available-Chargers"
+                                >GitHub</a
+                            >
+                        </div>
+                        <!--电脑访问的时候是宽版（两侧）-->
+                        <div class="nav-left-wide">
+                            <a
+                                class="py-2"
+                                href="https://chargers.injs.eu/doc/devices/map202308.webp"
+                                target="_blank"
+                                >充电桩位置示意图</a
+                            >
+                        </div>
+                    </nav>
+
+                    <nav class="f4 list-style-none text-md-right">
+                        <!--电脑访问的时候是宽版（两侧），手机访问不显示右侧-->
+                        <div class="nav-right">
+                            <a
+                                class="mr-3 mr-lg-4 py-2 text-gray"
+                                href="https://github.com/Golevka2001/Where-Are-Available-Chargers"
+                                target="_blank"
+                                >GitHub</a
+                            >
+                            <a
+                                class="py-2 text-gray"
+                                href="https://chargers.injs.eu/doc/"
+                                target="_blank"
+                                >文档</a
+                            >
+                        </div>
+                    </nav>
                 </div>
             </div>
 
             <div class="container">
+                {{!通知 start}}
+                <div class="unresolved-incidents">
+                    <div class="unresolved-incident impact-minor">
+                        <div class="incident-title font-large">
+                            <a>提醒</a>
+                        </div>
+                        <div class="updates font-regular">
+                            <div class="update">
+                                <p>
+                                    <strong>请注意数据更新时间</strong> -
+                                    <span
+                                        >显示的充电桩状态信息有约半分钟缓存，具体更新时间请在下方“更新于”内查看。</span
+                                    >
+                                    <span style="color: red"
+                                        >空闲情况请以充电桩设备实际占用情况为准。请不要贸然拔掉他人的充电器。</span
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!通知 end}}
+
                 {{#outdate}}
                 <div
                     class="page-status status-major"
@@ -84,23 +151,22 @@
 
                 <div style="overflow: auto; color: gray; font-size: smaller">
                     <div style="display: none" id="weather-div">
-                        <span style="color: darkturquoise">湖区天气 · </span>
-                        <span id="weather-span">Loading</span>
+                        <span style="color: #28a745">湖区天气</span> ·
+                        <span id="weather-span">Loading</span> ·
                         <a
                             href="https://www.qweather.com/weather/jiangning-101190104.html"
-                            style="float: right"
                             target="_blank"
-                            >天气详情</a
+                            >详情</a
                         >
                         <br />
                     </div>
 
                     <span> 更新于 {{ update_time }} </span>
+                    <span></span>
                     <div style="float: right">
                         <a href="./classical">经典界面</a>
                     </div>
                 </div>
-
                 <div class="components-section font-regular">
                     <div class="components-container two-columns">
                         {{{ stations }}}
@@ -110,6 +176,10 @@
                 <div style="display: flex; flex-direction: column">
                     <div style="max-width: 68rem; text-align: center">
                         充电桩序号为从北向南、从西向东排序
+                        <br />
+                        <span style="color: red"
+                            >数据存在稍许延迟，请以实际情况为准</span
+                        >
                         <br />
                         图例：
                         <span class="num_green">1</span
@@ -127,6 +197,7 @@
                     <a
                         href="https://github.com/Chariot-South/SEU-Chargers-History"
                         class="history-footer-link"
+                        target="_blank"
                         ><span style="font-family: arial">←</span>历史数据</a
                     >
                     <div class="text-gray">

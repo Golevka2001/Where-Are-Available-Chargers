@@ -100,14 +100,16 @@ table.gridtable td {
 
 .table_box {
     align-items: center;
-    margin-top: 10px;
-    width: 20rem;
+    margin: 5px;
+    width: 315px;
 }
 
-.detail_box {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin: 0 auto;
+
+@media (max-width: 325px) {
+    .table_box {
+        margin: auto;
+        width: 190px;
+    }
 }
 
 .remain_socket_green {
@@ -120,7 +122,14 @@ table.gridtable td {
 	color: #b0611a;
 }
 
-@media (max-width: 62rem) {
+
+.detail_box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 auto;
+}
+
+@media (max-width: 65rem) {
     .detail_box {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -128,7 +137,7 @@ table.gridtable td {
     }
 }
 
-@media (max-width: 41rem) {
+@media (max-width: 45rem) {
     .detail_box {
         display: grid;
         grid-template-columns: 1fr;
@@ -167,7 +176,7 @@ table.gridtable td {
 
 @media screen and (max-width: 650px) {
     .layout-content.status.status-index .unresolved-incidents {
-        margin-bottom:60px
+        margin-bottom:10px
     }
 }
 
@@ -366,4 +375,47 @@ body.status .layout-content.status .border-color,hr,.tooltip-base,.markdown-disp
 
 .updates-dropdown-container .privacy_policy_information,.updates-dropdown-container .terms_and_privacy_information {
     margin-bottom: 0 !important
+}
+
+/* 用于控制最上方导航栏 */
+
+.nav-left-wide {
+    display: none;
+}
+
+.nav-right {
+    display: none;
+}
+
+@media (min-width:768px) {
+    .nav-left-wide {
+        display: block;
+    }
+    .nav-left-narrow {
+        display: none;
+    }
+    .nav-right {
+        display: block;
+    }
+}
+
+/* End 用于控制最上方导航栏 */
+
+.title-narrow {
+    font-size: 1.3rem; white-space: nowrap
+}
+
+.title-wide {
+    font-size: 1.3rem; white-space: nowrap;
+    display: none
+}
+
+@media (min-width:390px) {
+    .title-wide {
+        display: block;
+    }
+
+    .title-narrow {
+        display: none;
+    }
 }

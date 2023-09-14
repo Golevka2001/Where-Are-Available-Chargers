@@ -56,23 +56,33 @@ export async function api_query(api_endpoint, sign_key) {
     const chargers_raw_data = api_raw_json["data"];
 
     for (const charger in chargers_raw_data) {
-        const station =
-            CONFIG["stations_r"][chargers_raw_data[charger]["name"]]["station"];
-        const friendly_no =
-            CONFIG["stations_r"][chargers_raw_data[charger]["name"]][
-                "charger_friendly_no"
-            ];
-        const sockets = [];
-        for (const channel in chargers_raw_data[charger]["channels"]) {
-            if (
-                chargers_raw_data[charger]["channels"][channel]["status"] === 1
-            ) {
-                sockets.push(1);
-            } else {
-                sockets.push(0);
+        try {
+            const station =
+                CONFIG["stations_r"][chargers_raw_data[charger]["name"]][
+                    "station"
+                ];
+            const friendly_no =
+                CONFIG["stations_r"][chargers_raw_data[charger]["name"]][
+                    "charger_friendly_no"
+                ];
+            const sockets = [];
+            for (const channel in chargers_raw_data[charger]["channels"]) {
+                if (
+                    chargers_raw_data[charger]["channels"][channel][
+                        "status"
+                    ] === 1
+                ) {
+                    sockets.push(1);
+                } else {
+                    sockets.push(0);
+                }
             }
+            ret_all["status_detail"][station][friendly_no] = sockets;
+        } catch {
+            console.log(
+                `Error: New charger ${[chargers_raw_data[charger]["name"]]}`
+            );
         }
-        ret_all["status_detail"][station][friendly_no] = sockets;
     }
 
     ret_all["update_message"]["last_success_end_time"] = new Date().getTime();

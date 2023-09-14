@@ -15,6 +15,8 @@ export async function render_maintenance() {
 export async function render_chinese_error(message = "发生错误，请稍后再试") {
     return mustache.render(await mtemplate("error"), {
         error_message: message,
+        display_version: CONFIG["system"]["display_version"],
+        copyright_year: moment().utcOffset(8).format("YYYY"),
     });
 }
 
