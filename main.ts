@@ -15,7 +15,6 @@ import update from "./update.js";
 
 const api_endpoint = Deno.env.get("API_ENDPOINT");
 const sign_key = Deno.env.get("SIGN_KEY");
-
 if (api_endpoint == null || sign_key == null) {
     throw new Error("Error: Env not set");
 }
@@ -35,7 +34,7 @@ router.get("/", async (ctx) => {
         }
         ctx.response.body = await renderChinesePage(ALL_INFORMATION);
     } catch {
-        ctx.response.body = renderChineseError("Something Wrong");
+        ctx.response.body = await renderChineseError("Something Wrong");
     }
 });
 
