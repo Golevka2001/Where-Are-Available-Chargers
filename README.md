@@ -10,16 +10,17 @@
 
 希望它可以帮你更方便给小电驴找到充电桩。
 
-如果它对你有帮助的话，可以点击右上角的 :star:**Star** 按钮（~~或者**v 我 50**~~）感谢您的支持！ :tada::tada::tada:
+如果它对你有帮助的话，可以点击右上角的 :star:**Star** 按钮（~~或者**v 我
+50**~~）感谢您的支持！ :tada::tada::tada:
 
 ## 目录
 
--   [:electric_plug::rage:Where Are Available Chargers?](#electric_plugragewhere-are-available-chargers)
-    -   [查询网址：http://chargers.injs.eu](#查询网址httpchargersinjseu)
-    -   [目录](#目录)
-    -   [使用方法](#使用方法)
-    -   [更新日志](#更新日志)
-    -   [使用许可](#使用许可)
+- [:electric_plug::rage:Where Are Available Chargers?](#electric_plugragewhere-are-available-chargers)
+  - [查询网址：http://chargers.injs.eu](#查询网址httpchargersinjseu)
+  - [目录](#目录)
+  - [使用方法](#使用方法)
+  - [更新日志](#更新日志)
+  - [使用许可](#使用许可)
 
 ## 使用方法
 
@@ -29,7 +30,9 @@
 
 **2023-09-14**
 
-1. 修复 Internet Explorer 10 或更高版本及其他浏览器中，充电桩详情显示错位的问题。（IE 显示效果还是有很多 bug，不打算修了）
+1. 修复 Internet Explorer 10
+   或更高版本及其他浏览器中，充电桩详情显示错位的问题。（IE 显示效果还是有很多
+   bug，不打算修了）
 
 **2023-09-13** Version `4.1.3`
 
@@ -37,10 +40,12 @@
 
 **2023-09-12** Version `4.1.2`
 
-1. 标题栏支持自适应显示。在显示环境较窄时，改为显示 ":electric_plug::rage:SEU Chargers" 以免长标题溢出。
+1. 标题栏支持自适应显示。在显示环境较窄时，改为显示 ":electric_plug::rage:SEU
+   Chargers" 以免长标题溢出。
 2. 启用菜单栏，加入充电桩位置示意图。
 3. 新增“提示”等样式，需要自行改 HTML 代码（文档之后补，咕咕咕）。
-4. 修复 Bug 并为未来添加新充电桩准备: 现在 `chargers_raw_data` 中出现不在 `config` 里的充电桩时，会打印 log 但不会报错中止。
+4. 修复 Bug 并为未来添加新充电桩准备: 现在 `chargers_raw_data` 中出现不在
+   `config` 里的充电桩时，会打印 log 但不会报错中止。
 
 **2023-07-29** Version `4.1.1`
 
@@ -94,14 +99,26 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 ```
 
--   `src/static/css/style.pure.css` 中引入的 css 文件和字体文件具有不同的许可证，详情请参阅该文件。
+- `src/static/css/style.pure.css` 中引入的 css
+  文件和字体文件具有不同的许可证，详情请参阅该文件。
 
--   `src/static/img/favicon.ico` 来自 [Google Fonts - Noto Emoji](https://github.com/googlefonts/noto-emoji)。该项目的 Emoji 图像按 [Apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0) 授权。
+- `src/static/img/favicon.ico` 来自
+  [Google Fonts - Noto Emoji](https://github.com/googlefonts/noto-emoji)。该项目的
+  Emoji 图像按
+  [Apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+  授权。
 
--   `src/static/img/apple-touch-icon.png` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
+- `src/static/img/apple-touch-icon.png` 采用
+  [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
 
-    -   `Copyright (C) 2023 Gol3vka and Csimide`
-    -   该文件采用了来自 [Twemoji](https://github.com/twitter/twemoji) 的 Emoji 字形。Twemoji 按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权使用。
-    -   文件采用了来自 Segoe UI Emoji (Version `1.29`) 的 Emoji 字形。Segoe UI Emoji 按微软文档 [Font redistribution FAQ (Frequently Asked Questions) for Windows](https://learn.microsoft.com/en-us/typography/fonts/font-faq) 使用。
+  - `Copyright (C) 2023 Gol3vka and Csimide`
+  - 该文件采用了来自 [Twemoji](https://github.com/twitter/twemoji) 的 Emoji
+    字形。Twemoji 按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+    授权使用。
+  - 文件采用了来自 Segoe UI Emoji (Version `1.29`) 的 Emoji 字形。Segoe UI Emoji
+    按微软文档
+    [Font redistribution FAQ (Frequently Asked Questions) for Windows](https://learn.microsoft.com/en-us/typography/fonts/font-faq)
+    使用。
 
--   `src/static/img/map202308.webp` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
+- `src/static/img/map202308.webp` 采用
+  [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。

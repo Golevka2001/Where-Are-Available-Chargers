@@ -11,18 +11,18 @@ async function hmacSha256(message, secret_key) {
         encoded_secret_key,
         { name: "HMAC", hash: "SHA-256" },
         true,
-        ["sign"]
+        ["sign"],
     );
     const signature = await crypto.subtle.sign(
         "HMAC",
         crypto_key,
-        encoded_message.buffer
+        encoded_message.buffer,
     );
 
     return [...new Uint8Array(signature)]
         .map((byte) => byte.toString(16).padStart(2, "0"))
         .join("")
-        .toUpperCase();  // 转为 Hex 并大写
+        .toUpperCase(); // 转为 Hex 并大写
 }
 
 export async function apiQuery(api_endpoint, sign_key) {
@@ -30,7 +30,7 @@ export async function apiQuery(api_endpoint, sign_key) {
     const cur_timestamp = Math.floor(new Date().getTime() / 1000);
     const sign = await hmacSha256(
         `timestamp=${cur_timestamp.toString()}&key=${sign_key}`,
-        sign_key
+        sign_key,
     );
 
     // 请求数据
@@ -84,7 +84,7 @@ export async function apiQuery(api_endpoint, sign_key) {
             ret_all["status_detail"][station][friendly_no] = sockets;
         } catch {
             console.log(
-                `Error: New charger ${[chargers_raw_data[charger]["name"]]}`
+                `Error: New charger ${[chargers_raw_data[charger]["name"]]}`,
             );
         }
     }

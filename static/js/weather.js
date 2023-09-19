@@ -20,8 +20,9 @@ function jlhWeather() {
                         "inline";
                 } else {
                     window.addEventListener("DOMContentLoaded", function () {
-                        var weatherSpan =
-                            document.getElementById("weather-span");
+                        var weatherSpan = document.getElementById(
+                            "weather-span",
+                        );
                         weatherSpan.innerHTML = weather.weather_text;
                         document.getElementById("weather-div").style.display =
                             "inline";

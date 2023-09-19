@@ -20,10 +20,10 @@ async function update(api_endpoint, sign_key) {
 
                     if (
                         new Date().getTime() -
-                            ALL_INFORMATION["update_message"][
-                                "last_success_start_time"
-                            ] <
-                        CONFIG["cache"]["refresh_time"] * 1000 * 60
+                                ALL_INFORMATION["update_message"][
+                                    "last_success_start_time"
+                                ] <
+                            CONFIG["cache"]["refresh_time"] * 1000 * 60
                     ) {
                         console.log("cache hit!");
                         return ALL_INFORMATION;

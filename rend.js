@@ -24,22 +24,21 @@ export async function renderChinesePage(KV_ALL) {
     let for_display_update_time = "Unknown";
     if (
         new Date().getTime() -
-            KV_ALL["update_message"]["last_success_start_time"] >
-        CONFIG.cache.refuse_time * 60 * 1000
+                KV_ALL["update_message"]["last_success_start_time"] >
+            CONFIG.cache.refuse_time * 60 * 1000
     ) {
         return renderChineseError("数据多次更新失败");
     } else {
         console.log(KV_ALL["update_message"]["last_success_start_time"]);
         for_display_update_time = moment(
-            KV_ALL["update_message"]["last_success_start_time"]
+            KV_ALL["update_message"]["last_success_start_time"],
         )
             .utcOffset(8)
             .format("YYYY-MM-DD HH:mm:ss");
     }
 
     // 过期判定
-    const is_expired =
-        new Date().getTime() -
+    const is_expired = new Date().getTime() -
             KV_ALL["update_message"]["last_success_start_time"] >
         CONFIG.cache.survival_time * 60 * 1000;
     // 命名方便使用
@@ -60,11 +59,11 @@ export async function renderChinesePage(KV_ALL) {
 
         const get_charger_name = Array.isArray(raw_detail[station])
             ? function (charger_key) {
-                  return parseInt(charger_key) + 1;
-              }
+                return parseInt(charger_key) + 1;
+            }
             : function (charger_key) {
-                  return charger_key;
-              };
+                return charger_key;
+            };
 
         for (const charger_key in raw_detail[station]) {
             ++all_chargers_num;
@@ -77,32 +76,31 @@ export async function renderChinesePage(KV_ALL) {
                     mustache.render(await mustacheTamplate("charger_detail"), {
                         charger_no: get_charger_name(charger_key),
                         socket_detail: "* 充电桩参数缺失 *",
-                    })
+                    }),
                 );
                 // 渲染充电桩总览 (message) - undefined
                 charger_message.push(
                     mustache.render(await mustacheTamplate("remain"), {
                         charger_no: get_charger_name(charger_key),
                         charger_a_num: "N/A",
-                    })
+                    }),
                 );
                 --all_chargers_num; //不计入查询失败
-            }
-            // 充电桩失败，直接写入充电桩Array和总览表格充电桩Array
+            } // 充电桩失败，直接写入充电桩Array和总览表格充电桩Array
             else if (raw_detail[station][charger_key].length === 0) {
                 // 渲染充电桩表格 (detail) - Error
                 charger_detail_arr.push(
                     mustache.render(await mustacheTamplate("charger_detail"), {
                         charger_no: get_charger_name(charger_key),
                         socket_detail: "* 获取失败 *",
-                    })
+                    }),
                 );
                 // 渲染充电桩总览 (message) - Error
                 charger_message.push(
                     mustache.render(await mustacheTamplate("remain"), {
                         charger_no: get_charger_name(charger_key),
                         charger_a_num: "Error",
-                    })
+                    }),
                 );
             } else {
                 ++success_chargers_num;
@@ -112,13 +110,17 @@ export async function renderChinesePage(KV_ALL) {
                 for (const socket_no in raw_detail[station][charger_key]) {
                     // 插座信息写入插座Array (detail)
                     socket_detail_arr.push(
-                        mustache.render(await mustacheTamplate("socket_detail"), {
-                            socket_status:
-                                raw_detail[station][charger_key][socket_no] == 1
+                        mustache.render(
+                            await mustacheTamplate("socket_detail"),
+                            {
+                                socket_status: raw_detail[station][charger_key][
+                                        socket_no
+                                    ] == 1
                                     ? 1
                                     : 0,
-                            socket_num: parseInt(socket_no) + 1,
-                        })
+                                socket_num: parseInt(socket_no) + 1,
+                            },
+                        ),
                     );
                     // 增加充电桩的可用插座数量
                     if (raw_detail[station][charger_key][socket_no] == 1) {
@@ -130,14 +132,14 @@ export async function renderChinesePage(KV_ALL) {
                     mustache.render(await mustacheTamplate("charger_detail"), {
                         charger_no: get_charger_name(charger_key),
                         socket_detail: socket_detail_arr.join("  "),
-                    })
+                    }),
                 );
                 // 插座Array拼装成充电桩总览Array，渲染充电桩总览 (message)
                 charger_message.push(
                     mustache.render(await mustacheTamplate("remain"), {
                         charger_no: get_charger_name(charger_key),
                         charger_a_num: available_num_in_a_charger,
-                    })
+                    }),
                 );
                 available_num_in_a_station += available_num_in_a_charger;
             }
@@ -148,12 +150,11 @@ export async function renderChinesePage(KV_ALL) {
             mustache.render(await mustacheTamplate("station_detail"), {
                 station_name: station,
                 available_num: available_num_in_a_station,
-                enough:
-                    available_num_in_a_station >
+                enough: available_num_in_a_station >
                     CONFIG["conditions"]["enough_socket_num"] *
                         CONFIG["stations_chargers_num"][station],
                 charger_detail: charger_detail_arr.join("\n"),
-            })
+            }),
         );
         // 渲染充电站总览 (message) 推入 充电站Array
         stations_message.push(
@@ -163,11 +164,10 @@ export async function renderChinesePage(KV_ALL) {
                 remain: charger_message.length
                     ? charger_message.join(", ")
                     : "<sup> </sup> 没有空闲插座",
-                enough:
-                    available_num_in_a_station >
+                enough: available_num_in_a_station >
                     CONFIG["conditions"]["enough_socket_num"] *
                         CONFIG["stations_chargers_num"][station],
-            })
+            }),
         );
     }
 
@@ -175,8 +175,7 @@ export async function renderChinesePage(KV_ALL) {
     return mustache.render(await mustacheTamplate("main"), {
         outdate: is_expired,
         update_time: for_display_update_time,
-        all_enough:
-            available_num_in_all_station >
+        all_enough: available_num_in_all_station >
             CONFIG["conditions"]["enough_sum_num"],
         stations: stations_message.join("\n"),
         station_detail: stations_detail_arr.join("\n"),
@@ -195,13 +194,13 @@ export async function renderClassicalPage(KV_ALL) {
     let for_display_update_time = "Unknown";
     if (
         new Date().getTime() -
-            KV_ALL["update_message"]["last_success_start_time"] >
-        CONFIG.cache.survival_time * 60 * 1000
+                KV_ALL["update_message"]["last_success_start_time"] >
+            CONFIG.cache.survival_time * 60 * 1000
     ) {
         return render_old_error("数据过期");
     } else {
         for_display_update_time = moment(
-            KV_ALL["update_message"]["last_success_start_time"]
+            KV_ALL["update_message"]["last_success_start_time"],
         )
             .utcOffset(8)
             .format("YYYY-MM-DD HH:mm:ss");
@@ -216,11 +215,11 @@ export async function renderClassicalPage(KV_ALL) {
 
         const get_charger_name = Array.isArray(raw_detail[station])
             ? function (charger_key) {
-                  return parseInt(charger_key) + 1;
-              }
+                return parseInt(charger_key) + 1;
+            }
             : function (charger_key) {
-                  return charger_key;
-              };
+                return charger_key;
+            };
 
         for (const charger_key in raw_detail[station]) {
             // 判断参数缺失，直接写入充电桩Array和总览表格充电桩Array
@@ -228,19 +227,24 @@ export async function renderClassicalPage(KV_ALL) {
             if (raw_detail[station][charger_key] == null) {
                 // 注：没使用 type of，可以同时判断 null 与 undefined
                 charger_detail_arr.push(
-                    mustache.render(await mustacheTamplate("classical_charger"), {
-                        charger_no: get_charger_name(charger_key),
-                        socket_detail: "* 充电桩参数缺失 *",
-                    })
+                    mustache.render(
+                        await mustacheTamplate("classical_charger"),
+                        {
+                            charger_no: get_charger_name(charger_key),
+                            socket_detail: "* 充电桩参数缺失 *",
+                        },
+                    ),
                 );
-            }
-            // 充电桩失败，直接写入充电桩Array
+            } // 充电桩失败，直接写入充电桩Array
             else if (raw_detail[station][charger_key].length === 0) {
                 charger_detail_arr.push(
-                    mustache.render(await mustacheTamplate("classical_charger"), {
-                        charger_no: get_charger_name(charger_key),
-                        socket_detail: "* 获取失败 *",
-                    })
+                    mustache.render(
+                        await mustacheTamplate("classical_charger"),
+                        {
+                            charger_no: get_charger_name(charger_key),
+                            socket_detail: "* 获取失败 *",
+                        },
+                    ),
                 );
             } else {
                 // 遍历插座
@@ -254,17 +258,23 @@ export async function renderClassicalPage(KV_ALL) {
                 }
                 if (no_available_socket) {
                     charger_detail_arr.push(
-                        mustache.render(await mustacheTamplate("classical_charger"), {
-                            charger_no: get_charger_name(charger_key),
-                            socket_detail: "* 无 *",
-                        })
+                        mustache.render(
+                            await mustacheTamplate("classical_charger"),
+                            {
+                                charger_no: get_charger_name(charger_key),
+                                socket_detail: "* 无 *",
+                            },
+                        ),
                     );
                 } else {
                     charger_detail_arr.push(
-                        mustache.render(await mustacheTamplate("classical_charger"), {
-                            charger_no: get_charger_name(charger_key),
-                            socket_detail: socket_detail_arr.join("  "),
-                        })
+                        mustache.render(
+                            await mustacheTamplate("classical_charger"),
+                            {
+                                charger_no: get_charger_name(charger_key),
+                                socket_detail: socket_detail_arr.join("  "),
+                            },
+                        ),
                     );
                 }
             }
@@ -273,12 +283,15 @@ export async function renderClassicalPage(KV_ALL) {
             mustache.render(await mustacheTamplate("classical_station"), {
                 station_name: station,
                 charger_detail: charger_detail_arr.join("\n"),
-            })
+            }),
         );
     }
 
-    return ret_page = mustache.render(await mustacheTamplate("classical_main"), {
-        update_time: for_display_update_time,
-        station_detail: stations_detail_arr.join("\n"),
-    });
+    return ret_page = mustache.render(
+        await mustacheTamplate("classical_main"),
+        {
+            update_time: for_display_update_time,
+            station_detail: stations_detail_arr.join("\n"),
+        },
+    );
 }
