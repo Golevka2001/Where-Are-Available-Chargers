@@ -160,7 +160,9 @@ export async function render_chinese(KV_ALL) {
             mustache.render(await mtemplate("station"), {
                 station_name: station,
                 available_num: available_num_in_a_station,
-                remain: charger_message.join(", "),
+                remain: charger_message.length
+                    ? charger_message.join(", ")
+                    : "<sup> </sup> 没有空闲插座",
                 enough:
                     available_num_in_a_station >
                     CONFIG["conditions"]["enough_socket_num"] *
