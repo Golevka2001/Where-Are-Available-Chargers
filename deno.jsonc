@@ -1,6 +1,22 @@
 {
-  "tasks": {
-    "devserver": "deno --unstable run --watch --allow-read --allow-net --allow-env main.ts",
-    "precommit": "deno fmt && deno lint"
-  }
+    "tasks": {
+        "devserver": "deno --unstable run --watch --allow-read --allow-net --allow-env main.ts",
+        "precommit": "deno fmt && deno lint"
+    },
+    "fmt": {
+        "useTabs": false,
+        "lineWidth": 80,
+        "indentWidth": 4,
+        "semiColons": true,
+        "singleQuote": false,
+        "proseWrap": "always",
+        "include": [
+            "**/*.ts",
+            "**/*.js",
+            "**/*.json",
+            "**/*.jsonc",
+            "**/*.md"
+        ],
+        "exclude": []
+    }
 }
