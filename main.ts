@@ -17,7 +17,7 @@ const api_endpoint = Deno.env.get("API_ENDPOINT");
 const sign_key = Deno.env.get("SIGN_KEY");
 
 if (api_endpoint == null || sign_key == null) {
-  throw new Error("Env null!");
+  throw new Error("Error: Env not set");
 }
 
 const router = new Router();
@@ -28,34 +28,34 @@ router.get("/favicon.ico", async (ctx) => {
 
 router.get("/", async (ctx) => {
   try {
-    const ALL_INFOMATION = await update(api_endpoint, sign_key);
-    if (ALL_INFOMATION == null) {
+    const ALL_INFORMATION = await update(api_endpoint, sign_key);
+    if (ALL_INFORMATION == null) {
       console.log("Error: ALL_INFORMATION NULL");
       throw new Error("Error: ALL_INFORMATION NULL");
     }
-    ctx.response.body = await render_chinese(ALL_INFOMATION);
+    ctx.response.body = await render_chinese(ALL_INFORMATION);
   } catch {
     ctx.response.body = render_chinese_error("Something Wrong");
   }
 });
 
 router.get("/test_endpoint", async (ctx) => {
-  const ALL_INFOMATION = await update(api_endpoint, sign_key);
-  if (ALL_INFOMATION == null) {
+  const ALL_INFORMATION = await update(api_endpoint, sign_key);
+  if (ALL_INFORMATION == null) {
     console.log("Error: ALL_INFORMATION NULL");
     throw new Error("Error: ALL_INFORMATION NULL");
   }
-  ctx.response.body = await render_chinese(ALL_INFOMATION);
+  ctx.response.body = await render_chinese(ALL_INFORMATION);
 });
 
 router.get("/classical", async (ctx) => {
   try {
-    const ALL_INFOMATION = await update(api_endpoint, sign_key);
-    if (ALL_INFOMATION == null) {
+    const ALL_INFORMATION = await update(api_endpoint, sign_key);
+    if (ALL_INFORMATION == null) {
       console.log("Error: ALL_INFORMATION NULL");
       throw new Error("Error: ALL_INFORMATION NULL");
     }
-    ctx.response.body = await render_classical(ALL_INFOMATION);
+    ctx.response.body = await render_classical(ALL_INFORMATION);
   } catch {
     ctx.response.body = await render_classical_error("Something Wrong");
   }
@@ -66,12 +66,12 @@ router.get("/api/get_status", async (ctx) => {
     "Content-Type": "application/json; charset=utf-8",
   });
   try {
-    const ALL_INFOMATION = await update(api_endpoint, sign_key);
-    if (ALL_INFOMATION == null) {
+    const ALL_INFORMATION = await update(api_endpoint, sign_key);
+    if (ALL_INFORMATION == null) {
       console.log("Error: ALL_INFORMATION NULL");
       throw new Error("Error: ALL_INFORMATION NULL");
     }
-    ctx.response.body = JSON.stringify(ALL_INFOMATION);
+    ctx.response.body = JSON.stringify(ALL_INFORMATION);
   } catch {
     ctx.response.body = {
       status_code: 5000,
