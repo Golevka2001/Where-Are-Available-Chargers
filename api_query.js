@@ -44,9 +44,22 @@ export async function apiQuery(api_endpoint, sign_key) {
         })
         .then((response) => {
             if (response.status !== 200) {
-                throw "Error! StatusCode !== 200";
+                console.log(
+                    "Error: API query failed[" + response.status + ", " +
+                        response.statusText + "]",
+                );
+                throw new Error("Error: API query failed");
             } else {
-                return response.data["data"];
+                if (response.data["status_code"] !== 200) {
+                    console.log(
+                        "Error: API query failed[" +
+                            response.data["status_code"] + ", " +
+                            response.data["message"] + "]",
+                    );
+                    throw new Error("Error: API query failed");
+                } else {
+                    return response.data["data"];
+                }
             }
         });
 

@@ -1,6 +1,6 @@
+import moment from "https://deno.land/x/momentjs@2.29.1-deno/mod.ts";
 import mustache from "https://deno.land/x/mustache_ts@v0.4.1.1/mustache.ts";
 import CONFIG from "./auto_gen/config.js";
-import moment from "https://deno.land/x/momentjs@2.29.1-deno/mod.ts";
 
 async function mustacheTamplate(template_name) {
     const template_dir = new URL("./mustache-templates/", import.meta.url);
@@ -29,12 +29,12 @@ export async function renderChinesePage(KV_ALL) {
     ) {
         return renderChineseError("数据多次更新失败");
     } else {
-        console.log(KV_ALL["update_message"]["last_success_start_time"]);
         for_display_update_time = moment(
             KV_ALL["update_message"]["last_success_start_time"],
         )
             .utcOffset(8)
             .format("YYYY-MM-DD HH:mm:ss");
+        console.log("Last update time: " + for_display_update_time);
     }
 
     // 过期判定
