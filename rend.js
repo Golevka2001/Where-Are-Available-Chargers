@@ -70,7 +70,7 @@ export async function render_chinese(KV_ALL) {
             ++all_chargers_num;
             // 判断参数缺失，直接写入充电桩Array和总览表格充电桩Array
             // 使用场景是充电桩ID没有获取全就上线
-            if (Raw_Detail[station][charger_key] == undefined) {
+            if (Raw_Detail[station][charger_key] == null) {
                 // 注：没使用 type of，可以同时判断 null 与 undefined
                 // 渲染充电桩表格 (detail) - undefined
                 charger_detail_arr.push(
@@ -224,7 +224,7 @@ export async function render_classical(KV_ALL) {
         for (const charger_key in Raw_Detail[station]) {
             // 判断参数缺失，直接写入充电桩Array和总览表格充电桩Array
             // 使用场景是充电桩ID没有获取全就上线
-            if (Raw_Detail[station][charger_key] == undefined) {
+            if (Raw_Detail[station][charger_key] == null) {
                 // 注：没使用 type of，可以同时判断 null 与 undefined
                 charger_detail_arr.push(
                     mustache.render(await mtemplate("classical_charger"), {
