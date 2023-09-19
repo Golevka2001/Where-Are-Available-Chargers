@@ -1,8 +1,8 @@
+import apiQuery from "./api_query.js";
 import CONFIG from "./auto_gen/config.js";
-import api_query from "./api_query.js";
 
 async function kv_update(api_endpoint, sign_key, kv) {
-    const ALL_INFORMATION = await api_query(api_endpoint, sign_key);
+    const ALL_INFORMATION = await apiQuery(api_endpoint, sign_key);
     kv.set(["KV_ALL"], ALL_INFORMATION);
     return ALL_INFORMATION;
 }
@@ -32,20 +32,19 @@ async function update(api_endpoint, sign_key) {
                 return await kv_update(api_endpoint, sign_key, kv);
             } catch {
                 console.log("case 1 err");
-                return await api_query(api_endpoint, sign_key);
+                return await apiQuery(api_endpoint, sign_key);
             }
         }
 
         case 2: {
             const kv = await Deno.openKv();
             const result = await kv.get(["KV_ALL"]);
-            const ALL_INFORMATION = JSON.parse(result.value);
-            return ALL_INFORMATION;
+            return JSON.parse(result.value);
         }
 
         default:
             console.log("case 0");
-            return await api_query(api_endpoint, sign_key);
+            return await apiQuery(api_endpoint, sign_key);
     }
 }
 

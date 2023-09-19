@@ -6,10 +6,10 @@ import {
 } from "https://deno.land/x/oak@v12.4.0/mod.ts";
 import { Status } from "https://deno.land/std@0.185.0/http/http_status.ts";
 import {
-  render_chinese,
-  render_chinese_error,
-  render_classical,
-  render_classical_error,
+  renderChinesePage,
+  renderChineseError,
+  renderClassicalPage,
+  renderClassicalError,
 } from "./rend.js";
 import update from "./update.js";
 
@@ -33,9 +33,9 @@ router.get("/", async (ctx) => {
       console.log("Error: ALL_INFORMATION NULL");
       throw new Error("Error: ALL_INFORMATION NULL");
     }
-    ctx.response.body = await render_chinese(ALL_INFORMATION);
+    ctx.response.body = await renderChinesePage(ALL_INFORMATION);
   } catch {
-    ctx.response.body = render_chinese_error("Something Wrong");
+    ctx.response.body = renderChineseError("Something Wrong");
   }
 });
 
@@ -45,7 +45,7 @@ router.get("/test_endpoint", async (ctx) => {
     console.log("Error: ALL_INFORMATION NULL");
     throw new Error("Error: ALL_INFORMATION NULL");
   }
-  ctx.response.body = await render_chinese(ALL_INFORMATION);
+  ctx.response.body = await renderChinesePage(ALL_INFORMATION);
 });
 
 router.get("/classical", async (ctx) => {
@@ -55,9 +55,9 @@ router.get("/classical", async (ctx) => {
       console.log("Error: ALL_INFORMATION NULL");
       throw new Error("Error: ALL_INFORMATION NULL");
     }
-    ctx.response.body = await render_classical(ALL_INFORMATION);
+    ctx.response.body = await renderClassicalPage(ALL_INFORMATION);
   } catch {
-    ctx.response.body = await render_classical_error("Something Wrong");
+    ctx.response.body = await renderClassicalError("Something Wrong");
   }
 });
 
