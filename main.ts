@@ -7,9 +7,9 @@ import {
 import { Status } from "https://deno.land/std@0.185.0/http/http_status.ts";
 import {
     renderChineseError,
-    renderChinesePage,
     renderClassicalError,
     renderClassicalPage,
+    renderMainPage,
 } from "./rend.js";
 import update from "./update.js";
 
@@ -32,7 +32,7 @@ router.get("/", async (ctx) => {
             console.log("Error: ALL_INFORMATION NULL");
             throw new Error("Error: ALL_INFORMATION NULL");
         }
-        ctx.response.body = await renderChinesePage(ALL_INFORMATION);
+        ctx.response.body = await renderMainPage(ALL_INFORMATION);
     } catch {
         ctx.response.body = await renderChineseError("Something Wrong");
     }
@@ -44,7 +44,7 @@ router.get("/test_endpoint", async (ctx) => {
         console.log("Error: ALL_INFORMATION NULL");
         throw new Error("Error: ALL_INFORMATION NULL");
     }
-    ctx.response.body = await renderChinesePage(ALL_INFORMATION);
+    ctx.response.body = await renderMainPage(ALL_INFORMATION);
 });
 
 router.get("/classical", async (ctx) => {

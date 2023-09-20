@@ -17,6 +17,8 @@
             "**/*.jsonc",
             "**/*.md"
         ],
-        "exclude": []
+        "exclude": [
+            "static/"
+        ]
     }
 }
