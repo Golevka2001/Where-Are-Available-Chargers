@@ -1,7 +1,7 @@
-config_file_version = "20230919"
+config_file_version = "20230920"
 
 [system]
-display_version = "4.1.4f"
+display_version = "4.2.0f"
 
 [cache]
 cache_mode = 1

@@ -6,7 +6,7 @@ import {
 } from "https://deno.land/x/oak@v12.4.0/mod.ts";
 import { Status } from "https://deno.land/std@0.185.0/http/http_status.ts";
 import {
-    renderChineseError,
+    renderError,
     renderClassicalError,
     renderClassicalPage,
     renderMainPage,
@@ -34,7 +34,7 @@ router.get("/", async (ctx) => {
         }
         ctx.response.body = await renderMainPage(ALL_INFORMATION);
     } catch {
-        ctx.response.body = await renderChineseError("Something Wrong");
+        ctx.response.body = await renderError("Something Wrong");
     }
 });
 

@@ -1,7 +1,7 @@
 import apiQuery from "./api_query.js";
 import CONFIG from "./auto_gen/config.js";
 
-async function kv_update(api_endpoint, sign_key, kv) {
+async function kvUpdate(api_endpoint, sign_key, kv) {
     const ALL_INFORMATION = await apiQuery(api_endpoint, sign_key);
     kv.set(["KV_ALL"], ALL_INFORMATION);
     return ALL_INFORMATION;
@@ -31,7 +31,7 @@ async function update(api_endpoint, sign_key) {
                         return ALL_INFORMATION;
                     }
                 }
-                return await kv_update(api_endpoint, sign_key, kv);
+                return await kvUpdate(api_endpoint, sign_key, kv);
             } catch {
                 console.log("Error: Cache hit failed, updating cache");
                 return await apiQuery(api_endpoint, sign_key);
@@ -40,6 +40,9 @@ async function update(api_endpoint, sign_key) {
 
         case 2: {
             // TODO: UNFINISHED
+            // case 2 时，会直接从 Deno KV 中读出数据。
+            // 使用此配置时，应当有外部辅助方式触发更新并写入 Deno KV
+            // TODO: 不使用外部刷新工具，使用 Deno cron 实现。
             const kv = await Deno.openKv();
             const result = await kv.get(["KV_ALL"]);
             return JSON.parse(result.value);
