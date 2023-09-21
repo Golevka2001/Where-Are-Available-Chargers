@@ -63,7 +63,7 @@ table.gridtable td {
     border-style: solid;
     border-color: #666666;
     background-color: #ffffff;
-    /*text-align: center;*/
+    text-align: center;
 }
 
 .num_green {
@@ -101,7 +101,8 @@ table.gridtable td {
 .table_box {
     align-items: center;
     margin: 5px;
-    width: 316px;
+    width: 20rem;
+    white-space: nowrap;
 }
 
 
@@ -109,6 +110,7 @@ table.gridtable td {
     .table_box {
         margin: auto;
         width: 190px;
+        white-space: normal;
     }
 }
 
