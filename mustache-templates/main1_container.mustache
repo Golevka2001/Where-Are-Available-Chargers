@@ -1,0 +1,100 @@
+<div class="container">
+    {{!通知应该显示在这里}}
+    {{{tips}}}
+
+    {{#is_expired}}
+        <div
+                class="page-status status-major"
+                style="padding-bottom: 0.5rem"
+        >
+                    <span class="status font-large">
+                        数据更新失败，本页显示的是过期数据
+                    </span>
+        </div>
+    {{/is_expired}}
+    {{#all_enough}}
+        <div
+                class="page-status status-none"
+                style="padding-bottom: 0.5rem"
+        >
+            <span class="status font-large"> 充电桩余量充足 </span>
+        </div>
+    {{/all_enough}}
+    {{^all_enough}}
+        <div
+                class="page-status status-minor"
+                style="padding-bottom: 0.5rem"
+        >
+            <span class="status font-large"> 充电桩余量紧张 </span>
+        </div>
+    {{/all_enough}}
+
+    <div style="overflow: auto;color: gray; font-size: smaller">
+
+        <div style="display: none" id="weather-div">
+            <span style="color: #28a745;">湖区天气</span> ·
+            <span id="weather-span">Loading</span> ·
+            <a href="https://www.qweather.com/weather/jiangning-101190104.html"
+               target="_blank">详情</a>
+            <br/>
+        </div>
+
+
+        <span>
+                 更新于 {{ update_time }}
+            </span>
+        <span></span>
+        <div style="float: right;">
+            <a href="https://survey.larksuite.com/m?t=sLfgofRTAwMi-5i3x" target="_blank">反馈</a>
+            ·
+            <a href="./classical">经典界面</a>
+        </div>
+    </div>
+    <div class="components-section font-regular">
+        <div class="components-container two-columns">
+            {{{ stations }}}
+        </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column">
+        <div style="max-width: 68rem; text-align: center">
+            充电桩序号为从北向南、从西向东排序
+            <br/>
+            <span style="color: red;">数据存在稍许延迟，请以实际情况为准</span>
+            <br/>
+            图例：
+            <span class="num_green">1</span
+            ><span style="color: #28a745">空闲</span>
+            <span class="num_orange">-</span
+            ><span style="color: #e67e22">占用</span><br/>
+        </div>
+        <div class="detail_box">{{{ station_detail }}}</div>
+    </div>
+
+    <div
+            class="page-footer border-color font-small"
+            style="margin-bottom: 0px"
+    >
+        <a
+                href="https://github.com/Chariot-South/SEU-Chargers-History"
+                class="history-footer-link"
+                target="_blank"
+        ><span style="font-family: arial">←</span>历史数据</a
+        >
+        <div class="text-gray">
+            <b>仅供参考 / For Reference Only</b>
+        </div>
+
+    </div>
+
+    <a href="" id="expired_tip_a" style="display: none">
+        <div id="expired_tip_d" class="page-status status-major">
+                        <span
+                                id="expired_tip_s"
+                                class="status font-large expired_tip_message"
+                        >
+                            结果已过期，请点此刷新
+                        </span>
+        </div>
+    </a>
+</div>

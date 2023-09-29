@@ -1805,7 +1805,11 @@ body.status .layout-content.status .border-color {
     color: #6a737d;
     display: block;
     font-size: 14px;
-    line-height: 2
+    line-height: 2;
+    margin-top: 0.3rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 @media (max-width:500px) {
@@ -3108,14 +3112,24 @@ div[id^=subscribe-modal] {
     background-color: #e36209
 }
 
-.layout-content.status.status-index .page-status.status-minor {
+.layout-content.status.status-index .status-day .update-title.impact-minor a,
+.layout-content.status.status-index .status-day .update-title.impact-minor a:hover,
+.layout-content.status.status-index .page-status.status-minor,
+.layout-content.status.status-index .unresolved-incident.impact-minor .incident-title,
+.layout-content.status.status-index .scheduled-incidents-container .tab  {
     background-color: #dbab09
 }
 
+.layout-content.status.status-index .status-day .update-title.impact-maintenance a,
+.layout-content.status.status-index .status-day .update-title.impact-maintenance a:hover,
+.layout-content.status.status-index .unresolved-incident.impact-maintenance .incident-title,
 .layout-content.status.status-index .page-status.status-maintenance {
     background-color: #0366d6
 }
 
+.layout-content.status.status-index .status-day .update-title.impact-tip a,
+.layout-content.status.status-index .status-day .update-title.impact-tip a:hover,
+.layout-content.status.status-index .unresolved-incident.impact-tip .incident-title,
 .layout-content.status.status-index .page-status.status-none {
     background-color: #28a745
 }

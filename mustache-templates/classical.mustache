@@ -10,42 +10,12 @@
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="stylesheet" href="static/css/oldstyle.css" />
-        <title>Where Are Availabe Chargers?!</title>
+        <title>Where Are Available Chargers?!</title>
     </head>
 
     <body>
-        <h1 align="center">
-            &#x1F50C;&#x1F621; Where Are Available Chargers?!
-        </h1>
-        <p align="center">
-            <span id="plug">&#x1F50C;</span>
-            <span id="hand">&#x1F90F;</span>
-            <span id="face">&#x1F605;</span>
-            <span id="hand">&#x1F44D;&nbsp;&nbsp;&nbsp;</span>
-            <br />
-            <span id="motor">&#x1F6F5;</span>
-        </p>
-        <p align="center"><a href="/">前往新版查询界面</a></p>
-        <br />
-        <hr />
-        <br />
-
-        <h2 align="center">查询结果</h2>
-        <p align="center" class="text">
-            充电桩序号排序方法为从北向南、从西向东（即地图上从上到下、从左到右）
-        </p>
-        <p align="center">
-            更新时间：{{ update_time }}
-            <br />
-            （数据刷新间隔为200秒）
-        </p>
-
-        {{{ station_detail }}}
-
-        <br />
-        <br />
-        <p align="center">查询结果仅供参考 不提供任何担保</p>
-        <br />
+        {{!container在此}}
+        {{{container}}}
 
         <p align="center">
             GitHub项目地址：

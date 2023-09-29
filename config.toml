@@ -1,26 +1,30 @@
-config_file_version = "20230511"
+config_file_version = "20230920"
 
 [system]
-display_version = "4.0.1"
+display_version = "4.2.0f"
 
 [cache]
 cache_mode = 1
 # 0:Realtime, 
 # 1:Passive Cache (User Request), 
-# 2:Active Cache  (Cron Refresh, 使用单独的功能刷新 Deno KV 里的数据)
+# 2:Active Cache  (Cron Refresh, **Unimplemented feature**)
 
 # Works when cache_mode == 1
 refresh_time = 1.3
 
 # Works when cache_mode == 2, sometimes works when cache_mode == 1
-survival_time = 2.5 # minute
-refuse_time = 4     # minute
+survival_time = 2 # minute
+refuse_time = 3   # minute
 
 [conditions]
 enough_sum_num = 100    # 小于这个数提示紧张
 enough_socket_num = 2.5 # 每个充电桩低于这个数字提示紧张
 
 [stations."东门北侧"]
+"N1" = "东门北侧 XYr6DGKCsRDZ5号设备"
+"N2" = "东门北侧 XYnWrKKm2uY74号设备"
+"N3" = "东门北侧 XYUOSoePDWDt1号设备"
+"N4" = "东门北侧 XYbRBoaA2YMA3号设备"
 "A" = "XYlFl6DnfgZH3"
 "B" = "XY1eANYJoWM620"
 "C" = "东门北侧 XYvIqZM8oCmT19号设备"
@@ -46,6 +50,10 @@ enough_socket_num = 2.5 # 每个充电桩低于这个数字提示紧张
 [stations."南门西侧"]
 "A" = "XY679RB8P35Y10"
 "B" = "XYOGaVYy7OHu7"
+
+[stations."南门东侧"]
+"A" = "南门外东侧 XY5dXpywawqy6号设备"
+"B" = "南门外东侧 XYsjnxW1MolG2号设备"
 
 [stations."北门东北侧"]
 "A" = "XYeo2IsT1Sx61"
