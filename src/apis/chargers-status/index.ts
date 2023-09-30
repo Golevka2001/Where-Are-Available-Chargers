@@ -9,5 +9,5 @@ export const getChargersStatus = async (): Promise<{
   const apiUrl = import.meta.env.VITE_API_URL || 'api/get_status';
   const res = await axios.get(apiUrl);
   // TODO：根据后端返回的格式相应调整
-  return res.data.testData;
+  return res.data;
 };

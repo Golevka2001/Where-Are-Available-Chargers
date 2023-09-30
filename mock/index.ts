@@ -56,9 +56,7 @@ export default [
         },
         status_detail: generateRandomData(),
       };
-      return {
-        testData,
-      };
+      return testData;
     },
   },
 ];
