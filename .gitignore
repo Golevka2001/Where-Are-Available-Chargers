@@ -1,0 +1,13 @@
+# Editors and IDEs
+.idea
+.vscode
+
+# Dependencies
+node_modules/
+
+# Compiled output
+dist/
+build/
+
+# 目前开发中暂时不锁版本，等基本完成了再添上
+package-lock.json
