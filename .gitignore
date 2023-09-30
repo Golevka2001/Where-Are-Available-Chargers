@@ -11,3 +11,8 @@ build/
 
 # 目前开发中暂时不锁版本，等基本完成了再添上
 package-lock.json
+
+# Yarn
+.pnp.*
+.yarn/*
+yarn.lock
