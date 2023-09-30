@@ -24,6 +24,9 @@ defineProps<{
 
 const color = computed(() => {
   // TODO：判断逻辑待补充
-  return 'green';
+  // 之前的做法:
+  // (空闲桩数 > 充电桩数 * 临界值) ? green : orange
+  // 取临界值 2.5
+  return 'color: green';
 });
 </script>
