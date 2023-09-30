@@ -7,7 +7,7 @@
     <span
       class="ml-2"
       style="font-size: 1.8rem"
-      :style="color"
+      :style="{color: availableCountTextColor}"
     >
       {{ availableCount }}
     </span>
@@ -15,18 +15,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   availableCount: number;
   totalCount: number;
 }>();
 
-const color = computed(() => {
-  // TODO：判断逻辑待补充
-  // 之前的做法:
-  // (空闲桩数 > 充电桩数 * 临界值) ? green : orange
-  // 取临界值 2.5
-  return 'color: green';
+const availableCount = ref(props.availableCount);
+const totalCount = ref(props.totalCount);
+
+const availableCountTextColor = computed(() => {
+  // TODO：将 0.25 （临界值）调整到配置文件之类的地方
+  return (availableCount.value > totalCount.value * .25) ? 'green' : 'orange';
 });
 </script>
