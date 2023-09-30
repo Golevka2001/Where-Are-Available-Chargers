@@ -6,7 +6,7 @@ export const getChargersStatus = async (): Promise<{
   update_message: UpdateMessage;
   status_detail: StatusDetail;
 }> => {
-  const apiUrl = process.env.API_URL || 'api/get_status';
+  const apiUrl = import.meta.env.VITE_API_URL || 'api/get_status';
   const res = await axios.get(apiUrl);
   // TODO：根据后端返回的格式相应调整
   return res.data.testData;
