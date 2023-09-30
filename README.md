@@ -60,13 +60,13 @@ git clone git@github.com:Golevka2001/Where-Are-Available-Chargers.git && cd Wher
 git checkout dev
 
 # 安装依赖
-npm install
+npm install # 或使用 yarn install
 ```
 
 ### 开发服务器，启动！
 
 ```bash
-npm run dev
+npm run dev # 或使用 yarn run dev
 ```
 
 浏览器访问 <http://localhost:3000>
