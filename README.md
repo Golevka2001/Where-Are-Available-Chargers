@@ -4,6 +4,8 @@
 
 <p align="center">Version 4 "🌌Milky Way"</p>
 
+> :loudspeaker: 新版本开发中，[点我查看进度](https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/dev)，欢迎加入！
+
 ## 查询网址：<http://chargers.injs.eu>
 
 这是一个用来查询校园内各个充电桩的使用情况的小工具，希望它可以帮你更方便给小电驴找到充电桩。
@@ -15,12 +17,12 @@
 
 ## 目录
 
-- [:electric_plug::rage:Where Are Available Chargers?](#electric_plugragewhere-are-available-chargers)
-  - [查询网址：http://chargers.injs.eu](#查询网址httpchargersinjseu)
-  - [目录](#目录)
-  - [使用方法](#使用方法)
-  - [更新日志](#更新日志)
-  - [使用许可](#使用许可)
+-   [:electric_plug::rage:Where Are Available Chargers?](#electric_plugragewhere-are-available-chargers)
+    -   [查询网址：http://chargers.injs.eu](#查询网址httpchargersinjseu)
+    -   [目录](#目录)
+    -   [使用方法](#使用方法)
+    -   [更新日志](#更新日志)
+    -   [使用许可](#使用许可)
 
 ## 使用方法
 
@@ -30,7 +32,7 @@
 
 **2023-09-19** Version `4.1.4`
 
-1. 新增一批充电桩： `东门北侧` N1~N4， `南门东侧` A B  （共6个）。
+1. 新增一批充电桩： `东门北侧` N1~N4， `南门东侧` A B （共6个）。
 2. 总览 UI 变化：现在已满的充电桩不会在 `桩号·余量` 中显示。
 
 **2023-09-14**
@@ -104,26 +106,26 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 ```
 
-- `src/static/css/style.pure.css` 中引入的 css
-  文件和字体文件具有不同的许可证，详情请参阅该文件。
+-   `src/static/css/style.pure.css` 中引入的 css
+    文件和字体文件具有不同的许可证，详情请参阅该文件。
 
-- `src/static/img/favicon.ico` 来自
-  [Google Fonts - Noto Emoji](https://github.com/googlefonts/noto-emoji)。该项目的
-  Emoji 图像按
-  [Apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
-  授权。
+-   `src/static/img/favicon.ico` 来自
+    [Google Fonts - Noto Emoji](https://github.com/googlefonts/noto-emoji)。该项目的
+    Emoji 图像按
+    [Apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+    授权。
 
-- `src/static/img/apple-touch-icon.png` 采用
-  [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
+-   `src/static/img/apple-touch-icon.png` 采用
+    [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
 
-  - `Copyright (C) 2023 Gol3vka and Csimide`
-  - 该文件采用了来自 [Twemoji](https://github.com/twitter/twemoji) 的 Emoji
-    字形。Twemoji 按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-    授权使用。
-  - 文件采用了来自 Segoe UI Emoji (Version `1.29`) 的 Emoji 字形。Segoe UI Emoji
-    按微软文档
-    [Font redistribution FAQ (Frequently Asked Questions) for Windows](https://learn.microsoft.com/en-us/typography/fonts/font-faq)
-    使用。
+    -   `Copyright (C) 2023 Gol3vka and Csimide`
+    -   该文件采用了来自 [Twemoji](https://github.com/twitter/twemoji) 的 Emoji
+        字形。Twemoji 按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+        授权使用。
+    -   文件采用了来自 Segoe UI Emoji (Version `1.29`) 的 Emoji 字形。Segoe UI Emoji
+        按微软文档
+        [Font redistribution FAQ (Frequently Asked Questions) for Windows](https://learn.microsoft.com/en-us/typography/fonts/font-faq)
+        使用。
 
-- `src/static/img/map202308.webp` 采用
-  [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
+-   `src/static/img/map202308.webp` 采用
+    [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
