@@ -2,16 +2,10 @@
 <!-- 包含：链接、版本号、版权、鸣谢（待补充） -->
 
 <template>
-  <div style="align-self: self-end">
+  <div class="align-end">
     <v-divider />
-    <v-footer
-      class="text-center bg-transparent"
-      style="align-self: self-end"
-    >
-      <v-row
-        class="my-0"
-        style="align-self: self-start"
-      >
+    <v-footer class="text-center bg-transparent">
+      <v-row class="my-0">
         <!-- Nav links -->
         <v-col cols="12">
           <v-btn
