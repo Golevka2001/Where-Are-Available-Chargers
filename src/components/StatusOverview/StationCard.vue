@@ -17,7 +17,7 @@
         >
           {{ stationName }}
         </span>
-        <span style="font-size: 1rem">
+        <span style="font-size: 0.9rem">
           详情<v-icon size="small">mdi-chevron-right</v-icon>
         </span>
       </div>

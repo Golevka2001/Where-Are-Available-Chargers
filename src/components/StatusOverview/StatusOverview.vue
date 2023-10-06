@@ -1,11 +1,10 @@
 <template>
   <div>
-    <!-- 卡片的 padding 保持 3 不要改 -->
     <v-card
       variant="outlined"
-      class="px-3 py-3 mx-6 my-6 text-center"
+      class="mx-6 my-6 text-center"
     >
-      <v-row>
+      <v-row class="mx-auto my-auto">
         <!-- TODO：列数根据屏幕宽度调整 -->
         <v-col
           v-for="(stationStatus, stationName, index) in appStore.statusManager
