@@ -1,6 +1,5 @@
 <!-- 顶部导航栏 -->
-<!-- 包含：菜单按钮、标题、分享按钮（待定） -->
-<!-- TODO：分享按钮 -->
+<!-- 包含：菜单按钮、标题、分享菜单 -->
 
 <template>
   <v-app-bar class="text-center">
@@ -21,14 +20,14 @@
       </router-link>
     </v-app-bar-title>
 
-    <!-- Share button -->
-    <!-- TODO：分享框 -->
-    <v-btn icon="mdi-share-variant-outline" />
+    <!-- Share button & menu -->
+    <TheShareMenu />
   </v-app-bar>
 </template>
 
 <script setup lang="ts">
 import { useAppStore } from '@/store/app';
+import TheShareMenu from '@/layouts/components/TheShareMenu.vue';
 
 const appStore = useAppStore();
 </script>
