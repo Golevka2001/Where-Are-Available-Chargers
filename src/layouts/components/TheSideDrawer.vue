@@ -9,10 +9,38 @@
   >
     <!-- Nav links -->
     <v-list
-      :items="navItems"
       density="compact"
       nav
-    />
+    >
+      <v-list-item
+        v-for="item in navItems"
+        :key="item.title"
+        :to="item.props.to"
+        :href="item.props.href"
+        :target="item.props.target"
+      >
+        <template v-slot:prepend>
+          <v-icon :icon="item.props.prependIcon" />
+        </template>
+        <v-list-item-title>
+          {{ item.title }}
+        </v-list-item-title>
+      </v-list-item>
+      <v-list-item @click="clickThemeButton">
+        <template v-slot:prepend>
+          <v-icon
+            :icon="
+              theme.global.current.value.dark
+                ? 'mdi-weather-sunny'
+                : 'mdi-weather-night'
+            "
+          />
+        </template>
+        <v-list-item-title>
+          {{ theme.global.current.value.dark ? '浅色模式' : '深色模式' }}
+        </v-list-item-title>
+      </v-list-item>
+    </v-list>
 
     <!-- Classic edition -->
     <template #append>
@@ -30,9 +58,15 @@
 </template>
 
 <script setup lang="ts">
+import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 
 const appStore = useAppStore();
+const theme = useTheme();
+
+const clickThemeButton = () => {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
+};
 
 // 外链用 `href`，内部路由用 `to`
 const navItems = [
