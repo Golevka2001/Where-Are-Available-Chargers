@@ -2,76 +2,83 @@
 <!-- 包含：链接、版本号、版权、鸣谢（待补充） -->
 
 <template>
-  <v-footer class="my-4 text-center">
-    <v-row style="align-self: self-end">
-      <v-divider />
+  <div style="align-self: self-end">
+    <v-divider />
+    <v-footer
+      class="text-center bg-transparent"
+      style="align-self: self-end"
+    >
+      <v-row
+        class="my-0"
+        style="align-self: self-start"
+      >
+        <!-- Nav links -->
+        <v-col cols="12">
+          <v-btn
+            v-for="navItem in navItems"
+            :key="navItem.text"
+            size="small"
+            variant="plain"
+            rounded="xl"
+            class="px-2"
+            style="font-size: 0.7rem"
+          >
+            <!-- 区分外链和内部路由 -->
+            <router-link
+              v-if="navItem.isRouterLink"
+              :to="navItem.link"
+              class="text-decoration-none"
+              style="color: inherit"
+            >
+              {{ navItem.text }}
+            </router-link>
+            <a
+              v-else
+              :href="navItem.link"
+              :target="navItem.target"
+              class="text-decoration-none"
+              style="color: inherit"
+            >
+              {{ navItem.text }}
+            </a>
+          </v-btn>
+        </v-col>
 
-      <!-- Nav links -->
-      <v-col cols="12">
-        <v-btn
-          v-for="navItem in navItems"
-          :key="navItem.text"
-          size="small"
-          variant="plain"
-          rounded="xl"
-          class="px-2"
+        <!-- Version -->
+        <v-col
+          cols="12"
+          class="py-0"
           style="font-size: 0.7rem"
         >
-          <!-- 区分外链和内部路由 -->
-          <router-link
-            v-if="navItem.isRouterLink"
-            :to="navItem.link"
-            class="text-decoration-none"
-            style="color: inherit"
-          >
-            {{ navItem.text }}
-          </router-link>
-          <a
-            v-else
-            :href="navItem.link"
-            :target="navItem.target"
-            class="text-decoration-none"
-            style="color: inherit"
-          >
-            {{ navItem.text }}
-          </a>
-        </v-btn>
-      </v-col>
+          Ver {{ version }}
+        </v-col>
 
-      <!-- Version -->
-      <v-col
-        cols="12"
-        class="py-0"
-        style="font-size: 0.7rem"
-      >
-        Ver {{ version }}
-      </v-col>
-
-      <!-- CopyRight -->
-      <v-col
-        cols=" 12"
-        class="py-0"
-        style="font-size: 0.7rem"
-      >
-        &#169;&nbsp;2022-{{ new Date().getFullYear() }}&nbsp;
-        <span
-          v-for="maintainer in maintainers"
-          :key="maintainer.name"
+        <!-- CopyRight -->
+        <v-col
+          cols=" 12"
+          class="pt-0"
+          style="font-size: 0.7rem"
         >
-          <a
-            :href="maintainer.link"
-            target="_blank"
-            v-text="maintainer.name"
-            class="text-decoration-none"
-            style="color: inherit"
-          />
-          <span v-if="maintainer !== maintainers[maintainers.length - 1]">
-            &
+          &#169;&nbsp;2022-{{ new Date().getFullYear() }}&nbsp;
+          <span
+            v-for="maintainer in maintainers"
+            :key="maintainer.name"
+          >
+            <a
+              :href="maintainer.link"
+              target="_blank"
+              v-text="maintainer.name"
+              class="text-decoration-none"
+              style="color: inherit"
+            />
+            <span v-if="maintainer !== maintainers[maintainers.length - 1]">
+              &
+            </span>
           </span>
-        </span>
-      </v-col>
-    </v-row>
-  </v-footer>
+        </v-col>
+      </v-row>
+    </v-footer>
+  </div>
 </template>
 
 <script setup lang="ts">
