@@ -14,7 +14,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
+import { useAppStore } from '@/store/app';
+
+const appStore = useAppStore();
 
 const props = defineProps<{
   availableCount: number;
@@ -22,7 +25,9 @@ const props = defineProps<{
 }>();
 
 const availableCountTextColor = computed(() => {
-  // TODO：将 0.25 （临界值）调整到配置文件之类的地方
-  return props.availableCount > props.totalCount * 0.25 ? 'green' : 'orange';
+  return props.availableCount >
+    props.totalCount * appStore.config.station_threshold_percentage
+    ? 'green'
+    : 'orange';
 });
 </script>
