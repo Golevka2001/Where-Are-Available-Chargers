@@ -21,11 +21,8 @@ const props = defineProps<{
   totalCount: number;
 }>();
 
-const availableCount = ref(props.availableCount);
-const totalCount = ref(props.totalCount);
-
 const availableCountTextColor = computed(() => {
   // TODO：将 0.25 （临界值）调整到配置文件之类的地方
-  return availableCount.value > totalCount.value * 0.25 ? 'green' : 'orange';
+  return props.availableCount > props.totalCount * 0.25 ? 'green' : 'orange';
 });
 </script>
