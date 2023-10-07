@@ -37,7 +37,12 @@ const generateRandomData = (): any => {
         status.push(randomStatus);
       }
 
-      data[location][deviceName] = status;
+      const random = Math.random();
+      if (random < 0.1) {
+        data[location][deviceName] = null;
+      } else {
+        data[location][deviceName] = status;
+      }
     }
   }
 

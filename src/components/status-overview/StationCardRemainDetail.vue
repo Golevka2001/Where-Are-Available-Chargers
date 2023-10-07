@@ -11,7 +11,11 @@
       :key="index"
     >
       <span
-        v-if="chargerName !== 'availableCount' && chargerName !== 'totalCount'"
+        v-if="
+          chargerName !== 'availableCount' &&
+          chargerName !== 'totalCount' &&
+          chargerStatus !== 0
+        "
       >
         <sup>{{ chargerName }}</sup>
         {{ chargerStatus }}

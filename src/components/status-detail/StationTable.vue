@@ -27,7 +27,11 @@
       >
         <td class="pr-1 text-center">{{ chargerName }}</td>
         <td class="pl-1 text-center">
-          <station-table-charger-status :charger-status="chargerStatus" />
+          <div v-if="chargerStatus === null">* 充电桩参数缺失 *</div>
+          <station-table-charger-status
+            :charger-status="chargerStatus"
+            v-else
+          />
         </td>
       </tr>
     </tbody>
