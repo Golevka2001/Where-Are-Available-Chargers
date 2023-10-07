@@ -56,7 +56,7 @@ const isSnackbarVisible = ref(false);
 const clickDownloadBtn = () => {
   // 下载二维码图片（png）
   const link = document.createElement('a');
-  link.href = '/public/img/qr-code.png';
+  link.href = '/img/qr-code.png';
   link.download = 'qr-code.png';
   link.click();
   // 显示提示信息
