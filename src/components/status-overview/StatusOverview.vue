@@ -10,8 +10,9 @@
 <template>
   <div>
     <v-card
+      rounded="lg"
       variant="outlined"
-      class="mx-6 my-6 text-center"
+      class="ma-6"
     >
       <v-row class="mx-auto my-auto">
         <!-- TODO：列数根据屏幕宽度调整 -->
@@ -45,6 +46,4 @@ import { useAppStore } from '@/store/app';
 import StationCard from '@/components/status-overview/StationCard.vue';
 
 const appStore = useAppStore();
-
-appStore.statusManager.updateData();
 </script>
