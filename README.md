@@ -83,10 +83,10 @@ npm run dev # 或使用 yarn run dev
 
 ## :open_file_folder: src 目录结构
 
-- `apis/`：网络请求、获取数据（按功能模块划分子目录）
+- `apis/`：网络请求、获取数据（按功能、模块划分子目录）
 - `assets/`：静态资源
-- `components/`：除页面布局外，其他在页面中使用到的组件（按功能模块划分子目录）
-- `layouts/`：页面布局及使用到的组件
+- `components/`：所使用到的组件（按功能、模块划分子目录）
+- `layouts/`：页面布局、框架
 - `plugins/`：插件的引入和注册
 - `router/`：路由配置
 - `store/`：状态管理
@@ -101,7 +101,7 @@ npm run dev # 或使用 yarn run dev
 - 优先使用 Vuetify 提供的工具类来定义样式（类似 Tailwind，查阅 Vuetify 文档的 `Styles and animations` 部分），更细粒度的样式直接在 HTML 的 `style` 属性中定义
 - 图标优先使用 [Material Design Icons](https://materialdesignicons.com/)，引用方式参考 Vuetify 文档
 - 适当拆分 Vue 组件，避免单个组件过于臃肿
-- 布局框架（如：TopBar、Footer）放在 `layouts` 目录下；页面（如：StatusPage、AboutPage）放在 `views` 目录下；页面中使用到的组件放在 `components` 目录下
+- 布局框架放在 `layouts` 目录下，而其中的组件（如：Bar、Footer）放在 `components/app` 目录下；页面（如：StatusPage、AboutPage）放在 `views` 目录下；页面中使用到的组件放在 `components` 目录下
 
 ### 代码风格相关
 
@@ -121,16 +121,16 @@ _注：并非按照优先级排序_
 
 - [x] 基本布局（TopBar、SideBar、Footer）
 - [x] 状态管理、路由等基本配置
+- [x] 分享按钮
+- [x] 深色主题
 - [ ] Loading、Error、About 等页面以及相关路由配置
 - [ ] 状态概览组件（完成了一部分）
 - [ ] 状态详情组件
-- [ ] 分享按钮
 - [ ] 回到顶部按钮
 - [ ] Axios 封装（请求拦截、响应拦截、错误处理都未配置）
 - [ ] 与后端的交互
 - [ ] 数据过期提醒
 - [ ] 顶部进度条
-- [ ] 深色主题
 - [ ] 不同设备的适配（建议先以移动端为主开发组件，大致完成后再设计响应式布局）
 - [ ] 迁移旧版页面
 - [ ] 迁移文档
