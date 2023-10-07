@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/default.vue'),
+    component: () => import('@/layouts/Default.vue'),
     children: [
       {
         path: '',
@@ -15,6 +15,17 @@ const routes = [
         path: 'about',
         name: 'About',
         component: () => import('@/views/AboutPage.vue'),
+      },
+    ],
+  },
+  {
+    path: '/feedback',
+    component: () => import('@/layouts/NoFooter.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Feedback',
+        component: () => import('@/views/FeedbackPage.vue'),
       },
     ],
   },

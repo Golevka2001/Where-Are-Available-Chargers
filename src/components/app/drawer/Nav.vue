@@ -31,7 +31,7 @@ const navList = [
     title: '反馈 & 建议',
     props: {
       prependIcon: 'mdi-forum-outline',
-      href: '', // TODO
+      to: '/feedback',
     },
   },
   {
