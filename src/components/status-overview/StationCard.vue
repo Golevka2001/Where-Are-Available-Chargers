@@ -1,7 +1,6 @@
 <!-- 充电站概览卡片 -->
-<!-- 包括：充电站名称、总可用插座数、充电桩概览 -->
 <!-- +-----------------------------+ -->
-<!-- | Station Name >      Count 5 | -->
+<!-- | Station Name >        Count | -->
 <!-- |                             | -->
 <!-- | Chargers Status             | -->
 <!-- +-----------------------------+ -->
@@ -9,8 +8,8 @@
 <template>
   <v-card variant="flat">
     <v-card-title class="px-2 pt-2 d-flex justify-space-between">
-      <!-- Station name -->
       <div>
+        <!-- Station name -->
         <span
           class="mr-2"
           style="font-size: 1.2rem"
@@ -23,20 +22,20 @@
       </div>
 
       <!-- Available sockets count -->
-      <StationAvailable
-        :availableCount="stationStatus.availableCount"
-        :totalCount="stationStatus.totalCount"
+      <station-card-remain-count
+        :available-count="stationStatus.availableCount"
+        :total-count="stationStatus.totalCount"
       />
     </v-card-title>
 
     <!-- Chargers info overview -->
-    <ChargersInfo :stationStatus="stationStatus" />
+    <station-card-remain-detail :stationStatus="stationStatus" />
   </v-card>
 </template>
 
 <script lang="ts" setup>
-import StationAvailable from '@/components/StatusOverview/StationAvailable.vue';
-import ChargersInfo from '@/components/StatusOverview/ChargersInfo.vue';
+import StationCardRemainCount from '@/components/status-overview/StationCardRemainCount.vue';
+import StationCardRemainDetail from '@/components/status-overview/StationCardRemainDetail.vue';
 
 defineProps<{
   stationName: string;

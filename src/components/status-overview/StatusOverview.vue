@@ -1,3 +1,12 @@
+<!-- 充电桩状态总览 -->
+<!-- +--------------------+ -->
+<!-- |   Station Card 1   | -->
+<!-- +--------------------+ -->
+<!-- |   Station Card 2   | -->
+<!-- +--------------------+ -->
+<!-- |         ...        | -->
+<!-- +--------------------+ -->
+
 <template>
   <div>
     <v-card
@@ -13,10 +22,9 @@
           cols="12"
           class="px-0 py-0"
         >
-          <!-- stationName 会被推断为 number，不用 String() 处理会红线 -->
-          <StationCard
-            :stationName="String(stationName)"
-            :stationStatus="stationStatus"
+          <station-card
+            :station-name="stationName"
+            :station-status="stationStatus"
           />
           <v-divider
             v-if="
@@ -33,7 +41,7 @@
 
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
-import StationCard from '@/components/StatusOverview/StationCard.vue';
+import StationCard from '@/components/status-overview/StationCard.vue';
 
 const appStore = useAppStore();
 

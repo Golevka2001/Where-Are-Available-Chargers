@@ -1,29 +1,31 @@
-<!-- 基础布局 -->
+<!-- 默认布局 -->
 <!-- +-------------------------+ -->
-<!-- | ==       TopBar         | -->
+<!-- | ==       AppBar         | -->
 <!-- +--------+----------------+ -->
 <!-- |        |                | -->
-<!-- |  Side  |      Main      | -->
+<!-- |  App   |      Main      | -->
 <!-- | Drawer |     Content    | -->
 <!-- |        |                | -->
 <!-- +--------+----------------+ -->
-<!-- |          Footer         | -->
+<!-- |        AppFooter        | -->
 <!-- +-------------------------+ -->
 
 <template>
   <v-app>
-    <TheTopBar />
+    <app-bar />
 
-    <TheSideDrawer />
+    <app-drawer />
 
     <v-main>
       <router-view />
     </v-main>
 
-    <TheFooter />
+    <app-footer />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-import { TheTopBar, TheSideDrawer, TheFooter } from '@/layouts/components';
+import AppBar from '@/components/app/bar/Bar.vue';
+import AppDrawer from '@/components/app/drawer/Drawer.vue';
+import AppFooter from '@/components/app/footer/Footer.vue';
 </script>
