@@ -22,8 +22,9 @@
           cols="12"
           class="px-0 py-0"
         >
+          <!-- stationName 会被推断为 number，不用 String() 处理会红线 -->
           <station-card
-            :station-name="stationName"
+            :station-name="String(stationName)"
             :station-status="stationStatus"
           />
           <v-divider
