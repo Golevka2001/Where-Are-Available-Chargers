@@ -6,7 +6,8 @@ export const useAppStore = defineStore('app', {
     isDrawerOpen: false,
     statusManager: new StatusManager(),
     config: {
-      station_threshold_percentage: 0.25,
+      latestMapPath: '/img/map-20230919.webp',
+      stationThresholdPercentage: 0.25,
     },
   }),
 });

@@ -25,7 +25,7 @@ const props = defineProps<{
 
 const availableCountTextColor = computed(() => {
   return props.availableCount >
-    props.totalCount * appStore.config.station_threshold_percentage
+    props.totalCount * appStore.config.stationThresholdPercentage
     ? 'green'
     : 'orange';
 });

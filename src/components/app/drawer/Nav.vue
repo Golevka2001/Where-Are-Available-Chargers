@@ -23,10 +23,6 @@ import { useAppStore } from '@/store/app';
 
 const appStore = useAppStore();
 
-const clickNavItem = () => {
-  appStore.isDrawerOpen = false;
-};
-
 // 外链用 `href`，内部路由用 `to`
 const navList = [
   {
@@ -37,7 +33,8 @@ const navList = [
   {
     title: '充电桩位置示意图',
     prependIcon: 'mdi-map-legend',
-    to: '', // TODO
+    href: appStore.config.latestMapPath,
+    target: '_blank',
   },
   {
     title: '反馈 & 建议',
@@ -47,7 +44,8 @@ const navList = [
   {
     title: '文档',
     prependIcon: 'mdi-book-open-page-variant-outline',
-    href: '', // TODO
+    href: 'https://chargers.injs.eu/doc/',
+    target: '_blank',
   },
   {
     title: 'GitHub',
@@ -56,4 +54,8 @@ const navList = [
     target: '_blank',
   },
 ];
+
+const clickNavItem = () => {
+  appStore.isDrawerOpen = false;
+};
 </script>
