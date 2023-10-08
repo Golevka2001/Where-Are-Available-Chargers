@@ -4,6 +4,14 @@
 
 <p align="center">Version 4 "🌌Milky Way"</p>
 
+> **Important**
+> 
+> 此项目的开发分支为 [`dev`](https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/dev) 分支。
+> 
+> 当前分支 `version-4` 是 Version 4 "🌌Milky Way" 的代码归档。Ver 4 的前端部分已中止开发；后端部分可能会作为独立分支或储存库提供。**除非必要情况，此分支将不再更新。**
+> 
+> Version 5 "🔮Crystal Ball" 采用了现代化的前端框架，优化了 UI 设计。请切换到 [`dev`](https://github.com/Golevka2001/Where-Are-Available-Chargers/tree/dev) 分支获取更多关于 Version 5 的信息。欢迎加入 Where Are Available Chargers 的开发。
+
 ## 查询网址：<http://chargers.injs.eu>
 
 这是一个用来查询校园内各个充电桩的使用情况的小工具，希望它可以帮你更方便给小电驴找到充电桩。
@@ -27,6 +35,21 @@
 请见源代码 `doc` 目录。
 
 ## 更新日志
+
+**2023-10-08** Version `4.2.1`
+
+1. 支持充电插座状态渲染为灰色“故障”。
+2. `rend.js` 添加注释。
+3. 位置示意图更新至 202310 (Ver 1.1)
+
+**2023-09-20** Version `4.2.0`
+
+1. 修复错误页面可能无法渲染的问题。
+2. 简化 `rend.js` 内经典界面、Ver 4 界面渲染的重复逻辑。
+
+**2023-09-19**
+1. 统一标识符命名格式。
+2. 增加 `deno task precommit` 格式化代码。
 
 **2023-09-19** Version `4.1.4`
 
@@ -125,5 +148,5 @@ You should have received a copy of the GNU Affero General Public License along w
     [Font redistribution FAQ (Frequently Asked Questions) for Windows](https://learn.microsoft.com/en-us/typography/fonts/font-faq)
     使用。
 
-- `src/static/img/map202308.webp` 采用
+- `src/static/img/map202310_1_1.webp` 采用
   [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
