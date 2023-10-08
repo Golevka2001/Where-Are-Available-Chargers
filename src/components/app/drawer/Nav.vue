@@ -21,6 +21,13 @@
 // 外链用 `href`，内部路由用 `to`
 const navList = [
   {
+    title: '状态查询',
+    props: {
+      prependIcon: 'mdi-bicycle-electric ',
+      to: '/',
+    },
+  },
+  {
     title: '充电桩位置示意图',
     props: {
       prependIcon: 'mdi-map-legend',
