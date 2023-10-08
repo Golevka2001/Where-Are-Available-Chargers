@@ -1,4 +1,3 @@
-// Composables
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -15,6 +14,11 @@ const routes = [
         path: 'about',
         name: 'About',
         component: () => import('@/views/AboutPage.vue'),
+      },
+      {
+        path: 'map',
+        name: 'Map',
+        component: () => import('@/views/MapPage.vue'),
       },
     ],
   },

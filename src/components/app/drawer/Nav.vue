@@ -33,8 +33,7 @@ const navList = [
   {
     title: '充电桩位置示意图',
     prependIcon: 'mdi-map-legend',
-    href: appStore.config.latestMapPath,
-    target: '_blank',
+    to: '/map',
   },
   {
     title: '反馈 & 建议',
