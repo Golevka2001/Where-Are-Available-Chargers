@@ -10,3 +10,11 @@
   >
   </iframe>
 </template>
+
+<script lang="ts" setup>
+import { useAppStore } from '@/store/app';
+
+const appStore = useAppStore();
+
+appStore.isFooterVisible = false;
+</script>

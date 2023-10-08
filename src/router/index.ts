@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/Default.vue'),
+    component: () => import('@/layouts/DefaultLayout.vue'),
     children: [
       {
         path: '',
@@ -16,20 +16,14 @@ const routes = [
         component: () => import('@/views/AboutPage.vue'),
       },
       {
+        path: 'feedback',
+        name: 'Feedback',
+        component: () => import('@/views/FeedbackPage.vue'),
+      },
+      {
         path: 'map',
         name: 'Map',
         component: () => import('@/views/MapPage.vue'),
-      },
-    ],
-  },
-  {
-    path: '/feedback',
-    component: () => import('@/layouts/NoFooter.vue'),
-    children: [
-      {
-        path: '',
-        name: 'Feedback',
-        component: () => import('@/views/FeedbackPage.vue'),
       },
     ],
   },
