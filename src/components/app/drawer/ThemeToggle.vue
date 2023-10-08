@@ -19,10 +19,13 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify';
+import { useAppStore } from '@/store/app';
 
+const appStore = useAppStore();
 const theme = useTheme();
 
 const clickThemeBtn = () => {
+  appStore.isDrawerOpen = false;
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
 };
 </script>

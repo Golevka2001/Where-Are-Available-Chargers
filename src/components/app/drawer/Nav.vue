@@ -3,13 +3,14 @@
 <template>
   <v-list-item
     v-for="navItem in navList"
+    @click="clickNavItem"
     :key="navItem.title"
-    :href="navItem.props.href"
-    :target="navItem.props.target"
-    :to="navItem.props.to"
+    :href="navItem.href"
+    :target="navItem.target"
+    :to="navItem.to"
   >
     <template v-slot:prepend>
-      <v-icon :icon="navItem.props.prependIcon" />
+      <v-icon :icon="navItem.prependIcon" />
     </template>
     <v-list-item-title>
       {{ navItem.title }}
@@ -18,43 +19,41 @@
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/store/app';
+
+const appStore = useAppStore();
+
+const clickNavItem = () => {
+  appStore.isDrawerOpen = false;
+};
+
 // 外链用 `href`，内部路由用 `to`
 const navList = [
   {
     title: '状态查询',
-    props: {
-      prependIcon: 'mdi-bicycle-electric ',
-      to: '/',
-    },
+    prependIcon: 'mdi-bicycle-electric ',
+    to: '/',
   },
   {
     title: '充电桩位置示意图',
-    props: {
-      prependIcon: 'mdi-map-legend',
-      to: '', // TODO
-    },
+    prependIcon: 'mdi-map-legend',
+    to: '', // TODO
   },
   {
     title: '反馈 & 建议',
-    props: {
-      prependIcon: 'mdi-forum-outline',
-      to: '/feedback',
-    },
+    prependIcon: 'mdi-forum-outline',
+    to: '/feedback',
   },
   {
     title: '文档',
-    props: {
-      prependIcon: 'mdi-book-open-page-variant-outline',
-      href: '', // TODO
-    },
+    prependIcon: 'mdi-book-open-page-variant-outline',
+    href: '', // TODO
   },
   {
     title: 'GitHub',
-    props: {
-      prependIcon: 'mdi-github', // FIXME: github 图标已被 mdi 弃用
-      href: 'https://github.com/Golevka2001/Where-Are-Available-Chargers',
-      target: '_blank',
-    },
+    prependIcon: 'mdi-github', // FIXME: github 图标已被 mdi 弃用
+    href: 'https://github.com/Golevka2001/Where-Are-Available-Chargers',
+    target: '_blank',
   },
 ];
 </script>
