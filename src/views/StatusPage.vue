@@ -10,13 +10,20 @@
 <!-- +---------------------+ -->
 
 <template>
-  <status-overview />
+  <div v-if="appStore.statusManager.isFetchingData">
+    <loading-indicator />
+  </div>
 
-  <status-detail />
+  <div v-else>
+    <status-overview />
+
+    <status-detail />
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
+import LoadingIndicator from '@/components/app/loading/Loading.vue';
 import StatusOverview from '@/components/status-overview/StatusOverview.vue';
 import StatusDetail from '@/components/status-detail/StatusDetail.vue';
 
