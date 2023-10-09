@@ -16,7 +16,7 @@
 
     <app-drawer />
 
-    <v-main>
+    <v-main class="pb-0">
       <router-view />
     </v-main>
 
