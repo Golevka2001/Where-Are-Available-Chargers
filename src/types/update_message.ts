@@ -1,4 +1,3 @@
 export interface UpdateMessage {
-  lastSuccessStartTime: number;
-  lastSuccessEndTime: number;
+  [key: string]: number;
 }

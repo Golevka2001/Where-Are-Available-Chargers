@@ -9,26 +9,36 @@ export class StatusManager {
   statusOverview: StatusOverview;
   availableCount: number;
   totalCount: number;
+  isFetchingData: boolean;
 
   constructor(response?: {
     update_message: UpdateMessage;
     status_detail: StatusDetail;
   }) {
-    this.updateMessage = response?.update_message || {
-      lastSuccessStartTime: 0,
-      lastSuccessEndTime: 0,
-    };
+    // TODO：若有变动记得修改
+    this.updateMessage = {};
+    this.updateMessage.lastSuccessStartTime =
+      response?.update_message?.last_success_start_time || 0;
+    this.updateMessage.lastSuccessEndTime =
+      response?.update_message?.last_success_end_time || 0;
     this.statusDetail = response?.status_detail || {};
     this.statusOverview = {};
     this.availableCount = 0;
     this.totalCount = 0;
+    this.isFetchingData = false;
   }
 
   async updateData(): Promise<void> {
+    this.isFetchingData = true;
     const response = await getChargersStatus();
-    this.updateMessage = response.update_message;
+    // TODO：若有变动记得修改
+    this.updateMessage.lastSuccessStartTime =
+      response.update_message.last_success_start_time;
+    this.updateMessage.lastSuccessEndTime =
+      response.update_message.last_success_end_time;
     this.statusDetail = response.status_detail;
     this.updateOverviewData();
+    this.isFetchingData = false;
   }
 
   private updateOverviewData(): void {
