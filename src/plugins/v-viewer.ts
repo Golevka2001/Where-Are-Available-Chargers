@@ -9,9 +9,6 @@ const VueViewerPlugin: Plugin = {
   install(app) {
     app.use(VueViewer, {
       name: 'vue-viewer',
-      defaultOptions: {
-        zIndex: 9999,
-      },
     });
   },
 };
