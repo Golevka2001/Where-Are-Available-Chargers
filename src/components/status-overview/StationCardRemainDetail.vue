@@ -17,9 +17,9 @@
           chargerStatus !== 0
         "
       >
+        <span v-if="showComma()"> , </span>
         <sup>{{ chargerName }}</sup>
         {{ chargerStatus }}
-        <span v-if="index !== Object.keys(stationStatus).length - 1"> , </span>
       </span>
     </span>
   </v-card-text>
@@ -33,4 +33,8 @@ defineProps<{
     totalCount: number;
   };
 }>();
+
+let availableChargerCounter: number = 0;
+// 用于判断分隔符 `,` 是否显示的计数器
+const showComma = () => availableChargerCounter++;
 </script>
