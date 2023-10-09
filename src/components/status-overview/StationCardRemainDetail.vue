@@ -5,7 +5,8 @@
     class="px-2 pb-2 text-left text-truncate"
     style="font-size: 0.9rem"
   >
-    桩号·余量：
+    <span v-if="stationStatus.availableCount === 0">暂无可用</span>
+    <span v-else> 桩号·余量： </span>
     <span
       v-for="(chargerStatus, chargerName, index) in stationStatus"
       :key="index"
