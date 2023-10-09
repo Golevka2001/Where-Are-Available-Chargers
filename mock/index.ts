@@ -1,7 +1,5 @@
-// mockjs 生成嵌套数据实在太麻烦了，没用 mockjs 的模板语法
 const generateRandomStatus = (): number => {
-  const random = Math.random();
-  if (random < 0.1) {
+  if (Math.random() < 0.1) {
     return 2;
   } else {
     return Math.floor(Math.random() * 2);
@@ -11,7 +9,7 @@ const generateRandomStatus = (): number => {
 const generateRandomData = (): any => {
   const data: any = {};
 
-  const locations = [
+  let stationNameList = [
     '东门北侧',
     '东门南侧',
     '西门北侧',
@@ -21,27 +19,27 @@ const generateRandomData = (): any => {
     '北门东北侧',
     '北门东南侧',
   ];
+  stationNameList = stationNameList.filter(() => Math.random() > 0.2);
 
-  for (let i = 0; i < locations.length; i++) {
-    const location = locations[i];
-    data[location] = {};
+  for (let i = 0; i < stationNameList.length; i++) {
+    const stationName = stationNameList[i];
+    data[stationName] = {};
 
-    const numOfDevices = Math.floor(Math.random() * 5) + 1; // Generate random number of devices
+    const chargerCount = Math.floor(Math.random() * 5) + 1;
 
-    for (let j = 0; j < numOfDevices; j++) {
-      const deviceName = String.fromCharCode(65 + j);
-      const status: number[] = [];
+    for (let j = 0; j < chargerCount; j++) {
+      const chargerName = String.fromCharCode(65 + j);
+      const chargerStatus: number[] = [];
 
       for (let k = 0; k < 10; k++) {
-        const randomStatus = generateRandomStatus();
-        status.push(randomStatus);
+        const socketStatus = generateRandomStatus();
+        chargerStatus.push(socketStatus);
       }
 
-      const random = Math.random();
-      if (random < 0.1) {
-        data[location][deviceName] = null;
+      if (Math.random() < 0.1) {
+        data[stationName][chargerName] = null;
       } else {
-        data[location][deviceName] = status;
+        data[stationName][chargerName] = chargerStatus;
       }
     }
   }
@@ -53,11 +51,13 @@ export default [
   {
     url: '/api/get_status',
     method: 'get',
+    timeout: Math.floor(Math.random() * 1000) + 500, // 0.5-1.5s
+    statusCode: 200,
     response: () => {
       const testData = {
         update_message: {
           last_success_start_time: Date.now(),
-          last_success_end_time: Date.now(),
+          last_success_end_time: Date.now() + 1000,
         },
         status_detail: generateRandomData(),
       };
