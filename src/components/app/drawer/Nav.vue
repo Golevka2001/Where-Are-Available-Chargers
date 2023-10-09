@@ -27,8 +27,8 @@ const appStore = useAppStore();
 const navList = [
   {
     title: '状态查询',
-    prependIcon: 'mdi-bicycle-electric ',
-    to: '/',
+    prependIcon: 'mdi-bicycle-electric',
+    to: '/status',
   },
   {
     title: '充电桩位置示意图',

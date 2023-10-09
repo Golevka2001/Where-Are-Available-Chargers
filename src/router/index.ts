@@ -4,9 +4,10 @@ const routes = [
   {
     path: '/',
     component: () => import('@/layouts/DefaultLayout.vue'),
+    redirect: 'status',
     children: [
       {
-        path: '',
+        path: 'status',
         name: 'Status',
         component: () => import('@/views/StatusPage.vue'),
       },
