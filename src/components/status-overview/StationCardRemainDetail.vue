@@ -27,8 +27,9 @@
 
 <script lang="ts" setup>
 import { ChargerStatus } from '@/types/charger-status';
+import { watch } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   availableCount: number;
   chargerList: ChargerStatus[];
 }>();
@@ -36,4 +37,11 @@ defineProps<{
 let availableChargerCounter: number = 0;
 // 用于判断分隔符 `,` 是否显示的计数器
 const showComma = () => availableChargerCounter++;
+
+watch(
+  () => props.chargerList,
+  () => {
+    availableChargerCounter = 0;
+  },
+);
 </script>
