@@ -6,6 +6,24 @@
 
 ---
 
+- [:electric_plug::rage: Where Are Available Chargers ?!](#electric_plugrage-where-are-available-chargers-)
+  - [:page_facing_up: 简介](#page_facing_up-简介)
+  - [:rocket: 快速开始](#rocket-快速开始)
+    - [准备工作](#准备工作)
+    - [开发服务器，启动！](#开发服务器启动)
+    - [开发 & 调试](#开发--调试)
+    - [构建](#构建)
+    - [部署](#部署)
+  - [:open_file_folder: src 目录结构](#open_file_folder-src-目录结构)
+  - [:triangular_ruler: 开发规范](#triangular_ruler-开发规范)
+    - [提交相关](#提交相关)
+    - [UI 相关](#ui-相关)
+    - [代码风格相关](#代码风格相关)
+    - [依赖相关](#依赖相关)
+  - [:memo: Todo List](#memo-todo-list)
+  - [:book: API 文档](#book-api-文档)
+  - [:scroll: 使用许可](#scroll-使用许可)
+
 ## :page_facing_up: 简介
 
 本分支是 Version 5 (dev) 的前端部分
@@ -81,6 +99,20 @@ npm run dev # 或使用 yarn run dev
 
 查看 [Todo List](#memo-todo-list) 以了解当前开发进度和规划，完成一部分工作后请及时更新，也可以向其中添加新的任务
 
+### 构建
+
+```bash
+npm run build # 或使用 yarn run build
+```
+
+构建后的文件位于 `dist` 目录下，请不要提交该目录下的文件到仓库
+
+### 部署
+
+部署到生产环境时，`Mock` 将会被自动禁用，数据将从后端获取
+
+需要配置环境变量 `VITE_API_URL`，指向后端 API 的地址
+
 ## :open_file_folder: src 目录结构
 
 - `apis/`：网络请求、获取数据（按功能、模块划分子目录）
@@ -94,6 +126,16 @@ npm run dev # 或使用 yarn run dev
 - `views/`：页面
 
 ## :triangular_ruler: 开发规范
+
+### 提交相关
+
+- 提交代码到远程仓库前，请执行以下检查：
+  - **执行 `npm run build` 检查构建是否成功【重要】**
+  - 执行 `npm run lint` 检查代码风格
+- Commit message 推荐遵循 [Angular 提交规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)，使用 `<Type> | <Subject>` 的格式，例如：
+  - `Feat | Add a progress linear`
+  - `Fix | Incorrect judgment in status page`
+  - `Docs | Update todo list in README`
 
 ### UI 相关
 
@@ -121,21 +163,26 @@ _注：并非按照优先级排序_
 
 - [x] 基本布局（TopBar、SideBar、Footer）
 - [x] 状态管理、路由等基本配置
-- [x] 分享按钮
 - [x] 深色主题
 - [x] 状态概览组件
 - [x] 状态详情组件
 - [x] 充电桩位置示意图
+- [x] 数据过期提醒
+- [x] 分享按钮
+- [x] 刷新按钮
 - [ ] Loading、Error、About 等页面以及相关路由配置
 - [ ] 回到顶部按钮
 - [ ] Axios 封装（请求拦截、响应拦截、错误处理都未配置）
 - [ ] 与后端的交互
-- [ ] 数据过期提醒
 - [ ] 顶部进度条
 - [ ] 不同设备的适配（建议先以移动端为主开发组件，大致完成后再设计响应式布局）
 - [ ] 迁移旧版页面
 - [ ] 迁移文档
 - [ ] ...
+
+## :book: API 文档
+
+临时文档： <https://app.swaggerhub.com/apis/Golevka2001/where-are-available-chargers-api/5.0.0>
 
 ## :scroll: 使用许可
 
@@ -144,6 +191,7 @@ _注：并非按照优先级排序_
 [GNU AFFERO GENERAL PUBLIC LICENSE, Version 3](https://www.gnu.org/licenses/agpl-3.0.html)
 
 ```
+
 Copyright (C) 2022 - Present Gol3vka, Csimide, and other contributors
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -151,6 +199,7 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 ```
 
 - `public/favicon.svg` 来自 [Google Fonts - Noto Emoji](https://github.com/googlefonts/noto-emoji)，该项目的 Emoji 图像按 [Apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0) 授权。
