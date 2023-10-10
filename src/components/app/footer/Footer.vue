@@ -6,7 +6,7 @@
 <!-- +-------------------------+ -->
 
 <template>
-  <div class="align-end">
+  <div class="mb-4 align-end">
     <v-divider />
     <v-footer class="text-center bg-transparent">
       <v-row class="my-0">

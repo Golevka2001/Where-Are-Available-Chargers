@@ -28,8 +28,12 @@ export class StatusManager {
     this.isFetchingData = false;
   }
 
-  async updateData(): Promise<void> {
-    this.isFetchingData = true;
+  async updateData(
+    isRefresh: boolean = false, // 用于区分加载页面时的刷新和手动刷新
+  ): Promise<void> {
+    if (!isRefresh) {
+      this.isFetchingData = true;
+    }
     const response = await getChargersStatus();
     // TODO：若有变动记得修改
     this.updateMessage.lastSuccessStartTime =
@@ -38,7 +42,9 @@ export class StatusManager {
       response.update_message.last_success_end_time;
     this.statusDetail = response.status_detail;
     this.updateOverviewData();
-    this.isFetchingData = false;
+    if (!isRefresh) {
+      this.isFetchingData = false;
+    }
   }
 
   private updateOverviewData(): void {
