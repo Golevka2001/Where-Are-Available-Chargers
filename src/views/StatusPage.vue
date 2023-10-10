@@ -10,16 +10,20 @@
 <!-- +---------------------+ -->
 
 <template>
-  <div v-if="appStore.statusManager.isFetchingData">
-    <loading-indicator />
-  </div>
+  <div style="max-width: 45rem; margin: auto">
+    <!-- ^临时措施: 横向宽度大时，横向会撑满屏幕，先加一行限制宽度并居中 -->
+    <!-- TODO: 若改为多栏布局，需另行调整 -->
+    <div v-if="appStore.statusManager.isFetchingData">
+      <loading-indicator />
+    </div>
 
-  <div v-else>
-    <status-overview />
+    <div v-else>
+      <status-overview />
 
-    <status-detail />
+      <status-detail />
 
-    <bottom-info-bar />
+      <bottom-info-bar />
+    </div>
   </div>
 </template>
 
