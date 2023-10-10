@@ -24,8 +24,8 @@
 
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
-import ShareMenuLink from '@/components/app/bar/ShareMenuLink.vue';
-import ShareMenuQrCode from '@/components/app/bar/ShareMenuQrCode.vue';
+import ShareMenuLink from './ShareMenuLink.vue';
+import ShareMenuQrCode from './ShareMenuQrCode.vue';
 
 const appStore = useAppStore();
 

@@ -24,6 +24,7 @@ const props = defineProps<{
   totalCount: number;
 }>();
 
+// TODO：准备改一下判断逻辑
 const availableCountTextColor = computed(() => {
   return props.availableCount >
     props.totalCount * appStore.config.stationThresholdPercentage

@@ -9,27 +9,20 @@
 
 <template>
   <div
-    v-for="(stationStatus, stationName) in appStore.statusManager.statusDetail"
-    :key="stationName"
+    v-for="(stationStatus, index) in appStore.statusManager.statusDetail
+      .stations"
+    :key="index"
     class="ma-6"
   >
-    <station-info
-      :station-name="String(stationName)"
-      :available-count="
-        appStore.statusManager.statusOverview[stationName].availableCount
-      "
-      :total-count="
-        appStore.statusManager.statusOverview[stationName].totalCount
-      "
-    />
-    <station-table :station-status="stationStatus" />
+    <station-info :station-status="stationStatus" />
+    <station-table :charger-list="stationStatus.chargers" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
-import StationInfo from '@/components/status-detail/StationInfo.vue';
-import StationTable from '@/components/status-detail/StationTable.vue';
+import StationInfo from './StationInfo.vue';
+import StationTable from './StationTable.vue';
 
 const appStore = useAppStore();
 </script>

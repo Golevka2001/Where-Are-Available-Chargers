@@ -12,9 +12,9 @@
 
 <template>
   <v-app>
-    <app-bar />
+    <app-top-bar />
 
-    <app-drawer />
+    <app-side-drawer />
 
     <v-main class="pb-0">
       <router-view />
@@ -26,9 +26,9 @@
 
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
-import AppBar from '@/components/app/bar/Bar.vue';
-import AppDrawer from '@/components/app/drawer/Drawer.vue';
-import AppFooter from '@/components/app/footer/Footer.vue';
+import AppTopBar from '@/components/app/app-top-bar/AppTopBar.vue';
+import AppSideDrawer from '@/components/app/app-side-drawer/AppSideDrawer.vue';
+import AppFooter from '@/components/app/app-footer/AppFooter.vue';
 
 const appStore = useAppStore();
 </script>

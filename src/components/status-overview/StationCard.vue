@@ -14,8 +14,9 @@
           class="mr-2"
           style="font-size: 1.2rem"
         >
-          {{ stationName }}
+          {{ stationStatus.name }}
         </span>
+        <!-- TODO: Add link -->
         <span style="font-size: 0.9rem">
           详情<v-icon size="small">mdi-chevron-right</v-icon>
         </span>
@@ -23,26 +24,25 @@
 
       <!-- Available sockets count -->
       <station-card-remain-count
-        :available-count="stationStatus.availableCount"
-        :total-count="stationStatus.totalCount"
+        :available-count="stationStatus.available_count"
+        :total-count="stationStatus.total_count"
       />
     </v-card-title>
 
-    <!-- Chargers info overview -->
-    <station-card-remain-detail :stationStatus="stationStatus" />
+    <!-- Chargers status overview -->
+    <station-card-remain-detail
+      :available-count="stationStatus.available_count"
+      :chargerList="stationStatus.chargers"
+    />
   </v-card>
 </template>
 
 <script lang="ts" setup>
-import StationCardRemainCount from '@/components/status-overview/StationCardRemainCount.vue';
-import StationCardRemainDetail from '@/components/status-overview/StationCardRemainDetail.vue';
+import { StationStatus } from '@/types/station-status';
+import StationCardRemainCount from './StationCardRemainCount.vue';
+import StationCardRemainDetail from './StationCardRemainDetail.vue';
 
 defineProps<{
-  stationName: string;
-  stationStatus: {
-    [chargerName: string]: number;
-    availableCount: number;
-    totalCount: number;
-  };
+  stationStatus: StationStatus;
 }>();
 </script>

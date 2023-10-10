@@ -19,10 +19,10 @@
       nav
     >
       <!-- Nav links -->
-      <app-drawer-nav />
+      <drawer-nav-list />
 
       <!-- Theme toggle -->
-      <app-drawer-theme-toggle />
+      <theme-toggle />
     </v-list>
 
     <!-- Classic version -->
@@ -43,8 +43,8 @@
 
 <script setup lang="ts">
 import { useAppStore } from '@/store/app';
-import AppDrawerNav from '@/components/app/drawer/Nav.vue';
-import AppDrawerThemeToggle from '@/components/app/drawer/ThemeToggle.vue';
+import DrawerNavList from './DrawerNavList.vue';
+import ThemeToggle from './ThemeToggle.vue';
 
 const appStore = useAppStore();
 </script>

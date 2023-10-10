@@ -1,15 +1,14 @@
-const generateRandomStatus = (): number => {
-  if (Math.random() < 0.1) {
-    return 2;
-  } else {
-    return Math.floor(Math.random() * 2);
-  }
-};
+const STATION_FILTER_RATE = 0.2;
+const CHARGER_FAULT_RATE = 0.1;
+const SOCKET_FAULT_RATE = 0.1;
 
-const generateRandomData = (): any => {
-  const data: any = {};
+const CHARGER_COUNT_BASE = 1;
+const CHARGER_COUNT_RANGE = 5;
 
-  let stationNameList = [
+const CODE = 200;
+
+const genStationNameList = (): string[] => {
+  const stationNameList = [
     '东门北侧',
     '东门南侧',
     '西门北侧',
@@ -19,49 +18,99 @@ const generateRandomData = (): any => {
     '北门东北侧',
     '北门东南侧',
   ];
-  stationNameList = stationNameList.filter(() => Math.random() > 0.2);
+  return stationNameList.filter(() => Math.random() > STATION_FILTER_RATE);
+};
 
-  for (let i = 0; i < stationNameList.length; i++) {
-    const stationName = stationNameList[i];
-    data[stationName] = {};
+const genSocketStatus = (): number => {
+  if (Math.random() < SOCKET_FAULT_RATE) {
+    return 2;
+  } else {
+    return Math.floor(Math.random() * 2);
+  }
+};
 
-    const chargerCount = Math.floor(Math.random() * 5) + 1;
+const genChargerStatus = (chargerName: string, socketCount: number): any => {
+  const sockets = Array.from({ length: socketCount }, () => genSocketStatus());
 
-    for (let j = 0; j < chargerCount; j++) {
-      const chargerName = String.fromCharCode(65 + j);
-      const chargerStatus: number[] = [];
+  const chargerStatus: any = {
+    name: chargerName,
+    total_count: socketCount,
+    available_count: sockets.filter((s) => s === 1).length,
+    sockets,
+  };
 
-      for (let k = 0; k < 10; k++) {
-        const socketStatus = generateRandomStatus();
-        chargerStatus.push(socketStatus);
-      }
-
-      if (Math.random() < 0.1) {
-        data[stationName][chargerName] = null;
-      } else {
-        data[stationName][chargerName] = chargerStatus;
-      }
-    }
+  if (Math.random() < CHARGER_FAULT_RATE) {
+    chargerStatus.fault_info = '未启用';
+    chargerStatus.available_count = 0;
+  } else {
+    chargerStatus.fault_info = null;
   }
 
-  return data;
+  return chargerStatus;
+};
+
+const genStationStatus = (stationName: string, chargerCount: number): any => {
+  const chargers = Array.from({ length: chargerCount }, (_, i) => {
+    const chargerName = String.fromCharCode(65 + i);
+    const chargerStatus = genChargerStatus(chargerName, 10);
+    return chargerStatus;
+  });
+
+  const stationStatus: any = {
+    name: stationName,
+    description: null,
+    total_count: chargers.reduce((sum, c) => sum + c.total_count, 0),
+    available_count: chargers.reduce((sum, c) => sum + c.available_count, 0),
+    chargers,
+  };
+
+  return stationStatus;
+};
+
+const genStatusDetail = (stationNameList: string[]): any => {
+  const stations = stationNameList.map((stationName) => {
+    const chargerCount =
+      Math.floor(Math.random() * CHARGER_COUNT_RANGE) + CHARGER_COUNT_BASE;
+    const stationStatus = genStationStatus(stationName, chargerCount);
+    return stationStatus;
+  });
+
+  const total_count = stations.reduce((sum, s) => sum + s.total_count, 0);
+  const available_count = stations.reduce(
+    (sum, s) => sum + s.available_count,
+    0,
+  );
+
+  const statusDetail: any = {
+    total_count,
+    available_count,
+    stations,
+  };
+
+  return statusDetail;
+};
+
+const genRandomData = (): any => {
+  const stationNameList = genStationNameList();
+  const statusDetail = genStatusDetail(stationNameList);
+
+  const testData = {
+    code: CODE,
+    last_update_time: Date.now(),
+    status: statusDetail,
+  };
+
+  return testData;
 };
 
 export default [
   {
     url: '/api/get_status',
     method: 'get',
-    timeout: Math.floor(Math.random() * 1000) + 500, // 0.5-1.5s
     statusCode: 200,
+    timeout: Math.floor(Math.random() * 1000) + 500, // 0.5-1.5s
     response: () => {
-      const testData = {
-        update_message: {
-          last_success_start_time: Date.now(),
-          last_success_end_time: Date.now() + 1000,
-        },
-        status_detail: generateRandomData(),
-      };
-      return testData;
+      return genRandomData();
     },
   },
 ];

@@ -10,17 +10,17 @@
     <v-app-bar-nav-icon @click.stop="clickMenuBtn" />
 
     <!-- Title -->
-    <app-bar-title />
+    <bar-title />
 
     <!-- Share button & share menu -->
-    <app-bar-share-menu />
+    <share-menu />
   </v-app-bar>
 </template>
 
 <script setup lang="ts">
 import { useAppStore } from '@/store/app';
-import AppBarShareMenu from '@/components/app/bar/ShareMenu.vue';
-import AppBarTitle from '@/components/app/bar/Title.vue';
+import BarTitle from './BarTitle.vue';
+import ShareMenu from './ShareMenu.vue';
 
 const appStore = useAppStore();
 

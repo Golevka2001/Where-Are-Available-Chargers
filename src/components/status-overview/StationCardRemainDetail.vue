@@ -5,34 +5,32 @@
     class="px-2 pb-2 text-left text-truncate"
     style="font-size: 0.9rem"
   >
-    <span v-if="stationStatus.availableCount === 0">暂无可用</span>
+    <span v-if="availableCount === 0">暂无可用</span>
     <span v-else> 桩号·余量： </span>
     <span
-      v-for="(chargerStatus, chargerName, index) in stationStatus"
+      v-for="(chargerStatus, index) in chargerList"
       :key="index"
     >
       <span
         v-if="
-          chargerName !== 'availableCount' &&
-          chargerName !== 'totalCount' &&
-          chargerStatus !== 0
+          typeof chargerStatus.fault_info !== 'string' &&
+          chargerStatus.available_count !== 0
         "
       >
         <span v-if="showComma()"> , </span>
-        <sup>{{ chargerName }}</sup>
-        {{ chargerStatus }}
+        <sup>{{ chargerStatus.name }}</sup>
+        {{ chargerStatus.available_count }}
       </span>
     </span>
   </v-card-text>
 </template>
 
 <script lang="ts" setup>
+import { ChargerStatus } from '@/types/charger-status';
+
 defineProps<{
-  stationStatus: {
-    [chargerName: string]: number;
-    availableCount: number;
-    totalCount: number;
-  };
+  availableCount: number;
+  chargerList: ChargerStatus[];
 }>();
 
 let availableChargerCounter: number = 0;

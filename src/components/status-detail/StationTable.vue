@@ -22,14 +22,20 @@
     </thead>
     <tbody>
       <tr
-        v-for="(chargerStatus, chargerName) in stationStatus"
-        :key="chargerName"
+        v-for="(chargerStatus, index) in chargerList"
+        :key="index"
       >
-        <td class="pr-1 text-center">{{ chargerName }}</td>
+        <!-- Charger name -->
+        <td class="pr-1 text-center">
+          {{ chargerStatus.name }}
+        </td>
+        <!-- Sockets status -->
         <td class="pl-1 text-center">
-          <div v-if="chargerStatus === null">* 充电桩参数缺失 *</div>
+          <div v-if="typeof chargerStatus.fault_info === 'string'">
+            {{ chargerStatus.fault_info }}
+          </div>
           <station-table-charger-status
-            :charger-status="chargerStatus"
+            :socket-list="chargerStatus.sockets"
             v-else
           />
         </td>
@@ -39,11 +45,10 @@
 </template>
 
 <script lang="ts" setup>
-import StationTableChargerStatus from '@/components/status-detail/StationTableChargerStatus.vue';
+import { ChargerStatus } from '@/types/charger-status';
+import StationTableChargerStatus from './StationTableChargerStatus.vue';
 
 defineProps<{
-  stationStatus: {
-    [chargerName: string]: number[] | null;
-  };
+  chargerList: ChargerStatus[];
 }>();
 </script>

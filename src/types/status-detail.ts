@@ -1,5 +1,7 @@
+import { StationStatus } from './station-status';
+
 export interface StatusDetail {
-  [stationName: string]: {
-    [chargerName: string]: number[] | null;
-  };
+  total_count: number;
+  available_count: number;
+  stations: StationStatus[];
 }

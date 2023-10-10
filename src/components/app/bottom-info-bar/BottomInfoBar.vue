@@ -30,13 +30,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useAppStore } from '@/store/app';
 
 const appStore = useAppStore();
 const dataExpirationTime = appStore.config.dataExpirationTime;
 
-const isBarVisible = ref(true);
+const isBarVisible = ref(false);
 const now = ref(new Date());
 const barBackground = ref('');
 const updateMessage = ref('');
@@ -83,7 +83,7 @@ const updateBottomBar = () => {
   now.value = new Date();
   const diff =
     now.value.getTime() -
-    new Date(appStore.statusManager.updateMessage.lastSuccessEndTime).getTime();
+    new Date(appStore.statusManager.lastUpdateTime).getTime();
   barBackground.value = getBarBackground(diff);
   updateMessage.value = getUpdateMessage(diff);
 };
@@ -126,6 +126,10 @@ const onScroll = () => {
 };
 
 onMounted(() => {
+  // 底栏在页面加载完成后缓出
+  setTimeout(() => {
+    isBarVisible.value = true;
+  }, appStore.config.bottomBarShowDelay / 3);
   startInterval();
 });
 </script>

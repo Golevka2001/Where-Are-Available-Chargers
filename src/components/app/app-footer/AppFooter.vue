@@ -12,7 +12,7 @@
       <v-row class="my-0">
         <!-- Nav links -->
         <v-col cols="12">
-          <app-footer-nav />
+          <footer-nav-list />
         </v-col>
 
         <!-- Version -->
@@ -29,7 +29,7 @@
           cols=" 12"
           class="pt-0"
         >
-          <app-footer-copyright />
+          <footer-copyright />
         </v-col>
       </v-row>
     </v-footer>
@@ -38,6 +38,6 @@
 
 <script setup lang="ts">
 import { version } from '@/../package.json';
-import AppFooterNav from '@/components/app/footer/Nav.vue';
-import AppFooterCopyright from '@/components/app/footer/Copyright.vue';
+import FooterNavList from './FooterNavList.vue';
+import FooterCopyright from './FooterCopyright.vue';
 </script>
