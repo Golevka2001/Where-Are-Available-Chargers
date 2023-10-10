@@ -1,81 +1,81 @@
 {
   "code": 200,
-  "last_update_date": 1696947550044,
+  "last_update_time": 1696953009813,
   "status": {
-    "available_count": 4,
+    "available_count": 2,
     "total_count": 320,
     "stations": [
       {
         "name": "东门北侧",
         "description": null,
-        "available_count": 2,
+        "available_count": 0,
         "total_count": 110,
         "chargers": [
           {
             "name": "N1",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "N2",
             "fault_info": null,
-            "available_count": 1,
-            "socket": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+            "available_count": 0,
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "N3",
             "fault_info": null,
-            "available_count": 1,
-            "socket": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+            "available_count": 0,
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "N4",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "A",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "B",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "C",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "D",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "E",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "F",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "G",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       },
@@ -89,13 +89,13 @@
             "name": "A",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "B",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       },
@@ -109,19 +109,19 @@
             "name": "A",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "B",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "C",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       },
@@ -135,135 +135,135 @@
             "name": "A",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "B",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "C",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       },
       {
         "name": "南门西侧",
         "description": null,
-        "available_count": 0,
+        "available_count": 1,
         "total_count": 10,
         "chargers": [
           {
             "name": "A",
             "fault_info": null,
-            "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "available_count": 1,
+            "sockets": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
           },
           {
             "name": "B",
             "fault_info": "整桩故障",
             "available_count": 0,
-            "socket": []
+            "sockets": []
           }
         ]
       },
       {
         "name": "南门东侧",
         "description": null,
-        "available_count": 1,
+        "available_count": 0,
         "total_count": 20,
         "chargers": [
           {
             "name": "A",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "B",
             "fault_info": null,
-            "available_count": 1,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+            "available_count": 0,
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       },
       {
         "name": "北门东北侧",
         "description": null,
-        "available_count": 0,
+        "available_count": 1,
         "total_count": 40,
         "chargers": [
           {
             "name": "A",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "B",
             "fault_info": null,
-            "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "available_count": 1,
+            "sockets": [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "C",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "D",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       },
       {
         "name": "北门东南侧",
         "description": null,
-        "available_count": 1,
+        "available_count": 0,
         "total_count": 60,
         "chargers": [
           {
             "name": "A",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "B",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "C",
             "fault_info": null,
-            "available_count": 1,
-            "socket": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+            "available_count": 0,
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "D",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "E",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           },
           {
             "name": "F",
             "fault_info": null,
             "available_count": 0,
-            "socket": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "sockets": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ]
       }
