@@ -4,9 +4,9 @@
   <span class="d-flex">
     <span style="font-size: 0.9rem"> 可用插座 </span>
     <span
+      :style="{ color: availableCountTextColor }"
       class="ml-2"
       style="font-size: 1.8rem"
-      :style="{ color: availableCountTextColor }"
     >
       {{ availableCount }}
     </span>

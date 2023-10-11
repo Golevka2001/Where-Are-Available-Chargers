@@ -17,7 +17,7 @@
   </v-app-bar>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useAppStore } from '@/store/app';
 import BarTitle from './BarTitle.vue';
 import ShareMenu from './ShareMenu.vue';

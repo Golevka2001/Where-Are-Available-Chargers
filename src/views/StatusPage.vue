@@ -35,6 +35,5 @@ import StatusDetail from '@/components/status-detail/StatusDetail.vue';
 import StatusOverview from '@/components/status-overview/StatusOverview.vue';
 
 const appStore = useAppStore();
-
 appStore.statusManager.updateData(false);
 </script>

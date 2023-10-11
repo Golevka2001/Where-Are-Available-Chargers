@@ -9,10 +9,10 @@
     <!-- 川剧变脸 -->
     <v-scroll-y-reverse-transition leave-absolute>
       <span
-        @click="clickEmojiFace"
         :key="emojiFace"
         v-html="emojiFace"
         style="cursor: pointer"
+        @click.stop="clickEmojiFace"
       ></span>
     </v-scroll-y-reverse-transition>
     <router-link

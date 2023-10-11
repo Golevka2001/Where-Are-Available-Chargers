@@ -26,9 +26,9 @@
 
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
-import AppTopBar from '@/components/app/app-top-bar/AppTopBar.vue';
-import AppSideDrawer from '@/components/app/app-side-drawer/AppSideDrawer.vue';
 import AppFooter from '@/components/app/app-footer/AppFooter.vue';
+import AppSideDrawer from '@/components/app/app-side-drawer/AppSideDrawer.vue';
+import AppTopBar from '@/components/app/app-top-bar/AppTopBar.vue';
 
 const appStore = useAppStore();
 </script>

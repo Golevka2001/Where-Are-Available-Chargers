@@ -36,7 +36,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { version } from '@/../package.json';
 import FooterNavList from './FooterNavList.vue';
 import FooterCopyright from './FooterCopyright.vue';

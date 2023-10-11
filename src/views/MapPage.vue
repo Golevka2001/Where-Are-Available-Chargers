@@ -24,9 +24,11 @@
         flipVertical: 0,
       },
     }"
+    class="text-center"
   >
     <img
       :src="appStore.config.latestMapPath"
+      alt="充电桩位置示意图"
       width="100%"
     />
   </div>

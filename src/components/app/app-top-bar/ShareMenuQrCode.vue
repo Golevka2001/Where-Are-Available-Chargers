@@ -2,10 +2,10 @@
 
 <template>
   <v-sheet
+    :rounded="true"
     width="10rem"
     class="mx-auto my-6 bg-white"
-    style="outline: gray solid 1px"
-    rounded
+    style="outline: rgb(158, 158, 158) solid 1px"
   >
     <!-- QR code image -->
     <v-img src="@/assets/img/qr-code.svg">
@@ -13,7 +13,7 @@
         <div class="d-flex fill-height align-center justify-center">
           <v-progress-circular
             color="grey"
-            indeterminate
+            :indeterminate="true"
           />
         </div>
       </template>
@@ -21,12 +21,12 @@
 
     <!-- Download button -->
     <v-btn
-      @click.stop="clickDownloadBtn"
+      :block="true"
+      :icon="true"
       density="compact"
       rounded="0"
       variant="tonal"
-      block
-      icon
+      @click.stop="clickDownloadBtn"
     >
       <v-icon> mdi-download-box-outline </v-icon>
       <v-tooltip
@@ -41,8 +41,8 @@
   <!-- Snackbar -->
   <v-snackbar
     v-model="isSnackbarVisible"
+    color="green"
     timeout="1000"
-    color="success"
   >
     &#10024;&nbsp;已保存
   </v-snackbar>

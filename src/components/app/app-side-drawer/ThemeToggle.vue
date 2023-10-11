@@ -1,31 +1,38 @@
 <!-- 侧边栏主题切换按钮 -->
 
 <template>
-  <v-list-item @click="clickThemeBtn">
+  <v-list-item @click.stop="clickThemeBtn">
     <template v-slot:prepend>
-      <v-icon
-        :icon="
-          theme.global.current.value.dark
-            ? 'mdi-weather-sunny'
-            : 'mdi-weather-night'
-        "
-      />
+      <v-icon :icon="themeToggleIcon" />
     </template>
     <v-list-item-title>
-      {{ theme.global.current.value.dark ? '浅色模式' : '深色模式' }}
+      {{ themeToggleText }}
     </v-list-item-title>
   </v-list-item>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
+import { computed } from 'vue';
 import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 
 const appStore = useAppStore();
 const theme = useTheme();
 
+const themeToggleIcon = computed(() => {
+  return theme.global.current.value.dark
+    ? 'mdi-weather-sunny'
+    : 'mdi-weather-night';
+});
+
+const themeToggleText = computed(() => {
+  return theme.global.current.value.dark ? '浅色模式' : '深色模式';
+});
+
 const clickThemeBtn = () => {
-  appStore.isDrawerOpen = false;
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
+  setTimeout(() => {
+    appStore.isDrawerOpen = false;
+  }, appStore.config.drawerCloseDelay);
 };
 </script>

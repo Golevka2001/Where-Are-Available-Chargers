@@ -3,23 +3,22 @@
 <template>
   <!-- Link -->
   <v-text-field
+    :model-value="link"
+    :readonly="true"
     density="compact"
     label="Link"
-    model-value="https://chargers.injs.eu"
     variant="outlined"
     class="mx-4"
     style="width: 15rem"
-    flat
-    readonly
   >
     <!-- Copy button -->
     <template v-slot:append-inner>
       <v-btn
-        @click.stop="clickCopyBtn"
+        :icon="true"
         rounded=""
         size="x-small"
         variant="tonal"
-        icon
+        @click.stop="clickCopyBtn"
       >
         <v-icon> mdi-content-copy </v-icon>
         <v-tooltip
@@ -36,8 +35,8 @@
   <!-- TODO：考虑消息条复用 & 显示在分享菜单处 -->
   <v-snackbar
     v-model="isSnackbarVisible"
+    color="green"
     timeout="1000"
-    color="success"
   >
     &#10024;&nbsp;已复制到剪贴板
   </v-snackbar>
@@ -47,10 +46,11 @@
 import { ref } from 'vue';
 
 const isSnackbarVisible = ref(false);
+const link = 'https://chargers.injs.eu';
 
 const clickCopyBtn = () => {
   // 复制网址
-  navigator.clipboard.writeText('https://chargers.injs.eu');
+  navigator.clipboard.writeText(link);
   // 显示提示信息
   isSnackbarVisible.value = true;
 };

@@ -3,7 +3,6 @@
 <template>
   <v-list-item
     v-for="navItem in navList"
-    @click="clickNavItem"
     :key="navItem.title"
     :href="navItem.href"
     :target="navItem.target"
@@ -18,11 +17,7 @@
   </v-list-item>
 </template>
 
-<script setup lang="ts">
-import { useAppStore } from '@/store/app';
-
-const appStore = useAppStore();
-
+<script lang="ts" setup>
 // 外链用 `href`，内部路由用 `to`
 const navList = [
   {
@@ -53,8 +48,4 @@ const navList = [
     target: '_blank',
   },
 ];
-
-const clickNavItem = () => {
-  appStore.isDrawerOpen = false;
-};
 </script>

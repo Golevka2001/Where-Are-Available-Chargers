@@ -12,11 +12,11 @@
 <template>
   <v-navigation-drawer
     v-model="appStore.isDrawerOpen"
-    temporary
+    :temporary="true"
   >
     <v-list
+      :nav="true"
       density="compact"
-      nav
     >
       <!-- Nav links -->
       <drawer-nav-list />
@@ -30,9 +30,9 @@
       <div class="pa-4">
         <!-- TODO：旧版链接和页面 -->
         <v-btn
+          :block="true"
           prepend-icon="mdi-undo-variant"
           variant="outlined"
-          block
         >
           回到旧版
         </v-btn>
@@ -41,7 +41,7 @@
   </v-navigation-drawer>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useAppStore } from '@/store/app';
 import DrawerNavList from './DrawerNavList.vue';
 import ThemeToggle from './ThemeToggle.vue';

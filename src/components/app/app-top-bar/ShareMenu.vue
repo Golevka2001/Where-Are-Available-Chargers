@@ -5,9 +5,9 @@
     <template v-slot:activator="{ props }">
       <!-- Share button -->
       <v-btn
-        @click.stop="clickShareBtn"
-        v-bind="props"
         icon="mdi-share-variant-outline"
+        v-bind="props"
+        @click.stop="clickShareBtn"
       />
     </template>
 

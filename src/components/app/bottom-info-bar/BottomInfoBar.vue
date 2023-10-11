@@ -4,20 +4,20 @@
 <template>
   <v-layout-item
     v-scroll="onScroll"
+    model-value
     position="bottom"
     class="d-flex align-end"
     style="pointer-events: none"
-    model-value
   >
     <v-slide-y-reverse-transition leave-absolute>
       <v-btn
-        @click="clickBottomBar"
-        :color="barBackground"
         v-show="isBarVisible"
+        :block="true"
+        :color="barBackground"
         rounded="0"
         class="text-background"
         style="pointer-events: all"
-        block
+        @click.stop="clickBottomBar"
       >
         <v-scroll-y-transition leave-absolute>
           <span :key="String(isRefreshing)">
