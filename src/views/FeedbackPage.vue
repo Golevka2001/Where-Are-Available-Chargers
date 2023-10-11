@@ -10,8 +10,16 @@
 </template>
 
 <script lang="ts" setup>
+import { onBeforeMount, onBeforeUnmount } from 'vue';
 import { useAppStore } from '@/store/app';
 
 const appStore = useAppStore();
-appStore.isFooterVisible = false;
+
+// 此页面不显示 Footer
+onBeforeMount(() => {
+  appStore.isFooterVisible = false;
+});
+onBeforeUnmount(() => {
+  appStore.isFooterVisible = true;
+});
 </script>
