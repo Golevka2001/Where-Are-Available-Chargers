@@ -132,6 +132,7 @@ npm run build # 或使用 yarn run build
 - 提交代码到远程仓库前，请执行以下检查：
   - **执行 `npm run build` 检查构建是否成功【重要】**
   - 执行 `npm run lint` 检查代码风格
+  - 执行 `npm run format` 格式化代码
 - Commit message 推荐遵循 [Angular 提交规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)，使用 `<Type> | <Subject>` 的格式，例如：
   - `Feat | Add a progress linear`
   - `Fix | Incorrect judgment in status page`
