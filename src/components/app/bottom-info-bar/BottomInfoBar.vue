@@ -20,8 +20,8 @@
         @click.stop="clickBottomBar"
       >
         <v-scroll-y-transition leave-absolute>
-          <span :key="String(isRefreshing)">
-            {{ updateMessage }}
+          <span :key="String(isBarClicked)">
+            {{ barText }}
           </span>
         </v-scroll-y-transition>
       </v-btn>
@@ -34,34 +34,35 @@ import { onMounted, ref } from 'vue';
 import { useAppStore } from '@/store/app';
 
 const appStore = useAppStore();
-const dataExpirationTime = appStore.config.dataExpirationTime;
 
 const isBarVisible = ref(false);
-const now = ref(new Date());
 const barBackground = ref('');
-const updateMessage = ref('');
+const barText = ref('');
 
-let isRefreshing = false;
+let isBarClicked = false;
 let lastScrollY = 0;
+
 let intervalId: NodeJS.Timeout;
+let isIntervalStarted = false;
 
 // 背景色渐变：绿[rgb(76, 175, 80)] -> 橙[rgb(255, 152, 0)]
-const getBarBackground = (diff: number) => {
-  if (diff > dataExpirationTime) {
-    return 'orange';
-  } else {
-    const percent = diff / dataExpirationTime;
-    const r = 76 + (255 - 76) * percent;
-    const g = 175 + (152 - 175) * percent;
-    const b = 80 + (0 - 80) * percent;
-    return `rgb(${r}, ${g}, ${b})`;
+const getBarBackground = (diff: number): string => {
+  if (diff < appStore.config.dataExpirationTime / 6) {
+    return 'green';
   }
+  if (diff > appStore.config.dataExpirationTime) {
+    return 'orange';
+  }
+  const percent = diff / appStore.config.dataExpirationTime;
+  const r = 76 + Math.floor((255 - 76) * percent);
+  const g = 175 + Math.floor((152 - 175) * percent);
+  const b = 80 + Math.floor((0 - 80) * percent);
+  return `rgb(${r}, ${g}, ${b})`;
 };
 
 // 文字信息：更新于 xxx
-const getUpdateMessage = (diff: number) => {
-  if (diff > dataExpirationTime) {
-    clearInterval(intervalId);
+const getUpdateMessage = (diff: number): string => {
+  if (diff > appStore.config.dataExpirationTime) {
     return '数据已过期，点此刷新';
   }
   const diffSeconds = Math.floor(diff / 1000);
@@ -80,34 +81,54 @@ const getUpdateMessage = (diff: number) => {
 
 // 更新底部状态栏
 const updateBottomBar = () => {
-  now.value = new Date();
   const diff =
-    now.value.getTime() -
-    new Date(appStore.statusManager.lastUpdateTime).getTime();
+    Date.now() - new Date(appStore.statusManager.lastUpdateTime).getTime();
   barBackground.value = getBarBackground(diff);
-  updateMessage.value = getUpdateMessage(diff);
+  // 被点击时需要一般需要显示其他文字，不更新
+  if (!isBarClicked) {
+    barText.value = getUpdateMessage(diff);
+  }
+  // 数据过期，停止定时器
+  if (diff > appStore.config.dataExpirationTime) {
+    clearInterval(intervalId);
+    isIntervalStarted = false;
+    return;
+  }
 };
 
 // 触发定时器
 const startInterval = () => {
-  clearInterval(intervalId);
+  if (isIntervalStarted) {
+    return;
+  }
+  isIntervalStarted = true;
   updateBottomBar(); // 定时器启动后有 1s 的延迟，需要手动更新一次
   intervalId = setInterval(() => {
-    if (isRefreshing) {
-      return;
-    } else {
-      updateBottomBar();
-    }
-  }, 1000);
+    updateBottomBar();
+  }, appStore.config.bottomBarInterval);
 };
 
-const clickBottomBar = () => {
-  isRefreshing = true;
-  updateMessage.value = '正在更新数据，请稍候 ...';
-  appStore.statusManager.updateData(true).then(() => {
-    isRefreshing = false;
-    startInterval();
-  });
+const clickBottomBar = async () => {
+  if (isBarClicked) {
+    return;
+  }
+  isBarClicked = true;
+  const diff =
+    Date.now() - new Date(appStore.statusManager.lastUpdateTime).getTime();
+  // 后端数据未更新，不刷新
+  if (diff < appStore.config.backendUpdateInterval) {
+    barText.value = '数据仍在有效期内';
+    await new Promise((resolve) =>
+      setTimeout(resolve, appStore.config.bottomBarInterval),
+    );
+  }
+  // 从后端获取新数据
+  else {
+    barText.value = '正在更新数据，请稍候...';
+    await appStore.statusManager.updateData(true);
+  }
+  isBarClicked = false;
+  isIntervalStarted ? updateBottomBar() : startInterval();
 };
 
 const onScroll = () => {
@@ -130,6 +151,7 @@ onMounted(() => {
   setTimeout(() => {
     isBarVisible.value = true;
   }, appStore.config.bottomBarShowDelay / 3);
+
   startInterval();
 });
 </script>
