@@ -28,6 +28,7 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from 'vue';
 import { useAppStore } from '@/store/app';
 import BottomInfoBar from '@/components/app/bottom-info-bar/BottomInfoBar.vue';
 import LoadingIndicator from '@/components/app/loading-indicator/LoadingIndicator.vue';
@@ -36,4 +37,16 @@ import StatusOverview from '@/components/status-overview/StatusOverview.vue';
 
 const appStore = useAppStore();
 appStore.statusManager.updateData(false);
+
+onMounted(() => {
+  let updateCount = 0;
+  // 自动更新数据一定次数
+  const intervalId = setInterval(() => {
+    appStore.statusManager.updateData(false);
+    ++updateCount;
+    if (updateCount >= appStore.config.autoUpdateMaxTimes) {
+      clearInterval(intervalId);
+    }
+  }, appStore.config.autoUpdateInterval);
+});
 </script>
