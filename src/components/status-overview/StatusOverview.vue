@@ -17,17 +17,14 @@
       <v-row class="mx-auto my-auto">
         <!-- TODO：列数根据屏幕宽度调整 -->
         <v-col
-          v-for="(stationStatus, index) in appStore.statusManager.statusDetail
-            .stations"
+          v-for="(stationStatus, index) in statusStore.statusDetail.stations"
           :key="index"
           cols="12"
           class="px-0 py-0"
         >
           <station-card :station-status="stationStatus" />
           <v-divider
-            v-if="
-              index !== appStore.statusManager.statusDetail.stations.length - 1
-            "
+            v-if="index !== statusStore.statusDetail.stations.length - 1"
             class="border-opacity-100"
           />
         </v-col>
@@ -37,8 +34,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from '@/store/app';
+import { useStatusStore } from '@/store/status';
 import StationCard from './StationCard.vue';
 
-const appStore = useAppStore();
+const statusStore = useStatusStore();
 </script>

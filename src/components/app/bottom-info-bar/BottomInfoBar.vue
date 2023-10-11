@@ -31,10 +31,10 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { useAppStore } from '@/store/app';
+import { useStatusStore } from '@/store/status';
 import config from '@/config';
 
-const appStore = useAppStore();
+const statusStore = useStatusStore();
 
 const isBarVisible = ref(false);
 const barBackground = ref('');
@@ -82,8 +82,7 @@ const getUpdateMessage = (diff: number): string => {
 
 // 更新底部状态栏
 const updateBottomBar = () => {
-  const diff =
-    Date.now() - new Date(appStore.statusManager.lastUpdateTime).getTime();
+  const diff = Date.now() - new Date(statusStore.lastUpdateTime).getTime();
   barBackground.value = getBarBackground(diff);
   // 被点击时需要一般需要显示其他文字，不更新
   if (!isBarClicked) {
@@ -114,8 +113,7 @@ const clickBottomBar = async () => {
     return;
   }
   isBarClicked = true;
-  const diff =
-    Date.now() - new Date(appStore.statusManager.lastUpdateTime).getTime();
+  const diff = Date.now() - new Date(statusStore.lastUpdateTime).getTime();
   // 后端数据未更新，不刷新
   if (diff < config.backendUpdateInterval) {
     barText.value = '数据仍在有效期内';
@@ -126,7 +124,7 @@ const clickBottomBar = async () => {
   // 从后端获取新数据
   else {
     barText.value = '正在更新数据，请稍候...';
-    await appStore.statusManager.updateData(true);
+    await statusStore.updateData(true);
   }
   isBarClicked = false;
   isIntervalStarted ? updateBottomBar() : startInterval();

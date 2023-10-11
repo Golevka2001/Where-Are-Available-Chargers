@@ -9,8 +9,7 @@
 
 <template>
   <div
-    v-for="(stationStatus, index) in appStore.statusManager.statusDetail
-      .stations"
+    v-for="(stationStatus, index) in statusStore.statusDetail.stations"
     :key="index"
     class="ma-6"
   >
@@ -20,9 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from '@/store/app';
+import { useStatusStore } from '@/store/status';
 import StationInfo from './StationInfo.vue';
 import StationTable from './StationTable.vue';
 
-const appStore = useAppStore();
+const statusStore = useStatusStore();
 </script>
