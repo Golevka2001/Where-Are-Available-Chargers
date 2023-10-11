@@ -30,12 +30,14 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 import { useAppStore } from '@/store/app';
+import config from '@/config';
 import BottomInfoBar from '@/components/app/bottom-info-bar/BottomInfoBar.vue';
 import LoadingIndicator from '@/components/app/loading-indicator/LoadingIndicator.vue';
 import StatusDetail from '@/components/status-detail/StatusDetail.vue';
 import StatusOverview from '@/components/status-overview/StatusOverview.vue';
 
 const appStore = useAppStore();
+
 appStore.statusManager.updateData(false);
 
 onMounted(() => {
@@ -44,9 +46,9 @@ onMounted(() => {
   const intervalId = setInterval(() => {
     appStore.statusManager.updateData(false);
     ++updateCount;
-    if (updateCount >= appStore.config.autoUpdateMaxTimes) {
+    if (updateCount >= config.autoUpdateMaxTimes) {
       clearInterval(intervalId);
     }
-  }, appStore.config.autoUpdateInterval);
+  }, config.autoUpdateInterval);
 });
 </script>

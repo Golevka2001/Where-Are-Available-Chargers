@@ -27,7 +27,7 @@
     class="text-center"
   >
     <img
-      :src="appStore.config.latestMapPath"
+      :src="config.latestMapPath"
       alt="充电桩位置示意图"
       width="100%"
     />
@@ -35,7 +35,5 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from '@/store/app';
-
-const appStore = useAppStore();
+import config from '@/config';
 </script>

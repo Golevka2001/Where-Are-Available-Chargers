@@ -2,9 +2,9 @@
 
 <template>
   <iframe
-    src="https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x"
-    width="100%"
+    :src="config.surveyUrl"
     height="100%"
+    width="100%"
     style="border: 0; display: block"
   ></iframe>
 </template>
@@ -12,6 +12,7 @@
 <script lang="ts" setup>
 import { onBeforeMount, onBeforeUnmount } from 'vue';
 import { useAppStore } from '@/store/app';
+import config from '@/config';
 
 const appStore = useAppStore();
 

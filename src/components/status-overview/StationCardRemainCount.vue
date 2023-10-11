@@ -15,9 +15,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { useAppStore } from '@/store/app';
-
-const appStore = useAppStore();
+import config from '@/config';
 
 const props = defineProps<{
   availableCount: number;
@@ -27,7 +25,7 @@ const props = defineProps<{
 // TODO：准备改一下判断逻辑
 const availableCountTextColor = computed(() => {
   return props.availableCount >
-    props.totalCount * appStore.config.stationThresholdPercentage
+    props.totalCount * config.stationThresholdPercentage
     ? 'green'
     : 'orange';
 });

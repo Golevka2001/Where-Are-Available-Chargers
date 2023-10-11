@@ -32,6 +32,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useAppStore } from '@/store/app';
+import config from '@/config';
 
 const appStore = useAppStore();
 
@@ -47,13 +48,13 @@ let isIntervalStarted = false;
 
 // 背景色渐变：绿[rgb(76, 175, 80)] -> 橙[rgb(255, 152, 0)]
 const getBarBackground = (diff: number): string => {
-  if (diff < appStore.config.dataExpirationTime / 6) {
+  if (diff < config.dataExpirationTime / 6) {
     return 'green';
   }
-  if (diff > appStore.config.dataExpirationTime) {
+  if (diff > config.dataExpirationTime) {
     return 'orange';
   }
-  const percent = diff / appStore.config.dataExpirationTime;
+  const percent = diff / config.dataExpirationTime;
   const r = 76 + Math.floor((255 - 76) * percent);
   const g = 175 + Math.floor((152 - 175) * percent);
   const b = 80 + Math.floor((0 - 80) * percent);
@@ -62,7 +63,7 @@ const getBarBackground = (diff: number): string => {
 
 // 文字信息：更新于 xxx
 const getUpdateMessage = (diff: number): string => {
-  if (diff > appStore.config.dataExpirationTime) {
+  if (diff > config.dataExpirationTime) {
     return '数据已过期，点此刷新';
   }
   const diffSeconds = Math.floor(diff / 1000);
@@ -89,7 +90,7 @@ const updateBottomBar = () => {
     barText.value = getUpdateMessage(diff);
   }
   // 数据过期，停止定时器
-  if (diff > appStore.config.dataExpirationTime) {
+  if (diff > config.dataExpirationTime) {
     clearInterval(intervalId);
     isIntervalStarted = false;
     return;
@@ -105,7 +106,7 @@ const startInterval = () => {
   updateBottomBar(); // 定时器启动后有 1s 的延迟，需要手动更新一次
   intervalId = setInterval(() => {
     updateBottomBar();
-  }, appStore.config.bottomBarInterval);
+  }, config.bottomBarInterval);
 };
 
 const clickBottomBar = async () => {
@@ -116,10 +117,10 @@ const clickBottomBar = async () => {
   const diff =
     Date.now() - new Date(appStore.statusManager.lastUpdateTime).getTime();
   // 后端数据未更新，不刷新
-  if (diff < appStore.config.backendUpdateInterval) {
+  if (diff < config.backendUpdateInterval) {
     barText.value = '数据仍在有效期内';
     await new Promise((resolve) =>
-      setTimeout(resolve, appStore.config.bottomBarInterval),
+      setTimeout(resolve, config.bottomBarInterval),
     );
   }
   // 从后端获取新数据
@@ -137,7 +138,7 @@ const onScroll = () => {
     isBarVisible.value = false;
     setTimeout(() => {
       isBarVisible.value = true;
-    }, appStore.config.bottomBarShowDelay);
+    }, config.bottomBarShowDelay);
   }
   // 向上滚动：显示底栏
   else {
@@ -150,7 +151,7 @@ onMounted(() => {
   // 底栏在页面加载完成后缓出
   setTimeout(() => {
     isBarVisible.value = true;
-  }, appStore.config.bottomBarShowDelay / 3);
+  }, config.bottomBarShowDelay / 3);
 
   startInterval();
 });

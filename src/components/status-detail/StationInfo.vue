@@ -13,19 +13,17 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { useAppStore } from '@/store/app';
+import config from '@/config';
 import { StationStatus } from '@/types/station-status';
 
 const props = defineProps<{
   stationStatus: StationStatus;
 }>();
 
-const appStore = useAppStore();
-
 // TODO：准备改一下判断逻辑
 const availableCountTextColor = computed(() => {
   return props.stationStatus.available_count >
-    props.stationStatus.total_count * appStore.config.stationThresholdPercentage
+    props.stationStatus.total_count * config.stationThresholdPercentage
     ? 'green'
     : 'orange';
 });

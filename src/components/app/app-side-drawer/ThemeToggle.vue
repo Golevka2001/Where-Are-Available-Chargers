@@ -15,6 +15,7 @@
 import { computed } from 'vue';
 import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
+import config from '@/config';
 
 const appStore = useAppStore();
 const theme = useTheme();
@@ -33,6 +34,6 @@ const clickThemeBtn = () => {
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
   setTimeout(() => {
     appStore.isDrawerOpen = false;
-  }, appStore.config.drawerCloseDelay);
+  }, config.drawerCloseDelay);
 };
 </script>
