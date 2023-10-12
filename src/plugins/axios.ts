@@ -4,7 +4,10 @@ import { App, Plugin } from 'vue';
 const axiosPlugin: Plugin = {
   install(app: App) {
     app.config.globalProperties.$axios = axios;
-    // TODO：后端接口暂未确定，先不配置 baseURL
+    app.config.globalProperties.$axios.defaults.baseURL =
+      process.env.NODE_ENV === 'development'
+        ? import.meta.env.VITE_API_URL || '/api'
+        : import.meta.env.VITE_API_URL;
   },
 };
 
