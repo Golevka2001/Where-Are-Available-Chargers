@@ -7,10 +7,13 @@
 <template>
   <v-app-bar class="text-center">
     <!-- Menu button -->
-    <v-app-bar-nav-icon @click.stop="clickMenuBtn" />
+    <v-app-bar-nav-icon @click.stop="onClickMenuBtn" />
 
     <!-- Title -->
     <bar-title />
+
+    <!-- Progress bar -->
+    <progress-bar :absolute="true" />
 
     <!-- Share button & share menu -->
     <share-menu />
@@ -21,10 +24,11 @@
 import { useAppStore } from '@/store/app';
 import BarTitle from './BarTitle.vue';
 import ShareMenu from './ShareMenu.vue';
+import ProgressBar from './ProgressBar.vue';
 
 const appStore = useAppStore();
 
-const clickMenuBtn = () => {
+const onClickMenuBtn = () => {
   appStore.isDrawerOpen = !appStore.isDrawerOpen;
 };
 </script>

@@ -8,10 +8,17 @@ const config = {
   statusRequestTimeout: 10 * 1000, // 状态请求超时时间
 
   // 组件显示相关
+  // 底栏
   bottomBarUpdateInterval: 1000, // 底栏定时器更新间隔
   bottomBarInitDelay: 0.5 * 1000, // 底栏初始弹出的延迟时间
   bottomBarReshowDelay: 1.5 * 1000, // 底栏隐藏后再次弹出的延迟时间
+  // 侧栏
   drawerCloseDelay: 0.2 * 1000, // 侧栏被点击后关闭的延迟时间
+  // 进度条
+  progressBarHideDelay: 0.5 * 1000, // 页面跳转完成后进度条隐藏的延迟时间
+  progressBarMinUpdateTimes: 5, // 进度条最小更新次数（不完全是最小，会被路由守卫打断）
+  progressBarUpdateIntervalRange: [100, 500], // 进度条更新间隔范围
+  progressBarValues: [0, 70, 100], // 进度条在 `beforeEach`、`beforeResolve`、`afterEach` 时的值
 
   // 静态资源相关
   latestMapPath: '/img/map-20230919.webp',
@@ -23,7 +30,7 @@ if (process.env.NODE_ENV === 'development') {
   config.autoUpdateInterval = 5 * 1000;
   config.backendUpdateInterval = 2 * 1000;
   config.dataExpirationTime = 10 * 1000;
-  config.statusRequestTimeout = 1.5 * 1000;
+  // config.statusRequestTimeout = 1.3 * 1000;
 }
 
 export default config;
