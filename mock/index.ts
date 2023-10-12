@@ -5,7 +5,7 @@ const SOCKET_FAULT_RATE = 0.1;
 const CHARGER_COUNT_BASE = 1;
 const CHARGER_COUNT_RANGE = 5;
 
-const CODE = 200;
+const REQUEST_ERROR_RATE = 0.4;
 
 const genStationNameList = (): string[] => {
   const stationNameList = [
@@ -95,7 +95,7 @@ const genRandomData = (): any => {
   const statusDetail = genStatusDetail(stationNameList);
 
   const testData = {
-    code: CODE,
+    code: Math.random() < REQUEST_ERROR_RATE ? undefined : 200,
     last_update_time: Date.now(),
     status: statusDetail,
   };
