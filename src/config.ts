@@ -7,8 +7,9 @@ const config = {
   stationThresholdPercentage: 0.25, // TODO: 改判定方式
 
   // 组件显示相关
-  bottomBarInterval: 1000, // 底栏定时器间隔
-  bottomBarShowDelay: 1.5 * 1000, // 底栏隐藏后再次显示的延迟时间
+  bottomBarUpdateInterval: 1000, // 底栏定时器更新间隔
+  bottomBarInitDelay: 0.5 * 1000, // 底栏初始弹出的延迟时间
+  bottomBarReshowDelay: 1.5 * 1000, // 底栏隐藏后再次弹出的延迟时间
   drawerCloseDelay: 0.2 * 1000, // 侧栏被点击后关闭的延迟时间
 
   // 静态资源相关
