@@ -18,7 +18,7 @@
         rounded=""
         size="x-small"
         variant="tonal"
-        @click.stop="clickCopyBtn"
+        @click.stop="onClickCopyBtn"
       >
         <v-icon> mdi-content-copy </v-icon>
         <v-tooltip
@@ -48,7 +48,7 @@ import { ref } from 'vue';
 const isSnackbarVisible = ref(false);
 const link = 'https://chargers.injs.eu';
 
-const clickCopyBtn = () => {
+const onClickCopyBtn = () => {
   // 复制网址
   navigator.clipboard.writeText(link);
   // 显示提示信息

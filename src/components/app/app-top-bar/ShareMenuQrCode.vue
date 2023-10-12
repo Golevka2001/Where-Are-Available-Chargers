@@ -26,7 +26,7 @@
       density="compact"
       rounded="0"
       variant="tonal"
-      @click.stop="clickDownloadBtn"
+      @click.stop="onClickDownloadBtn"
     >
       <v-icon> mdi-download-box-outline </v-icon>
       <v-tooltip
@@ -53,7 +53,7 @@ import { ref } from 'vue';
 
 const isSnackbarVisible = ref(false);
 
-const clickDownloadBtn = () => {
+const onClickDownloadBtn = () => {
   // 下载二维码图片（png）
   const link = document.createElement('a');
   link.href = '/img/qr-code.png';

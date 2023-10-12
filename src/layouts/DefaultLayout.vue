@@ -19,8 +19,7 @@
     <v-main class="pb-0">
       <router-view />
     </v-main>
-
-    <app-footer v-if="appStore.isFooterVisible" />
+    <app-footer v-show="appStore.isFooterVisible" />
   </v-app>
 </template>
 

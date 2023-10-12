@@ -1,7 +1,7 @@
 <!-- 侧边栏主题切换按钮 -->
 
 <template>
-  <v-list-item @click.stop="clickThemeBtn">
+  <v-list-item @click.stop="onClickThemeBtn">
     <template v-slot:prepend>
       <v-icon :icon="themeToggleIcon" />
     </template>
@@ -30,7 +30,7 @@ const themeToggleText = computed(() => {
   return theme.global.current.value.dark ? '浅色模式' : '深色模式';
 });
 
-const clickThemeBtn = () => {
+const onClickThemeBtn = () => {
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
   setTimeout(() => {
     appStore.isDrawerOpen = false;

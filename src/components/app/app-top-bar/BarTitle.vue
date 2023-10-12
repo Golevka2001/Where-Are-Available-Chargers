@@ -12,7 +12,7 @@
         :key="emojiFace"
         v-html="emojiFace"
         style="cursor: pointer"
-        @click.stop="clickEmojiFace"
+        @click.stop="onClickEmojiFace"
       ></span>
     </v-scroll-y-reverse-transition>
     <router-link
@@ -30,7 +30,7 @@ import { ref } from 'vue';
 
 const emojiFace = ref('&#128545;');
 
-const clickEmojiFace = () => {
+const onClickEmojiFace = () => {
   // 黄豆和小动物脸的编码范围
   const emojiCodeRangeList = [
     [128045, 128060],

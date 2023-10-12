@@ -7,7 +7,7 @@
       <v-btn
         icon="mdi-share-variant-outline"
         v-bind="props"
-        @click.stop="clickShareBtn"
+        @click.stop="onClickShareBtn"
       />
     </template>
 
@@ -29,7 +29,7 @@ import ShareMenuQrCode from './ShareMenuQrCode.vue';
 
 const appStore = useAppStore();
 
-const clickShareBtn = () => {
+const onClickShareBtn = () => {
   appStore.isDrawerOpen = false;
 };
 </script>

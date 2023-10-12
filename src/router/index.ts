@@ -1,35 +1,42 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
+const DefaultLayout = () => import('@/layouts/DefaultLayout.vue');
+const AboutPage = () => import('@/views/AboutPage.vue');
+const ErrorPage = () => import('@/views/ErrorPage.vue');
+const FeedbackPage = () => import('@/views/FeedbackPage.vue');
+const MapPage = () => import('@/views/MapPage.vue');
+const StatusPage = () => import('@/views/StatusPage.vue');
+
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/DefaultLayout.vue'),
+    component: DefaultLayout,
     redirect: 'status',
     children: [
       {
         path: 'about',
         name: 'About',
-        component: () => import('@/views/AboutPage.vue'),
+        component: AboutPage,
       },
       {
         path: 'error',
         name: 'Error',
-        component: () => import('@/views/ErrorPage.vue'),
+        component: ErrorPage,
       },
       {
         path: 'feedback',
         name: 'Feedback',
-        component: () => import('@/views/FeedbackPage.vue'),
+        component: FeedbackPage,
       },
       {
         path: 'map',
         name: 'Map',
-        component: () => import('@/views/MapPage.vue'),
+        component: MapPage,
       },
       {
         path: 'status',
         name: 'Status',
-        component: () => import('@/views/StatusPage.vue'),
+        component: StatusPage,
       },
     ],
   },

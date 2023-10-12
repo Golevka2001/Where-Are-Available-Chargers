@@ -13,9 +13,9 @@
   <div style="max-width: 45rem; margin: auto">
     <!-- ^临时措施: 横向宽度大时，横向会撑满屏幕，先加一行限制宽度并居中 -->
     <!-- TODO: 若改为多栏布局，需另行调整 -->
-    <loading-indicator v-if="showLoadingIndicator" />
+    <loading-indicator v-show="showLoadingIndicator" />
 
-    <div v-else>
+    <div v-show="!showLoadingIndicator">
       <status-overview />
 
       <status-detail />
