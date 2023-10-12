@@ -11,6 +11,7 @@ import {
     renderClassicalPage,
     renderMainPage,
 } from "./rend.js";
+import v5apiConverter from "./v5api.js"
 import update from "./update.js";
 
 const api_endpoint = Deno.env.get("API_ENDPOINT");
@@ -60,7 +61,7 @@ router.get("/classical", async (ctx) => {
     }
 });
 
-router.get("/api/get_status", async (ctx) => {
+router.get("/api/ver4/get_status", async (ctx) => {
     ctx.response.headers = new Headers({
         "Content-Type": "application/json; charset=utf-8",
     });
@@ -75,6 +76,32 @@ router.get("/api/get_status", async (ctx) => {
         ctx.response.body = {
             status_code: 5000,
             status_text: "Something went wrong.",
+        };
+        ctx.response.status = 500;
+    }
+});
+
+router.get("/api/ver5/get_status", async (ctx) => {
+    ctx.response.headers = new Headers({
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+    });
+    try {
+        const ALL_INFORMATION = await update(api_endpoint, sign_key);
+        if (ALL_INFORMATION == null) {
+            console.log("Error: ALL_INFORMATION NULL");
+            throw new Error("Error: ALL_INFORMATION NULL");
+        }
+        ctx.response.body = JSON.stringify(v5apiConverter(ALL_INFORMATION, null));
+    } catch {
+        ctx.response.body = {
+            code: 500,
+            last_update_time: new Date().getTime(),
+            status: {
+                "available_count": 0,
+                "total_count": 0,
+                "stations": [],
+            }
         };
         ctx.response.status = 500;
     }
