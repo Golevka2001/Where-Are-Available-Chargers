@@ -1,5 +1,4 @@
 <!-- 底部状态更新信息展示栏 -->
-<!-- TODO：拆分 -->
 
 <template>
   <v-layout-item
@@ -11,7 +10,7 @@
     <v-slide-y-reverse-transition leave-absolute>
       <bar-button
         v-show="appStore.isBottomBarVisible"
-        @restart-interval="startInterval"
+        @manually-update-data="emit('manuallyUpdateData')"
       />
     </v-slide-y-reverse-transition>
   </v-layout-item>
@@ -23,6 +22,9 @@ import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
 import BarButton from './BarButton.vue';
+
+defineExpose({ stopBottomBarInterval: () => clearInterval(intervalId) });
+const emit = defineEmits(['manuallyUpdateData']);
 
 const appStore = useAppStore();
 const statusStore = useStatusStore();

@@ -7,14 +7,14 @@ const routes = [
     redirect: 'status',
     children: [
       {
-        path: 'status',
-        name: 'Status',
-        component: () => import('@/views/StatusPage.vue'),
-      },
-      {
         path: 'about',
         name: 'About',
         component: () => import('@/views/AboutPage.vue'),
+      },
+      {
+        path: 'error',
+        name: 'Error',
+        component: () => import('@/views/ErrorPage.vue'),
       },
       {
         path: 'feedback',
@@ -25,6 +25,11 @@ const routes = [
         path: 'map',
         name: 'Map',
         component: () => import('@/views/MapPage.vue'),
+      },
+      {
+        path: 'status',
+        name: 'Status',
+        component: () => import('@/views/StatusPage.vue'),
       },
     ],
   },

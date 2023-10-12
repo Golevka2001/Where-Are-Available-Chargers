@@ -19,19 +19,31 @@ export const useStatusStore = defineStore('status', {
   }),
   actions: {
     async updateData(): Promise<void> {
-      // TODO：处理异常情况
+      // 防止重复请求
       if (this.isFetchingData) {
         return;
       }
       this.isFetchingData = true;
       appStore.bottomBarText = '正在更新数据，请稍候...';
       try {
-        const response = await getChargersStatus();
-        this.lastUpdateTime = response.last_update_time;
-        this.statusDetail = response.status;
+        const res = await getChargersStatus();
+        if (res.code !== 200) {
+          throw new Error('返回的状态数据无效');
+        }
+        // 清除底栏颜色和文字
+        appStore.bottomBarBgColor = null;
+        appStore.bottomBarText = null;
+        // 更新数据
+        this.lastUpdateTime = res.last_update_time;
+        this.statusDetail = res.status;
+        appStore.statusUpdateTimeDiff = Date.now() - this.lastUpdateTime;
+      } catch (err) {
+        console.error(err);
+        appStore.bottomBarBgColor = 'red';
+        appStore.bottomBarText = '数据更新失败，点此重试';
+        throw err;
       } finally {
         this.isFetchingData = false;
-        appStore.bottomBarText = null;
       }
     },
   },

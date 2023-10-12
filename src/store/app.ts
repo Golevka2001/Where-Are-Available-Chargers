@@ -8,15 +8,20 @@ export const useAppStore = defineStore('app', {
     isDrawerOpen: false,
     isFooterVisible: true,
     isBottomBarVisible: false,
+    keepBottomBarVisible: false,
 
     statusUpdateTimeDiff: 0, // 当前时间与数据更新时间的差值（毫秒时间戳）
 
-    bottomBarBgColor: '',
+    bottomBarBgColor: null as string | null,
     bottomBarText: null as string | null,
   }),
   getters: {
     // 底栏背景色
     getBottomBarBgColor: (state: any): string => {
+      // 强制显示颜色
+      if (state.bottomBarBgColor !== null) {
+        return state.bottomBarBgColor;
+      }
       // 过期时间的 1/6 前：绿色
       if (state.statusUpdateTimeDiff < config.dataExpirationTime / 6) {
         return 'green';
@@ -36,8 +41,10 @@ export const useAppStore = defineStore('app', {
     getBottomBarText: (state: any): string => {
       // 强制显示文字
       if (state.bottomBarText !== null) {
+        state.keepBottomBarVisible = true;
         return state.bottomBarText;
       }
+      state.keepBottomBarVisible = false;
       if (state.statusUpdateTimeDiff > config.dataExpirationTime) {
         return '数据已过期，点此刷新';
       }

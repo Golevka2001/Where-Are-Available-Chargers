@@ -1,3 +1,5 @@
+<!-- 底部状态更新信息展示栏中的具体内容 -->
+
 <template>
   <v-btn
     :block="true"
@@ -17,13 +19,11 @@
 
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
-import { useStatusStore } from '@/store/status';
 import config from '@/config';
 
-const emit = defineEmits(['restartInterval']);
+const emit = defineEmits(['manuallyUpdateData']);
 
 const appStore = useAppStore();
-const statusStore = useStatusStore();
 
 let isProcessingClick = false;
 
@@ -43,12 +43,8 @@ const onClickBottomBar = async () => {
     isProcessingClick = false;
     return;
   }
-  // 从后端获取新数据
-  await statusStore.updateData();
-  // 如果已过期，需要重启定时器
-  if (appStore.statusUpdateTimeDiff > config.backendUpdateInterval) {
-    emit('restartInterval');
-  }
+  // 从后端获取新数据，同时重置自动更新数据的定时器
+  emit('manuallyUpdateData');
   isProcessingClick = false;
 };
 </script>

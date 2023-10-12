@@ -5,6 +5,7 @@ const config = {
   backendUpdateInterval: 20 * 1000, // 后端数据更新间隔（要与后端同步）
   dataExpirationTime: 1.5 * 60 * 1000, // 提示数据过期时间
   stationThresholdPercentage: 0.25, // TODO: 改判定方式
+  statusRequestTimeout: 10 * 1000, // 状态请求超时时间
 
   // 组件显示相关
   bottomBarUpdateInterval: 1000, // 底栏定时器更新间隔
@@ -16,5 +17,13 @@ const config = {
   latestMapPath: '/img/map-20230919.webp',
   surveyUrl: 'https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x',
 };
+
+// 开发环境：
+if (process.env.NODE_ENV === 'development') {
+  config.autoUpdateInterval = 5 * 1000;
+  config.backendUpdateInterval = 2 * 1000;
+  config.dataExpirationTime = 10 * 1000;
+  config.statusRequestTimeout = 1.5 * 1000;
+}
 
 export default config;
