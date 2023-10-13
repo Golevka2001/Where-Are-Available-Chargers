@@ -110,7 +110,7 @@ npm run build # 或使用 yarn run build
 如需在本地预览构建后的应用，可以执行以下命令：
 
 ```bash
-npm run preview # 或使用 yarn run serve
+npm run preview # 或使用 yarn run preview
 ```
 
 浏览器访问 <http://localhost:4173>
