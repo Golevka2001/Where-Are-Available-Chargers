@@ -28,7 +28,7 @@
       variant="tonal"
       @click.stop="onClickDownloadBtn"
     >
-      <v-icon> mdi-download-box-outline </v-icon>
+      <v-icon> {{ mdiDownloadBoxOutline }} </v-icon>
       <v-tooltip
         activator="parent"
         location="bottom"
@@ -50,6 +50,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+
+import { mdiDownloadBoxOutline } from '@mdi/js';
 
 const isSnackbarVisible = ref(false);
 

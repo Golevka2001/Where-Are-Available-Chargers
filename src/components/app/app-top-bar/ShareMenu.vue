@@ -5,7 +5,7 @@
     <template v-slot:activator="{ props }">
       <!-- Share button -->
       <v-btn
-        icon="mdi-share-variant-outline"
+        :icon="mdiShareVariantOutline"
         v-bind="props"
         @click.stop="onClickShareBtn"
       />
@@ -26,6 +26,8 @@
 import { useAppStore } from '@/store/app';
 import ShareMenuLink from './ShareMenuLink.vue';
 import ShareMenuQrCode from './ShareMenuQrCode.vue';
+
+import { mdiShareVariantOutline } from '@mdi/js';
 
 const appStore = useAppStore();
 

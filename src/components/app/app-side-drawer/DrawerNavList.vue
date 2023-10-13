@@ -18,32 +18,40 @@
 </template>
 
 <script lang="ts" setup>
+import {
+  mdiBicycleElectric,
+  mdiBookOpenPageVariantOutline,
+  mdiForumOutline,
+  mdiGithub,
+  mdiMapLegend,
+} from '@mdi/js';
+
 // 外链用 `href`，内部路由用 `to`
 const navList = [
   {
     title: '状态查询',
-    prependIcon: 'mdi-bicycle-electric',
+    prependIcon: mdiBicycleElectric,
     to: '/status',
   },
   {
     title: '充电桩位置示意图',
-    prependIcon: 'mdi-map-legend',
+    prependIcon: mdiMapLegend,
     to: '/map',
   },
   {
     title: '反馈 & 建议',
-    prependIcon: 'mdi-forum-outline',
+    prependIcon: mdiForumOutline,
     to: '/feedback',
   },
   {
     title: '文档',
-    prependIcon: 'mdi-book-open-page-variant-outline',
+    prependIcon: mdiBookOpenPageVariantOutline,
     href: 'https://chargers.injs.eu/doc/',
     target: '_blank',
   },
   {
     title: 'GitHub',
-    prependIcon: 'mdi-github', // FIXME: github 图标已被 mdi 弃用
+    prependIcon: mdiGithub, // FIXME: github 图标已被 mdi 弃用
     href: 'https://github.com/Golevka2001/Where-Are-Available-Chargers',
     target: '_blank',
   },

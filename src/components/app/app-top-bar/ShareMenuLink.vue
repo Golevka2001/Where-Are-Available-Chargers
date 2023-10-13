@@ -20,7 +20,7 @@
         variant="tonal"
         @click.stop="onClickCopyBtn"
       >
-        <v-icon> mdi-content-copy </v-icon>
+        <v-icon> {{ mdiContentCopy }} </v-icon>
         <v-tooltip
           activator="parent"
           location="bottom"
@@ -44,6 +44,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+
+import { mdiContentCopy } from '@mdi/js';
 
 const isSnackbarVisible = ref(false);
 const link = 'https://chargers.injs.eu';

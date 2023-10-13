@@ -18,7 +18,7 @@
         </span>
         <!-- TODO: Add link -->
         <span style="font-size: 0.9rem">
-          详情<v-icon size="small">mdi-chevron-right</v-icon>
+          详情<v-icon size="small">{{ mdiChevronRight }}</v-icon>
         </span>
       </div>
 
@@ -41,6 +41,8 @@
 import { StationStatus } from '@/types/station-status';
 import StationCardRemainCount from './StationCardRemainCount.vue';
 import StationCardRemainDetail from './StationCardRemainDetail.vue';
+
+import { mdiChevronRight } from '@mdi/js';
 
 defineProps<{
   stationStatus: StationStatus;

@@ -10,7 +10,6 @@
     "format": "prettier --write --ignore-path .gitignore \"src/**/*.{vue,js,ts,json,html,css,less,scss,md}\""
   },
   "dependencies": {
-    "@mdi/font": "7.3.67",
     "axios": "^1.5.1",
     "pinia": "^2.1.6",
     "roboto-fontface": "*",
@@ -22,6 +21,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.23.0",
+    "@mdi/js": "^7.3.67",
     "@types/node": "^20.8.4",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vue/eslint-config-typescript": "^12.0.0",

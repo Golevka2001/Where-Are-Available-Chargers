@@ -17,13 +17,13 @@ import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 
+import { mdiWeatherNight, mdiWeatherSunny } from '@mdi/js';
+
 const appStore = useAppStore();
 const theme = useTheme();
 
 const themeToggleIcon = computed(() => {
-  return theme.global.current.value.dark
-    ? 'mdi-weather-sunny'
-    : 'mdi-weather-night';
+  return theme.global.current.value.dark ? mdiWeatherSunny : mdiWeatherNight;
 });
 
 const themeToggleText = computed(() => {

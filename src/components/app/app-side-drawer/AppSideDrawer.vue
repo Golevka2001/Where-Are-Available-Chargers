@@ -31,7 +31,7 @@
         <!-- TODO：旧版链接和页面 -->
         <v-btn
           :block="true"
-          prepend-icon="mdi-undo-variant"
+          :prepend-icon="mdiUndoVariant"
           variant="outlined"
         >
           回到旧版
@@ -45,6 +45,8 @@
 import { useAppStore } from '@/store/app';
 import DrawerNavList from './DrawerNavList.vue';
 import ThemeToggle from './ThemeToggle.vue';
+
+import { mdiUndoVariant } from '@mdi/js';
 
 const appStore = useAppStore();
 </script>

@@ -107,6 +107,14 @@ npm run build # 或使用 yarn run build
 
 构建后的文件位于 `dist` 目录下，请不要提交该目录下的文件到仓库
 
+如需在本地预览构建后的应用，可以执行以下命令：
+
+```bash
+npm run preview # 或使用 yarn run serve
+```
+
+浏览器访问 <http://localhost:4173>
+
 ### 部署
 
 部署到生产环境时，`Mock` 将会被自动禁用，数据将从后端获取
@@ -142,7 +150,7 @@ npm run build # 或使用 yarn run build
 
 - 尽可能使用 Vuetify 提供的 UI 组件，少造轮子
 - 优先使用 Vuetify 提供的工具类来定义样式（类似 Tailwind，查阅 Vuetify 文档的 `Styles and animations` 部分），更细粒度的样式直接在 HTML 的 `style` 属性中定义
-- 图标优先使用 [Material Design Icons](https://materialdesignicons.com/)，引用方式参考 Vuetify 文档
+- 图标优先使用 [Material Design Icons](https://materialdesignicons.com/)，为减小体积，请在组件中按需从 `@mdi/js` 中引入，具体方式见 [Vuetify 文档](https://vuetifyjs.com/features/icon-fonts/#mdi-js-svg)
 - 适当拆分 Vue 组件，避免单个组件过于臃肿
 - 布局框架放在 `layouts` 目录下，而其中的组件（如：Bar、Footer）放在 `components/app` 目录下；页面（如：StatusPage、AboutPage）放在 `views` 目录下；页面中使用到的组件放在 `components` 目录下
 
