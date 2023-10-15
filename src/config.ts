@@ -20,8 +20,6 @@ const config = {
   progressBarUpdateIntervalRange: [100, 500], // 进度条更新间隔范围
   progressBarValues: [0, 70, 100], // 进度条在 `beforeEach`、`beforeResolve`、`afterEach` 时的值
 
-  // 静态资源相关
-  latestMapPath: '/img/map-20230919.webp',
   surveyUrl: 'https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x',
 };
 

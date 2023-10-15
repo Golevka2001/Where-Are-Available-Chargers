@@ -29,14 +29,10 @@
       class="text-center"
     >
       <img
-        :src="config.latestMapPath"
         alt="充电桩位置示意图"
+        src="/img/map.webp"
         width="100%"
       />
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import config from '@/config';
-</script>
