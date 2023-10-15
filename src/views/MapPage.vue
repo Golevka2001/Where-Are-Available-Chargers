@@ -36,3 +36,10 @@
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import 'viewerjs/dist/viewer.css';
+import { directive as viewer } from 'v-viewer';
+
+const vVueViewer = viewer();
+</script>

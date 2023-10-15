@@ -163,7 +163,7 @@ npm run preview # 或使用 yarn run preview
 ### 依赖相关
 
 - 添加新依赖时，注意区分在开发环境用（-D）还是生产环境用（-S）
-- 插件类依赖统一在 `@/plugins/index.ts` 中引入并注册
+- 需要全局使用的插件统一在 `@/plugins/index.ts` 中引入并注册（如：Vuetify、Pinia 等）；而使用频率较低的插件推荐在组件中按需引入（如：V-Viewer 等）
 - 当前开发阶段暂时不锁版本，等基本功能完成后再添加 `package-lock.json`
 
 ## :memo: Todo List
@@ -183,6 +183,8 @@ _注：并非按照优先级排序_
 - [x] 分享按钮
 - [x] 刷新按钮
 - [ ] Loading、Error、About 等页面以及相关路由配置
+- [ ] 多语言
+- [ ] 天气预报功能
 - [ ] 回到顶部按钮
 - [ ] Axios 封装（请求拦截、响应拦截、错误处理都未配置）
 - [ ] 与后端的交互
