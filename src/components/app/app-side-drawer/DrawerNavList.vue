@@ -22,9 +22,10 @@ import {
   mdiBicycleElectric,
   mdiBookOpenPageVariantOutline,
   mdiForumOutline,
-  mdiGithub,
+  mdiInformationOutline,
   mdiMapLegend,
 } from '@mdi/js';
+import { githubIcon } from '@/assets/img/custom-icons';
 
 // 外链用 `href`，内部路由用 `to`
 const navList = [
@@ -44,14 +45,19 @@ const navList = [
     to: '/feedback',
   },
   {
-    title: '文档',
+    title: '项目文档',
     prependIcon: mdiBookOpenPageVariantOutline,
     href: 'https://chargers.injs.eu/doc/',
     target: '_blank',
   },
   {
+    title: '关于我们',
+    prependIcon: mdiInformationOutline,
+    to: '/about',
+  },
+  {
     title: 'GitHub',
-    prependIcon: mdiGithub, // FIXME: github 图标已被 mdi 弃用
+    prependIcon: githubIcon,
     href: 'https://github.com/Golevka2001/Where-Are-Available-Chargers',
     target: '_blank',
   },

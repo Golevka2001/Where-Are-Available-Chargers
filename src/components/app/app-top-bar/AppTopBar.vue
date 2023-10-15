@@ -36,12 +36,13 @@ import BarTitle from './BarTitle.vue';
 import ShareMenu from './ShareMenu.vue';
 import ProgressBar from './ProgressBar.vue';
 
-import { mdiMenu, mdiMinus } from '@mdi/js';
+import { mdiMenu } from '@mdi/js';
+import { lineMenu } from '@/assets/img/custom-icons';
 
 const appStore = useAppStore();
 
 const menuIcon = computed(() => {
-  return appStore.isDrawerOpen ? mdiMinus : mdiMenu;
+  return appStore.isDrawerOpen ? lineMenu : mdiMenu;
 });
 
 const onClickMenuBtn = () => {
