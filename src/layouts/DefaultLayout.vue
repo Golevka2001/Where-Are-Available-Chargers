@@ -16,7 +16,7 @@
 
     <app-side-drawer />
 
-    <v-main class="pb-0">
+    <v-main class="pb-0 d-flex justify-center">
       <router-view />
     </v-main>
     <app-footer v-show="appStore.isFooterVisible" />

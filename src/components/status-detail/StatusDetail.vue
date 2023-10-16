@@ -11,7 +11,6 @@
   <div
     v-for="(stationStatus, index) in statusStore.statusDetail.stations"
     :key="index"
-    class="ma-6"
   >
     <station-info :station-status="stationStatus" />
     <station-table :charger-list="stationStatus.chargers" />

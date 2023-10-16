@@ -3,7 +3,9 @@
 <template>
   <v-list-item @click.stop="onClickThemeBtn">
     <template v-slot:prepend>
-      <v-icon :icon="themeToggleIcon" />
+      <v-icon>
+        {{ themeToggleIcon }}
+      </v-icon>
     </template>
     <v-list-item-title>
       {{ themeToggleText }}

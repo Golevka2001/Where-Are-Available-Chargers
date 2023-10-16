@@ -10,9 +10,10 @@
 <!-- +---------------------+ -->
 
 <template>
-  <div style="max-width: 45rem; margin: auto">
-    <!-- ^临时措施: 横向宽度大时，横向会撑满屏幕，先加一行限制宽度并居中 -->
-    <!-- TODO: 若改为多栏布局，需另行调整 -->
+  <div
+    :style="{ maxWidth: width < 960 ? '40rem' : '70rem' }"
+    class="mx-8 my-8"
+  >
     <loading-indicator v-show="showLoadingIndicator" />
 
     <div v-show="!showLoadingIndicator">
@@ -32,6 +33,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useDisplay } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
@@ -40,9 +42,10 @@ import LoadingIndicator from '@/components/app/loading-indicator/LoadingIndicato
 import StatusDetail from '@/components/status-detail/StatusDetail.vue';
 import StatusOverview from '@/components/status-overview/StatusOverview.vue';
 
+const router = useRouter();
+const { width } = useDisplay();
 const appStore = useAppStore();
 const statusStore = useStatusStore();
-const router = useRouter();
 
 const bottomInfoBar = ref();
 

@@ -9,7 +9,9 @@
     :to="navItem.to"
   >
     <template v-slot:prepend>
-      <v-icon :icon="navItem.prependIcon" />
+      <v-icon>
+        {{ navItem.prependIcon }}
+      </v-icon>
     </template>
     <v-list-item-title>
       {{ navItem.title }}

@@ -6,7 +6,10 @@
 <!-- +-----------------------------+ -->
 
 <template>
-  <v-card variant="flat">
+  <v-card
+    rounded="0"
+    variant="text"
+  >
     <v-card-title class="px-2 pt-2 d-flex justify-space-between">
       <div>
         <!-- Station name -->
