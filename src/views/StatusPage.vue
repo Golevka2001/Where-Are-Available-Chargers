@@ -12,11 +12,14 @@
 <template>
   <div
     :style="{ maxWidth: width < 960 ? '40rem' : '70rem' }"
-    class="mx-8 my-8"
+    class="mx-auto"
   >
     <loading-indicator v-show="showLoadingIndicator" />
 
-    <div v-show="!showLoadingIndicator">
+    <div
+      v-show="!showLoadingIndicator"
+      class="mx-8"
+    >
       <status-overview />
 
       <status-detail />
