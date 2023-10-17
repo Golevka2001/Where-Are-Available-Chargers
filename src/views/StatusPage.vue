@@ -14,11 +14,11 @@
     :style="{ maxWidth: width < 960 ? '40rem' : '70rem' }"
     class="mx-auto"
   >
-    <loading-indicator v-show="showLoadingIndicator" />
+    <loading-indicator v-if="showLoadingIndicator" />
 
     <div
-      v-show="!showLoadingIndicator"
-      class="mx-8"
+      v-else
+      class="ma-8"
     >
       <status-overview />
 
@@ -50,8 +50,7 @@ const { width } = useDisplay();
 const appStore = useAppStore();
 const statusStore = useStatusStore();
 
-const bottomInfoBar = ref();
-
+const bottomInfoBarComponent = ref();
 const showLoadingIndicator = ref(true);
 
 let lastScrollY = 0;
@@ -65,14 +64,14 @@ const startInterval = () => {
     try {
       await statusStore.updateData();
       // 一定次数后停止定时器
-      ++autoUpdateCount;
+      autoUpdateCount++;
       if (autoUpdateCount >= config.autoUpdateMaxTimes) {
         clearInterval(intervalId);
       }
     } catch (err) {
       // 数据更新失败，清除定时器
       clearInterval(intervalId);
-      bottomInfoBar.value.stopBottomBarInterval();
+      bottomInfoBarComponent.value.stopInterval();
       return;
     }
   }, config.autoUpdateInterval);
@@ -84,13 +83,11 @@ const manualUpdateData = async () => {
   clearInterval(intervalId);
   try {
     await statusStore.updateData();
-    if (appStore.statusUpdateTimeDiff > config.backendUpdateInterval) {
-      // 如果已过期，需要重启定时器
-      bottomInfoBar.value.restartBottomBarInterval();
-    }
+    // 重置定时器
+    bottomInfoBarComponent.value.startInterval();
     startInterval();
   } catch (err) {
-    bottomInfoBar.value.stopBottomBarInterval();
+    bottomInfoBarComponent.value.stopInterval();
     return;
   }
 };

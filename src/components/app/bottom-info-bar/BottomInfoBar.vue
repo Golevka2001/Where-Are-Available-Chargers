@@ -7,11 +7,24 @@
     class="d-flex align-end"
     style="pointer-events: none"
   >
+    <!-- Clickable button -->
     <v-slide-y-reverse-transition leave-absolute>
-      <bar-button
+      <v-btn
         v-show="appStore.isBottomBarVisible"
-        @manually-update-data="emit('manuallyUpdateData')"
-      />
+        :block="true"
+        :color="appStore.getBottomBarBgColor"
+        rounded="0"
+        class="text-background"
+        style="pointer-events: all"
+        @click.stop="onClickBottomBar"
+      >
+        <!-- Update message -->
+        <v-scroll-y-transition leave-absolute>
+          <span :key="String(appStore.bottomBarText)">
+            {{ appStore.getBottomBarText }}
+          </span>
+        </v-scroll-y-transition>
+      </v-btn>
     </v-slide-y-reverse-transition>
   </v-layout-item>
 </template>
@@ -21,14 +34,13 @@ import { onMounted } from 'vue';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
-import BarButton from './BarButton.vue';
 
-defineExpose({ stopBottomBarInterval: () => clearInterval(intervalId) });
 const emit = defineEmits(['manuallyUpdateData']);
 
 const appStore = useAppStore();
 const statusStore = useStatusStore();
 
+let isProcessingClick = false;
 let intervalId: NodeJS.Timeout;
 
 // 触发定时器（定时器的功能是更新当前时间差，以及判断过期后停止。文字和底色的更新在 appStore 中根据时间差自动完成）
@@ -47,6 +59,32 @@ const startInterval = () => {
       return;
     }
   }, config.bottomBarUpdateInterval);
+};
+
+defineExpose({
+  startInterval,
+  stopInterval: () => clearInterval(intervalId),
+});
+
+const onClickBottomBar = async () => {
+  // 防止重复点击
+  if (isProcessingClick || statusStore.isFetchingData) {
+    return;
+  }
+  isProcessingClick = true;
+  // 后端数据未更新，不刷新
+  if (appStore.statusUpdateTimeDiff < config.backendUpdateInterval) {
+    appStore.bottomBarText = '数据仍在有效期内';
+    await new Promise((resolve) =>
+      setTimeout(resolve, config.bottomBarUpdateInterval),
+    );
+    appStore.bottomBarText = null;
+    isProcessingClick = false;
+    return;
+  }
+  // 从后端获取新数据，同时重置定时器
+  emit('manuallyUpdateData');
+  isProcessingClick = false;
 };
 
 onMounted(() => {

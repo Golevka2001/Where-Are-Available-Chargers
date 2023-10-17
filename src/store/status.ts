@@ -24,19 +24,20 @@ export const useStatusStore = defineStore('status', {
         return;
       }
       this.isFetchingData = true;
+      appStore.bottomBarBgColor = 'green';
       appStore.bottomBarText = '正在更新数据，请稍候...';
       try {
         const res = await getChargersStatus();
         if (res.code !== 200) {
           throw new Error('返回的状态数据无效');
         }
-        // 清除底栏颜色和文字
-        appStore.bottomBarBgColor = null;
-        appStore.bottomBarText = null;
         // 更新数据
         this.lastUpdateTime = res.last_update_time;
         this.statusDetail = res.status;
         appStore.statusUpdateTimeDiff = Date.now() - this.lastUpdateTime;
+        // 清除底栏颜色和文字
+        appStore.bottomBarBgColor = null;
+        appStore.bottomBarText = null;
       } catch (err) {
         console.error(err);
         appStore.bottomBarBgColor = 'red';
