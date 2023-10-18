@@ -10,10 +10,9 @@
 <template>
   <v-navigation-drawer
     v-model:model-value="appStore.isStatusDetailDrawerOpen"
-    :style="{ zIndex: config.zIndex.statusDetailDrawer }"
+    :style="{ zIndex: config.zIndex.statusDetailDrawer, minWidth: '22rem' }"
     :temporary="true"
     location="right"
-    :width="width * 0.5"
   >
     <drawer-header
       :stationDescription="curStation.description"
