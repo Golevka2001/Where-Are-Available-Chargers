@@ -2,7 +2,7 @@
 
 <template>
   <v-card-text
-    class="px-2 pb-2 text-left text-truncate"
+    class="text-left text-truncate"
     style="font-size: 0.9rem"
   >
     <span v-if="availableCount === 0">暂无可用</span>

@@ -9,6 +9,7 @@
   <v-card
     rounded="0"
     variant="text"
+    @click.stop="onClickStatusCard"
   >
     <v-card-title class="px-2 pt-2 d-flex justify-space-between">
       <div>
@@ -36,18 +37,27 @@
     <station-card-remain-detail
       :available-count="stationStatus.available_count"
       :chargerList="stationStatus.chargers"
+      class="px-2 pb-2"
     />
   </v-card>
 </template>
 
 <script lang="ts" setup>
+import { useAppStore } from '@/store/app';
 import { StationStatus } from '@/types/station-status';
 import StationCardRemainCount from './StationCardRemainCount.vue';
 import StationCardRemainDetail from './StationCardRemainDetail.vue';
 
 import { mdiChevronRight } from '@mdi/js';
 
-defineProps<{
+const props = defineProps<{
+  stationIndex: number;
   stationStatus: StationStatus;
 }>();
+
+const appStore = useAppStore();
+
+const onClickStatusCard = () => {
+  appStore.openStatusDetailDrawer(props.stationIndex);
+};
 </script>

@@ -7,15 +7,15 @@
     :readonly="true"
     density="compact"
     label="Link"
+    rounded="lg"
     variant="outlined"
-    class="mx-4"
     style="width: 15rem"
   >
     <!-- Copy button -->
     <template v-slot:append-inner>
       <v-btn
         :icon="true"
-        rounded=""
+        :rounded="true"
         size="x-small"
         variant="tonal"
         @click.stop="onClickCopyBtn"
@@ -30,30 +30,21 @@
       </v-btn>
     </template>
   </v-text-field>
-
-  <!-- Snackbar -->
-  <!-- TODO：考虑消息条复用 & 显示在分享菜单处 -->
-  <v-snackbar
-    v-model="isSnackbarVisible"
-    color="green"
-    timeout="1000"
-  >
-    &#10024;&nbsp;已复制到剪贴板
-  </v-snackbar>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { useAppStore } from '@/store/app';
 
 import { mdiContentCopy } from '@mdi/js';
 
-const isSnackbarVisible = ref(false);
+const appStore = useAppStore();
+
 const link = 'https://chargers.injs.eu';
 
 const onClickCopyBtn = () => {
   // 复制网址
   navigator.clipboard.writeText(link);
   // 显示提示信息
-  isSnackbarVisible.value = true;
+  appStore.showSnackBar('&#10024;&nbsp;已复制到剪贴板', 'green');
 };
 </script>

@@ -11,8 +11,10 @@
 
 <template>
   <v-navigation-drawer
-    v-model="appStore.isDrawerOpen"
+    v-model:model-value="appStore.isAppSideDrawerOpen"
+    :style="{ zIndex: config.zIndex.appSideDrawer }"
     :temporary="true"
+    location="left"
   >
     <v-list
       :nav="true"
@@ -43,6 +45,7 @@
 
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
+import config from '@/config';
 import DrawerNavList from './DrawerNavList.vue';
 import ThemeToggle from './ThemeToggle.vue';
 

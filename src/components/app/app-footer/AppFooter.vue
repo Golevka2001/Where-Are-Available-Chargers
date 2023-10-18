@@ -6,9 +6,12 @@
 <!-- +-------------------------+ -->
 
 <template>
-  <div class="mb-4 align-end">
+  <div class="align-end">
     <v-divider />
-    <v-footer class="text-center bg-transparent">
+    <v-footer
+      color="transparent"
+      class="text-center"
+    >
       <v-row class="my-0">
         <!-- Nav links -->
         <v-col cols="12">

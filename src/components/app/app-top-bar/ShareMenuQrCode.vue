@@ -2,13 +2,16 @@
 
 <template>
   <v-sheet
-    :rounded="true"
+    color="white"
+    rounded="lg"
     width="10rem"
-    class="mx-auto my-6 bg-white"
     style="outline: rgb(158, 158, 158) solid 1px"
   >
     <!-- QR code image -->
-    <v-img src="@/assets/img/qr-code.svg">
+    <v-img
+      src="@/assets/img/qr-code.svg"
+      height="160"
+    >
       <template v-slot:placeholder>
         <div class="d-flex fill-height align-center justify-center">
           <v-progress-circular
@@ -37,23 +40,14 @@
       </v-tooltip>
     </v-btn>
   </v-sheet>
-
-  <!-- Snackbar -->
-  <v-snackbar
-    v-model="isSnackbarVisible"
-    color="green"
-    timeout="1000"
-  >
-    &#10024;&nbsp;已保存
-  </v-snackbar>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { useAppStore } from '@/store/app';
 
 import { mdiDownloadBoxOutline } from '@mdi/js';
 
-const isSnackbarVisible = ref(false);
+const appStore = useAppStore();
 
 const onClickDownloadBtn = () => {
   // 下载二维码图片（png）
@@ -62,6 +56,6 @@ const onClickDownloadBtn = () => {
   link.download = 'qr-code.png';
   link.click();
   // 显示提示信息
-  isSnackbarVisible.value = true;
+  appStore.showSnackBar('&#10024;&nbsp;已保存', 'green');
 };
 </script>

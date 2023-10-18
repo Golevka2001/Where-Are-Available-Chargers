@@ -1,11 +1,13 @@
 const STATION_FILTER_RATE = 0.2;
+const STATION_DESCRIPTION_RATE = 0.5;
 const CHARGER_FAULT_RATE = 0.1;
 const SOCKET_FAULT_RATE = 0.1;
 
 const CHARGER_COUNT_BASE = 1;
 const CHARGER_COUNT_RANGE = 5;
 
-const REQUEST_ERROR_RATE = 0.4;
+// const REQUEST_ERROR_RATE = 0.4;
+const REQUEST_ERROR_RATE = 0;
 
 const genStationNameList = (): string[] => {
   const stationNameList = [
@@ -58,7 +60,10 @@ const genStationStatus = (stationName: string, chargerCount: number): any => {
 
   const stationStatus: any = {
     name: stationName,
-    description: null,
+    description:
+      Math.random() < STATION_DESCRIPTION_RATE
+        ? stationName + '充电站位于xxx'
+        : null,
     total_count: chargers.reduce((sum, c) => sum + c.total_count, 0),
     available_count: chargers.reduce((sum, c) => sum + c.available_count, 0),
     chargers,

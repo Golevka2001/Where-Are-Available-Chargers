@@ -4,6 +4,7 @@
 <template>
   <v-progress-linear
     v-show="isProgressBarVisible"
+    :absolute="true"
     :model-value="progressValue"
     color="green"
   />

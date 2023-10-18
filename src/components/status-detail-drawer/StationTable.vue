@@ -12,7 +12,7 @@
 <template>
   <v-table
     density="compact"
-    class="rounded-lg border-lg"
+    class="border-md rounded-lg"
   >
     <thead>
       <tr>

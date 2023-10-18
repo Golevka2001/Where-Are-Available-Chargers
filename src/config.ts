@@ -19,12 +19,20 @@ const config = {
   progressBarMinUpdateTimes: 5, // 进度条最小更新次数（不完全是最小，会被路由守卫打断）
   progressBarUpdateIntervalRange: [100, 500], // 进度条更新间隔范围
   progressBarValues: [0, 70, 100], // 进度条在 `beforeEach`、`beforeResolve`、`afterEach` 时的值
+  zIndex: {
+    appTopBar: 1500,
+    shareMenu: 1400,
+    appSideDrawer: 1300,
+    bottomInfoBar: 1200,
+    statusDetailDrawer: 1100,
+  },
 
   surveyUrl: 'https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x',
 };
 
 // 开发环境：
 if (process.env.NODE_ENV === 'development') {
+  config.autoUpdateMaxTimes = 3;
   config.autoUpdateInterval = 5 * 1000;
   config.backendUpdateInterval = 2 * 1000;
   config.dataExpirationTime = 10 * 1000;

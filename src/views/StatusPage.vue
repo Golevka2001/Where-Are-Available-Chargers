@@ -14,19 +14,19 @@
     :style="{ maxWidth: width < 960 ? '40rem' : '70rem' }"
     class="mx-auto"
   >
-    <loading-indicator v-if="showLoadingIndicator" />
+    <loading-indicator v-if="isLoadingIndicatorVisible" />
 
     <div
       v-else
       class="ma-8"
     >
-      <status-overview />
+      <status-detail-drawer />
 
-      <status-detail />
+      <status-overview />
 
       <bottom-info-bar
         v-scroll="onScroll"
-        ref="bottomInfoBar"
+        ref="bottomInfoBarComponent"
         @manually-update-data="manualUpdateData"
       />
     </div>
@@ -42,7 +42,7 @@ import { useStatusStore } from '@/store/status';
 import config from '@/config';
 import BottomInfoBar from '@/components/app/bottom-info-bar/BottomInfoBar.vue';
 import LoadingIndicator from '@/components/app/loading-indicator/LoadingIndicator.vue';
-import StatusDetail from '@/components/status-detail/StatusDetail.vue';
+import StatusDetailDrawer from '@/components/status-detail-drawer/StatusDetailDrawer.vue';
 import StatusOverview from '@/components/status-overview/StatusOverview.vue';
 
 const router = useRouter();
@@ -51,7 +51,7 @@ const appStore = useAppStore();
 const statusStore = useStatusStore();
 
 const bottomInfoBarComponent = ref();
-const showLoadingIndicator = ref(true);
+const isLoadingIndicatorVisible = ref(true);
 
 let lastScrollY = 0;
 let intervalId: NodeJS.Timeout;
@@ -93,7 +93,11 @@ const manualUpdateData = async () => {
 };
 
 const onScroll = () => {
-  if (appStore.keepBottomBarVisible) {
+  if (
+    appStore.bottomBarText !== null ||
+    appStore.bottomBarBgColor !== null ||
+    appStore.statusUpdateTimeDiff > config.dataExpirationTime
+  ) {
     return;
   }
   // 向下滚动：隐藏底栏，一定时间后显示
@@ -112,7 +116,7 @@ const onScroll = () => {
 
 onMounted(async () => {
   // 页面挂载时更新数据，显示加载动画
-  showLoadingIndicator.value = true;
+  isLoadingIndicatorVisible.value = true;
   try {
     await statusStore.updateData();
   } catch (err) {
@@ -122,7 +126,7 @@ onMounted(async () => {
   }
 
   // 之后在当前页面内不再显示加载动画
-  showLoadingIndicator.value = false;
+  isLoadingIndicatorVisible.value = false;
 
   // 数据更新完成后，底栏缓出
   setTimeout(() => {

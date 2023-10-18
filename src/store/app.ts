@@ -2,18 +2,23 @@
 
 import { defineStore } from 'pinia';
 import config from '@/config';
+import { stat } from 'fs';
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    isDrawerOpen: false,
-    isFooterVisible: true,
+    isAppSideDrawerOpen: false,
     isBottomBarVisible: false,
-    keepBottomBarVisible: false,
+    isFooterVisible: true,
+    isSnackBarVisible: false,
+    isStatusDetailDrawerOpen: false,
 
     statusUpdateTimeDiff: 0, // 当前时间与数据更新时间的差值（毫秒时间戳）
 
     bottomBarBgColor: null as string | null,
     bottomBarText: null as string | null,
+    curStationIndex: 0, // 当前状态详情抽屉中所显示的充电站的名称
+    snackBarBgColor: '',
+    snackBarText: '',
   }),
   getters: {
     // 底栏背景色
@@ -41,10 +46,8 @@ export const useAppStore = defineStore('app', {
     getBottomBarText: (state: any): string => {
       // 强制显示文字
       if (state.bottomBarText !== null) {
-        state.keepBottomBarVisible = true;
         return state.bottomBarText;
       }
-      state.keepBottomBarVisible = false;
       if (state.statusUpdateTimeDiff > config.dataExpirationTime) {
         return '数据已过期，点此刷新';
       }
@@ -60,6 +63,18 @@ export const useAppStore = defineStore('app', {
       } else {
         return `更新于 ${Math.floor(diffSeconds / 86400)} 天前`;
       }
+    },
+  },
+  actions: {
+    openStatusDetailDrawer(stationIndex: number) {
+      this.isAppSideDrawerOpen = false;
+      this.curStationIndex = stationIndex;
+      this.isStatusDetailDrawerOpen = true;
+    },
+    showSnackBar(text: string, bgColor: string) {
+      this.snackBarBgColor = bgColor;
+      this.snackBarText = text;
+      this.isSnackBarVisible = true;
     },
   },
 });

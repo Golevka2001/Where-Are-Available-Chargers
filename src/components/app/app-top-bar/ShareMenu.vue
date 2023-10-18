@@ -1,29 +1,36 @@
 <!-- 顶部导航栏右侧的分享按钮和弹出的菜单 -->
 
 <template>
-  <v-menu :close-on-content-click="false">
+  <v-menu
+    :close-on-content-click="false"
+    :style="{ zIndex: config.zIndex.shareMenu }"
+    location="bottom"
+    z-index=""
+  >
     <template v-slot:activator="{ props }">
       <!-- Share button -->
       <v-btn
         :icon="mdiShareVariantOutline"
         v-bind="props"
-        @click.stop="onClickShareBtn"
+        @click.stop="onClickShareButton"
       />
     </template>
 
     <!-- Share menu -->
     <v-card>
       <!-- QR code -->
-      <share-menu-qr-code />
+      <share-menu-qr-code class="mx-auto my-8" />
 
       <!-- Link -->
-      <share-menu-link />
+      <share-menu-link class="mx-4" />
     </v-card>
   </v-menu>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { useAppStore } from '@/store/app';
+import config from '@/config';
 import ShareMenuLink from './ShareMenuLink.vue';
 import ShareMenuQrCode from './ShareMenuQrCode.vue';
 
@@ -31,7 +38,11 @@ import { mdiShareVariantOutline } from '@mdi/js';
 
 const appStore = useAppStore();
 
-const onClickShareBtn = () => {
-  appStore.isDrawerOpen = false;
+const isShareMenuOpen = ref(false);
+
+const onClickShareButton = () => {
+  isShareMenuOpen.value = true;
+  appStore.isAppSideDrawerOpen = false;
+  // 状态详细信息抽屉就不关了
 };
 </script>

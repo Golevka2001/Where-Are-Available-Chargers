@@ -10,9 +10,9 @@
 <template>
   <div>
     <v-card
+      border="md"
       rounded="lg"
       variant="flat"
-      class="border-lg"
     >
       <v-row class="mx-auto my-auto">
         <v-col
@@ -22,6 +22,7 @@
           class="pa-0"
         >
           <station-card
+            :station-index="index"
             :station-status="stationStatus"
             :style="cardBorderStyle(index)"
             class="pa-1"

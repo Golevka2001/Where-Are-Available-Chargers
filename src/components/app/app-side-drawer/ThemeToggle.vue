@@ -35,7 +35,7 @@ const themeToggleText = computed(() => {
 const onClickThemeBtn = () => {
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
   setTimeout(() => {
-    appStore.isDrawerOpen = false;
+    appStore.isAppSideDrawerOpen = false;
   }, config.drawerCloseDelay);
 };
 </script>

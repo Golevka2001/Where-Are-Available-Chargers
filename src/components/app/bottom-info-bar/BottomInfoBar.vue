@@ -3,6 +3,7 @@
 <template>
   <v-layout-item
     model-value
+    :style="{ zIndex: config.zIndex.bottomInfoBar }"
     position="bottom"
     class="d-flex align-end"
     style="pointer-events: none"
@@ -13,8 +14,7 @@
         v-show="appStore.isBottomBarVisible"
         :block="true"
         :color="appStore.getBottomBarBgColor"
-        rounded="0"
-        class="text-background"
+        class="text-background rounded-0"
         style="pointer-events: all"
         @click.stop="onClickBottomBar"
       >
@@ -63,7 +63,9 @@ const startInterval = () => {
 
 defineExpose({
   startInterval,
-  stopInterval: () => clearInterval(intervalId),
+  stopInterval: () => {
+    clearInterval(intervalId);
+  },
 });
 
 const onClickBottomBar = async () => {
