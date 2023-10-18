@@ -10,7 +10,10 @@
     :color="socketChipColor(socketStatus)"
     density="compact"
     variant="flat"
-    style="margin: 0 0.15rem 0 0.15rem; padding: 0.6rem 0.1rem 0.6rem 0.1rem"
+    style="
+      margin: 0.3rem 0.15rem 0.3rem 0.15rem;
+      padding: 0.6rem 0.1rem 0.6rem 0.1rem;
+    "
   >
     <div
       class="justify-center fill-height text-background font-weight-medium"

@@ -8,6 +8,7 @@
     </v-col>
     <v-col
       v-for="legend in legendList"
+      :key="legend.color"
       cols="auto"
       class="px-2 d-flex align-center"
     >
@@ -45,10 +46,11 @@ const legendList = [
     content: null,
     text: '占用',
   },
-  {
-    color: 'grey',
-    content: null,
-    text: '故障',
-  },
+  // // 暂不添加故障的图例
+  // {
+  //   color: 'grey',
+  //   content: null,
+  //   text: '故障',
+  // },
 ];
 </script>

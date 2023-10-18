@@ -11,7 +11,7 @@
 
 <template>
   <v-table
-    density="compact"
+    density="comfortable"
     class="border-md rounded-lg"
   >
     <thead>
@@ -35,8 +35,8 @@
             {{ chargerStatus.fault_info }}
           </div>
           <station-table-charger-status
-            :socket-list="chargerStatus.sockets"
             v-else
+            :socket-list="chargerStatus.sockets"
           />
         </td>
       </tr>

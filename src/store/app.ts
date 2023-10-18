@@ -2,7 +2,6 @@
 
 import { defineStore } from 'pinia';
 import config from '@/config';
-import { stat } from 'fs';
 
 export const useAppStore = defineStore('app', {
   state: () => ({

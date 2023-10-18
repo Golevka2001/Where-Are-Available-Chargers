@@ -1,16 +1,23 @@
-<!-- 充电桩状态详情 -->
-<!-- +---------------------+ -->
-<!-- |   Station Table 1   | -->
-<!-- +---------------------+ -->
-<!-- |   Station Table 2   | -->
-<!-- +---------------------+ -->
-<!-- |         ...         | -->
-<!-- +---------------------+ -->
+<!-- 充电桩状态详情抽屉 -->
+<!-- +--------------------+ -->
+<!-- |   Drawer Header    | -->
+<!-- +--------------------+ -->
+<!-- |       Legend       | -->
+<!-- | +----------------+ | -->
+<!-- | |                | | -->
+<!-- | |  Status Table  | | -->
+<!-- | |                | | -->
+<!-- | +----------------+ | -->
+<!-- |                    | -->
+<!-- +--------------------+ -->
 
 <template>
   <v-navigation-drawer
     v-model:model-value="appStore.isStatusDetailDrawerOpen"
-    :style="{ zIndex: config.zIndex.statusDetailDrawer, minWidth: '22rem' }"
+    :style="{
+      zIndex: config.zIndex.statusDetailDrawer,
+      width: drawerWidth,
+    }"
     :temporary="true"
     location="right"
   >
@@ -36,12 +43,24 @@ import { useStatusStore } from '@/store/status';
 import config from '@/config';
 import DrawerHeader from './DrawerHeader.vue';
 import SocketStatusLegend from './SocketStatusLegend.vue';
-import StationInfo from './StationInfo.vue';
 import StationTable from './StationTable.vue';
 
 const { width } = useDisplay();
 const appStore = useAppStore();
 const statusStore = useStatusStore();
+
+const drawerWidth = computed(() => {
+  if (width.value <= 360) {
+    // 宽度不够排成 1*10 时变为 2*5
+    return '240px';
+  } else if (width.value <= 600) {
+    // xs 显示全屏宽度
+    return '100%';
+  } else {
+    // 其他情况固定宽度
+    return '450px';
+  }
+});
 
 const curStation = computed(() => {
   return statusStore.statusDetail.stations[appStore.curStationIndex];
