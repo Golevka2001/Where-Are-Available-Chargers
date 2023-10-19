@@ -25,6 +25,7 @@ const config = {
     appSideDrawer: 1300,
     bottomInfoBar: 1200,
     statusDetailDrawer: 1100,
+    overlay: 1000,
   },
 
   surveyUrl: 'https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x',

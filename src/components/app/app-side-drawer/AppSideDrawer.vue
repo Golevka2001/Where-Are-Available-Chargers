@@ -34,6 +34,7 @@
         <v-btn
           :block="true"
           :prepend-icon="mdiUndoVariant"
+          rounded="lg"
           variant="outlined"
         >
           回到旧版

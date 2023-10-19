@@ -32,8 +32,20 @@
 
         <!-- Station name -->
         <vue-scroll-picker
-          :options="stationNameList"
           v-model="appStore.curStationIndex"
+          :key="appStore.curStationIndex"
+          :options="stationNameList"
+          class="ml-4"
+        />
+
+        <v-spacer />
+
+        <v-btn
+          :icon="mdiMenuClose"
+          rounded="lg"
+          size="xx-large"
+          variant="plain"
+          @click.stop="onClickMenuCloseBtn"
         />
       </div>
     </template>
@@ -45,15 +57,18 @@
     >
       {{ stationDescription }}
     </v-card-text>
+
+    <v-divider />
   </v-card>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import { VueScrollPicker } from '../scroll-picker';
 
-import { mdiMapMarkerOutline } from '@mdi/js';
+import { mdiMapMarkerOutline, mdiMenuClose } from '@mdi/js';
 
 defineProps<{
   stationDescription: string | null | undefined;
@@ -63,13 +78,16 @@ defineProps<{
 const appStore = useAppStore();
 const statusStore = useStatusStore();
 
-// {name: stationName, value: index}
-const stationNameList = statusStore.statusDetail.stations.map(
-  (station, index) => ({
+const stationNameList = computed(() =>
+  statusStore.statusDetail.stations.map((station, index) => ({
     name: station.name,
     value: index,
-  }),
+  })),
 );
+
+const onClickMenuCloseBtn = () => {
+  appStore.isStatusDetailDrawerOpen = false;
+};
 </script>
 
 <!-- vue-scroll-picker 的样式文件，为适应此页面样式做出更改 -->
@@ -97,7 +115,7 @@ const stationNameList = statusStore.statusDetail.stations.map(
   font-size: large;
   text-align: left;
   line-height: 1.1em;
-  color: rgba(128, 128, 128, 0.3);
+  color: rgba(128, 128, 128, 0.5);
 }
 .vue-scroll-picker-item-selected {
   font-size: x-large;

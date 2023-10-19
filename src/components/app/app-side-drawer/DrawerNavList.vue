@@ -7,6 +7,7 @@
     :href="navItem.href"
     :target="navItem.target"
     :to="navItem.to"
+    rounded="lg"
   >
     <template v-slot:prepend>
       <v-icon>

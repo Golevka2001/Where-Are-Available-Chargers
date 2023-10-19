@@ -8,7 +8,7 @@
 <!-- | |  Status Table  | | -->
 <!-- | |                | | -->
 <!-- | +----------------+ | -->
-<!-- |                    | -->
+<!-- | Prev          Next | -->
 <!-- +--------------------+ -->
 
 <template>
@@ -28,10 +28,40 @@
 
     <socket-status-legend class="ma-auto" />
 
-    <station-table
-      :charger-list="curStation.chargers"
-      class="mx-4"
-    />
+    <v-window v-model="appStore.curStationIndex">
+      <v-window-item
+        v-for="index in statusStore.statusDetail.stations.length"
+        :key="index"
+      >
+        <station-table
+          :charger-list="curStation.chargers"
+          class="mx-4"
+        />
+      </v-window-item>
+    </v-window>
+
+    <template #append>
+      <div class="mx-4 mt-4 mb-12 d-flex justify-space-between">
+        <v-btn
+          :disabled="isCurStationTheFirst()"
+          :prepend-icon="mdiChevronLeft"
+          rounded="lg"
+          variant="outlined"
+          @click.stop="onClickPrevStationBtn"
+        >
+          <span v-html="prevStationName"> </span>
+        </v-btn>
+        <v-btn
+          :append-icon="mdiChevronRight"
+          :disabled="isCurStationTheLast()"
+          rounded="lg"
+          variant="outlined"
+          @click.stop="onClickNextStationBtn"
+        >
+          <span v-html="nextStationName"> </span>
+        </v-btn>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -44,6 +74,8 @@ import config from '@/config';
 import DrawerHeader from './DrawerHeader.vue';
 import SocketStatusLegend from './SocketStatusLegend.vue';
 import StationTable from './StationTable.vue';
+
+import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 
 const { width } = useDisplay();
 const appStore = useAppStore();
@@ -62,7 +94,41 @@ const drawerWidth = computed(() => {
   }
 });
 
+// 这两个属性不应该放在 computed 里，缓存结果会导致在下面的 computed 中无法更新
+const isCurStationTheFirst = () => {
+  return appStore.curStationIndex === 0;
+};
+const isCurStationTheLast = () => {
+  return (
+    appStore.curStationIndex === statusStore.statusDetail.stations.length - 1
+  );
+};
+
+// 当前展示的充电站的详细信息
 const curStation = computed(() => {
   return statusStore.statusDetail.stations[appStore.curStationIndex];
 });
+
+// 当前的上一个、下一个充电站名称
+const prevStationName = computed(() => {
+  if (isCurStationTheFirst()) {
+    return '&#9940;';
+  } else {
+    return statusStore.statusDetail.stations[appStore.curStationIndex - 1].name;
+  }
+});
+const nextStationName = computed(() => {
+  if (isCurStationTheLast()) {
+    return '&#9940;';
+  } else {
+    return statusStore.statusDetail.stations[appStore.curStationIndex + 1].name;
+  }
+});
+
+const onClickPrevStationBtn = () => {
+  appStore.curStationIndex--;
+};
+const onClickNextStationBtn = () => {
+  appStore.curStationIndex++;
+};
 </script>
