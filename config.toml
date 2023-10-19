@@ -1,7 +1,7 @@
-config_file_version = "20231008"
+config_file_version = "20231019"
 
 [system]
-display_version = "4.2.1f"
+display_version = "4.2.2f"
 
 [cache]
 cache_mode = 1
@@ -21,17 +21,17 @@ enough_sum_num = 100    # 小于这个数提示紧张
 enough_socket_num = 2.5 # 每个充电桩低于这个数字提示紧张
 
 [stations."东门北侧"]
-"N1" = "东门北侧 XYr6DGKCsRDZ5号设备"
-"N2" = "东门北侧 XYnWrKKm2uY74号设备"
-"N3" = "东门北侧 XYUOSoePDWDt1号设备"
-"N4" = "东门北侧 XYbRBoaA2YMA3号设备"
-"A" = "XYlFl6DnfgZH3"
-"B" = "XY1eANYJoWM620"
-"C" = "东门北侧 XYvIqZM8oCmT19号设备"
-"D" = "东门北侧 XYnfw8BeyiXS16号设备"
-"E" = "东门北侧 XYEogTrLdXZx14号设备"
-"F" = "东门北侧 XYxN6z9ZETBZ17号设备"
-"G" = "东门北侧 XYBGw4c88NWd21号设备"
+"A" = "XYBGw4c88NWd21"
+"B" = "XYxN6z9ZETBZ17"
+"C" = "XYEogTrLdXZx14"
+"D" = "XYnfw8BeyiXS16"
+"E" = "XYvIqZM8oCmT19"
+"F" = "XY1eANYJoWM620"
+"G" = "XYlFl6DnfgZH3"
+"H" = "XYbRBoaA2YMA3"
+"I" = "XYUOSoePDWDt1"
+"J" = "XYnWrKKm2uY74"
+"K" = "XYr6DGKCsRDZ5"
 
 [stations."东门南侧"]
 "A" = "XYSfeYzOvLwN5"
@@ -49,11 +49,11 @@ enough_socket_num = 2.5 # 每个充电桩低于这个数字提示紧张
 
 [stations."南门西侧"]
 "A" = "XY679RB8P35Y10"
-"B" = "XYOGaVYy7OHu7"
+"B" = "!XYOGaVYy7OHu7" # 充电桩坏了，所以故意加了一个`!`
 
 [stations."南门东侧"]
-"A" = "南门外东侧 XY5dXpywawqy6号设备"
-"B" = "南门外东侧 XYsjnxW1MolG2号设备"
+"A" = "XY5dXpywawqy6"
+"B" = "XYsjnxW1MolG2"
 
 [stations."北门东北侧"]
 "A" = "XYeo2IsT1Sx61"
@@ -62,9 +62,9 @@ enough_socket_num = 2.5 # 每个充电桩低于这个数字提示紧张
 "D" = "XYo7UstSCeu64"
 
 [stations."北门东南侧"]
-"A" = "北门东侧 XYbwFHY40PZK3号设备"
-"B" = "北门东侧 XYgbwesjiMEy6号设备"
-"C" = "北门东侧 XYnT1V47gbvQ5号设备"
-"D" = "北门东侧 XYwgYSUv41Ve2号设备"
-"E" = "北门东侧 XYG9NcgUXBlg4号设备"
-"F" = "北门东侧 XYWOjzU06jWc1号设备"
+"A" = "XYbwFHY40PZK3"
+"B" = "XYgbwesjiMEy6"
+"C" = "XYnT1V47gbvQ5"
+"D" = "XYwgYSUv41Ve2"
+"E" = "XYG9NcgUXBlg4"
+"F" = "XYWOjzU06jWc1"

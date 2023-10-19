@@ -75,11 +75,11 @@ export async function apiQuery(api_endpoint, sign_key) {
     for (const charger in chargers_raw_data) {
         try {
             const station =
-                CONFIG["stations_r"][chargers_raw_data[charger]["name"]][
+                CONFIG["stations_r"][chargers_raw_data[charger]["cid"]][
                     "station"
                 ];
             const friendly_no =
-                CONFIG["stations_r"][chargers_raw_data[charger]["name"]][
+                CONFIG["stations_r"][chargers_raw_data[charger]["cid"]][
                     "charger_friendly_no"
                 ];
             const sockets = [];
@@ -97,7 +97,7 @@ export async function apiQuery(api_endpoint, sign_key) {
             ret_all["status_detail"][station][friendly_no] = sockets;
         } catch {
             console.log(
-                `Error: New charger ${[chargers_raw_data[charger]["name"]]}`,
+                `Error: New charger [${chargers_raw_data[charger]["cid"]}]: ${chargers_raw_data[charger]["name"]}`,
             );
         }
     }
