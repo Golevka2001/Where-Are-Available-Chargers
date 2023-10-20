@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { SocketStatus } from '@/types/socket-status';
+import { SocketStatus } from '@/types/charger';
 
 defineProps<{
   socketList: SocketStatus[];

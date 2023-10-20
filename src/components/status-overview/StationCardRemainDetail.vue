@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ChargerStatus } from '@/types/charger-status';
+import { ChargerStatus } from '@/types/charger';
 import { watch } from 'vue';
 
 const props = defineProps<{

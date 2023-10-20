@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ChargerStatus } from '@/types/charger-status';
+import { ChargerStatus } from '@/types/charger';
 import StationTableChargerStatus from './StationTableChargerStatus.vue';
 
 defineProps<{

@@ -2,8 +2,8 @@
 
 import { defineStore } from 'pinia';
 import { useAppStore } from './app';
-import { StationStatus } from '@/types/station-status';
-import { getChargersStatus } from '@/apis/chargers-status';
+import { StationStatus } from '@/types/charger';
+import { getChargersStatus } from '@/apis/charger';
 
 const appStore = useAppStore();
 

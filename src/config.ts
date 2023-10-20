@@ -2,9 +2,9 @@ const config = {
   // 状态查询、显示相关
   autoUpdateMaxTimes: 6, // 自动更新最大次数
   autoUpdateInterval: 30 * 1000, // 前端自动拉取数据间隔
-  backendUpdateInterval: 20 * 1000, // 后端数据更新间隔（要与后端同步）
+  backendUpdateInterval: 20 * 1000, // 后端数据更新间隔（要与后端同步）// TODO：改为从后端获取
   dataExpirationTime: 1.5 * 60 * 1000, // 提示数据过期时间
-  stationThresholdPercentage: 0.25, // TODO: 改判定方式
+  stationThresholdPercentage: 0.25, // TODO：改判定方式
   statusRequestTimeout: 10 * 1000, // 状态请求超时时间
 
   // 组件显示相关
@@ -19,6 +19,7 @@ const config = {
   progressBarMinUpdateTimes: 5, // 进度条最小更新次数（不完全是最小，会被路由守卫打断）
   progressBarUpdateIntervalRange: [100, 500], // 进度条更新间隔范围
   progressBarValues: [0, 70, 100], // 进度条在 `beforeEach`、`beforeResolve`、`afterEach` 时的值
+  // 叠层
   zIndex: {
     appTopBar: 1500,
     shareMenu: 1400,

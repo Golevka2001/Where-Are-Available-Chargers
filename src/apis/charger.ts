@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '@/config';
-import { StatusResponse } from '@/types/status-response';
+import { StatusResponse } from '@/types/charger';
 
 export const getChargersStatus = async (): Promise<StatusResponse> => {
   const res = await axios

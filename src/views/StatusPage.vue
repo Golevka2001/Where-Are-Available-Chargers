@@ -22,6 +22,8 @@
     >
       <status-detail-drawer />
 
+      <weather-panel class="mb-6" />
+
       <status-overview />
 
       <bottom-info-bar
@@ -39,16 +41,19 @@ import { useRouter } from 'vue-router';
 import { useDisplay } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
+import { useWeatherStore } from '@/store/weather';
 import config from '@/config';
 import BottomInfoBar from '@/components/app/bottom-info-bar/BottomInfoBar.vue';
 import LoadingIndicator from '@/components/app/loading-indicator/LoadingIndicator.vue';
 import StatusDetailDrawer from '@/components/status-detail-drawer/StatusDetailDrawer.vue';
 import StatusOverview from '@/components/status-overview/StatusOverview.vue';
+import WeatherPanel from '@/components/weather-panel/WeatherPanel.vue';
 
 const router = useRouter();
 const { width } = useDisplay();
 const appStore = useAppStore();
 const statusStore = useStatusStore();
+const weatherStore = useWeatherStore();
 
 const bottomInfoBarComponent = ref();
 const isLoadingIndicatorVisible = ref(true);
@@ -119,6 +124,7 @@ onMounted(async () => {
   isLoadingIndicatorVisible.value = true;
   try {
     await statusStore.updateData();
+    weatherStore.updateData();
   } catch (err) {
     // 数据更新失败，跳转到错误页面
     router.push('/error');
