@@ -10,16 +10,13 @@
 <!-- +---------------------+ -->
 
 <template>
+  <loading-indicator v-if="isLoadingIndicatorVisible" />
   <div
+    v-else
     :style="{ maxWidth: width < 960 ? '40rem' : '70rem' }"
     class="mx-auto"
   >
-    <loading-indicator v-if="isLoadingIndicatorVisible" />
-
-    <div
-      v-else
-      class="ma-8"
-    >
+    <div class="ma-8">
       <status-detail-drawer />
 
       <weather-panel class="mb-6" />

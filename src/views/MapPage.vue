@@ -1,7 +1,11 @@
 <!-- 充电桩位置示意图页面 -->
 
 <template>
-  <div class="fill-height">
+  <loading-indicator v-if="!imgLoaded" />
+  <div
+    v-show="imgLoaded"
+    class="fill-height"
+  >
     <div
       v-vue-viewer.static="{
         backdrop: false,
@@ -32,6 +36,7 @@
         alt="充电桩位置示意图"
         src="/img/map.webp"
         width="100%"
+        @load="imgLoaded = true"
       />
     </div>
   </div>
@@ -41,5 +46,11 @@
 import 'viewerjs/dist/viewer.css';
 import { directive as viewer } from 'v-viewer';
 
+import { ref } from 'vue';
+
+import LoadingIndicator from '@/components/loading-indicator/LoadingIndicator.vue';
+
 const vVueViewer = viewer();
+
+const imgLoaded = ref(false);
 </script>
