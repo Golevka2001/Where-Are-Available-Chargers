@@ -56,7 +56,7 @@
       <td><a href="https://router.vuejs.org/">Vue Router</a></td>
       <td><a href="https://pinia.vuejs.org/">Pinia</a></td>
       <td><a href="https://axios-http.com/">Axios</a></td>
-      <td><a href="https://expressjs.com/">Express</a></td>
+      <td><a href="http://mockjs.com/">Mock.js</a></td>
       <td><a href="https://vitest.dev/">Vitest</a></td>
     </tr>
   </tbody>
@@ -117,7 +117,9 @@ npm run preview # 或使用 yarn run preview
 
 ### 部署
 
-部署到生产环境时，数据将从后端获取。需要配置环境变量 `VITE_API_URL`，指向后端 API 的地址
+部署到生产环境时，`Mock` 将会被自动禁用，数据将从后端获取
+
+需要配置环境变量 `VITE_API_URL`，指向后端 API 的地址
 
 ## :open_file_folder: src 目录结构
 

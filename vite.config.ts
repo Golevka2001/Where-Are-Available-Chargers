@@ -2,8 +2,8 @@
 
 import vue from '@vitejs/plugin-vue';
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
+import { viteMockServe } from 'vite-plugin-mock';
 import { VitePWA } from 'vite-plugin-pwa';
-// import mix from 'vite-plugin-mix';
 
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
@@ -15,6 +15,10 @@ export default defineConfig({
     }),
     vuetify({
       autoImport: true,
+    }),
+    viteMockServe({
+      mockPath: 'mock',
+      enable: process.env.NODE_ENV === 'development',
     }),
     VitePWA({
       // Generate PWA/Service Worker files
@@ -45,15 +49,6 @@ export default defineConfig({
         ],
       },
     }),
-    // Only for development
-    // ...(process.env.NODE_ENV === 'development'
-    //   ? [
-    //       mix({
-    //         // Mixin mock server, launch with `vite` command
-    //         handler: './mock/test-api-server.ts',
-    //       }),
-    //     ]
-    //   : []),
   ],
   define: { 'process.env': {} },
   resolve: {
