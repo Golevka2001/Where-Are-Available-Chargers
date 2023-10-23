@@ -17,6 +17,7 @@ export const useAppStore = defineStore('app', {
     isAppSideDrawerOpen: false,
     isBottomBarVisible: false,
     isFooterVisible: true,
+    isSemiTransparentSupported: true, // TODO：添加判断
     isSnackBarVisible: false,
     isStatusDetailDrawerOpen: false,
 

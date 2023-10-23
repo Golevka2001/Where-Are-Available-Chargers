@@ -12,14 +12,10 @@
 <template>
   <v-navigation-drawer
     v-model:model-value="appStore.isAppSideDrawerOpen"
-    scrim="transparent"
-    :style="{
-      backgroundColor: useTheme().current.value.colors.surface + 'A0',
-      zIndex: config.zIndex.appSideDrawer,
-    }"
+    :style="[semiTransparentStyle, { zIndex: config.zIndex.appSideDrawer }]"
     :temporary="true"
     location="left"
-    style="backdrop-filter: blur(0.5rem)"
+    scrim="transparent"
   >
     <v-list
       :nav="true"
@@ -37,9 +33,9 @@
       <div class="ma-6">
         <v-btn
           :block="true"
-          :disabled="loading"
+          :disabled="isLoadingPage"
           :href="config.classicVersionUrl"
-          :loading="loading"
+          :loading="isLoadingPage"
           :prepend-icon="mdiUndoVariant"
           rounded="lg"
           variant="tonal"
@@ -63,15 +59,26 @@ import DrawerNavList from './DrawerNavList.vue';
 import ThemeToggle from './ThemeToggle.vue';
 
 import { mdiUndoVariant } from '@mdi/js';
+import { computed } from 'vue';
 
+const theme = useTheme();
 const appStore = useAppStore();
 
-const loading = ref(false);
+const isLoadingPage = ref(false);
+
+const semiTransparentStyle = computed(() => {
+  return appStore.isSemiTransparentSupported
+    ? {
+        backdropFilter: 'blur(0.5rem)',
+        backgroundColor: theme.current.value.colors.surface + 'A0',
+      }
+    : {};
+});
 
 const onClickClassicVersionButton = () => {
-  loading.value = true;
+  isLoadingPage.value = true;
   setTimeout(() => {
-    loading.value = false;
-  }, 3000);
+    isLoadingPage.value = false;
+  }, 5000);
 };
 </script>

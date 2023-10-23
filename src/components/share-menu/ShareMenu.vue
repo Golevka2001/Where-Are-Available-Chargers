@@ -18,11 +18,8 @@
 
     <!-- Share menu -->
     <v-card
-      :style="{
-        backgroundColor: useTheme().current.value.colors.surface + 'A0',
-      }"
+      :style="semiTransparentStyle"
       rounded="lg"
-      style="backdrop-filter: blur(0.5rem)"
     >
       <!-- QR code -->
       <share-menu-qr-code class="mx-auto my-8" />
@@ -34,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
@@ -44,9 +41,19 @@ import ShareMenuQrCode from './ShareMenuQrCode.vue';
 
 import { mdiShareVariantOutline } from '@mdi/js';
 
+const theme = useTheme();
 const appStore = useAppStore();
 
 const isShareMenuOpen = ref(false);
+
+const semiTransparentStyle = computed(() => {
+  return appStore.isSemiTransparentSupported
+    ? {
+        backdropFilter: 'blur(0.5rem)',
+        backgroundColor: theme.current.value.colors.surface + 'A0',
+      }
+    : {};
+});
 
 const onClickShareButton = () => {
   isShareMenuOpen.value = true;

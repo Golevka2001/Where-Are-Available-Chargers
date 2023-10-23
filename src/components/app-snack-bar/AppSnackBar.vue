@@ -5,7 +5,9 @@
     v-model:model-value="appStore.isSnackBarVisible"
     :color="appStore.snackBarBgColor"
     location="top"
+    rounded="lg"
     timeout="1000"
+    style="opacity: 0.9"
   >
     <span v-html="appStore.snackBarText"></span>
   </v-snackbar>

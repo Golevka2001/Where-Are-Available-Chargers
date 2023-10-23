@@ -14,7 +14,7 @@
   <v-app>
     <app-top-bar />
 
-    <app-snack-bar class="mt-16" />
+    <app-snack-bar class="mt-12" />
 
     <app-side-drawer />
 
