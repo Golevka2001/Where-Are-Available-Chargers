@@ -56,6 +56,6 @@ const onClickDownloadBtn = () => {
   link.download = 'qr-code.png';
   link.click();
   // 显示提示信息
-  appStore.showSnackBar('&#10024;&nbsp;已保存', 'green');
+  appStore.showSnackBar('&#10024;&nbsp;已保存', 'success');
 };
 </script>

@@ -7,7 +7,7 @@
 
 <template>
   <v-card
-    color="green"
+    color="success"
     rounded="0"
     variant="tonal"
   >

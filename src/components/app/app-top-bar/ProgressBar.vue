@@ -6,7 +6,7 @@
     v-show="isProgressBarVisible"
     :absolute="true"
     :model-value="progressValue"
-    color="green"
+    color="success"
   />
 </template>
 

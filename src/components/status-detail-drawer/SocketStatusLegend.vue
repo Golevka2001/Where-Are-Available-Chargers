@@ -37,18 +37,18 @@
 <script lang="ts" setup>
 const legendList = [
   {
-    color: 'green',
+    color: 'success',
     content: 1,
     text: '空闲',
   },
   {
-    color: 'orange',
+    color: 'warning',
     content: null,
     text: '占用',
   },
   // // 暂不添加故障的图例
   // {
-  //   color: 'grey',
+  //   color: 'default',
   //   content: null,
   //   text: '故障',
   // },

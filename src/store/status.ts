@@ -24,7 +24,7 @@ export const useStatusStore = defineStore('status', {
         return;
       }
       this.isFetchingData = true;
-      appStore.bottomBarBgColor = 'green';
+      appStore.bottomBarBgColor = 'success';
       appStore.bottomBarText = '正在更新数据，请稍候...';
       try {
         const res = await getChargersStatus();
@@ -40,7 +40,7 @@ export const useStatusStore = defineStore('status', {
         appStore.bottomBarText = null;
       } catch (err) {
         console.error(err);
-        appStore.bottomBarBgColor = 'red';
+        appStore.bottomBarBgColor = 'error';
         appStore.bottomBarText = '数据更新失败，点此重试';
         throw err;
       } finally {

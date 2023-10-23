@@ -19,6 +19,7 @@
       width: drawerWidth,
     }"
     :temporary="true"
+    color="background"
     location="right"
   >
     <drawer-header

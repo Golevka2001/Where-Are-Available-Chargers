@@ -45,6 +45,6 @@ const onClickCopyBtn = () => {
   // 复制网址
   navigator.clipboard.writeText(link);
   // 显示提示信息
-  appStore.showSnackBar('&#10024;&nbsp;已复制到剪贴板', 'green');
+  appStore.showSnackBar('&#10024;&nbsp;已复制到剪贴板', 'success');
 };
 </script>

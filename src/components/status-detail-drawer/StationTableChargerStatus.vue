@@ -35,13 +35,13 @@ defineProps<{
 const socketChipColor = computed(() => (socketStatus: SocketStatus) => {
   switch (socketStatus) {
     case 0:
-      return 'orange';
+      return 'warning';
     case 1:
-      return 'green';
+      return 'success';
     case 2:
-      return 'grey';
+      return 'default';
     default:
-      return 'grey';
+      return 'default';
   }
 });
 </script>
