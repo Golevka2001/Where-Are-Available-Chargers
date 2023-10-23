@@ -29,7 +29,9 @@ const config = {
     overlay: 1000,
   },
 
-  surveyUrl: 'https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x',
+  thisSiteUrl: 'https://chargers.injs.eu', // 当前本站地址（用于`分享菜单`）
+  classicVersionUrl: 'https://chargers.injs.eu/classical', // 旧版页面地址（用于`侧栏-回到旧版`）
+  surveyUrl: 'https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x', // 反馈问卷地址（用于`反馈页面`）
 };
 
 // 开发环境：
