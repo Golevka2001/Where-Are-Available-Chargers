@@ -1,34 +1,37 @@
 <!-- 分享菜单下的二维码 -->
 
 <template>
-  <v-sheet
-    color="white"
-    rounded="lg"
-    width="10rem"
-    style="outline: rgb(158, 158, 158) solid 1px"
+  <div
+    class="rounded-lg"
+    style="outline: thin solid darkgray; width: 10rem"
   >
     <!-- QR code image -->
-    <v-img
-      src="@/assets/img/qr-code.svg"
-      height="160"
+    <div
+      class="rounded-ts-lg rounded-te-lg rounded-bs-0 rounded-be-0"
+      style="background-color: white"
     >
-      <template v-slot:placeholder>
-        <div class="d-flex fill-height align-center justify-center">
-          <v-progress-circular
-            color="grey"
-            :indeterminate="true"
-          />
-        </div>
-      </template>
-    </v-img>
+      <v-img
+        src="@/assets/img/qr-code.svg"
+        height="10rem"
+      >
+        <template v-slot:placeholder>
+          <div class="d-flex fill-height align-center justify-center">
+            <v-progress-circular
+              color="default"
+              :indeterminate="true"
+            />
+          </div>
+        </template>
+      </v-img>
+    </div>
 
     <!-- Download button -->
     <v-btn
       :block="true"
       :icon="true"
       density="compact"
-      rounded="0"
       variant="tonal"
+      class="rounded-ts-0 rounded-te-0 rounded-bs-lg rounded-be-lg"
       @click.stop="onClickDownloadBtn"
     >
       <v-icon> {{ mdiDownloadBoxOutline }} </v-icon>
@@ -39,7 +42,7 @@
         保存二维码
       </v-tooltip>
     </v-btn>
-  </v-sheet>
+  </div>
 </template>
 
 <script lang="ts" setup>

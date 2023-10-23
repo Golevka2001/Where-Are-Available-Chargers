@@ -4,6 +4,7 @@
   <v-btn
     v-for="navItem in navList"
     :key="navItem.text"
+    :ripple="false"
     rounded="xl"
     size="small"
     variant="plain"

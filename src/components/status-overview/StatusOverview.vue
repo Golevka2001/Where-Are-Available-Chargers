@@ -10,7 +10,7 @@
 <template>
   <div>
     <v-card
-      border="md"
+      border="sm"
       rounded="lg"
       variant="flat"
     >
