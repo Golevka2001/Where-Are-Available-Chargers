@@ -34,13 +34,17 @@
 
     <!-- Classic version -->
     <template #append>
-      <div class="pa-4">
-        <!-- TODO：旧版链接和页面 -->
+      <div class="ma-6">
         <v-btn
           :block="true"
+          :disabled="loading"
+          :href="config.classicVersionUrl"
+          :loading="loading"
           :prepend-icon="mdiUndoVariant"
           rounded="lg"
-          variant="outlined"
+          variant="tonal"
+          style="border: thin solid"
+          @click.stop="onClickClassicVersionButton"
         >
           回到旧版
         </v-btn>
@@ -50,6 +54,7 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
@@ -60,4 +65,13 @@ import ThemeToggle from './ThemeToggle.vue';
 import { mdiUndoVariant } from '@mdi/js';
 
 const appStore = useAppStore();
+
+const loading = ref(false);
+
+const onClickClassicVersionButton = () => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 3000);
+};
 </script>

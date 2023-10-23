@@ -43,7 +43,7 @@
     </v-window>
 
     <template #append>
-      <div class="ma-4 d-flex justify-space-between">
+      <div class="ma-6 d-flex justify-space-between">
         <v-btn
           :disabled="isCurStationTheFirst()"
           :prepend-icon="mdiChevronLeft"
