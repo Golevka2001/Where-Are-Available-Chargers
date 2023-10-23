@@ -43,8 +43,9 @@ import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import { useWeatherStore } from '@/store/weather';
 import config from '@/config';
-import BottomInfoBar from '@/components/app/bottom-info-bar/BottomInfoBar.vue';
-import LoadingIndicator from '@/components/app/loading-indicator/LoadingIndicator.vue';
+
+import BottomInfoBar from '@/components/bottom-info-bar/BottomInfoBar.vue';
+import LoadingIndicator from '@/components/loading-indicator/LoadingIndicator.vue';
 import StatusDetailDrawer from '@/components/status-detail-drawer/StatusDetailDrawer.vue';
 import StatusOverview from '@/components/status-overview/StatusOverview.vue';
 import WeatherPanel from '@/components/weather-panel/WeatherPanel.vue';

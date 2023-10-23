@@ -7,8 +7,8 @@
     location="bottom"
     z-index=""
   >
+    <!-- Share button -->
     <template v-slot:activator="{ props }">
-      <!-- Share button -->
       <v-btn
         :icon="mdiShareVariantOutline"
         v-bind="props"
@@ -38,6 +38,7 @@ import { ref } from 'vue';
 import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
+
 import ShareMenuLink from './ShareMenuLink.vue';
 import ShareMenuQrCode from './ShareMenuQrCode.vue';
 

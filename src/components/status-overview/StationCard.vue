@@ -45,6 +45,7 @@
 <script lang="ts" setup>
 import { useAppStore } from '@/store/app';
 import { StationStatus } from '@/types/charger';
+
 import StationCardRemainCount from './StationCardRemainCount.vue';
 import StationCardRemainDetail from './StationCardRemainDetail.vue';
 

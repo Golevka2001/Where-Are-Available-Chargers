@@ -1,6 +1,6 @@
 <!-- 状态详细信息抽屉的头部内容 -->
 <!-- +---------------------+ -->
-<!-- | |!|  Station Name   | -->
+<!-- | |!| Station Name  > | -->
 <!-- |                     | -->
 <!-- | Station Description | -->
 <!-- +---------------------+ -->
@@ -66,6 +66,7 @@
 import { computed } from 'vue';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
+
 import { VueScrollPicker } from '../scroll-picker';
 
 import { mdiMapMarkerOutline, mdiMenuClose } from '@mdi/js';

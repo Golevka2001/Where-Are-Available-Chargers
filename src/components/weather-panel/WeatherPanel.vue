@@ -1,3 +1,10 @@
+<!-- 天气预报面板 -->
+<!-- +-------------------------+ -->
+<!-- | [~]  Brief Forecast   > | -->
+<!-- +-------------------------+ -->
+<!-- |      Panel Content      | -->
+<!-- +-------------------------+ -->
+
 <template>
   <v-expansion-panels :readonly="weatherStore.skyconIconList.length === 0">
     <v-expansion-panel
@@ -24,6 +31,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 import { useWeatherStore } from '@/store/weather';
+
 import PanelContent from './PanelContent.vue';
 
 import { mdiWeatherCloudyClock } from '@mdi/js';

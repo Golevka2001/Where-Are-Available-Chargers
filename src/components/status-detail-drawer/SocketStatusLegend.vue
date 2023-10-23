@@ -1,3 +1,5 @@
+<!-- 插座状态图例 -->
+
 <template>
   <v-row class="justify-center text-body-2">
     <v-col

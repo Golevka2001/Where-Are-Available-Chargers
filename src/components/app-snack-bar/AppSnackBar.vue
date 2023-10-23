@@ -1,3 +1,5 @@
+<!-- 消息提示条 -->
+
 <template>
   <v-snackbar
     v-model:model-value="appStore.isSnackBarVisible"

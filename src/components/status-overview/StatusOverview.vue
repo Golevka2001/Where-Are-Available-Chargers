@@ -37,6 +37,7 @@
 import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 import { useStatusStore } from '@/store/status';
+
 import StationCard from './StationCard.vue';
 
 const { width } = useDisplay();

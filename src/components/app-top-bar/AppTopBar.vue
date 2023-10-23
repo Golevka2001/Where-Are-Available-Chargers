@@ -1,8 +1,7 @@
 <!-- 顶部导航栏 -->
-<!-- +------+-----------+-------+ -->
-<!-- | Menu |    App    | Share | -->
-<!-- | Btn  |   Title   |  Btn  | -->
-<!-- +------+-----------+-------+ -->
+<!-- +------+---------------+-------+ -->
+<!-- | Menu |   App Title   | Share | -->
+<!-- +------+---------------+-------+ -->
 
 <template>
   <v-app-bar
@@ -27,7 +26,7 @@
     <!-- Progress bar -->
     <progress-bar />
 
-    <!-- Share button & share menu -->
+    <!-- Share button & Share menu -->
     <share-menu />
   </v-app-bar>
 </template>
@@ -36,9 +35,10 @@
 import { computed } from 'vue';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
+
 import BarTitle from './BarTitle.vue';
-import ShareMenu from './ShareMenu.vue';
-import ProgressBar from './ProgressBar.vue';
+import ProgressBar from '@/components/progress-bar/ProgressBar.vue';
+import ShareMenu from '@/components/share-menu/ShareMenu.vue';
 
 import { mdiMenu } from '@mdi/js';
 import { lineMenu } from '@/assets/img/custom-icons';

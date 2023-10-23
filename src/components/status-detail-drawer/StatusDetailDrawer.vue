@@ -73,6 +73,7 @@ import { useDisplay } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
+
 import DrawerHeader from './DrawerHeader.vue';
 import SocketStatusLegend from './SocketStatusLegend.vue';
 import StationTable from './StationTable.vue';

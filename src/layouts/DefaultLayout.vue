@@ -37,12 +37,14 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+
 import { useAppStore } from '@/store/app';
 import config from '@/config';
-import AppFooter from '@/components/app/app-footer/AppFooter.vue';
-import AppSideDrawer from '@/components/app/app-side-drawer/AppSideDrawer.vue';
-import AppSnackBar from '@/components/app/app-snack-bar/AppSnackBar.vue';
-import AppTopBar from '@/components/app/app-top-bar/AppTopBar.vue';
+
+import AppFooter from '@/components/app-footer/AppFooter.vue';
+import AppSideDrawer from '@/components/app-side-drawer/AppSideDrawer.vue';
+import AppSnackBar from '@/components/app-snack-bar/AppSnackBar.vue';
+import AppTopBar from '@/components/app-top-bar/AppTopBar.vue';
 
 const appStore = useAppStore();
 
