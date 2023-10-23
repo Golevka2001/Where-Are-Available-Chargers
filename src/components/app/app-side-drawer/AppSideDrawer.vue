@@ -12,9 +12,14 @@
 <template>
   <v-navigation-drawer
     v-model:model-value="appStore.isAppSideDrawerOpen"
-    :style="{ zIndex: config.zIndex.appSideDrawer }"
+    scrim="transparent"
+    :style="{
+      backgroundColor: useTheme().current.value.colors.surface + 'A0',
+      zIndex: config.zIndex.appSideDrawer,
+    }"
     :temporary="true"
     location="left"
+    style="backdrop-filter: blur(0.5rem)"
   >
     <v-list
       :nav="true"
@@ -45,6 +50,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 import DrawerNavList from './DrawerNavList.vue';

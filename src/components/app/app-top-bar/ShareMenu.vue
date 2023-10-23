@@ -17,7 +17,13 @@
     </template>
 
     <!-- Share menu -->
-    <v-card>
+    <v-card
+      :style="{
+        backgroundColor: useTheme().current.value.colors.surface + 'A0',
+      }"
+      rounded="lg"
+      style="backdrop-filter: blur(0.5rem)"
+    >
       <!-- QR code -->
       <share-menu-qr-code class="mx-auto my-8" />
 
@@ -29,6 +35,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 import ShareMenuLink from './ShareMenuLink.vue';
