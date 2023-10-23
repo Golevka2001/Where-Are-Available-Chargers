@@ -1,6 +1,6 @@
 import express from 'express';
-import { genRandomStatusData } from './status-gen.ts';
-import { genRandomWeatherData } from './weather-gen.ts';
+import { genRandomStatusData } from './status-gen';
+import { genRandomWeatherData } from './weather-gen';
 
 const app = express();
 
