@@ -16,10 +16,6 @@ export default defineConfig({
     vuetify({
       autoImport: true,
     }),
-    mix({
-      // Mixin mock server, launch with `vite` command
-      handler: './mock/test-api-server.ts',
-    }),
     VitePWA({
       // Generate PWA/Service Worker files
       registerType: 'autoUpdate',
@@ -49,6 +45,15 @@ export default defineConfig({
         ],
       },
     }),
+    // Only for development
+    ...(process.env.NODE_ENV === 'development'
+      ? [
+          mix({
+            // Mixin mock server, launch with `vite` command
+            handler: './mock/test-api-server.ts',
+          }),
+        ]
+      : []),
   ],
   define: { 'process.env': {} },
   resolve: {
