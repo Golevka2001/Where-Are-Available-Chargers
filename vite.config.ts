@@ -2,14 +2,11 @@
 
 import vue from '@vitejs/plugin-vue';
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
-// import ViteFonts from 'unplugin-fonts/vite';
-import { viteMockServe } from 'vite-plugin-mock';
+import mix from 'vite-plugin-mix';
+import { VitePWA } from 'vite-plugin-pwa';
 
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
-
-import { VitePWA } from 'vite-plugin-pwa';
-// Generate PWA/Service Worker files
 
 export default defineConfig({
   plugins: [
@@ -19,22 +16,12 @@ export default defineConfig({
     vuetify({
       autoImport: true,
     }),
-    /*ViteFonts({
-      google: {
-        families: [
-          {
-            name: 'Roboto',
-            styles: 'wght@100;300;400;500;700;900',
-          },
-        ],
-      },
-    }),*/
-    // 似乎没有必要引入字体，先注释掉了
-    viteMockServe({
-      mockPath: 'mock',
-      enable: process.env.NODE_ENV === 'development',
+    mix({
+      // Mixin mock server, launch with `vite` command
+      handler: './mock/test-api-server.ts',
     }),
     VitePWA({
+      // Generate PWA/Service Worker files
       registerType: 'autoUpdate',
       manifest: {
         name: 'Where Are Available Chargers?!',
