@@ -21,6 +21,7 @@
     :temporary="true"
     color="background"
     location="right"
+    class="pb-10"
   >
     <drawer-header
       :stationDescription="curStation.description"
@@ -42,7 +43,7 @@
     </v-window>
 
     <template #append>
-      <div class="mx-4 mt-4 mb-12 d-flex justify-space-between">
+      <div class="ma-4 d-flex justify-space-between">
         <v-btn
           :disabled="isCurStationTheFirst()"
           :prepend-icon="mdiChevronLeft"
