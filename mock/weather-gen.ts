@@ -32,8 +32,8 @@ const genSkyconList = (): RawSkycon[] => {
   const currentTime = new Date();
   const skyconList: RawSkycon[] = [];
 
-  // 生成从当前时刻开始的未来10小时的天气数据
-  for (let i = 0; i < 10; i++) {
+  // 生成从当前时刻开始的未来 13 小时的天气数据
+  for (let i = 0; i < 13; i++) {
     const datetime = new Date(
       currentTime.getFullYear(),
       currentTime.getMonth(),

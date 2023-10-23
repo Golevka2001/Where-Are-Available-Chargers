@@ -104,13 +104,16 @@ export const useWeatherStore = defineStore('weather', {
         // 更新数据
         this.forecast = res.hourly.description;
         this.skyconIconList = res.hourly.skycon
-          .sort((a, b) => a.datetime.localeCompare(b.datetime))
+          .sort((a, b) => a.datetime.localeCompare(b.datetime)) // 按时间排序
           .map((item) => ({
             time: item.datetime.slice(11, 16),
             icon: skycon2Icon(item.value),
-          }));
+          })) // 时间转换为 HH:mm，天气状况转换为图标
+          .slice(0, Math.min(13, res.hourly.skycon.length)); // 最多取 13 小时的数据
       } catch (err) {
         console.error(err);
+        this.forecast = '获取天气数据失败';
+        this.skyconIconList = [];
         throw err;
       }
     },

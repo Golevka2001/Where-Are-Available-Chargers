@@ -31,7 +31,11 @@ const { width } = useDisplay();
 const weatherStore = useWeatherStore();
 
 const iconListInterval = computed(() => {
-  return width.value < 960 ? 2 : 1;
+  if (width.value > 960) return 1;
+  if (width.value > 500) return 2;
+  if (width.value > 350) return 3;
+  if (width.value > 300) return 4;
+  return 6;
 });
 
 const get12HourTime = (time: string) => {
