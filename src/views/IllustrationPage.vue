@@ -34,7 +34,7 @@
     >
       <img
         alt="充电桩位置示意图"
-        src="/img/map.webp"
+        src="/img/illustration.webp"
         width="100%"
         @load="imgLoaded = true"
       />

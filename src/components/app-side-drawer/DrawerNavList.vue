@@ -40,7 +40,7 @@ const navList = [
   {
     title: '充电桩位置示意图',
     prependIcon: mdiMapLegend,
-    to: '/map',
+    to: '/illustration',
   },
   {
     title: '反馈 & 建议',

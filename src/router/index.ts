@@ -4,7 +4,7 @@ const DefaultLayout = () => import('@/layouts/DefaultLayout.vue');
 const AboutPage = () => import('@/views/AboutPage.vue');
 const ErrorPage = () => import('@/views/ErrorPage.vue');
 const FeedbackPage = () => import('@/views/FeedbackPage.vue');
-const MapPage = () => import('@/views/MapPage.vue');
+const IllustrationPage = () => import('@/views/IllustrationPage.vue');
 const StatusPage = () => import('@/views/StatusPage.vue');
 
 const routes = [
@@ -29,9 +29,9 @@ const routes = [
         component: FeedbackPage,
       },
       {
-        path: 'map',
-        name: 'Map',
-        component: MapPage,
+        path: 'illustration',
+        name: 'Illustration',
+        component: IllustrationPage,
       },
       {
         path: 'status',
