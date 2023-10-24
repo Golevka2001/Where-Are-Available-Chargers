@@ -29,15 +29,19 @@ const config = {
     overlay: 1000,
   },
 
-  classicVersionUrl: 'https://chargers.injs.eu/classical', // 旧版页面地址（用于`侧栏-回到旧版`）
-  surveyUrl: 'https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x', // 反馈问卷地址（用于`反馈页面`）
   tencentMapUrl:
     'https://apis.map.qq.com/tools/poimarker?' +
     'type=0' +
     '&marker=coord:{lat},{lng};title:{title};addr:{addr}' +
     `&key=${import.meta.env.VITE_TENCENT_MAP_KEY}` +
     `&referer=${import.meta.env.VITE_TENCENT_MAP_APP_NAME}`, // 腾讯地图标记点地址，花括号内为待填充参数（用于`地图页面`）
-  thisSiteUrl: 'https://chargers.injs.eu', // 当前本站地址（用于`分享菜单`）
+
+  // 以下变量可以被环境变量覆盖，以 `VITE_` 开头的是对应的环境变量
+  apiBaseUrl: '/api', // API 的 baseURL | `VITE_API_URL`
+  thisSiteUrl: 'https://chargers.injs.eu', // 当前本站地址（用于`分享菜单`） | `VITE_SITE_URL`
+  classicVersionUrl: 'https://chargers.injs.eu/classical', // 旧版页面地址（用于`侧栏-回到旧版`） | `VITE_CLASSIC_VER_URL`
+  surveyUrl: 'https://example.com', // 反馈问卷地址（用于`反馈页面`） | `VITE_SURVEY_URL`
+  challengeUrl: '/api/challenge', // 用于网页验证质询 | `VITE_CHALLENGE_URL`
 };
 
 // 开发环境：
@@ -48,5 +52,13 @@ if (import.meta.env.DEV) {
   config.dataExpirationTime = 10 * 1000;
   // config.statusRequestTimeout = 1.3 * 1000;
 }
+
+// 环境变量覆盖部分设置：
+config.apiBaseUrl = import.meta.env.VITE_API_URL || config.apiBaseUrl;
+config.thisSiteUrl = import.meta.env.VITE_SITE_URL || config.thisSiteUrl;
+config.classicVersionUrl =
+  import.meta.env.VITE_CLASSIC_VER_URL || config.classicVersionUrl;
+config.surveyUrl = import.meta.env.VITE_SURVEY_URL || config.surveyUrl;
+config.challengeUrl = import.meta.env.VITE_CHALLENGE_URL || config.challengeUrl;
 
 export default config;

@@ -7,6 +7,7 @@ const FeedbackPage = () => import('@/views/FeedbackPage.vue');
 const IllustrationPage = () => import('@/views/IllustrationPage.vue');
 const MapPage = () => import('@/views/MapPage.vue');
 const StatusPage = () => import('@/views/StatusPage.vue');
+const ChallengePage = () => import('@/views/ChallengePage.vue');
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
         path: 'status',
         name: 'Status',
         component: StatusPage,
+      },
+      {
+        path: 'challenge',
+        name: 'Challenge',
+        component: ChallengePage,
       },
     ],
   },
