@@ -61,6 +61,22 @@ const startInterval = () => {
   }, config.bottomBarUpdateInterval);
 };
 
+// 处理页面置于后台时的计时器
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    // 页面切换到后台，停止计时器
+    clearInterval(intervalId);
+  } else {
+    // 如果超过五分钟，则强制刷新
+    if (
+      Date.now() - new Date(statusStore.lastUpdateTime).getTime() >
+      5 * 60 * 1000
+    ) {
+      window.location.reload();
+    } else startInterval();
+  }
+});
+
 defineExpose({
   startInterval,
   stopInterval: () => {
