@@ -10,14 +10,26 @@ export default [
     statusCode: 200,
     timeout: Math.floor(Math.random() * 1000) + 500,
     rawResponse: (req, res) => {
-      res.setHeader('Content-Type', 'application/json');
       res.setHeader('Access-Control-Allow-Origin', '*');
       if (Math.random() < 0.35) {
         // 模拟发生质询的情况
         res.setHeader('cf-mitigated', 'challenge');
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
         res.statusCode = 403;
+        res.end(`
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <title>验证码</title>
+</head>
+<body>
+123456
+</body>
+`);
+      } else {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(genRandomStatusData()));
       }
-      res.end(JSON.stringify(genRandomStatusData()));
     },
   },
   {

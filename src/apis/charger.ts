@@ -18,5 +18,6 @@ export const getChargersStatus = async (): Promise<StatusResponse> => {
           '/challenge?' + encodeURIComponent(window.location.pathname);
       } else throw new Error('充电桩状态请求失败：' + err.message);
     });
+  if (!res.data) return { last_update_time: 0, status: undefined, code: 403 };
   return res.data;
 };
