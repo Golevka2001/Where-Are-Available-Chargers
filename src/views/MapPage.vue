@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed, onBeforeMount, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
@@ -116,7 +116,8 @@ const mapUrl = computed(() => {
     : '';
 });
 
-onMounted(() => {
+// 此页面不显示 Footer
+onBeforeMount(() => {
   appStore.isFooterVisible = false;
   // 检查充电站位置信息列表中是否存在传入的充电站名称
   if (
@@ -127,5 +128,8 @@ onMounted(() => {
     // TODO：error message
     router.push('/error');
   }
+});
+onBeforeUnmount(() => {
+  appStore.isFooterVisible = true;
 });
 </script>
