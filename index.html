@@ -28,11 +28,32 @@
   </head>
 
   <body>
-    <!-- TODO：判断浏览器版本，跳转经典页面 -->
+    <script type="text/javascript">
+      function isUnsupportedBrowser() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1) {
+          // IE
+          return true;
+        } else if (ua.indexOf('firefox') != -1) {
+          // Firefox < 78
+          if (ua.match(/firefox\/([\d.]+)/)[1] < 78) return true;
+        } else if (ua.indexOf('chrome') != -1) {
+          // Chrome < 86
+          if (ua.match(/chrome\/([\d.]+)/)[1] < 86) return true;
+        } else return false;
+      }
+      if (isUnsupportedBrowser()) {
+        if (
+          confirm('当前浏览器版本较低，存在兼容性问题，是否跳转到经典页面？')
+        ) {
+          window.location.href = 'https://chargers.injs.eu/classical';
+        }
+      }
+      var script = document.createElement('script');
+      script.type = 'module';
+      script.src = '/src/main.ts';
+      document.body.appendChild(script);
+    </script>
     <div id="app"></div>
-    <script
-      type="module"
-      src="/src/main.ts"
-    ></script>
   </body>
 </html>
