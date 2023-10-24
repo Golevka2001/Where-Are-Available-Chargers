@@ -4,7 +4,7 @@
 <!-- +----------+----------+----------+ -->
 
 <template>
-  <div class="d-flex justify-center">
+  <div class="my-2 d-flex justify-center">
     <div
       class="text-start"
       style="width: 40%"
