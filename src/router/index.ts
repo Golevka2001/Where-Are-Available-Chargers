@@ -5,6 +5,7 @@ const AboutPage = () => import('@/views/AboutPage.vue');
 const ErrorPage = () => import('@/views/ErrorPage.vue');
 const FeedbackPage = () => import('@/views/FeedbackPage.vue');
 const IllustrationPage = () => import('@/views/IllustrationPage.vue');
+const MapPage = () => import('@/views/MapPage.vue');
 const StatusPage = () => import('@/views/StatusPage.vue');
 
 const routes = [
@@ -32,6 +33,12 @@ const routes = [
         path: 'illustration',
         name: 'Illustration',
         component: IllustrationPage,
+      },
+      {
+        path: 'map/:stationName',
+        name: 'Map',
+        component: MapPage,
+        props: true,
       },
       {
         path: 'status',

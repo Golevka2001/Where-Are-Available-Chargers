@@ -16,7 +16,7 @@
       ></span>
     </v-scroll-y-reverse-transition>
     <router-link
-      to="/"
+      to="/status"
       class="font-weight-medium text-decoration-none text-no-wrap"
       style="font-size: 1rem; color: inherit"
     >

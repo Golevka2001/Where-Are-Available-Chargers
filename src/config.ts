@@ -29,13 +29,19 @@ const config = {
     overlay: 1000,
   },
 
-  thisSiteUrl: 'https://chargers.injs.eu', // 当前本站地址（用于`分享菜单`）
   classicVersionUrl: 'https://chargers.injs.eu/classical', // 旧版页面地址（用于`侧栏-回到旧版`）
   surveyUrl: 'https://forms.larksuite.com/m/cfm?t=sLfgofRTAwMi-5i3x', // 反馈问卷地址（用于`反馈页面`）
+  tencentMapUrl:
+    'https://apis.map.qq.com/tools/poimarker?' +
+    'type=0' +
+    '&marker=coord:{lat},{lng};title:{title};addr:{addr}' +
+    `&key=${import.meta.env.VITE_TENCENT_MAP_KEY}` +
+    `&referer=${import.meta.env.VITE_TENCENT_MAP_APP_NAME}`, // 腾讯地图标记点地址，花括号内为待填充参数（用于`地图页面`）
+  thisSiteUrl: 'https://chargers.injs.eu', // 当前本站地址（用于`分享菜单`）
 };
 
 // 开发环境：
-if (process.env.NODE_ENV === 'development') {
+if (import.meta.env.DEV) {
   config.autoUpdateMaxTimes = 3;
   config.autoUpdateInterval = 5 * 1000;
   config.backendUpdateInterval = 2 * 1000;

@@ -17,6 +17,7 @@
         <!-- TODO：link -->
         <v-btn
           :icon="true"
+          :to="`/map/${props.stationName}`"
           variant="text"
         >
           <v-icon>
@@ -71,7 +72,7 @@ import { VueScrollPicker } from '../scroll-picker';
 
 import { mdiMapMarkerOutline, mdiMenuClose } from '@mdi/js';
 
-defineProps<{
+const props = defineProps<{
   stationDescription: string | null | undefined;
   stationName: string;
 }>();
