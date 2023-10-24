@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useDisplay } from 'vuetify';
 import { useAppStore } from '@/store/app';
@@ -64,6 +64,7 @@ const startInterval = () => {
   clearInterval(intervalId); // 防止重复启动
   let autoUpdateCount = 0;
   intervalId = setInterval(async () => {
+    console.log('intervalId');
     try {
       await statusStore.updateData();
       // 一定次数后停止定时器
@@ -138,5 +139,9 @@ onMounted(async () => {
   }, config.bottomBarInitDelay);
 
   startInterval();
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId);
 });
 </script>

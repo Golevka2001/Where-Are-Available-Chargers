@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
@@ -91,5 +91,9 @@ const onClickBottomBar = async () => {
 
 onMounted(() => {
   startInterval();
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId);
 });
 </script>
