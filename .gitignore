@@ -2,6 +2,9 @@
 .idea
 .vscode
 
+# Environment
+.env*
+
 # Dependencies
 node_modules/
 .yarn/*
