@@ -5,13 +5,23 @@ export default {
   data: () => ({
     snackbar: true,
     text: '我们怀疑你是人类，请完成机器人验证',
-    timeout: 3000,
+    timeout: 1145141919,
+    iframeShow: true,
   }),
+  methods: {
+    refreshIframe() {
+      this.iframeShow = false;
+      this.$nextTick(() => {
+        this.iframeShow = true;
+      });
+    },
+  },
 };
 </script>
 
 <template>
   <iframe
+    v-if="iframeShow"
     :src="config.challengeUrl"
     height="100%"
     width="100%"
@@ -27,10 +37,10 @@ export default {
 
     <template v-slot:actions>
       <v-btn
-        variant="text"
-        @click="snackbar = false"
+        variant="tonal"
+        @click="refreshIframe()"
       >
-        Close
+        刷新
       </v-btn>
     </template>
   </v-snackbar>
@@ -45,9 +55,12 @@ import config from '@/config';
 const appStore = useAppStore();
 const router = useRouter();
 
+let intervalId: NodeJS.Timeout;
+
 // 此页面不显示 Footer
 onBeforeMount(() => {
   appStore.isFooterVisible = false;
+  clearInterval(intervalId);
   window.addEventListener('message', handleMessage);
 });
 onBeforeUnmount(() => {

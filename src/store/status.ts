@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 import { useAppStore } from './app';
 import { StationStatus } from '@/types/charger';
 import { getChargersStatus } from '@/apis/charger';
+import router from '@/router';
 
 const appStore = useAppStore();
 
@@ -28,6 +29,15 @@ export const useStatusStore = defineStore('status', {
       appStore.bottomBarText = '正在更新数据，请稍候...';
       try {
         const res = await getChargersStatus();
+        if (res.code === 766) {
+          await router.push({
+            path: '/challenge',
+            query: {
+              callback: router.currentRoute.value.fullPath,
+            },
+          });
+          return;
+        }
         if (res.code !== 200) {
           throw new Error('返回的状态数据无效');
         }
