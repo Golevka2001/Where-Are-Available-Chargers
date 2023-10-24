@@ -1,27 +1,8 @@
 <!-- 质询（人机验证）页面 -->
 
-<script lang="ts">
-export default {
-  data: () => ({
-    snackbar: true,
-    text: '我们怀疑你是人类，请完成机器人验证',
-    timeout: 1145141919,
-    iframeShow: true,
-  }),
-  methods: {
-    refreshIframe() {
-      this.iframeShow = false;
-      this.$nextTick(() => {
-        this.iframeShow = true;
-      });
-    },
-  },
-};
-</script>
-
 <template>
   <iframe
-    v-if="iframeShow"
+    v-if="isIframeVisible"
     :src="config.challengeUrl"
     height="100%"
     width="100%"
@@ -29,16 +10,15 @@ export default {
   ></iframe>
 
   <v-snackbar
-    v-model="snackbar"
+    v-model="isIframeVisible"
     color="deep-purple-accent-4"
-    :timeout="timeout"
+    timeout="-1"
   >
-    {{ text }}
-
+    我们怀疑你是人类，请完成机器人验证
     <template v-slot:actions>
       <v-btn
         variant="tonal"
-        @click="refreshIframe()"
+        @click.stop="refreshIframe()"
       >
         刷新
       </v-btn>
@@ -47,20 +27,19 @@ export default {
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onBeforeUnmount } from 'vue';
-import { useAppStore } from '@/store/app';
+import { nextTick, onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAppStore } from '@/store/app';
 import config from '@/config';
 
 const appStore = useAppStore();
 const router = useRouter();
 
-let intervalId: NodeJS.Timeout;
+const isIframeVisible = ref(true);
 
 // 此页面不显示 Footer
 onBeforeMount(() => {
   appStore.isFooterVisible = false;
-  clearInterval(intervalId);
   window.addEventListener('message', handleMessage);
 });
 onBeforeUnmount(() => {
@@ -68,7 +47,7 @@ onBeforeUnmount(() => {
   window.removeEventListener('message', handleMessage);
 });
 
-function handleMessage(event: MessageEvent) {
+const handleMessage = (event: MessageEvent) => {
   if (
     event.origin === window.location.origin &&
     event.data === 'verificationComplete'
@@ -80,5 +59,12 @@ function handleMessage(event: MessageEvent) {
      */
     router.push('/status');
   }
-}
+};
+
+const refreshIframe = () => {
+  isIframeVisible.value = false;
+  nextTick(() => {
+    isIframeVisible.value = true;
+  });
+};
 </script>

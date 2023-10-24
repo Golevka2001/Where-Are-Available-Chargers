@@ -33,8 +33,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { onMounted, ref } from 'vue';
+import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import { useDisplay } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
@@ -62,7 +62,12 @@ const startInterval = () => {
   clearInterval(intervalId); // 防止重复启动
   let autoUpdateCount = 0;
   intervalId = setInterval(async () => {
-    console.log('intervalId');
+    if (router.currentRoute.value.path !== '/status') {
+      // 路由不在当前页面时，清除定时器
+      //对应的问题是：若页面加载时触发 challenge，路由跳转不会被 onBeforeRouteLeave 捕获，导致定时器不被清除
+      clearInterval(intervalId);
+      return;
+    }
     try {
       await statusStore.updateData();
       // 一定次数后停止定时器
@@ -102,22 +107,21 @@ const onScroll = () => {
   ) {
     return;
   }
-  // 向下滚动：隐藏底栏，一定时间后显示
   if (scrollY > lastScrollY) {
+    // 向下滚动：隐藏底栏，一定时间后显示
     appStore.isBottomBarVisible = false;
     setTimeout(() => {
       appStore.isBottomBarVisible = true;
     }, config.bottomBarReshowDelay);
-  }
-  // 向上滚动：显示底栏
-  else {
+  } else {
+    // 向上滚动：显示底栏
     appStore.isBottomBarVisible = true;
   }
   lastScrollY = scrollY;
 };
 
 onMounted(async () => {
-  // 页面挂载时更新数据，显示加载动画
+  // 页面挂载时更新数据，显示加载动画，之后在当前页面内不再显示加载动画
   isLoadingIndicatorVisible.value = true;
   try {
     await statusStore.updateData();
@@ -126,8 +130,6 @@ onMounted(async () => {
     router.push('/error');
     return;
   }
-
-  // 之后在当前页面内不再显示加载动画
   isLoadingIndicatorVisible.value = false;
 
   // 数据更新完成后，底栏缓出
@@ -138,7 +140,8 @@ onMounted(async () => {
   startInterval();
 });
 
-onUnmounted(() => {
+// 应使用路由守卫而不能是 onUnmounted
+onBeforeRouteLeave(() => {
   clearInterval(intervalId);
 });
 </script>

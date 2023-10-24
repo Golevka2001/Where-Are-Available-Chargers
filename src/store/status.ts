@@ -36,6 +36,9 @@ export const useStatusStore = defineStore('status', {
               callback: router.currentRoute.value.fullPath,
             },
           });
+          appStore.bottomBarBgColor = 'error';
+          appStore.bottomBarText = '数据更新失败，点此重试';
+          this.isFetchingData = false;
           return;
         }
         if (res.code !== 200) {
