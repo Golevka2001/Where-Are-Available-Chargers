@@ -38,7 +38,7 @@ import { mdiWeatherCloudyClock } from '@mdi/js';
 
 const weatherStore = useWeatherStore();
 
-onMounted(() => {
-  weatherStore.updateData();
+onMounted(async () => {
+  await weatherStore.updateData();
 });
 </script>

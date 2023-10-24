@@ -38,7 +38,6 @@ import { useRouter } from 'vue-router';
 import { useDisplay } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
-import { useWeatherStore } from '@/store/weather';
 import config from '@/config';
 
 import BottomInfoBar from '@/components/bottom-info-bar/BottomInfoBar.vue';
@@ -51,7 +50,6 @@ const router = useRouter();
 const { width } = useDisplay();
 const appStore = useAppStore();
 const statusStore = useStatusStore();
-const weatherStore = useWeatherStore();
 
 const bottomInfoBarComponent = ref();
 const isLoadingIndicatorVisible = ref(true);
@@ -123,7 +121,6 @@ onMounted(async () => {
   isLoadingIndicatorVisible.value = true;
   try {
     await statusStore.updateData();
-    weatherStore.updateData();
   } catch (err) {
     // 数据更新失败，跳转到错误页面
     router.push('/error');
