@@ -19,6 +19,11 @@
     <div class="ma-8">
       <status-detail-drawer />
 
+      <announcement-board
+        v-if="config.announcementBoard.enabled"
+        class="mb-6"
+      />
+
       <weather-panel class="mb-6" />
 
       <status-overview />
@@ -42,6 +47,7 @@ import config from '@/config';
 
 import { LoadingIndicator } from '@/components/global';
 import {
+  AnnouncementBoard,
   BottomInfoBar,
   StatusDetailDrawer,
   StatusOverview,

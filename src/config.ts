@@ -1,5 +1,16 @@
 const config = {
-  // 状态查询、显示相关
+  /********** 公告栏内容 **********/
+  announcementBoard: {
+    enabled: false, // 是否启用公告栏
+    title: '测试标题', // 标题（支持 HTML）
+    content: '&#129323; 测试内容', // 内容（支持 HTML）
+
+    color: 'orange', // 颜色
+    variant: 'tonal', // 样式（'text' | 'flat' | 'elevated' | 'tonal' | 'outlined' | 'plain'）
+    border: 'start', // 边框位置（boolean | 'top' | 'end' | 'bottom' | 'start'）
+  },
+
+  /********** 状态查询、显示相关 **********/
   autoUpdateMaxTimes: 6, // 自动更新最大次数
   autoUpdateInterval: 30 * 1000, // 前端自动拉取数据间隔
   backendUpdateInterval: 20 * 1000, // 后端数据更新间隔（要与后端同步）// TODO：改为从后端获取
@@ -7,7 +18,7 @@ const config = {
   stationThresholdPercentage: 0.25, // TODO：改判定方式
   statusRequestTimeout: 10 * 1000, // 状态请求超时时间
 
-  // 组件显示相关
+  /********** 组件显示相关 **********/
   // 底栏
   bottomBarUpdateInterval: 1000, // 底栏定时器更新间隔
   bottomBarInitDelay: 0.5 * 1000, // 底栏初始弹出的延迟时间
@@ -27,6 +38,7 @@ const config = {
     overlay: 1000,
   },
 
+  /********** 链接 **********/
   tencentMapUrl:
     'https://apis.map.qq.com/tools/poimarker?' +
     'type=0' +
@@ -36,10 +48,10 @@ const config = {
 
   // 以下变量可以被环境变量覆盖，以 `VITE_` 开头的是对应的环境变量
   apiBaseUrl: '/api', // API 的 baseURL | `VITE_API_URL`
-  thisSiteUrl: 'https://chargers.injs.eu', // 当前本站地址（用于`分享菜单`） | `VITE_SITE_URL`
+  challengeUrl: '/api/challenge', // 用于网页验证质询 | `VITE_CHALLENGE_URL`
   classicVersionUrl: 'https://chargers.injs.eu/classical', // 旧版页面地址（用于`侧栏-回到旧版`） | `VITE_CLASSIC_VER_URL`
   surveyUrl: 'https://example.com', // 反馈问卷地址（用于`反馈页面`） | `VITE_SURVEY_URL`
-  challengeUrl: '/api/challenge', // 用于网页验证质询 | `VITE_CHALLENGE_URL`
+  thisSiteUrl: 'https://chargers.injs.eu', // 当前本站地址（用于`分享菜单`） | `VITE_SITE_URL`
 };
 
 // 开发环境：
@@ -53,10 +65,10 @@ if (import.meta.env.DEV) {
 
 // 环境变量覆盖部分设置：
 config.apiBaseUrl = import.meta.env.VITE_API_URL || config.apiBaseUrl;
-config.thisSiteUrl = import.meta.env.VITE_SITE_URL || config.thisSiteUrl;
+config.challengeUrl = import.meta.env.VITE_CHALLENGE_URL || config.challengeUrl;
 config.classicVersionUrl =
   import.meta.env.VITE_CLASSIC_VER_URL || config.classicVersionUrl;
 config.surveyUrl = import.meta.env.VITE_SURVEY_URL || config.surveyUrl;
-config.challengeUrl = import.meta.env.VITE_CHALLENGE_URL || config.challengeUrl;
+config.thisSiteUrl = import.meta.env.VITE_SITE_URL || config.thisSiteUrl;
 
 export default config;
