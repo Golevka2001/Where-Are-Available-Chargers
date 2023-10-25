@@ -1,13 +1,19 @@
 <!-- 质询（人机验证）页面 -->
 
 <template>
-  <div class="d-flex flex-column fill-height">
+  <loading-indicator v-if="!isIframeLoaded" />
+  <div
+    v-show="isIframeLoaded"
+    class="flex-column fill-height"
+    :class="isIframeLoaded ? 'd-flex' : ''"
+  >
     <iframe
-      v-if="isIframeVisible"
+      :key="refreshHelper"
       :src="config.challengeUrl"
       height="100%"
       width="100%"
       style="border: 0; display: block"
+      @load="isIframeLoaded = true"
     ></iframe>
 
     <div class="px-4 py-2 align-center bg-deep-purple-accent-4 d-flex">
@@ -19,7 +25,7 @@
       <v-btn
         :prepend-icon="mdiRefresh"
         variant="tonal"
-        @click.stop="onClickRefreshBtn()"
+        @click.stop="refreshHelper += 1"
       >
         刷新
       </v-btn>
@@ -33,12 +39,15 @@ import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 
+import LoadingIndicator from '@/components/global/loading-indicator/LoadingIndicator.vue';
+
 import { mdiRefresh } from '@mdi/js';
 
 const appStore = useAppStore();
 const router = useRouter();
 
-const isIframeVisible = ref(true);
+const isIframeLoaded = ref(false);
+const refreshHelper = ref(0); // 据说使用 key 比 v-if 会更好
 
 // 监听 iframe 的 message 事件，验证完成后返回 /status
 const handleMessage = (event: MessageEvent) => {
@@ -53,13 +62,6 @@ const handleMessage = (event: MessageEvent) => {
      */
     router.push('/status');
   }
-};
-
-const onClickRefreshBtn = () => {
-  isIframeVisible.value = false;
-  nextTick(() => {
-    isIframeVisible.value = true;
-  });
 };
 
 // 此页面不显示 Footer

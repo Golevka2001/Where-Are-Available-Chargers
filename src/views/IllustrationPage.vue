@@ -1,9 +1,9 @@
 <!-- 充电桩位置示意图页面 -->
 
 <template>
-  <loading-indicator v-if="!imgLoaded" />
+  <loading-indicator v-if="!isImgLoaded" />
   <div
-    v-show="imgLoaded"
+    v-show="isImgLoaded"
     class="fill-height"
   >
     <div
@@ -36,7 +36,7 @@
         alt="充电桩位置示意图"
         src="/img/illustration.webp"
         width="100%"
-        @load="imgLoaded = true"
+        @load="isImgLoaded = true"
       />
     </div>
   </div>
@@ -52,5 +52,5 @@ import { LoadingIndicator } from '@/components/global';
 
 const vVueViewer = viewer();
 
-const imgLoaded = ref(false);
+const isImgLoaded = ref(false);
 </script>

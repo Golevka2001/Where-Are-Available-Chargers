@@ -1,10 +1,11 @@
 <!-- 地图页面 -->
 
 <template>
-  <loading-indicator v-if="mapUrl === ''" />
+  <loading-indicator v-if="!isIframeLoaded" />
   <div
-    v-else
-    class="d-flex flex-column fill-height"
+    v-show="isIframeLoaded"
+    class="flex-column fill-height"
+    :class="isIframeLoaded ? 'd-flex' : ''"
   >
     <!-- Map -->
     <iframe
@@ -12,6 +13,7 @@
       height="100%"
       width="100%"
       style="border: 0; display: block"
+      @load="isIframeLoaded = true"
     >
     </iframe>
 
@@ -23,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeMount, onBeforeUnmount } from 'vue';
+import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
@@ -42,6 +44,7 @@ const router = useRouter();
 const appStore = useAppStore();
 const statusStore = useStatusStore();
 
+const isIframeLoaded = ref(false);
 // 构造腾讯地图 URL
 const mapUrl = computed(() => {
   const stationPosition = stationPositionList.find(

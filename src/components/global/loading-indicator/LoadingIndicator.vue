@@ -1,4 +1,9 @@
 <!-- 加载中提示 -->
+<!-- NOTE：在使用时，如果是以待加载元素的 load 事件来控制 LoadingIndicator 的显示，
+  LoadingIndicator 可以用 v-if 来判断，而待加载元素务必使用 v-show 控制。
+  因为 v-if 在条件值为 false 时不会渲染元素，也就永远不会触发 load 事件，
+  而 v-show 只是将元素 display 属性设置为 none，元素正常加载。
+  所带来的问题是如果待加载元素同时使用了 d-flex 类，优先级会高于 v-show，需额外处理。 -->
 
 <template>
   <div
