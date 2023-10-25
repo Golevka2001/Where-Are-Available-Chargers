@@ -45,6 +45,16 @@
       </v-window-item>
     </v-window>
 
+    <!-- Detailed update time -->
+    <div class="mx-4 mt-2 text-center text-body-2 text-default">
+      更新于
+      {{
+        new Date(statusStore.lastUpdateTime).toLocaleString('zh-CN', {
+          hour12: false,
+        })
+      }}
+    </div>
+
     <!-- Prev/Next buttons -->
     <template #append>
       <drawer-bottom-buttons class="ma-6" />
