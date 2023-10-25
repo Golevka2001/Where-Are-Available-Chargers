@@ -3,6 +3,9 @@ import { MockMethod } from 'vite-plugin-mock';
 import { genRandomStatusData } from './status-gen';
 import { genRandomWeatherData } from './weather-gen';
 
+// const CHALLENGE_RATE = 0.35;
+const CHALLENGE_RATE = 0;
+
 export default [
   {
     url: '/api/get_status',
@@ -11,7 +14,7 @@ export default [
     timeout: Math.floor(Math.random() * 1000) + 500,
     rawResponse: (req, res) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
-      if (Math.random() < 0.35) {
+      if (Math.random() < CHALLENGE_RATE) {
         // 模拟发生质询的情况
         res.setHeader('cf-mitigated', 'challenge');
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
