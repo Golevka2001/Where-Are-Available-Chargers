@@ -29,8 +29,8 @@ import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
 
-import BottomButtonGroup from '@/components/bottom-button-group/BottomButtonGroup.vue';
-import LoadingIndicator from '@/components/loading-indicator/LoadingIndicator.vue';
+import { LoadingIndicator } from '@/components/global';
+import { BottomButtonGroup } from '@/components/map-page';
 
 const props = defineProps({
   stationName: String,

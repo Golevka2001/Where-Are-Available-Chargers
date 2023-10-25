@@ -37,8 +37,7 @@ import { useAppStore } from '@/store/app';
 import config from '@/config';
 
 import BarTitle from './BarTitle.vue';
-import ProgressBar from '@/components/progress-bar/ProgressBar.vue';
-import ShareMenu from '@/components/share-menu/ShareMenu.vue';
+import { ProgressBar, ShareMenu } from '@/components/global';
 
 import { mdiMenu } from '@mdi/js';
 import { lineMenu } from '@/assets/img/custom-icons';
@@ -55,6 +54,7 @@ const onClickMenuBtn = () => {
 };
 </script>
 
+<!-- 自定义菜单图标过渡动画 -->
 <style lang="less" scoped>
 .switch-menu-icon-enter-active {
   animation: expand 0.2s;

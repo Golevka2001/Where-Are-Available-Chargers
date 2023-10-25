@@ -48,7 +48,7 @@ import { directive as viewer } from 'v-viewer';
 
 import { ref } from 'vue';
 
-import LoadingIndicator from '@/components/loading-indicator/LoadingIndicator.vue';
+import { LoadingIndicator } from '@/components/global';
 
 const vVueViewer = viewer();
 

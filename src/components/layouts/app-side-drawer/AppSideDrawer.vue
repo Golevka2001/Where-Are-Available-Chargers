@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
@@ -59,7 +59,6 @@ import DrawerNavList from './DrawerNavList.vue';
 import ThemeToggle from './ThemeToggle.vue';
 
 import { mdiUndoVariant } from '@mdi/js';
-import { computed } from 'vue';
 
 const theme = useTheme();
 const appStore = useAppStore();

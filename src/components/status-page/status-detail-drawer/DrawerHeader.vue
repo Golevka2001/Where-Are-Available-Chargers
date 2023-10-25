@@ -68,7 +68,7 @@ import { computed } from 'vue';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 
-import { VueScrollPicker } from '../scroll-picker';
+import { VueScrollPicker } from '@/components/global';
 
 import { mdiMapMarkerOutline, mdiMenuClose } from '@mdi/js';
 

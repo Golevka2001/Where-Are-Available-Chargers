@@ -14,8 +14,6 @@
   <v-app>
     <app-top-bar />
 
-    <app-snack-bar class="mt-12" />
-
     <app-side-drawer />
 
     <v-main class="pb-0">
@@ -37,14 +35,10 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 
-import AppFooter from '@/components/app-footer/AppFooter.vue';
-import AppSideDrawer from '@/components/app-side-drawer/AppSideDrawer.vue';
-import AppSnackBar from '@/components/app-snack-bar/AppSnackBar.vue';
-import AppTopBar from '@/components/app-top-bar/AppTopBar.vue';
+import { AppFooter, AppSideDrawer, AppTopBar } from '@/components/layouts';
 
 const appStore = useAppStore();
 

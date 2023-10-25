@@ -40,11 +40,13 @@ import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
 
-import BottomInfoBar from '@/components/bottom-info-bar/BottomInfoBar.vue';
-import LoadingIndicator from '@/components/loading-indicator/LoadingIndicator.vue';
-import StatusDetailDrawer from '@/components/status-detail-drawer/StatusDetailDrawer.vue';
-import StatusOverview from '@/components/status-overview/StatusOverview.vue';
-import WeatherPanel from '@/components/weather-panel/WeatherPanel.vue';
+import { LoadingIndicator } from '@/components/global';
+import {
+  BottomInfoBar,
+  StatusDetailDrawer,
+  StatusOverview,
+  WeatherPanel,
+} from '@/components/status-page';
 
 const router = useRouter();
 const { width } = useDisplay();
