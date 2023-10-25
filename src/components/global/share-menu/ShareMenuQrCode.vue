@@ -26,39 +26,57 @@
     </div>
 
     <!-- Download button -->
-    <v-btn
-      :block="true"
-      :icon="true"
-      density="compact"
-      variant="tonal"
-      class="rounded-ts-0 rounded-te-0 rounded-bs-lg rounded-be-lg"
-      @click.stop="onClickDownloadBtn"
-    >
-      <v-icon> {{ mdiDownloadBoxOutline }} </v-icon>
-      <v-tooltip
-        activator="parent"
-        location="bottom"
+    <v-fade-transition mode="out-in">
+      <v-btn
+        :block="true"
+        :color="color"
+        :icon="true"
+        :key="String(showHint)"
+        :variant="showHint ? 'text' : 'tonal'"
+        density="compact"
+        class="rounded-ts-0 rounded-te-0 rounded-bs-lg rounded-be-lg"
+        @click.stop="onClickDownloadBtn"
       >
-        保存二维码
-      </v-tooltip>
-    </v-btn>
+        <v-icon>
+          {{ showHint ? mdiCheck : mdiDownloadBoxOutline }}
+        </v-icon>
+        <v-tooltip
+          activator="parent"
+          location="bottom"
+        >
+          保存二维码
+        </v-tooltip>
+      </v-btn>
+    </v-fade-transition>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from '@/store/app';
+import { computed, ref } from 'vue';
+import { useTheme } from 'vuetify';
 
-import { mdiDownloadBoxOutline } from '@mdi/js';
+import { mdiCheck, mdiDownloadBoxOutline } from '@mdi/js';
 
-const appStore = useAppStore();
+let isProcessingClick = false;
+const showHint = ref(false);
+const color = computed(() => {
+  return showHint.value ? useTheme().current.value.colors.success : '';
+});
 
 const onClickDownloadBtn = () => {
+  // 防止重复点击
+  if (isProcessingClick) return;
+  isProcessingClick = true;
   // 下载二维码图片（png）
   const link = document.createElement('a');
   link.href = '/img/qr-code.png';
   link.download = 'qr-code.png';
   link.click();
   // 显示提示信息
-  appStore.showSnackBar('&#10024;&nbsp;已保存', 'success');
+  showHint.value = true;
+  setTimeout(() => {
+    showHint.value = false;
+    isProcessingClick = false;
+  }, 2000);
 };
 </script>
