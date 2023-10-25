@@ -34,12 +34,15 @@
         if (ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1) {
           // IE
           return true;
-        } else if (ua.indexOf('firefox') != -1) {
-          // Firefox < 78
-          if (ua.match(/firefox\/([\d.]+)/)[1] < 78) return true;
         } else if (ua.indexOf('chrome') != -1) {
           // Chrome < 86
-          if (ua.match(/chrome\/([\d.]+)/)[1] < 86) return true;
+          if (ua.match(/chrome\/([\d.]+)/)[1].split('.')[0] < 86) return true;
+        } else if (ua.indexOf('firefox') != -1) {
+          // Firefox < 78
+          if (ua.match(/firefox\/([\d.]+)/)[1].split('.')[0] < 78) return true;
+        } else if (ua.indexOf('opr') != -1) {
+          // opera < 67
+          if (ua.match(/opr\/([\d.]+)/)[1].split('.')[0] < 67) return true;
         } else return false;
       }
       if (isUnsupportedBrowser()) {
