@@ -8,36 +8,36 @@
 <!-- +--------------------+ -->
 
 <template>
-  <div>
-    <v-card
-      border="sm"
-      rounded="lg"
-      variant="flat"
-    >
-      <v-row class="mx-auto my-auto">
-        <v-col
-          v-for="(stationStatus, index) in statusStore.statusDetail.stations"
-          :key="index"
-          :cols="width < 960 ? 12 : 6"
-          class="pa-0"
-        >
-          <station-card
-            :station-index="index"
-            :station-status="stationStatus"
-            :style="cardBorderStyle(index)"
-            class="pa-1"
-          />
-        </v-col>
-      </v-row>
-    </v-card>
-  </div>
+  <v-card
+    border="sm"
+    rounded="lg"
+    variant="flat"
+  >
+    <v-row class="mx-auto my-auto">
+      <v-col
+        v-for="(stationStatus, index) in statusStore.statusDetail.stations"
+        :key="index"
+        :cols="width < 960 ? 12 : 6"
+        class="pa-0"
+      >
+        <station-card
+          :station-index="index"
+          :station-status="stationStatus"
+          :style="cardBorderStyle(index)"
+          class="pa-1"
+        />
+      </v-col>
+    </v-row>
+  </v-card>
+
+  <disclaimer-and-time class="mx-1 mt-2" />
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 import { useStatusStore } from '@/store/status';
 
+import DisclaimerAndTime from '../disclaimer-and-time/DisclaimerAndTime.vue';
 import StationCard from './StationCard.vue';
 
 const { width } = useDisplay();

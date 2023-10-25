@@ -45,15 +45,8 @@
       </v-window-item>
     </v-window>
 
-    <!-- Detailed update time -->
-    <div class="mx-4 mt-2 text-center text-body-2 text-default">
-      更新于
-      {{
-        new Date(statusStore.lastUpdateTime).toLocaleString('zh-CN', {
-          hour12: false,
-        })
-      }}
-    </div>
+    <!-- Disclaimer & Detailed update time -->
+    <disclaimer-and-time class="mx-5 mt-2" />
 
     <!-- Prev/Next buttons -->
     <template #append>
@@ -69,6 +62,7 @@ import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
 
+import DisclaimerAndTime from '../disclaimer-and-time/DisclaimerAndTime.vue';
 import DrawerBottomButtons from './DrawerBottomButtons.vue';
 import DrawerHeader from './DrawerHeader.vue';
 import SocketStatusLegend from './SocketStatusLegend.vue';
