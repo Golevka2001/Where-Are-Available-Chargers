@@ -36,6 +36,7 @@ import { useWeatherStore } from '@/store/weather';
 const { width } = useDisplay();
 const weatherStore = useWeatherStore();
 
+// 宽度不够时间隔显示
 const iconListInterval = computed(() => {
   if (width.value > 960) return 1;
   if (width.value > 500) return 2;
@@ -44,6 +45,7 @@ const iconListInterval = computed(() => {
   return 6;
 });
 
+// 宽度不够时显示 am/pm 格式
 const get12HourTime = (time: string) => {
   const hour = parseInt(time.split(':')[0]);
   return `${hour > 12 ? hour - 12 : hour}${hour >= 12 ? 'pm' : 'am'}`;

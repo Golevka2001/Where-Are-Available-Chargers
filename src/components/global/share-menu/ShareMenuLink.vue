@@ -45,8 +45,10 @@ import config from '@/config';
 
 import { mdiCheck, mdiContentCopy } from '@mdi/js';
 
-let isFocused = false;
+let isFocused = false; // 处理不希望文本框在点击时高亮的问题
 let isProcessingClick = false;
+
+// 点击按钮后，文字、颜色、按钮图标将变化
 const showHint = ref(false);
 const text = computed(() => {
   return showHint.value ? '✨已复制到剪贴板' : config.thisSiteUrl;
@@ -61,7 +63,7 @@ const onClickCopyBtn = () => {
   isProcessingClick = true;
   // 复制网址
   navigator.clipboard.writeText(config.thisSiteUrl);
-  // 显示提示信息
+  // 显示提示信息 2s
   showHint.value = true;
   setTimeout(() => {
     showHint.value = false;

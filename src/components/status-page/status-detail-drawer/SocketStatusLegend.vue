@@ -9,7 +9,7 @@
       图例：
     </v-col>
     <v-col
-      v-for="legend in legendList"
+      v-for="legend in detailDrawerLegendList"
       :key="legend.color"
       cols="auto"
       class="px-2 d-flex align-center"
@@ -37,22 +37,5 @@
 </template>
 
 <script lang="ts" setup>
-const legendList = [
-  {
-    color: 'success',
-    content: 1,
-    text: '空闲',
-  },
-  {
-    color: 'warning',
-    content: null,
-    text: '占用',
-  },
-  // // 暂不添加故障的图例
-  // {
-  //   color: 'default',
-  //   content: null,
-  //   text: '故障',
-  // },
-];
+import { detailDrawerLegendList } from '@/utils/lists';
 </script>

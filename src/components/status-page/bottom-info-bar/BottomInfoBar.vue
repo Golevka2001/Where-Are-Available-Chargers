@@ -35,6 +35,7 @@ import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
 
+// 向 StatusPage 传递的事件（updateData 统一在 StatusPage 中调用）
 const emit = defineEmits(['manuallyUpdateData']);
 
 const appStore = useAppStore();
@@ -77,6 +78,7 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
+// 暴露给 StatusPage 的方法
 defineExpose({
   startInterval,
   stopInterval: () => {
@@ -84,6 +86,7 @@ defineExpose({
   },
 });
 
+// 点击底栏按钮，判断是否需要刷新，向 StatusPage 发送事件触发刷新
 const onClickBottomBar = async () => {
   // 防止重复点击
   if (isProcessingClick || statusStore.isFetchingData) {
@@ -105,10 +108,10 @@ const onClickBottomBar = async () => {
   isProcessingClick = false;
 };
 
+// 组件挂载时启动定时器，卸载时停止
 onMounted(() => {
   startInterval();
 });
-
 onUnmounted(() => {
   clearInterval(intervalId);
 });

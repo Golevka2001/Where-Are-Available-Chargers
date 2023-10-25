@@ -9,7 +9,7 @@
   <v-card
     rounded="0"
     variant="text"
-    @click.stop="onClickStatusCard"
+    @click.stop="appStore.openStatusDetailDrawer(props.stationIndex)"
   >
     <v-card-title class="px-2 pt-2 d-flex justify-space-between">
       <div>
@@ -20,7 +20,6 @@
         >
           {{ stationStatus.name }}
         </span>
-        <!-- TODO: Add link -->
         <span style="font-size: 0.9rem">
           详情<v-icon size="small">{{ mdiChevronRight }}</v-icon>
         </span>
@@ -57,8 +56,4 @@ const props = defineProps<{
 }>();
 
 const appStore = useAppStore();
-
-const onClickStatusCard = () => {
-  appStore.openStatusDetailDrawer(props.stationIndex);
-};
 </script>

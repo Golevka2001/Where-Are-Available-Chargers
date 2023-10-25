@@ -2,7 +2,7 @@
 
 <template>
   <v-list-item
-    v-for="navItem in navList"
+    v-for="navItem in sideDrawerNavList"
     :key="navItem.title"
     :href="navItem.href"
     :target="navItem.target"
@@ -21,48 +21,5 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  mdiBicycleElectric,
-  mdiBookOpenPageVariantOutline,
-  mdiForumOutline,
-  mdiInformationOutline,
-  mdiMapLegend,
-} from '@mdi/js';
-import { githubIcon } from '@/assets/img/custom-icons';
-
-// 外链用 `href`，内部路由用 `to`
-const navList = [
-  {
-    title: '状态查询',
-    prependIcon: mdiBicycleElectric,
-    to: '/status',
-  },
-  {
-    title: '充电桩位置示意图',
-    prependIcon: mdiMapLegend,
-    to: '/illustration',
-  },
-  {
-    title: '反馈 & 建议',
-    prependIcon: mdiForumOutline,
-    to: '/feedback',
-  },
-  {
-    title: '项目文档',
-    prependIcon: mdiBookOpenPageVariantOutline,
-    href: 'https://chargers.injs.eu/doc/',
-    target: '_blank',
-  },
-  {
-    title: '关于我们',
-    prependIcon: mdiInformationOutline,
-    to: '/about',
-  },
-  {
-    title: 'GitHub',
-    prependIcon: githubIcon,
-    href: 'https://github.com/Golevka2001/Where-Are-Available-Chargers',
-    target: '_blank',
-  },
-];
+import { sideDrawerNavList } from '@/utils/lists';
 </script>

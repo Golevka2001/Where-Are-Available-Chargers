@@ -14,7 +14,6 @@
     <template v-slot:title>
       <div class="d-flex align-center">
         <!-- Map button -->
-        <!-- TODO：link -->
         <v-btn
           :icon="true"
           :to="`/map/${props.stationName}`"
@@ -46,7 +45,7 @@
           rounded="lg"
           size="xx-large"
           variant="plain"
-          @click.stop="onClickMenuCloseBtn"
+          @click.stop="appStore.isStatusDetailDrawerOpen = false"
         />
       </div>
     </template>
@@ -86,10 +85,6 @@ const stationNameList = computed(() =>
     value: index,
   })),
 );
-
-const onClickMenuCloseBtn = () => {
-  appStore.isStatusDetailDrawerOpen = false;
-};
 </script>
 
 <!-- vue-scroll-picker 的样式文件，为适应此页面样式做出更改 -->

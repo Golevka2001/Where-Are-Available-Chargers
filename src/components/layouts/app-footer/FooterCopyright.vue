@@ -23,14 +23,5 @@
 </template>
 
 <script lang="ts" setup>
-const maintainerList = [
-  {
-    name: 'Gol3vka',
-    link: 'https://github.com/Golevka2001',
-  },
-  {
-    name: 'Csimide',
-    link: 'https://github.com/csimide',
-  },
-];
+import { maintainerList } from '@/utils/lists';
 </script>

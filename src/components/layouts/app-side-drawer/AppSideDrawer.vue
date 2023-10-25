@@ -33,9 +33,9 @@
       <div class="ma-6">
         <v-btn
           :block="true"
-          :disabled="isLoadingPage"
+          :disabled="isLoadingClassicPage"
           :href="config.classicVersionUrl"
-          :loading="isLoadingPage"
+          :loading="isLoadingClassicPage"
           :prepend-icon="mdiUndoVariant"
           rounded="lg"
           variant="tonal"
@@ -63,8 +63,8 @@ import { mdiUndoVariant } from '@mdi/js';
 const theme = useTheme();
 const appStore = useAppStore();
 
-const isLoadingPage = ref(false);
-
+const isLoadingClassicPage = ref(false);
+// 毛玻璃背景样式
 const semiTransparentStyle = computed(() => {
   return appStore.isSemiTransparentSupported
     ? {
@@ -75,9 +75,9 @@ const semiTransparentStyle = computed(() => {
 });
 
 const onClickClassicVersionButton = () => {
-  isLoadingPage.value = true;
+  isLoadingClassicPage.value = true;
   setTimeout(() => {
-    isLoadingPage.value = false;
+    isLoadingClassicPage.value = false;
   }, 5000);
 };
 </script>

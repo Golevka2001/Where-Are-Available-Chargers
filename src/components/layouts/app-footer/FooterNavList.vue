@@ -2,7 +2,7 @@
 
 <template>
   <v-btn
-    v-for="navItem in navList"
+    v-for="navItem in footerNavList"
     :key="navItem.text"
     :ripple="false"
     size="small"
@@ -32,31 +32,5 @@
 </template>
 
 <script lang="ts" setup>
-const navList = [
-  {
-    text: 'Source Code',
-    link: 'https://github.com/Golevka2001/Where-Are-Available-Chargers',
-    isRouterLink: false,
-  },
-  {
-    text: 'Issues',
-    link: 'https://github.com/Golevka2001/Where-Are-Available-Chargers/issues',
-    isRouterLink: false,
-  },
-  {
-    text: 'API',
-    link: 'https://chargers.injs.eu/doc/ver4_pub/api/get_status/',
-    isRouterLink: false,
-  },
-  {
-    text: 'Docs',
-    link: 'https://chargers.injs.eu/doc/',
-    isRouterLink: false,
-  },
-  {
-    text: 'About',
-    link: '/about',
-    isRouterLink: true,
-  },
-];
+import { footerNavList } from '@/utils/lists';
 </script>

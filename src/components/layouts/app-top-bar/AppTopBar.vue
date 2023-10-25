@@ -14,8 +14,8 @@
         name="switch-menu-icon"
         style="position: absolute"
       >
-        <v-icon :key="menuIcon">
-          {{ menuIcon }}
+        <v-icon :key="String(appStore.isAppSideDrawerOpen)">
+          {{ appStore.isAppSideDrawerOpen ? lineMenu : mdiMenu }}
         </v-icon>
       </transition>
     </v-app-bar-nav-icon>
@@ -32,7 +32,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 
@@ -44,13 +43,9 @@ import { lineMenu } from '@/assets/img/custom-icons';
 
 const appStore = useAppStore();
 
-const menuIcon = computed(() => {
-  return appStore.isAppSideDrawerOpen ? lineMenu : mdiMenu;
-});
-
 const onClickMenuBtn = () => {
   appStore.isAppSideDrawerOpen = !appStore.isAppSideDrawerOpen;
-  appStore.isStatusDetailDrawerOpen = false;
+  appStore.isStatusDetailDrawerOpen = false; // 同时关闭状态详情抽屉
 };
 </script>
 

@@ -17,11 +17,11 @@ import config from '@/config';
 
 const router = useRouter();
 
+let intervalId: NodeJS.Timeout;
 const isProgressBarVisible = ref(false);
 const progressValue = ref(0);
 
-let intervalId: NodeJS.Timeout;
-
+// 启动随机增加进度的定时器
 const startRandomIncrement = (lowerBound: number, higherBound: number) => {
   clearInterval(intervalId);
   intervalId = setInterval(
@@ -50,7 +50,7 @@ const startRandomIncrement = (lowerBound: number, higherBound: number) => {
   );
 };
 
-// 路由守卫
+// 路由守卫，控制进度条显示
 router.beforeEach((to) => {
   // 错误页面不需要显示进度条
   if (to.path === '/error') {
@@ -63,7 +63,6 @@ router.beforeEach((to) => {
     config.progressBarValues[1] - 10,
   );
 });
-
 router.beforeResolve(() => {
   progressValue.value = config.progressBarValues[1];
   startRandomIncrement(
@@ -71,7 +70,6 @@ router.beforeResolve(() => {
     config.progressBarValues[2] - 10,
   );
 });
-
 router.afterEach(() => {
   progressValue.value = config.progressBarValues[2];
   setTimeout(() => {

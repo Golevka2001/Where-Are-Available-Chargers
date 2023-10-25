@@ -32,6 +32,7 @@ defineProps<{
   socketList: SocketStatus[];
 }>();
 
+// 0-占用-橙色，1-空闲-绿色，2-故障-灰色
 const socketChipColor = computed(() => (socketStatus: SocketStatus) => {
   switch (socketStatus) {
     case 0:

@@ -30,6 +30,7 @@ import { ref } from 'vue';
 
 const emojiFace = ref('&#128545;');
 
+// 点击表演川剧变脸
 const onClickEmojiFace = () => {
   // 黄豆和小动物脸的编码范围
   const emojiCodeRangeList = [

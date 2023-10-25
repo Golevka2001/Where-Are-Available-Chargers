@@ -101,6 +101,7 @@ const manualUpdateData = async () => {
   }
 };
 
+// 页面滚动，控制底栏的显示和隐藏
 const onScroll = () => {
   if (
     appStore.bottomBarText !== null ||

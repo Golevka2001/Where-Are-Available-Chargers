@@ -58,6 +58,8 @@ import { useTheme } from 'vuetify';
 import { mdiCheck, mdiDownloadBoxOutline } from '@mdi/js';
 
 let isProcessingClick = false;
+
+// 点击按钮后，颜色、按钮图标将变化
 const showHint = ref(false);
 const color = computed(() => {
   return showHint.value ? useTheme().current.value.colors.success : '';

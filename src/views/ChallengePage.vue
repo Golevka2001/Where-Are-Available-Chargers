@@ -19,7 +19,7 @@
       <v-btn
         :prepend-icon="mdiRefresh"
         variant="tonal"
-        @click.stop="refreshIframe()"
+        @click.stop="onClickRefreshBtn()"
       >
         刷新
       </v-btn>
@@ -40,16 +40,7 @@ const router = useRouter();
 
 const isIframeVisible = ref(true);
 
-// 此页面不显示 Footer
-onBeforeMount(() => {
-  appStore.isFooterVisible = false;
-  window.addEventListener('message', handleMessage);
-});
-onBeforeUnmount(() => {
-  appStore.isFooterVisible = true;
-  window.removeEventListener('message', handleMessage);
-});
-
+// 监听 iframe 的 message 事件，验证完成后返回 /status
 const handleMessage = (event: MessageEvent) => {
   if (
     event.origin === window.location.origin &&
@@ -64,10 +55,20 @@ const handleMessage = (event: MessageEvent) => {
   }
 };
 
-const refreshIframe = () => {
+const onClickRefreshBtn = () => {
   isIframeVisible.value = false;
   nextTick(() => {
     isIframeVisible.value = true;
   });
 };
+
+// 此页面不显示 Footer
+onBeforeMount(() => {
+  appStore.isFooterVisible = false;
+  window.addEventListener('message', handleMessage);
+});
+onBeforeUnmount(() => {
+  appStore.isFooterVisible = true;
+  window.removeEventListener('message', handleMessage);
+});
 </script>

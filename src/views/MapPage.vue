@@ -28,10 +28,12 @@ import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
+import { stationPositionList } from '@/utils/lists';
 
 import { LoadingIndicator } from '@/components/global';
 import { BottomButtonGroup } from '@/components/map-page';
 
+// 从路由传入，/map/:stationName
 const props = defineProps({
   stationName: String,
 });
@@ -40,69 +42,7 @@ const router = useRouter();
 const appStore = useAppStore();
 const statusStore = useStatusStore();
 
-const stationPositionList = [
-  {
-    title: '东门北侧',
-    addr: '桃园篮球场东侧车棚内',
-    lat: 31.888485,
-    lng: 118.829991,
-  },
-  {
-    title: '东门南侧',
-    addr: '东门校内南侧外卖架旁',
-    lat: 31.886716,
-    lng: 118.830103,
-  },
-  {
-    title: '西门北侧',
-    addr: '西门到快递站路口之间的道路北侧，南工路燕湖桥旁',
-    lat: 31.886339,
-    lng: 118.812658,
-  },
-  {
-    title: '西门南侧',
-    addr: '西门到快递站路口之间的道路南侧，南工路燕湖桥旁',
-    lat: 31.886095,
-    lng: 118.812658,
-  },
-  {
-    title: '南门西侧',
-    addr: '南门校外西侧',
-    lat: 31.880837,
-    lng: 118.819328,
-  },
-  {
-    title: '南门东侧',
-    addr: '南门校外东侧',
-    lat: 31.880837,
-    lng: 118.820108,
-  },
-  {
-    title: '北门东北侧',
-    addr: '北门校内东侧空地北侧，南高北路旁',
-    lat: 31.893529,
-    lng: 118.823852,
-  },
-  {
-    title: '北门东南侧',
-    addr: '北门校内东侧空地南侧，南高北路旁',
-    lat: 31.893461,
-    lng: 118.823852,
-  },
-  {
-    title: '橘园北侧南',
-    addr: '位于橘园9/10舍北侧道路的南侧',
-    lat: 31.885002,
-    lng: 118.812975,
-  },
-  {
-    title: '校医院西',
-    addr: '校医院西侧空地',
-    lat: 31.892616,
-    lng: 118.823786,
-  },
-];
-
+// 构造腾讯地图 URL
 const mapUrl = computed(() => {
   const stationPosition = stationPositionList.find(
     (station) => station.title === props.stationName,

@@ -18,7 +18,7 @@
         <v-col
           v-for="(stationStatus, index) in statusStore.statusDetail.stations"
           :key="index"
-          :cols="colWidth"
+          :cols="width < 960 ? 12 : 6"
           class="pa-0"
         >
           <station-card
@@ -43,13 +43,7 @@ import StationCard from './StationCard.vue';
 const { width } = useDisplay();
 const statusStore = useStatusStore();
 
-// 充电站状态卡片的列数
-const colWidth = computed(() => {
-  return width.value < 960 ? 12 : 6; // 注：Vuetify 的 grid 为 12 栅格
-});
-
 // 充电站状态卡片的边框样式
-// NOTE：没出现问题的话不用琢磨里面的逻辑，有屎山潜质
 const cardBorderStyle = (index: number) => {
   const singleColumn = width.value < 960; // 单列？
   const evenItemCount = statusStore.statusDetail.stations.length % 2 === 0; // 共偶数个元素？
@@ -61,6 +55,7 @@ const cardBorderStyle = (index: number) => {
   const borderStyle =
     'thin solid rgba(var(--v-border-color), var(--v-border-opacity))';
 
+  // 只显示在表格内部的边框
   return {
     borderBottom:
       (singleColumn && !isLastOne) ||

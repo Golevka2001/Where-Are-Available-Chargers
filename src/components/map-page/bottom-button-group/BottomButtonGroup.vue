@@ -10,7 +10,7 @@
       style="width: 40%"
     >
       <v-btn
-        :disabled="isCurStationTheFirst()"
+        :disabled="appStore.curStationIndex === 0"
         :prepend-icon="mdiChevronLeft"
         variant="text"
         @click.stop="onClickPrevStationBtn"
@@ -43,7 +43,10 @@
     >
       <v-btn
         :append-icon="mdiChevronRight"
-        :disabled="isCurStationTheLast()"
+        :disabled="
+          appStore.curStationIndex ===
+          statusStore.statusDetail.stations.length - 1
+        "
         variant="text"
         @click.stop="onClickNextStationBtn"
       >
@@ -67,33 +70,29 @@ const statusStore = useStatusStore();
 
 // 当前的上一个、下一个充电站名称
 const prevStationName = computed(() => {
-  if (isCurStationTheFirst()) {
+  if (appStore.curStationIndex === 0) {
     return '&#9940;';
   } else {
     return statusStore.statusDetail.stations[appStore.curStationIndex - 1].name;
   }
 });
 const nextStationName = computed(() => {
-  if (isCurStationTheLast()) {
+  if (
+    appStore.curStationIndex ===
+    statusStore.statusDetail.stations.length - 1
+  ) {
     return '&#9940;';
   } else {
     return statusStore.statusDetail.stations[appStore.curStationIndex + 1].name;
   }
 });
 
-const isCurStationTheFirst = () => {
-  return appStore.curStationIndex === 0;
-};
-const isCurStationTheLast = () => {
-  return (
-    appStore.curStationIndex === statusStore.statusDetail.stations.length - 1
-  );
-};
-
+// 点击 Home 按钮，回到状态详情页面
 const onClickHomeBtn = () => {
   router.push('/status');
   appStore.isStatusDetailDrawerOpen = true;
 };
+// 点击 Next、Prev 按钮，导航到对应地图页面，并切换全局的当前充电站
 const onClickNextStationBtn = () => {
   router.push(`/map/${nextStationName.value}`);
   appStore.curStationIndex++;

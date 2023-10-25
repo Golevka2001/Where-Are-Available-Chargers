@@ -4,11 +4,13 @@
   <v-list-item @click.stop="onClickThemeBtn">
     <template v-slot:prepend>
       <v-icon>
-        {{ themeToggleIcon }}
+        {{
+          theme.global.current.value.dark ? mdiWeatherSunny : mdiWeatherNight
+        }}
       </v-icon>
     </template>
     <v-list-item-title>
-      {{ themeToggleText }}
+      {{ theme.global.current.value.dark ? '浅色模式' : '深色模式' }}
     </v-list-item-title>
   </v-list-item>
 </template>
@@ -17,25 +19,17 @@
 import { computed } from 'vue';
 import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
-import config from '@/config';
 
 import { mdiWeatherNight, mdiWeatherSunny } from '@mdi/js';
 
 const appStore = useAppStore();
 const theme = useTheme();
 
-const themeToggleIcon = computed(() => {
-  return theme.global.current.value.dark ? mdiWeatherSunny : mdiWeatherNight;
-});
-
-const themeToggleText = computed(() => {
-  return theme.global.current.value.dark ? '浅色模式' : '深色模式';
-});
-
+// 点击按钮切换主题，随后关闭侧边栏
 const onClickThemeBtn = () => {
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
   setTimeout(() => {
     appStore.isAppSideDrawerOpen = false;
-  }, config.drawerCloseDelay);
+  }, 500);
 };
 </script>

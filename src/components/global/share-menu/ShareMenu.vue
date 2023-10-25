@@ -45,7 +45,7 @@ const theme = useTheme();
 const appStore = useAppStore();
 
 const isShareMenuOpen = ref(false);
-
+// 毛玻璃背景样式
 const semiTransparentStyle = computed(() => {
   return appStore.isSemiTransparentSupported
     ? {
