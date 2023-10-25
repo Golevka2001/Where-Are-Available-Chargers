@@ -7,8 +7,8 @@
   >
     <!-- Motor emoji -->
     <div
-      class="motor mb-n6"
-      style="font-size: 8rem"
+      class="motor"
+      style="font-size: 6rem"
     >
       &#128757;
     </div>
@@ -89,10 +89,10 @@ onUnmounted(() => {
     transform: translateX(-13.12%) rotateZ(10deg) skewX(-10deg);
   }
   38% {
-    transform: translateX(1.22%) rotateZ(0) skewX(0);
+    transform: translateX(-1.64%) rotateZ(0) skewX(0);
   }
   43% {
-    transform: translateX(37.06%) rotateZ(0) skewX(0);
+    transform: translateX(27.06%) rotateZ(0) skewX(0);
   }
   55% {
     transform: translateX(-100%) rotateZ(30deg) skewX(-30deg);
