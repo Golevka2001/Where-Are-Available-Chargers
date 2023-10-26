@@ -50,7 +50,7 @@ onUnmounted(() => {
 </script>
 
 <!-- 自定义动画 -->
-<style>
+<style scoped>
 .motor {
   animation: 4000ms linear 0s 1 both running translate-easeInElastic;
   animation-iteration-count: infinite;
