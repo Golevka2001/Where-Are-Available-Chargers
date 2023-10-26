@@ -6,8 +6,14 @@ const config = {
     content: '&#129323; 测试内容', // 内容（支持 HTML）
 
     color: 'orange', // 颜色
-    variant: 'tonal', // 样式（'text' | 'flat' | 'elevated' | 'tonal' | 'outlined' | 'plain'）
-    border: 'start', // 边框位置（boolean | 'top' | 'end' | 'bottom' | 'start'）
+    variant: 'tonal' as
+      | 'text'
+      | 'flat'
+      | 'elevated'
+      | 'tonal'
+      | 'outlined'
+      | 'plain', // 样式（只修改 as 前的内容，as 后为可选值）
+    border: 'start' as boolean | 'top' | 'end' | 'bottom' | 'start', // 边框位置（只修改 as 前的内容，as 后为可选值）
   },
 
   /********** 状态查询、显示相关 **********/

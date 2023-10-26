@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onBeforeMount, onBeforeUnmount, ref } from 'vue';
+import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
