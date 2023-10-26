@@ -23,7 +23,7 @@
       rounded="pill"
       variant="tonal"
       class="mt-6"
-      @click.stop="router.push('/status')"
+      @click.once.stop="router.push('/status')"
     >
       <span> 重试 </span>
     </v-btn>

@@ -22,8 +22,8 @@
     </thead>
     <tbody>
       <tr
-        v-for="(chargerStatus, index) in chargerList"
-        :key="index"
+        v-for="chargerStatus in chargerList"
+        :key="chargerStatus.name"
       >
         <!-- Charger name -->
         <td class="pr-1 text-center">

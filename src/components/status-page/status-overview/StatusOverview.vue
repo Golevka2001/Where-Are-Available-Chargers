@@ -15,15 +15,15 @@
   >
     <v-row class="mx-auto my-auto">
       <v-col
-        v-for="(stationStatus, index) in statusStore.statusDetail.stations"
-        :key="index"
+        v-for="(stationStatus, stationIndex) in statusStore.statusDetail.stations"
+        :key="stationStatus.name"
         :cols="width < 960 ? 12 : 6"
         class="pa-0"
       >
         <station-card
-          :station-index="index"
+          :station-index="stationIndex"
           :station-status="stationStatus"
-          :style="cardBorderStyle(index)"
+          :style="cardBorderStyle(stationIndex)"
           class="pa-1"
         />
       </v-col>

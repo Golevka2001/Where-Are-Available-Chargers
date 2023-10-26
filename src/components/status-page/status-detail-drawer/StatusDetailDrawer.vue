@@ -35,8 +35,8 @@
     <!-- Station table -->
     <v-window v-model="appStore.curStationIndex">
       <v-window-item
-        v-for="index in statusStore.statusDetail.stations.length"
-        :key="index"
+        v-for="station in statusStore.statusDetail.stations"
+        :key="station.name"
       >
         <station-table
           :charger-list="curStation.chargers"
