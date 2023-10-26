@@ -18,7 +18,6 @@ import { useAppStore } from '@/store/app';
 import config from '@/config';
 
 import { LoadingIndicator } from '@/components/global';
-import { onBeforeUnmount } from 'vue';
 
 const appStore = useAppStore();
 

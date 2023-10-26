@@ -15,7 +15,8 @@
   >
     <v-row class="mx-auto my-auto">
       <v-col
-        v-for="(stationStatus, stationIndex) in statusStore.statusDetail.stations"
+        v-for="(stationStatus, stationIndex) in statusStore.statusDetail
+          .stations"
         :key="stationStatus.name"
         :cols="width < 960 ? 12 : 6"
         class="pa-0"
