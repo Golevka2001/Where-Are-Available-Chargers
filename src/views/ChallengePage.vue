@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
+import { onBeforeMount, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
@@ -69,7 +69,7 @@ onBeforeMount(() => {
   appStore.isFooterVisible = false;
   window.addEventListener('message', handleMessage);
 });
-onBeforeUnmount(() => {
+onUnmounted(() => {
   appStore.isFooterVisible = true;
   window.removeEventListener('message', handleMessage);
 });

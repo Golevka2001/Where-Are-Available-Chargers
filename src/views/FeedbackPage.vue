@@ -13,11 +13,12 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
+import { onBeforeMount, onUnmounted, ref } from 'vue';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 
 import { LoadingIndicator } from '@/components/global';
+import { onBeforeUnmount } from 'vue';
 
 const appStore = useAppStore();
 
@@ -27,7 +28,7 @@ const isIframeLoaded = ref(false);
 onBeforeMount(() => {
   appStore.isFooterVisible = false;
 });
-onBeforeUnmount(() => {
+onUnmounted(() => {
   appStore.isFooterVisible = true;
 });
 </script>

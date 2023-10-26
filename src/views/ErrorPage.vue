@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeRouteLeave } from 'vue-router';
+import { onUnmounted } from 'vue';
 import { useDisplay } from 'vuetify';
 import { useErrorStore } from '@/store/error';
 
@@ -42,7 +42,7 @@ import { NotFound, StatusError } from '@/components/error-page/';
 const { width } = useDisplay();
 const errorStore = useErrorStore();
 
-onBeforeRouteLeave(() => {
+onUnmounted(() => {
   // 离开页面时清空错误信息
   errorStore.errorFrom = '';
   errorStore.stationName = '';

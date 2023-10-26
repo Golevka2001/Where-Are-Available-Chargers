@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue';
+import { computed, onBeforeMount, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
 import { useErrorStore } from '@/store/error';
@@ -78,7 +78,7 @@ onBeforeMount(() => {
     isStationNameValid.value = true;
   }
 });
-onBeforeUnmount(() => {
+onUnmounted(() => {
   appStore.isFooterVisible = true;
 });
 </script>
