@@ -42,6 +42,7 @@ import { onMounted, ref } from 'vue';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import { useDisplay } from 'vuetify';
 import { useAppStore } from '@/store/app';
+import { useErrorStore } from '@/store/error';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
 
@@ -57,6 +58,7 @@ import {
 const router = useRouter();
 const { width } = useDisplay();
 const appStore = useAppStore();
+const errorStore = useErrorStore();
 const statusStore = useStatusStore();
 
 const bottomInfoBarComponent = ref();
@@ -136,6 +138,7 @@ onMounted(async () => {
     await statusStore.updateData();
   } catch (err) {
     // 数据更新失败，跳转到错误页面
+    errorStore.errorFrom = 'status';
     router.push('/error');
     return;
   }

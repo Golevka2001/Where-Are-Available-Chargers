@@ -3,9 +3,10 @@
 <template>
   <loading-indicator v-if="!isIframeLoaded" />
   <div
+    v-if="isStationNameValid"
     v-show="isIframeLoaded"
     class="flex-column fill-height"
-    :class="isIframeLoaded ? 'd-flex' : ''"
+    :class="isIframeLoaded ? 'd-flex' : 'none'"
   >
     <!-- Map -->
     <iframe
@@ -16,7 +17,6 @@
       @load="isIframeLoaded = true"
     >
     </iframe>
-
     <v-divider />
 
     <!-- Button group -->
@@ -28,6 +28,7 @@
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
+import { useErrorStore } from '@/store/error';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
 import { stationPositionList } from '@/utils/lists';
@@ -42,8 +43,10 @@ const props = defineProps({
 
 const router = useRouter();
 const appStore = useAppStore();
+const errorStore = useErrorStore();
 const statusStore = useStatusStore();
 
+const isStationNameValid = ref(false); // 先检查充电站名称是否有效，无效时不渲染 iframe
 const isIframeLoaded = ref(false);
 // 构造腾讯地图 URL
 const mapUrl = computed(() => {
@@ -68,8 +71,11 @@ onBeforeMount(() => {
       (stationPosition) => stationPosition.title === props.stationName,
     )
   ) {
-    // TODO：error message
+    errorStore.errorFrom = 'map';
+    errorStore.stationName = props.stationName || '';
     router.push('/error');
+  } else {
+    isStationNameValid.value = true;
   }
 });
 onBeforeUnmount(() => {

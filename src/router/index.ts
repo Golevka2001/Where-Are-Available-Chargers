@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 const DefaultLayout = () => import('@/layouts/DefaultLayout.vue');
+
 const AboutPage = () => import('@/views/AboutPage.vue');
+const ChallengePage = () => import('@/views/ChallengePage.vue');
 const ErrorPage = () => import('@/views/ErrorPage.vue');
 const FeedbackPage = () => import('@/views/FeedbackPage.vue');
 const IllustrationPage = () => import('@/views/IllustrationPage.vue');
 const MapPage = () => import('@/views/MapPage.vue');
 const StatusPage = () => import('@/views/StatusPage.vue');
-const ChallengePage = () => import('@/views/ChallengePage.vue');
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
         path: 'about',
         name: 'About',
         component: AboutPage,
+      },
+      {
+        path: 'challenge',
+        name: 'Challenge',
+        component: ChallengePage,
       },
       {
         path: 'error',
@@ -47,9 +53,9 @@ const routes = [
         component: StatusPage,
       },
       {
-        path: 'challenge',
-        name: 'Challenge',
-        component: ChallengePage,
+        path: '/:pathMatch(.*)*',
+        name: '404',
+        component: ErrorPage,
       },
     ],
   },
