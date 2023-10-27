@@ -26,7 +26,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+
+const route = useRoute();
 
 const emojiFace = ref('&#128545;');
 
@@ -44,4 +47,15 @@ const onClickEmojiFace = () => {
   const emojiCode = Math.floor(Math.random() * (end - start + 1)) + start;
   emojiFace.value = `&#${emojiCode};`;
 };
+
+// 在不同页面显示不同的表情
+onBeforeMount(() => {
+  if (route.path === '/about') emojiFace.value = '&#128526;';
+  if (route.path === '/error') emojiFace.value = '&#128560;';
+});
+onBeforeRouteUpdate((to, from) => {
+  if (to.path === '/about') emojiFace.value = '&#128526;';
+  else if (to.path === '/error') emojiFace.value = '&#128560;';
+  else emojiFace.value = '&#128545;';
+});
 </script>
