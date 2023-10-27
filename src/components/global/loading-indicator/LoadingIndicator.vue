@@ -17,8 +17,12 @@
     >
       &#128757;
     </div>
+
     <!-- Loading text -->
-    <div style="font-size: 1.5rem">
+    <div
+      v-if="!hideText"
+      style="font-size: 1.5rem"
+    >
       {{ loadingText }}
     </div>
   </div>
@@ -27,10 +31,21 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 
+const props = defineProps({
+  // 是否显示 Loading 文字
+  hideText: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 let intervalId: NodeJS.Timeout;
 const loadingText = ref('Loading');
 
 onMounted(() => {
+  if (props.hideText) {
+    return;
+  }
   intervalId = setInterval(() => {
     loadingText.value += '.';
     if (loadingText.value.length > 10) {
