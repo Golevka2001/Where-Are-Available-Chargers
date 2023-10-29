@@ -8,7 +8,7 @@ import {
   mdiInformationOutline,
   mdiMapLegend,
 } from '@mdi/js';
-import { githubIcon } from '@/assets/img/custom-icons';
+import { githubIcon } from '@/assets/custom-icons';
 
 // 外链用 href + target，内部路由用 to
 export const sideDrawerNavList = [

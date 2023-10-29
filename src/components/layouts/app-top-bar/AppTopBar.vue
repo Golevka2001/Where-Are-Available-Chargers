@@ -39,7 +39,7 @@ import BarTitle from './BarTitle.vue';
 import { ProgressBar, ShareMenu } from '@/components/global';
 
 import { mdiMenu } from '@mdi/js';
-import { lineMenu } from '@/assets/img/custom-icons';
+import { lineMenu } from '@/assets/custom-icons';
 
 const appStore = useAppStore();
 
