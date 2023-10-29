@@ -6,11 +6,11 @@ export const developerList = [
   {
     name: 'Gol3vka',
     link: 'https://github.com/Golevka2001',
-    avatar: 'src/assets/avatar/developer/gol3vka.webp',
+    avatar: '/img/avatar/developer/gol3vka.webp',
   },
   {
     name: 'Csimide',
     link: 'https://github.com/csimide',
-    avatar: 'src/assets/avatar/developer/csimide.webp',
+    avatar: '/img/avatar/developer/csimide.webp',
   },
 ];
