@@ -28,15 +28,15 @@ export const sideDrawerNavList = [
     to: '/feedback',
   },
   {
+    title: '关于我们',
+    prependIcon: mdiInformationOutline,
+    to: '/about',
+  },
+  {
     title: '项目文档',
     prependIcon: mdiBookOpenPageVariantOutline,
     href: 'https://chargers.injs.eu/doc/',
     target: '_blank',
-  },
-  {
-    title: '关于我们',
-    prependIcon: mdiInformationOutline,
-    to: '/about',
   },
   {
     title: 'GitHub',
