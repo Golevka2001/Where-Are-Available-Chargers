@@ -10,27 +10,27 @@
 <!-- +---------------------+ -->
 
 <template>
+  <!-- Temporary: Anniversary -->
+  <v-card
+    color="pink-accent-1"
+    density="compact"
+    rounded="0"
+    variant="tonal"
+    width="100%"
+  >
+    <v-card-text class="pa-3 text-center">
+      <span style="font-size: 1.2rem">&#129395;</span>
+      &nbsp;&nbsp; Where-Are-Available-Chargers 上线一周年 &nbsp;&nbsp;
+      <span style="font-size: 1.2rem">&#127874;</span>
+    </v-card-text>
+  </v-card>
+
   <loading-indicator v-if="isLoadingIndicatorVisible" />
   <div
     v-else
     :style="{ maxWidth: width < 960 ? '40rem' : '70rem' }"
     class="mx-auto"
   >
-    <!-- Temporary: Anniversary -->
-    <v-card
-      color="pink-accent-1"
-      density="compact"
-      rounded="0"
-      variant="tonal"
-      width="100%"
-    >
-      <v-card-text class="pa-3 text-center">
-        <span style="font-size: 1.2rem">&#129395;</span>
-        &nbsp;&nbsp; Where-Are-Available-Chargers 上线一周年 &nbsp;&nbsp;
-        <span style="font-size: 1.2rem">&#127874;</span>
-      </v-card-text>
-    </v-card>
-
     <div class="ma-8">
       <status-detail-drawer />
 
