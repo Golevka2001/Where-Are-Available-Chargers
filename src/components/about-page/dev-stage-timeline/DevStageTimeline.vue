@@ -26,7 +26,7 @@
           variant="tonal"
           class="ma-auto px-4 py-1 d-flex"
         >
-          <div v-html="devStage.version"></div>
+          <span v-html="devStage.version"></span>
           <v-spacer />
           <div>
             {{ devStage.startTime }}
@@ -34,10 +34,9 @@
         </v-card>
 
         <!-- Description -->
-        <v-card-text
-          v-html="devStage.description"
-          class="bg-background"
-        />
+        <v-card-text class="bg-background">
+          <span v-html="devStage.description"></span>
+        </v-card-text>
       </v-card>
     </v-timeline-item>
   </v-timeline>
@@ -52,10 +51,10 @@ const { width } = useDisplay();
 
 const cardWidth = computed(() => {
   if (width.value <= 350) {
-    return '220px';
+    return '200px';
   } else if (width.value <= 600) {
     // 不能直接使用百分比
-    return width.value * 0.6 + 'px';
+    return width.value * 0.55 + 'px';
   } else {
     return '400px';
   }

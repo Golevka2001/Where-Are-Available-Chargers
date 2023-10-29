@@ -53,7 +53,7 @@ onBeforeMount(() => {
   if (route.path === '/about') emojiFace.value = '&#128526;';
   if (route.path === '/error') emojiFace.value = '&#128560;';
 });
-onBeforeRouteUpdate((to, from) => {
+onBeforeRouteUpdate((to) => {
   if (to.path === '/about') emojiFace.value = '&#128526;';
   else if (to.path === '/error') emojiFace.value = '&#128560;';
   else emojiFace.value = '&#128545;';
