@@ -15,7 +15,7 @@ const CHARGER_COUNT_BASE = 1;
 const CHARGER_COUNT_RANGE = 5;
 
 // const REQUEST_ERROR_RATE = 0.4;
-const REQUEST_ERROR_RATE = 0;
+const REQUEST_ERROR_RATE = 1;
 
 const genStationNameList = (): string[] => {
   const stationNameList = [
