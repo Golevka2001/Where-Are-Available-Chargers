@@ -17,7 +17,7 @@ export const useAppStore = defineStore('app', {
     isAppSideDrawerOpen: false,
     isBottomBarVisible: false,
     isFooterVisible: true,
-    isSemiTransparentSupported: true, // TODO：添加判断
+    isSemiTransparentSupported: true,
     isStatusDetailDrawerOpen: false,
 
     statusUpdateTimeDiff: 0, // 当前时间与数据更新时间的差值（毫秒时间戳）
