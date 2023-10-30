@@ -55,6 +55,7 @@ export default defineConfig({
           /^\/ver4/,
           /^\/ver3/,
           /^\/static/,
+          /^\/classical/,
         ],
       },
     }),

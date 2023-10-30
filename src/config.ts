@@ -45,7 +45,6 @@ const config = {
   },
 
   /********** 链接 **********/
-  contactEmail: 'chargers@akari.injs.eu', // 联系邮箱
   tencentMapUrl:
     'https://apis.map.qq.com/tools/poimarker?' +
     'type=0' +
@@ -59,6 +58,7 @@ const config = {
   classicVersionUrl: 'https://chargers.injs.eu/classical', // 旧版页面地址（用于`侧栏-回到旧版`） | `VITE_CLASSIC_VER_URL`
   surveyUrl: 'https://example.com', // 反馈问卷地址（用于`反馈页面`） | `VITE_SURVEY_URL`
   thisSiteUrl: 'https://chargers.injs.eu', // 当前本站地址（用于`分享菜单`） | `VITE_SITE_URL`
+  contactEmail: 'example@example.com', // 联系邮箱 | `VITE_CONTACT_EMAIL`
 };
 
 // 开发环境：
@@ -77,5 +77,6 @@ config.classicVersionUrl =
   import.meta.env.VITE_CLASSIC_VER_URL || config.classicVersionUrl;
 config.surveyUrl = import.meta.env.VITE_SURVEY_URL || config.surveyUrl;
 config.thisSiteUrl = import.meta.env.VITE_SITE_URL || config.thisSiteUrl;
+config.contactEmail = import.meta.env.VITE_CONTACT_EMAIL || config.contactEmail;
 
 export default config;
