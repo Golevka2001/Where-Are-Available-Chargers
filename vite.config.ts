@@ -49,7 +49,13 @@ export default defineConfig({
         ],
       },
       workbox: {
-        navigateFallbackDenylist: [/^\/api/, /^\/doc/, /^\/ver4/, /^\/ver3/],
+        navigateFallbackDenylist: [
+          /^\/api/,
+          /^\/doc/,
+          /^\/ver4/,
+          /^\/ver3/,
+          /^\/static/,
+        ],
       },
     }),
   ],
