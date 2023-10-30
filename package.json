@@ -10,18 +10,18 @@
     "format": "prettier --write --ignore-path .gitignore \"src/**/*.{vue,js,ts,json,html,css,less,scss,md}\""
   },
   "dependencies": {
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "pinia": "^2.1.7",
     "v-viewer": "^3.0.11",
     "viewerjs": "^1.11.6",
-    "vue": "^3.3.6",
+    "vue": "^3.3.7",
     "vue-router": "^4.2.5",
-    "vuetify": "^3.3.22"
+    "vuetify": "^3.3.23"
   },
   "devDependencies": {
     "@babel/types": "^7.23.0",
     "@mdi/js": "^7.3.67",
-    "@types/node": "^20.8.7",
+    "@types/node": "^20.8.9",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "dotenv": "^16.3.1",
@@ -29,7 +29,7 @@
     "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-vue": "^9.17.0",
+    "eslint-plugin-vue": "^9.18.1",
     "less": "^4.2.0",
     "mockjs": "^1.1.0",
     "prettier": "3.0.3",
@@ -37,11 +37,11 @@
     "unplugin-fonts": "^1.0.3",
     "vite": "^4.5.0",
     "vite-plugin-mock": "^3.0.0",
-    "vite-plugin-pwa": "^0.16.5",
+    "vite-plugin-pwa": "^0.16.6",
     "vite-plugin-vuetify": "^1.0.2",
     "vitest": "^0.34.6",
     "vue-eslint-parser": "^9.3.2",
-    "vue-tsc": "^1.8.19"
+    "vue-tsc": "^1.8.22"
   },
   "browserslist": [
     "> 1%",
