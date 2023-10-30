@@ -270,7 +270,7 @@ export default defineComponent({
 
       const rotatorTop = $rotator.getBoundingClientRect().top;
       const pivots = (this.pivots = this.refItems
-        .map((item) => getBoundingClientCenterY(item) - rotatorTop)
+        .map((item: any) => getBoundingClientCenterY(item) - rotatorTop)
         .sort((a, b) => a - b));
       const pivotsMin = (this.pivotsMin = Math.min(...pivots));
       const pivotsMax = (this.pivotsMax = Math.max(...pivots));
