@@ -20,27 +20,38 @@
       </transition>
     </v-app-bar-nav-icon>
 
+    <!-- Share button -->
+    <template v-slot:append>
+      <v-btn
+        :icon="true"
+        @click.stop="appStore.isAppSideDrawerOpen = false"
+      >
+        <v-icon>
+          {{ mdiShareVariantOutline }}
+        </v-icon>
+        <!-- Share menu -->
+        <share-menu activator="parent" />
+      </v-btn>
+    </template>
+
     <!-- Title -->
     <bar-title />
 
     <!-- Progress bar -->
     <progress-bar />
-
-    <!-- Share button & Share menu -->
-    <share-menu />
   </v-app-bar>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 
 import BarTitle from './BarTitle.vue';
 import { ProgressBar, ShareMenu } from '@/components/global';
 
-import { mdiMenu } from '@mdi/js';
+import { mdiMenu, mdiShareVariantOutline } from '@mdi/js';
 import { lineMenu } from '@/assets/custom-icons';
-
 const appStore = useAppStore();
 
 const onClickMenuBtn = () => {

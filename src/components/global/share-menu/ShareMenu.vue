@@ -1,4 +1,4 @@
-<!-- 顶部导航栏右侧的分享按钮和弹出的菜单 -->
+<!-- 弹出的分享菜单 -->
 
 <template>
   <v-menu
@@ -7,16 +7,6 @@
     location="bottom"
     z-index=""
   >
-    <!-- Share button -->
-    <template v-slot:activator="{ props }">
-      <v-btn
-        :icon="mdiShareVariantOutline"
-        v-bind="props"
-        @click.stop="onClickShareButton"
-      />
-    </template>
-
-    <!-- Share menu -->
     <v-card
       :style="semiTransparentStyle"
       rounded="lg"
@@ -31,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useTheme } from 'vuetify';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
@@ -39,12 +29,9 @@ import config from '@/config';
 import ShareMenuLink from './ShareMenuLink.vue';
 import ShareMenuQrCode from './ShareMenuQrCode.vue';
 
-import { mdiShareVariantOutline } from '@mdi/js';
-
 const theme = useTheme();
 const appStore = useAppStore();
 
-const isShareMenuOpen = ref(false);
 // 毛玻璃背景样式
 const semiTransparentStyle = computed(() => {
   return appStore.isSemiTransparentSupported
@@ -54,10 +41,4 @@ const semiTransparentStyle = computed(() => {
       }
     : {};
 });
-
-const onClickShareButton = () => {
-  isShareMenuOpen.value = true;
-  appStore.isAppSideDrawerOpen = false;
-  // 状态详细信息抽屉就不关了
-};
 </script>
