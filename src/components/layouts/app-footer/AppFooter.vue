@@ -1,0 +1,47 @@
+<!-- 页脚 -->
+<!-- +-------------------------+ -->
+<!-- |  Link1 Link2 Link3 ...  | -->
+<!-- |         Ver ...         | -->
+<!-- |     ©2022-2023 ...      | -->
+<!-- +-------------------------+ -->
+
+<template>
+  <div class="align-end">
+    <v-divider />
+    <v-footer
+      color="transparent"
+      class="text-center"
+    >
+      <v-row class="my-0">
+        <!-- Nav links -->
+        <v-col cols="12">
+          <footer-nav-list />
+        </v-col>
+
+        <!-- Version -->
+        <v-col
+          cols="12"
+          class="py-0"
+          style="font-size: 0.7rem"
+        >
+          Ver {{ version }}
+        </v-col>
+
+        <!-- CopyRight -->
+        <v-col
+          cols=" 12"
+          class="pt-0"
+        >
+          <footer-copyright />
+        </v-col>
+      </v-row>
+    </v-footer>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { version } from '@/../package.json';
+
+import FooterCopyright from './FooterCopyright.vue';
+import FooterNavList from './FooterNavList.vue';
+</script>

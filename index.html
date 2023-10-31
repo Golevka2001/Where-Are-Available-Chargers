@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="/favicon.svg"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/apple-touch-icon.png"
+      sizes="180x180"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="Find Chargers Easily in Southeast University Jiulonghu Campus"
+    />
+    <meta
+      name="theme-color"
+      content="#FFFFFF"
+    />
+    <title>Where Are Available Chargers?!</title>
+    <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=IntersectionObserver,ResizeObserver,WebAnimations,Object.fromEntries,Array.prototype.at"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      function isUnsupportedBrowser() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1) {
+          // IE
+          return true;
+        } else if (ua.indexOf('chrome') != -1) {
+          // Chrome < 86
+          if (ua.match(/chrome\/([\d.]+)/)[1].split('.')[0] < 86) return true;
+        } else if (ua.indexOf('firefox') != -1) {
+          // Firefox < 78
+          if (ua.match(/firefox\/([\d.]+)/)[1].split('.')[0] < 78) return true;
+        } else if (ua.indexOf('opr') != -1) {
+          // opera < 67
+          if (ua.match(/opr\/([\d.]+)/)[1].split('.')[0] < 67) return true;
+        } else return false;
+      }
+      if (isUnsupportedBrowser()) {
+        if (
+          confirm('当前浏览器版本较低，存在兼容性问题，是否跳转到经典页面？')
+        ) {
+          window.location.href = 'https://chargers.injs.eu/classical';
+        }
+      }
+    </script>
+    <div id="app"></div>
+    <script
+      type="module"
+      src="/src/main.ts"
+    ></script>
+  </body>
+</html>
