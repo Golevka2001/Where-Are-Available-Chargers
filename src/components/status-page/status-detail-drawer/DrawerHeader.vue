@@ -13,6 +13,26 @@
   >
     <template v-slot:title>
       <div class="d-flex align-center">
+        <v-btn
+          :icon="true"
+          variant="text"
+          @click.stop="appStore.isStatusDetailDrawerOpen = false"
+        >
+          <v-icon>
+            {{ mdiClose }}
+          </v-icon>
+        </v-btn>
+
+        <!-- Station name -->
+        <vue-scroll-picker
+          v-model="appStore.curStationIndex"
+          :key="appStore.curStationIndex"
+          :options="stationNameList"
+          class="ml-4"
+        />
+
+        <v-spacer />
+
         <!-- Map button -->
         <v-btn
           :icon="true"
@@ -29,24 +49,6 @@
             查看地图
           </v-tooltip>
         </v-btn>
-
-        <!-- Station name -->
-        <vue-scroll-picker
-          v-model="appStore.curStationIndex"
-          :key="appStore.curStationIndex"
-          :options="stationNameList"
-          class="ml-4"
-        />
-
-        <v-spacer />
-
-        <v-btn
-          :icon="mdiMenuClose"
-          rounded="lg"
-          size="xx-large"
-          variant="plain"
-          @click.stop="appStore.isStatusDetailDrawerOpen = false"
-        />
       </div>
     </template>
 
@@ -69,7 +71,7 @@ import { useStatusStore } from '@/store/status';
 
 import { VueScrollPicker } from '@/components/global';
 
-import { mdiMapMarkerOutline, mdiMenuClose } from '@mdi/js';
+import { mdiClose, mdiMapMarkerOutline } from '@mdi/js';
 
 const props = defineProps<{
   stationDescription: string | null | undefined;
