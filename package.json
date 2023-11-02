@@ -1,6 +1,6 @@
 {
   "name": "chargers-frontend",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "scripts": {
     "dev": "vite",
     "test": "vitest",
@@ -21,7 +21,7 @@
   "devDependencies": {
     "@babel/types": "^7.23.0",
     "@mdi/js": "^7.3.67",
-    "@types/node": "^20.8.9",
+    "@types/node": "^20.8.10",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "dotenv": "^16.3.1",

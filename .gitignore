@@ -15,6 +15,5 @@ dist/
 build/
 
 # Lock files
-# 目前开发中暂时不锁版本，等基本完成了再添上
-package-lock.json
-yarn.lock
+# package-lock.json
+# yarn.lock
