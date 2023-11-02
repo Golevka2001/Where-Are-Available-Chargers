@@ -77,7 +77,7 @@
 
 ### 准备工作
 
-_注：需要使用 16.0 或更高版本的 [Node.js](https://nodejs.org/) 以及 [npm](https://www.npmjs.com/)_
+_注：需要使用 16.0 或更高版本的 [Node.js](https://nodejs.org/) 与 [Yarn](https://yarnpkg.com/) `^4.0.1`。_
 
 ```bash
 # 克隆到本地
@@ -87,13 +87,13 @@ git clone git@github.com:Golevka2001/Where-Are-Available-Chargers.git && cd Wher
 git checkout dev
 
 # 安装依赖
-npm install # 或使用 yarn install
+yarn install
 ```
 
 ### 开发服务器，启动！
 
 ```bash
-npm run dev # 或使用 yarn run dev
+yarn run dev
 ```
 
 浏览器访问 <http://localhost:3000>
@@ -111,7 +111,7 @@ npm run dev # 或使用 yarn run dev
 ### 构建
 
 ```bash
-npm run build # 或使用 yarn run build
+yarn run build
 ```
 
 构建后的文件位于 `dist` 目录下，请不要提交该目录下的文件到仓库
@@ -119,7 +119,7 @@ npm run build # 或使用 yarn run build
 如需在本地预览构建后的应用，可以执行以下命令：
 
 ```bash
-npm run preview # 或使用 yarn run preview
+yarn run preview
 ```
 
 浏览器访问 <http://localhost:4173>

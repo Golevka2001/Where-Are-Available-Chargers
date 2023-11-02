@@ -9,6 +9,10 @@
     "lint": "eslint . --fix --ignore-path .gitignore",
     "format": "prettier --write --ignore-path .gitignore \"src/**/*.{vue,js,ts,json,html,css,less,scss,md}\""
   },
+  "engines": {
+    "node": ">=16",
+    "yarn": "~4.0.1"
+  },
   "dependencies": {
     "axios": "^1.6.0",
     "pinia": "^2.1.7",
@@ -85,5 +89,6 @@
         }
       }
     ]
-  }
+  },
+  "packageManager": "yarn@4.0.1"
 }
