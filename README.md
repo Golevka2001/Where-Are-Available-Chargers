@@ -152,9 +152,9 @@ yarn run preview
 ### 提交相关
 
 - 提交代码到远程仓库前，请执行以下检查：
-  - **执行 `npm run build` 检查构建是否成功【重要】**
-  - 执行 `npm run lint` 检查代码风格
-  - 执行 `npm run format` 格式化代码
+  - **执行 `yarn run build` 检查构建是否成功【重要】**
+  - 执行 `yarn run lint` 检查代码风格
+  - 执行 `yarn run format` 格式化代码
 - Commit message 推荐遵循 [Angular 提交规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)，使用 `<Type> | <Subject>` 的格式，例如：
   - `Feat | Add a progress linear`
   - `Fix | Incorrect judgment in status page`
@@ -247,4 +247,3 @@ You should have received a copy of the GNU Affero General Public License along w
 - `public/apple-touch-icon.png` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
 
 - `public/img/illustration.webp` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
-
