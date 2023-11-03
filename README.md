@@ -77,7 +77,7 @@
 
 ### 准备工作
 
-_注：需要使用 16.0 或更高版本的 [Node.js](https://nodejs.org/) 以及 [npm](https://www.npmjs.com/)_
+_注：需要使用 16.0 或更高版本的 [Node.js](https://nodejs.org/) 与 [Yarn](https://yarnpkg.com/) `^4.0.1`。_
 
 ```bash
 # 克隆到本地
@@ -87,13 +87,13 @@ git clone git@github.com:Golevka2001/Where-Are-Available-Chargers.git && cd Wher
 git checkout dev
 
 # 安装依赖
-npm install # 或使用 yarn install
+yarn install
 ```
 
 ### 开发服务器，启动！
 
 ```bash
-npm run dev # 或使用 yarn run dev
+yarn run dev
 ```
 
 浏览器访问 <http://localhost:3000>
@@ -111,7 +111,7 @@ npm run dev # 或使用 yarn run dev
 ### 构建
 
 ```bash
-npm run build # 或使用 yarn run build
+yarn run build
 ```
 
 构建后的文件位于 `dist` 目录下，请不要提交该目录下的文件到仓库
@@ -119,7 +119,7 @@ npm run build # 或使用 yarn run build
 如需在本地预览构建后的应用，可以执行以下命令：
 
 ```bash
-npm run preview # 或使用 yarn run preview
+yarn run preview
 ```
 
 浏览器访问 <http://localhost:4173>
@@ -152,9 +152,9 @@ npm run preview # 或使用 yarn run preview
 ### 提交相关
 
 - 提交代码到远程仓库前，请执行以下检查：
-  - **执行 `npm run build` 检查构建是否成功【重要】**
-  - 执行 `npm run lint` 检查代码风格
-  - 执行 `npm run format` 格式化代码
+  - **执行 `yarn run build` 检查构建是否成功【重要】**
+  - 执行 `yarn run lint` 检查代码风格
+  - 执行 `yarn run format` 格式化代码
 - Commit message 推荐遵循 [Angular 提交规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)，使用 `<Type> | <Subject>` 的格式，例如：
   - `Feat | Add a progress linear`
   - `Fix | Incorrect judgment in status page`
@@ -247,4 +247,3 @@ You should have received a copy of the GNU Affero General Public License along w
 - `public/apple-touch-icon.png` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
 
 - `public/img/illustration.webp` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
-
