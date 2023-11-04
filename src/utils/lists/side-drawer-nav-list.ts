@@ -9,6 +9,7 @@ import {
   mdiMapLegend,
 } from '@mdi/js';
 import { githubIcon } from '@/assets/custom-icons';
+import config from '@/config';
 
 // 外链用 href + target，内部路由用 to
 export const sideDrawerNavList = [
@@ -35,7 +36,7 @@ export const sideDrawerNavList = [
   {
     title: '项目文档',
     prependIcon: mdiBookOpenPageVariantOutline,
-    href: 'https://chargers.injs.eu/doc/',
+    href: config.projectDocUrl,
     target: '_blank',
   },
   {

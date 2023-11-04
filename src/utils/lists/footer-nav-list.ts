@@ -1,6 +1,8 @@
 // 页脚导航链接列表
 // 在 src/components/layouts/app-footer/AppFooter.vue 中使用
 
+import config from '@/config';
+
 // 区分外链和内部路由
 export const footerNavList = [
   {
@@ -15,12 +17,12 @@ export const footerNavList = [
   },
   {
     text: 'API',
-    link: 'https://chargers.injs.eu/doc/ver4_pub/api/get_status/',
+    link: config.apiDocUrl,
     isRouterLink: false,
   },
   {
     text: 'Docs',
-    link: 'https://chargers.injs.eu/doc/',
+    link: config.projectDocUrl,
     isRouterLink: false,
   },
   {
