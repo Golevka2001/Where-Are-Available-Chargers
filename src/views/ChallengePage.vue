@@ -55,7 +55,7 @@ const handleMessage = (event: MessageEvent) => {
     event.origin === window.location.origin &&
     event.data === 'verificationComplete'
   ) {
-    // 处于其他考虑，这里暂时不解析 callback，统一返回 `/status`
+    // 出于其他考虑，这里暂时不解析 callback，统一返回 `/status`
     /*
     const callbackUrl = router.currentRoute.value.query['callback'];
     router.push(callbackUrl || '/status');
