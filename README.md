@@ -5,16 +5,17 @@
   - [:rocket: 快速开始](#rocket-快速开始)
     - [准备工作](#准备工作)
     - [开发服务器，启动！](#开发服务器启动)
-    - [开发 & 调试](#开发--调试)
+    - [开发 \& 调试](#开发--调试)
     - [构建](#构建)
     - [部署](#部署)
-  - [:open_file_folder: src 目录结构](#open_file_folder-src-目录结构)
+  - [:open_file_folder: 目录结构](#open_file_folder-目录结构)
   - [:triangular_ruler: 开发规范](#triangular_ruler-开发规范)
     - [提交相关](#提交相关)
     - [UI 相关](#ui-相关)
     - [代码风格相关](#代码风格相关)
     - [依赖相关](#依赖相关)
   - [:memo: Todo List](#memo-todo-list)
+  - [:lady_beetle: Bugs](#lady_beetle-bugs)
   - [:book: API 文档](#book-api-文档)
   - [:scroll: 使用许可](#scroll-使用许可)
 
@@ -219,6 +220,11 @@ _注：并非按照优先级排序_
 - [ ] 文档页面
 
 - [ ] 历史数据页面【待定】
+
+## :lady_beetle: Bugs
+
+- 在微信的 Webview 中，弹出抽屉（包括 `侧栏菜单` 和 `详细状态`）会导致页面立即滚动到顶部
+- 首次加载时，页面跳转会卡在 Loading，页面内容（如 `img`、`iframe`）不加载或不触发 `load` 事件
 
 ## :book: API 文档
 
