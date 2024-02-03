@@ -1,9 +1,10 @@
 const config = {
   /********** 公告栏内容 **********/
   announcementBoard: {
-    enabled: false, // 是否启用公告栏
-    title: '测试标题', // 标题（支持 HTML）
-    content: '&#129323; 测试内容', // 内容（支持 HTML）
+    enabled: true, // 是否启用公告栏
+    title: '维护提醒', // 标题（支持 HTML）
+    content:
+      '2024年春节期间，在线查询（含API）与历史记录功能可能不可用，敬请谅解。', // 内容（支持 HTML）
 
     color: 'orange', // 颜色
     variant: 'tonal' as
