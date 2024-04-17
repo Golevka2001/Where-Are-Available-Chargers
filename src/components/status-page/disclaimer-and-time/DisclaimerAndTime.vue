@@ -1,8 +1,15 @@
 <!-- “仅供参考”免责声明 & 详细更新时间 -->
 
 <template>
-  <div class="d-flex justify-space-between text-body-2 text-default">
-    <span> 仅供参考 </span>
+  <div class="mt-2 d-flex justify-space-between text-default" style="font-size: 0.7rem">
+    <a
+      href="/feedback"
+      target="_blank"
+      class="text-decoration-none"
+      style="color: inherit"
+    >
+      数据有误？点我反馈 >
+    </a>
     <span>
       更新于
       {{
