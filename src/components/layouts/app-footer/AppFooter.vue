@@ -28,7 +28,7 @@
           Ver {{ version }}
         </v-col>
 
-        <!-- CopyRight -->
+        <!-- Copyright -->
         <v-col
           cols=" 12"
           class="pt-0"
