@@ -1,7 +1,7 @@
-config_file_version = "20231023"
+config_file_version = "20240421"
 
 [system]
-display_version = "4.2.3f"
+display_version = "4.2.5f"
 
 [cache]
 cache_mode = 1
@@ -49,7 +49,7 @@ enough_socket_num = 2.5 # 每个充电桩低于这个数字提示紧张
 
 [stations."南门西侧"]
 "A" = "XY679RB8P35Y10"
-"B" = "!XYOGaVYy7OHu7" # 充电桩坏了，所以故意加了一个`!`
+"B" = "XYOGaVYy7OHu7"
 
 [stations."南门东侧"]
 "A" = "XY5dXpywawqy6"
@@ -82,12 +82,12 @@ enough_socket_num = 2.5 # 每个充电桩低于这个数字提示紧张
 "J" = "XYnA1fapkKoJ23"
 
 [stations."校医院西"]
-"A" = "XYhsT6K7WuFF2"
-"B" = "XYSrI29yuVPy4"
-"C" = "XYmX1k57YPHa18"
-"D" = "XYL81WkCxNTu17"
+"A" = "XYQ9V3oRnl7T14"
+"B" = "XYKnEbnnJCeb11"
+"C" = "XYyyylX0CqbR12"
+"D" = "XYgfTM8RL9mE6"
 "E" = "XYI1OP4t44eM5"
-"F" = "XYgfTM8RL9mE6"
-"G" = "XYyyylX0CqbR12"
-"H" = "XYKnEbnnJCeb11"
-"I" = "XYQ9V3oRnl7T14"
+"F" = "XYL81WkCxNTu17"
+"G" = "XYmX1k57YPHa18"
+"H" = "XYSrI29yuVPy4"
+"I" = "XYhsT6K7WuFF2"
