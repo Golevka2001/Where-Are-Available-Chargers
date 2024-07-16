@@ -1,7 +1,10 @@
 <!-- “仅供参考”免责声明 & 详细更新时间 -->
 
 <template>
-  <div class="mt-2 d-flex justify-space-between text-default" style="font-size: 0.7rem">
+  <div
+    class="mt-2 d-flex justify-space-between text-default"
+    style="font-size: 0.7rem"
+  >
     <a
       href="/feedback"
       target="_blank"
