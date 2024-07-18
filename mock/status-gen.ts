@@ -36,6 +36,23 @@ const genSocketStatus = (): SocketStatus => {
     return 2;
   } else {
     return Math.floor(Math.random() * 2) as SocketStatus;
+    /*
+    const status = Math.floor(Math.random() * 2);
+    const remainingMinutes =
+      status === 0 ? Math.floor(Math.random() * 300) : null;
+    const remainingTimeStr =
+      remainingMinutes === null
+        ? null
+        : remainingMinutes < 60
+        ? `${remainingMinutes}min`
+        : `${Math.floor(remainingMinutes / 60)}h`;
+
+    const socketStatus: SocketStatus = {
+      status: status,
+      remaining_time: remainingTimeStr,
+    };
+    return socketStatus;
+    */
   }
 };
 
@@ -46,12 +63,13 @@ const genChargerStatus = (
   const sockets = Array.from({ length: socketCount }, () => genSocketStatus());
 
   const chargerStatus: ChargerStatus = {
-    available_count: sockets.filter((s) => s === 1).length,
+    name: chargerName,
     description: null,
     fault_info: null,
-    name: chargerName,
-    sockets,
     total_count: socketCount,
+    available_count: sockets.filter((s) => s === 1).length,
+    // available_count: sockets.filter((s) => s.status === 1).length,
+    sockets: sockets,
   };
 
   if (Math.random() < CHARGER_FAULT_RATE) {

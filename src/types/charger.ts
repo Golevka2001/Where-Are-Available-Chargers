@@ -2,6 +2,14 @@
 
 export type SocketStatus = 0 | 1 | 2;
 
+// 带剩余时间的插座状态（备用）
+/*
+export interface SocketStatus {
+  status: 0 | 1 | 2;
+  remaining_time: string | null | undefined;
+}
+*/
+
 export interface ChargerStatus {
   name: string;
   description: string | null | undefined;
