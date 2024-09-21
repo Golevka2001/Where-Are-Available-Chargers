@@ -1,6 +1,7 @@
 import type {
   ChargerStatus,
   SocketStatus,
+  SocketStatusWithEndTS,
   StationStatus,
   StatusDetail,
   StatusResponse,
@@ -31,28 +32,25 @@ const genStationNameList = (): string[] => {
   return stationNameList.filter(() => Math.random() > STATION_FILTER_RATE);
 };
 
-const genSocketStatus = (): SocketStatus => {
+const genSocketStatus = (): SocketStatus | SocketStatusWithEndTS => {
   if (Math.random() < SOCKET_FAULT_RATE) {
     return 2;
   } else {
-    return Math.floor(Math.random() * 2) as SocketStatus;
-    /*
+    // 一部分模拟没有剩余时间的
+    if (Math.random() < 0.5) {
+      return Math.floor(Math.random() * 2) as SocketStatus;
+    }
+    // 另一部分模拟有剩余时间的
     const status = Math.floor(Math.random() * 2);
-    const remainingMinutes =
-      status === 0 ? Math.floor(Math.random() * 300) : null;
-    const remainingTimeStr =
-      remainingMinutes === null
-        ? null
-        : remainingMinutes < 60
-        ? `${remainingMinutes}min`
-        : `${Math.floor(remainingMinutes / 60)}h`;
-
-    const socketStatus: SocketStatus = {
+    const endTimestamp =
+      status === 0
+        ? new Date().getTime() + Math.floor(Math.random() * 8 * 1000 * 3600)
+        : null;
+    const socketStatus: SocketStatusWithEndTS = {
       status: status,
-      remaining_time: remainingTimeStr,
+      end_timestamp: endTimestamp,
     };
     return socketStatus;
-    */
   }
 };
 
@@ -67,8 +65,9 @@ const genChargerStatus = (
     description: null,
     fault_info: null,
     total_count: socketCount,
-    available_count: sockets.filter((s) => s === 1).length,
-    // available_count: sockets.filter((s) => s.status === 1).length,
+    available_count: sockets.filter((s) => {
+      return typeof s === 'string' ? s === 1 : s.status === 1;
+    }).length,
     sockets: sockets,
   };
 
