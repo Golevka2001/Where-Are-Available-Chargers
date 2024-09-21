@@ -66,7 +66,7 @@ const genChargerStatus = (
     fault_info: null,
     total_count: socketCount,
     available_count: sockets.filter((s) => {
-      return typeof s === 'string' ? s === 1 : s.status === 1;
+      return typeof s === 'number' ? s === 1 : s.status === 1;
     }).length,
     sockets: sockets,
   };
