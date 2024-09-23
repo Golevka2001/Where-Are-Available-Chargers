@@ -10,7 +10,37 @@
 <!-- +---------------------+ -->
 
 <template>
+  <div
+    :style="{ maxWidth: width < 960 ? '40rem' : '70rem' }"
+    class="mx-auto"
+  >
+    <div class="ma-8">
+      <announcement-board
+        v-if="config.announcementBoard.enabled"
+        class="mb-6"
+      />
+      <v-btn-toggle
+        v-model="selectedCampus"
+        mandatory
+        class="mb-6"
+        style="display: flex; width: 100%"
+        @update:model-value="onCampusChange"
+      >
+        <v-btn
+          v-for="campus in config.campuses"
+          density="comfortable"
+          :key="campus.id"
+          :value="campus"
+          style="flex: 1"
+        >
+          {{ campus.name }}
+        </v-btn>
+      </v-btn-toggle>
+    </div>
+  </div>
+
   <loading-indicator v-if="isLoadingIndicatorVisible" />
+
   <div
     v-else
     :style="{ maxWidth: width < 960 ? '40rem' : '70rem' }"
@@ -19,12 +49,10 @@
     <div class="ma-8">
       <status-detail-drawer />
 
-      <announcement-board
-        v-if="config.announcementBoard.enabled"
+      <weather-panel
+        :campus="selectedCampus"
         class="mb-6"
       />
-
-      <weather-panel class="mb-6" />
 
       <status-overview />
 
@@ -63,6 +91,7 @@ const statusStore = useStatusStore();
 
 const bottomInfoBarComponent = ref();
 const isLoadingIndicatorVisible = ref(true);
+const selectedCampus = ref(config.campuses[0]);
 
 let lastScrollY = 0;
 let intervalId: NodeJS.Timeout;
@@ -79,10 +108,10 @@ const startInterval = () => {
       return;
     }
     try {
-      await statusStore.updateData();
+      await statusStore.updateData(selectedCampus.value);
       // 一定次数后停止定时器
       autoUpdateCount++;
-      if (autoUpdateCount >= config.autoUpdateMaxTimes) {
+      if (autoUpdateCount >= selectedCampus.value.autoUpdateMaxTimes) {
         clearInterval(intervalId);
       }
     } catch (err) {
@@ -91,7 +120,7 @@ const startInterval = () => {
       bottomInfoBarComponent.value.stopInterval();
       return;
     }
-  }, config.autoUpdateInterval);
+  }, selectedCampus.value.autoUpdateInterval);
 };
 
 // 底栏被点击触发手动更新数据，拉取数据成功后重置定时器
@@ -99,7 +128,7 @@ const manualUpdateData = async () => {
   // 停止定时器
   clearInterval(intervalId);
   try {
-    await statusStore.updateData();
+    await statusStore.updateData(selectedCampus.value);
     // 重置定时器
     bottomInfoBarComponent.value.startInterval();
     startInterval();
@@ -114,7 +143,7 @@ const onScroll = () => {
   if (
     appStore.bottomBarText !== null ||
     appStore.bottomBarBgColor !== null ||
-    appStore.statusUpdateTimeDiff > config.dataExpirationTime
+    appStore.statusUpdateTimeDiff > selectedCampus.value.dataExpirationTime
   ) {
     return;
   }
@@ -135,7 +164,7 @@ onMounted(async () => {
   // 页面挂载时更新数据，显示加载动画，之后在当前页面内不再显示加载动画
   isLoadingIndicatorVisible.value = true;
   try {
-    await statusStore.updateData();
+    await statusStore.updateData(selectedCampus.value);
   } catch (err) {
     // 数据更新失败，跳转到错误页面
     errorStore.errorFrom = 'status';
@@ -156,4 +185,17 @@ onMounted(async () => {
 onBeforeRouteLeave(() => {
   clearInterval(intervalId);
 });
+
+const onCampusChange = async () => {
+  isLoadingIndicatorVisible.value = true;
+  try {
+    await statusStore.updateData(selectedCampus.value);
+  } catch (err) {
+    errorStore.errorFrom = 'status';
+    router.push('/error');
+    return;
+  } finally {
+    isLoadingIndicatorVisible.value = false;
+  }
+};
 </script>

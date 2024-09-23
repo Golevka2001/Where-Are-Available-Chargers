@@ -19,6 +19,7 @@ import {
   mdiWeatherDust,
   mdiWeatherWindy,
 } from '@mdi/js';
+import { campusConfig } from '@/types/campus-config';
 
 // TODO：是否要按需引入？
 const skycon2Icon = (skycon: string): string => {
@@ -95,9 +96,9 @@ export const useWeatherStore = defineStore('weather', {
     },
   },
   actions: {
-    async updateData(): Promise<void> {
+    async updateData(campus: campusConfig): Promise<void> {
       try {
-        const res = await getWeatherData();
+        const res = await getWeatherData(campus);
         if (res.status !== 'ok') {
           throw new Error('返回的天气数据无效');
         }

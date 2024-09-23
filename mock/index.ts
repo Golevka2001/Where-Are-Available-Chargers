@@ -8,7 +8,7 @@ const CHALLENGE_RATE = 0;
 
 export default [
   {
-    url: '/api/get_status',
+    url: '/api/get_status/:campus',
     method: 'get',
     statusCode: 200,
     timeout: Math.floor(Math.random() * 1000) + 500,
@@ -36,7 +36,7 @@ export default [
     },
   },
   {
-    url: '/api/weather/jiulonghu',
+    url: '/api/weather/:campus',
     method: 'get',
     statusCode: 200,
     timeout: Math.floor(Math.random() * 1000) + 500,

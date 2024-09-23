@@ -29,16 +29,30 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { onMounted, watch } from 'vue';
 import { useWeatherStore } from '@/store/weather';
 
 import PanelContent from './PanelContent.vue';
 
 import { mdiWeatherCloudyClock } from '@mdi/js';
+import { campusConfig } from '@/types/campus-config';
+
+const props = defineProps<{
+  campus: campusConfig;
+}>();
 
 const weatherStore = useWeatherStore();
 
-onMounted(async () => {
-  await weatherStore.updateData();
-});
+const updateWeatherData = async () => {
+  await weatherStore.updateData(props.campus);
+};
+
+onMounted(updateWeatherData);
+
+watch(
+  () => props.campus,
+  () => {
+    updateWeatherData();
+  },
+);
 </script>

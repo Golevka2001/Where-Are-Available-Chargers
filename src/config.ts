@@ -1,3 +1,5 @@
+import { campusConfig } from '@/types/campus-config';
+
 const config = {
   /********** 公告栏内容 **********/
   announcementBoard: {
@@ -18,12 +20,32 @@ const config = {
   },
 
   /********** 状态查询、显示相关 **********/
-  autoUpdateMaxTimes: 6, // 自动更新最大次数
-  autoUpdateInterval: 30 * 1000, // 前端自动拉取数据间隔
-  backendUpdateInterval: 20 * 1000, // 后端数据更新间隔（要与后端同步）// TODO：改为从后端获取
-  dataExpirationTime: 1.5 * 60 * 1000, // 提示数据过期时间
-  stationThresholdPercentage: 0.25, // 充电站余量紧张的阈值
-  statusRequestTimeout: 10 * 1000, // 状态请求超时时间
+  campuses: [
+    {
+      id: 'jiulonghu',
+      name: '九龙湖',
+      weatherApiPath: '/weather/jiulonghu',
+      statusApiPath: '/get_status/jiulonghu',
+      autoUpdateMaxTimes: 6, // 自动更新最大次数
+      autoUpdateInterval: 30 * 1000, // 前端自动拉取数据间隔
+      backendUpdateInterval: 20 * 1000, // 后端数据更新间隔（要与后端同步）// TODO：改为从后端获取
+      dataExpirationTime: 1.5 * 60 * 1000, // 提示数据过期时间
+      stationThresholdPercentage: 0.25, // 充电站余量紧张的阈值
+      statusRequestTimeout: 10 * 1000, // 状态请求超时时间
+    } as campusConfig,
+    {
+      id: 'dingjiaqiao',
+      name: '丁家桥',
+      weatherApiPath: '/weather/dingjiaqiao',
+      statusApiPath: '/get_status/dingjiaqiao',
+      autoUpdateMaxTimes: 6, // 自动更新最大次数
+      autoUpdateInterval: 70 * 1000, // 前端自动拉取数据间隔
+      backendUpdateInterval: 60 * 1000, // 后端数据更新间隔（要与后端同步）// TODO：改为从后端获取
+      dataExpirationTime: 1.5 * 60 * 1000, // 提示数据过期时间
+      stationThresholdPercentage: 0.25, // 充电站余量紧张的阈值
+      statusRequestTimeout: 15 * 1000, // 状态请求超时时间
+    } as campusConfig,
+  ],
 
   /********** 组件显示相关 **********/
   // 底栏
