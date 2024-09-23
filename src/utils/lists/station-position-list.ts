@@ -62,4 +62,16 @@ export const stationPositionList = [
     lat: 31.892616,
     lng: 118.823786,
   },
+  {
+    title: '基二楼',
+    addr: '丁家桥校区基二教学楼附近',
+    lat: 32.0765,
+    lng: 118.7703,
+  },
+  {
+    title: '求恩一舍',
+    addr: '丁家桥校区求恩一舍附近',
+    lat: 32.0784,
+    lng: 118.7703,
+  },
 ];
