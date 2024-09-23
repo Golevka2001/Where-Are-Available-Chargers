@@ -30,10 +30,15 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, watch } from 'vue';
 import { useAppStore } from '@/store/app';
 import { useStatusStore } from '@/store/status';
 import config from '@/config';
+import { campusConfig } from '@/types/campus-config';
+
+const props = defineProps<{
+  campus: campusConfig;
+}>();
 
 // 向 StatusPage 传递的事件（updateData 统一在 StatusPage 中调用）
 const emit = defineEmits(['manuallyUpdateData']);
@@ -55,7 +60,7 @@ const startInterval = () => {
     appStore.statusUpdateTimeDiff =
       Date.now() - new Date(statusStore.lastUpdateTime).getTime();
     // 数据过期，停止定时器
-    if (appStore.statusUpdateTimeDiff > config.dataExpirationTime) {
+    if (appStore.statusUpdateTimeDiff > props.campus.dataExpirationTime) {
       clearInterval(intervalId);
       return;
     }
@@ -94,7 +99,7 @@ const onClickBottomBar = async () => {
   }
   isProcessingClick = true;
   // 后端数据未更新，不刷新
-  if (appStore.statusUpdateTimeDiff < config.backendUpdateInterval) {
+  if (appStore.statusUpdateTimeDiff < props.campus.backendUpdateInterval) {
     appStore.bottomBarText = '数据仍在有效期内';
     await new Promise((resolve) =>
       setTimeout(resolve, config.bottomBarUpdateInterval),
@@ -111,8 +116,16 @@ const onClickBottomBar = async () => {
 // 组件挂载时启动定时器，卸载时停止
 onMounted(() => {
   startInterval();
+  appStore.updateDataExpirationTime(props.campus.dataExpirationTime);
 });
 onUnmounted(() => {
   clearInterval(intervalId);
 });
+watch(
+  () => props.campus,
+  (newCampus) => {
+    startInterval();
+    appStore.updateDataExpirationTime(newCampus.dataExpirationTime);
+  },
+);
 </script>

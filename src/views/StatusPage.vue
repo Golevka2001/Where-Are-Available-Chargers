@@ -59,6 +59,7 @@
       <bottom-info-bar
         v-scroll="onScroll"
         ref="bottomInfoBarComponent"
+        :campus="selectedCampus"
         @manually-update-data="manualUpdateData"
       />
     </div>

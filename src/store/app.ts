@@ -2,7 +2,6 @@
 
 import { defineStore } from 'pinia';
 import { useTheme } from 'vuetify';
-import config from '@/config';
 
 const hexToRgb = (hex: string): number[] => {
   const hexValue = hex.replace('#', '');
@@ -25,6 +24,8 @@ export const useAppStore = defineStore('app', {
     bottomBarBgColor: null as string | null,
     bottomBarText: null as string | null,
     curStationIndex: 0, // 当前状态详情抽屉中所显示的充电站的名称
+
+    dataExpirationTime: 60 * 1000, // 过期时间
   }),
   getters: {
     getSuccessRgb: (): number[] => {
@@ -34,21 +35,21 @@ export const useAppStore = defineStore('app', {
       return hexToRgb(useTheme().current.value.colors.warning);
     },
     // 底栏背景色
-    getBottomBarBgColor: (state: any): string => {
+    getBottomBarBgColor(state: any): string {
       // 强制显示颜色
       if (state.bottomBarBgColor !== null) {
         return state.bottomBarBgColor;
       }
       // 过期时间的 1/6 前：绿色
-      if (state.statusUpdateTimeDiff < config.dataExpirationTime / 6) {
+      if (state.statusUpdateTimeDiff < this.dataExpirationTime / 6) {
         return 'success';
       }
       // 过期：橙色
-      if (state.statusUpdateTimeDiff > config.dataExpirationTime) {
+      if (state.statusUpdateTimeDiff > this.dataExpirationTime) {
         return 'warning';
       }
       // 之间：渐变
-      const percent = state.statusUpdateTimeDiff / config.dataExpirationTime;
+      const percent = state.statusUpdateTimeDiff / this.dataExpirationTime;
       const gradientColor = [
         state.getSuccessRgb[0] +
           (state.getWarningRgb[0] - state.getSuccessRgb[0]) * percent,
@@ -60,12 +61,12 @@ export const useAppStore = defineStore('app', {
       return `rgb(${gradientColor[0]}, ${gradientColor[1]}, ${gradientColor[2]})`;
     },
     // 底栏文字
-    getBottomBarText: (state: any): string => {
+    getBottomBarText(state: any): string {
       // 强制显示文字
       if (state.bottomBarText !== null) {
         return state.bottomBarText;
       }
-      if (state.statusUpdateTimeDiff > config.dataExpirationTime) {
+      if (state.statusUpdateTimeDiff > this.dataExpirationTime) {
         return '数据已过期，点此刷新';
       }
       const diffSeconds = Math.floor(state.statusUpdateTimeDiff / 1000);
@@ -87,6 +88,9 @@ export const useAppStore = defineStore('app', {
       this.isAppSideDrawerOpen = false;
       this.curStationIndex = stationIndex;
       this.isStatusDetailDrawerOpen = true;
+    },
+    updateDataExpirationTime(expirationTime: number) {
+      this.dataExpirationTime = expirationTime;
     },
   },
 });

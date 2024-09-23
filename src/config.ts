@@ -88,11 +88,13 @@ const config = {
 
 // 开发环境：
 if (import.meta.env.DEV) {
-  config.autoUpdateMaxTimes = 3;
-  config.autoUpdateInterval = 5 * 1000;
-  config.backendUpdateInterval = 2 * 1000;
-  config.dataExpirationTime = 10 * 1000;
-  // config.statusRequestTimeout = 1.3 * 1000;
+  for (const campus of config.campuses) {
+    campus.autoUpdateMaxTimes = 3;
+    campus.autoUpdateInterval = 5 * 1000;
+    campus.backendUpdateInterval = 2 * 1000;
+    campus.dataExpirationTime = 10 * 1000;
+    // config.statusRequestTimeout = 1.3 * 1000;
+  }
 }
 
 // 环境变量覆盖部分设置：
