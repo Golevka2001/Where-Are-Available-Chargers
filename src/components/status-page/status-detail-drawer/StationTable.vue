@@ -31,8 +31,13 @@
         </td>
         <!-- Sockets status -->
         <td class="pl-1 text-center">
-          <div v-if="typeof chargerStatus.fault_info === 'string'">
-            {{ chargerStatus.fault_info }}
+          <div
+            v-if="
+              typeof chargerStatus.fault_info === 'string' ||
+              chargerStatus.sockets.length <= 1
+            "
+          >
+            {{ chargerStatus.fault_info ?? '获取失败' }}
           </div>
           <station-table-charger-status
             v-else

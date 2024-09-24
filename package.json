@@ -1,6 +1,6 @@
 {
   "name": "chargers-frontend",
-  "version": "5.0.3",
+  "version": "5.1.1",
   "scripts": {
     "dev": "vite",
     "test": "vitest",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^1.6.0",
+    "floating-vue": "^5.2.2",
     "pinia": "^2.1.7",
     "v-viewer": "^3.0.11",
     "viewerjs": "^1.11.6",
@@ -26,11 +27,13 @@
     "@babel/types": "^7.23.0",
     "@mdi/js": "^7.3.67",
     "@types/node": "^20.8.10",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "dotenv": "^16.3.1",
     "esbuild": "^0.19.5",
-    "eslint": "^8.52.0",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-vue": "^9.18.1",

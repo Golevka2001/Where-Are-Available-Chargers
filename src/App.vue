@@ -17,9 +17,8 @@ let isWxwork = ua.indexOf('wxwork') !== -1;
 // 获取用户系统主题偏好
 if (isWxwork) {
   // 企业微信深色模式适配
-  theme.global.name.value = ua.indexOf('colorscheme/dark') !== -1
-    ? 'dark'
-    : 'light';
+  theme.global.name.value =
+    ua.indexOf('colorscheme/dark') !== -1 ? 'dark' : 'light';
 } else {
   theme.global.name.value = window.matchMedia('(prefers-color-scheme: dark)')
     .matches

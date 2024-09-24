@@ -29,6 +29,7 @@
       <station-card-remain-count
         :available-count="stationStatus.available_count"
         :total-count="stationStatus.total_count"
+        :campus="campus"
       />
     </v-card-title>
 
@@ -49,10 +50,12 @@ import StationCardRemainCount from './StationCardRemainCount.vue';
 import StationCardRemainDetail from './StationCardRemainDetail.vue';
 
 import { mdiChevronRight } from '@mdi/js';
+import { campusConfig } from '@/types/campus-config';
 
 const props = defineProps<{
   stationIndex: number;
   stationStatus: StationStatus;
+  campus: campusConfig;
 }>();
 
 const appStore = useAppStore();

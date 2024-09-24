@@ -20,12 +20,13 @@
       </span>
     </span>
   </div>
-  <div class="mt-2 text-center text-default" style="font-size: 0.7rem">
+  <div
+    class="mt-2 text-center text-default"
+    style="font-size: 0.7rem"
+  >
     <span>
       数据由
-      <span class="text-decoration-underline">
-        久安充电
-      </span>
+      <span class="text-decoration-underline"> 久安充电 </span>
       &nbsp;提供，查询结果仅供参考
     </span>
   </div>

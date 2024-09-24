@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 import { useAppStore } from './app';
 import { StationStatus } from '@/types/charger';
 import { getChargersStatus } from '@/apis/charger';
+import { campusConfig } from '@/types/campus-config';
 import router from '@/router';
 
 const appStore = useAppStore();
@@ -19,7 +20,7 @@ export const useStatusStore = defineStore('status', {
     isFetchingData: false,
   }),
   actions: {
-    async updateData(): Promise<void> {
+    async updateData(campus: campusConfig): Promise<void> {
       // 防止重复请求
       if (this.isFetchingData) {
         return;
@@ -28,7 +29,7 @@ export const useStatusStore = defineStore('status', {
       appStore.bottomBarBgColor = 'success';
       appStore.bottomBarText = '正在更新数据，请稍候...';
       try {
-        const res = await getChargersStatus();
+        const res = await getChargersStatus(campus);
         if (res.code === 766) {
           await router.push({
             path: '/challenge',

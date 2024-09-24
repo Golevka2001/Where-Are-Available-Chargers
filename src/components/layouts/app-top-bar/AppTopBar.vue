@@ -43,7 +43,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { useAppStore } from '@/store/app';
 import config from '@/config';
 
