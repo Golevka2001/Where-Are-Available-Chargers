@@ -193,7 +193,10 @@ onBeforeRouteLeave(() => {
 const onCampusChange = async () => {
   // 更新用户储存中的校区数据
   saveSelectedCampusIndex(selectedCampusIndex.value);
-
+  router.go(0);
+  // 下面是原本的逻辑，但是可能会导致切换后仍显示原来校区的数据
+  // 所以改成 router.go(0) 强制重载
+  /*
   isLoadingIndicatorVisible.value = true;
   try {
     await statusStore.updateData(selectedCampus.value);
@@ -203,7 +206,7 @@ const onCampusChange = async () => {
     return;
   } finally {
     isLoadingIndicatorVisible.value = false;
-  }
+  }*/
 };
 
 // 储存和读取用户侧储存的校区数据
