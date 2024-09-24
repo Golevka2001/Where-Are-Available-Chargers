@@ -41,7 +41,7 @@
     <v-dialog v-model="buildInfoVisible">
       <div style="display: flex; justify-content: center">
         <v-card
-          max-width="400"
+          max-width="30rem"
           title="版本详情"
         >
           <v-card-subtitle>版本号 {{ version }}</v-card-subtitle>
@@ -52,19 +52,24 @@
             </code>
           </v-card-text>
           <template v-slot:actions>
-            <v-btn
-              v-for="(i, index) in resetTypes"
-              @click="
-                resetDialogVisible = true;
-                resetTypeSelected = index;
-              "
+            <div
+              class="d-flex flex-wrap"
+              style="justify-content: right"
             >
-              {{ i.name }}
-            </v-btn>
-            <v-btn
-              text="关闭"
-              @click="buildInfoVisible = false"
-            ></v-btn>
+              <v-btn
+                v-for="(i, index) in resetTypes"
+                @click="
+                  resetDialogVisible = true;
+                  resetTypeSelected = index;
+                "
+              >
+                {{ i.name }}
+              </v-btn>
+              <v-btn
+                text="关闭"
+                @click="buildInfoVisible = false"
+              ></v-btn>
+            </div>
           </template>
         </v-card>
       </div>
@@ -73,24 +78,29 @@
     <v-dialog v-model="resetDialogVisible">
       <div style="display: flex; justify-content: center">
         <v-card
-          max-width="400"
+          max-width="40rem"
           title="重置确认"
         >
           <v-card-text>
             确定要{{ (resetTypes ?? [])[resetTypeSelected]?.name ?? '' }}吗？
           </v-card-text>
           <template v-slot:actions>
-            <v-btn
-              color="red"
-              text="确定"
-              @click="
-                ((resetTypes ?? [])[resetTypeSelected]?.f ?? (() => {}))()
-              "
-            ></v-btn>
-            <v-btn
-              text="取消"
-              @click="resetDialogVisible = false"
-            ></v-btn>
+            <div
+              class="d-flex flex-wrap"
+              style="justify-content: right"
+            >
+              <v-btn
+                color="red"
+                text="确定"
+                @click="
+                  ((resetTypes ?? [])[resetTypeSelected]?.f ?? (() => {}))()
+                "
+              ></v-btn>
+              <v-btn
+                text="取消"
+                @click="resetDialogVisible = false"
+              ></v-btn>
+            </div>
           </template>
         </v-card>
       </div>
