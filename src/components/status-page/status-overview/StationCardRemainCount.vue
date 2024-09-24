@@ -17,10 +17,12 @@
 import { computed } from 'vue';
 import { useTheme } from 'vuetify';
 import config from '@/config';
+import { campusConfig } from '@/types/campus-config';
 
 const props = defineProps<{
   availableCount: number;
   totalCount: number;
+  campus: campusConfig;
 }>();
 
 const theme = useTheme();
@@ -28,7 +30,7 @@ const theme = useTheme();
 // TODO：准备改一下判断逻辑
 const availableCountTextColor = computed(() => {
   return props.availableCount >
-    props.totalCount * config.stationThresholdPercentage
+    props.totalCount * props.campus.stationThresholdPercentage
     ? theme.current.value.colors.success
     : theme.current.value.colors.warning;
 });

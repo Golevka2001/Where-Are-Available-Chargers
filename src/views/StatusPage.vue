@@ -54,7 +54,7 @@
         class="mb-6"
       />
 
-      <status-overview />
+      <status-overview :campus="selectedCampus" />
 
       <bottom-info-bar
         v-scroll="onScroll"

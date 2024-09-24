@@ -25,6 +25,7 @@
           :station-index="stationIndex"
           :station-status="stationStatus"
           :style="cardBorderStyle(stationIndex)"
+          :campus="campus"
           class="pa-1"
         />
       </v-col>
@@ -40,9 +41,14 @@ import { useStatusStore } from '@/store/status';
 
 import DisclaimerAndTime from '../disclaimer-and-time/DisclaimerAndTime.vue';
 import StationCard from './StationCard.vue';
+import { campusConfig } from '@/types/campus-config';
 
 const { width } = useDisplay();
 const statusStore = useStatusStore();
+
+const props = defineProps<{
+  campus: campusConfig;
+}>();
 
 // 充电站状态卡片的边框样式
 const cardBorderStyle = (index: number) => {
