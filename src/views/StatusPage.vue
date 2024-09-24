@@ -20,17 +20,17 @@
         class="mb-6"
       />
       <v-btn-toggle
-        v-model="selectedCampus"
+        v-model="selectedCampusIndex"
         mandatory
         class="mb-6"
         style="display: flex; width: 100%"
         @update:model-value="onCampusChange"
       >
         <v-btn
-          v-for="campus in config.campuses"
+          v-for="(campus, index) in config.campuses"
           density="comfortable"
           :key="campus.id"
-          :value="campus"
+          :value="index"
           style="flex: 1"
         >
           {{ campus.name }}
@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import { useDisplay } from 'vuetify';
 import { useAppStore } from '@/store/app';
@@ -92,7 +92,12 @@ const statusStore = useStatusStore();
 
 const bottomInfoBarComponent = ref();
 const isLoadingIndicatorVisible = ref(true);
-const selectedCampus = ref(config.campuses[0]);
+const selectedCampusIndex = ref(getSelectedCampusIndex());
+const selectedCampus = computed(
+  () => config.campuses[selectedCampusIndex.value],
+);
+
+const CAMPUS_INDEX_STORAGE_KEY = 'selectedCampusIndex';
 
 let lastScrollY = 0;
 let intervalId: NodeJS.Timeout;
@@ -188,6 +193,9 @@ onBeforeRouteLeave(() => {
 });
 
 const onCampusChange = async () => {
+  // 更新用户储存中的校区数据
+  saveSelectedCampusIndex(selectedCampusIndex.value);
+
   isLoadingIndicatorVisible.value = true;
   try {
     await statusStore.updateData(selectedCampus.value);
@@ -199,4 +207,15 @@ const onCampusChange = async () => {
     isLoadingIndicatorVisible.value = false;
   }
 };
+
+// 储存和读取用户侧储存的校区数据
+function saveSelectedCampusIndex(index: number) {
+  localStorage.setItem(CAMPUS_INDEX_STORAGE_KEY, index.toString());
+}
+
+function getSelectedCampusIndex(): number {
+  const storedIndex = localStorage.getItem(CAMPUS_INDEX_STORAGE_KEY);
+  const index = storedIndex ? parseInt(storedIndex, 10) : 0;
+  return index >= 0 && index < config.campuses.length ? index : 0;
+}
 </script>
