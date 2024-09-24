@@ -97,8 +97,6 @@ const selectedCampus = computed(
   () => config.campuses[selectedCampusIndex.value],
 );
 
-const CAMPUS_INDEX_STORAGE_KEY = 'selectedCampusIndex';
-
 let lastScrollY = 0;
 let intervalId: NodeJS.Timeout;
 
@@ -210,11 +208,11 @@ const onCampusChange = async () => {
 
 // 储存和读取用户侧储存的校区数据
 function saveSelectedCampusIndex(index: number) {
-  localStorage.setItem(CAMPUS_INDEX_STORAGE_KEY, index.toString());
+  localStorage.setItem(config.CAMPUS_INDEX_STORAGE_KEY, index.toString());
 }
 
 function getSelectedCampusIndex(): number {
-  const storedIndex = localStorage.getItem(CAMPUS_INDEX_STORAGE_KEY);
+  const storedIndex = localStorage.getItem(config.CAMPUS_INDEX_STORAGE_KEY);
   const index = storedIndex ? parseInt(storedIndex, 10) : 0;
   return index >= 0 && index < config.campuses.length ? index : 0;
 }

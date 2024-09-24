@@ -67,6 +67,9 @@ const config = {
     overlay: 1000,
   },
 
+  // 用于控制用户浏览器保存校区信息的 LocalStorage Key
+  CAMPUS_INDEX_STORAGE_KEY: 'selectedCampusIndex',
+
   /********** 链接 **********/
   tencentMapUrl:
     'https://apis.map.qq.com/tools/poimarker?' +
