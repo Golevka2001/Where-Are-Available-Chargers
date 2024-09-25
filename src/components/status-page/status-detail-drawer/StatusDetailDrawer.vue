@@ -19,6 +19,8 @@
       width: drawerWidth,
     }"
     :temporary="true"
+    :rail="true"
+    :rail-width="railWidth"
     color="background"
     location="right"
     class="pb-10"
@@ -82,6 +84,17 @@ const drawerWidth = computed(() => {
   } else {
     // 其他情况固定宽度
     return '450px';
+  }
+});
+
+// 与 drawerWidth 对应
+const railWidth = computed(() => {
+  if (width.value <= 360) {
+    return 240;
+  } else if (width.value <= 600) {
+    return width.value;
+  } else {
+    return 450;
   }
 });
 
