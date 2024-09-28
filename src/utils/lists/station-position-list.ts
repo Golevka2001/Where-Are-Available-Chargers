@@ -74,4 +74,10 @@ export const stationPositionList = [
     lat: 32.07616,
     lng: 118.775664,
   },
+  {
+    title: '日新楼前',
+    addr: '无锡国际校区体育馆东侧、日新楼南侧、网球场北侧',
+    lat: 31.470371,
+    lng: 120.260376,
+  },
 ];
