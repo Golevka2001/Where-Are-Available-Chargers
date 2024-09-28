@@ -2,7 +2,7 @@
 
 <template>
   <span class="d-flex">
-    <span style="font-size: 0.9rem"> 可用插座 </span>
+    <span style="font-size: 0.9rem; align-content: center"> 可用插座 </span>
     <span
       :style="{ color: availableCountTextColor }"
       class="ml-2"
@@ -16,7 +16,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useTheme } from 'vuetify';
-import config from '@/config';
 import { campusConfig } from '@/types/campus-config';
 
 const props = defineProps<{
