@@ -26,7 +26,7 @@
   >
     <span>
       数据由
-      <span class="text-decoration-underline"> 久安充电 </span>
+      <span class="text-decoration-underline">久安充电/中网充/太湖智行</span>
       &nbsp;提供，查询结果仅供参考
     </span>
   </div>
