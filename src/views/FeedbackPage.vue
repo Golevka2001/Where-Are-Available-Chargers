@@ -8,6 +8,7 @@
     height="100%"
     width="100%"
     style="border: 0; display: block"
+    referrerpolicy="no-referrer"
     @load="isIframeLoaded = true"
   ></iframe>
 </template>
