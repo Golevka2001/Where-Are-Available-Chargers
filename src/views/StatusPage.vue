@@ -22,6 +22,7 @@
       <v-btn-toggle
         v-model="selectedCampusIndex"
         mandatory
+        rounded="lg"
         class="mb-6"
         style="display: flex; width: 100%"
         @update:model-value="onCampusChange"

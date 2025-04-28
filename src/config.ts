@@ -3,10 +3,10 @@ import { campusConfig } from '@/types/campus-config';
 const config = {
   /********** 公告栏内容 **********/
   announcementBoard: {
-    enabled: false, // 是否启用公告栏
+    enabled: true, // 是否启用公告栏
     title: '维护提醒', // 标题（支持 HTML）
     content:
-      '2024年春节期间，在线查询（含API）与历史记录功能可能不可用，敬请谅解。', // 内容（支持 HTML）
+      '由于充电设施提供方变动，网站近期可能进入维护状态，届时将暂时下线九龙湖校区查询功能', // 内容（支持 HTML）
 
     color: 'orange', // 颜色
     variant: 'tonal' as
@@ -83,6 +83,8 @@ const config = {
   CAMPUS_INDEX_STORAGE_KEY: 'selectedCampusIndex',
 
   /********** 链接 **********/
+  tencentMapKey: import.meta.env.VITE_TENCENT_MAP_KEY, // 腾讯地图 API Key
+  tencentMapAppName: import.meta.env.VITE_TENCENT_MAP_APP_NAME, // 腾讯地图 API AppName
   tencentMapUrl:
     'https://apis.map.qq.com/tools/poimarker?' +
     'type=0' +
