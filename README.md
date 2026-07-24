@@ -1,235 +1,209 @@
-# :electric_plug::rage: Where Are Available Chargers ?!
+# :electric_plug::rage: Where Are Available Chargers
 
-- [:electric_plug::rage: Where Are Available Chargers ?!](#electric_plugrage-where-are-available-chargers-)
-  - [:page_facing_up: 简介](#page_facing_up-简介)
-  - [:rocket: 快速开始](#rocket-快速开始)
-    - [准备工作](#准备工作)
-    - [开发服务器，启动！](#开发服务器启动)
-    - [开发 \& 调试](#开发--调试)
-    - [构建](#构建)
-    - [部署](#部署)
-  - [:open_file_folder: 目录结构](#open_file_folder-目录结构)
-  - [:triangular_ruler: 开发规范](#triangular_ruler-开发规范)
-    - [提交相关](#提交相关)
-    - [UI 相关](#ui-相关)
-    - [代码风格相关](#代码风格相关)
-    - [依赖相关](#依赖相关)
-  - [:memo: Todo List](#memo-todo-list)
-  - [:lady_beetle: Bugs](#lady_beetle-bugs)
-  - [:book: API 文档](#book-api-文档)
-  - [:scroll: 使用许可](#scroll-使用许可)
+<https://chargers.dpdns.org> | <https://chargers.injs.eu>
 
 ## :page_facing_up: 简介
 
-<h4>
-  查询网址：
-  <a href="https://chargers.injs.eu" target="_blank">
-    https://chargers.injs.eu
-  </a>
-</h4>
+本项目开始于 2022 年 11 月，初衷是为了帮助 SEUers 更便捷地找到空闲充电桩，可在[关于页面](https://chargers.dpdns.org/about)查看更多信息。如果它对您有帮助的话，可以点击右上角的 ⭐Star 按钮，感谢您的支持 :tada::tada::tada:
 
-本项目开始于 2022 年 11 月，初衷是为了帮助 SEUers 更便捷地找到空闲充电桩，可在[关于页面](https://chargers.injs.eu/about)查看更多信息。如果它对您有帮助的话，可以点击右上角的 ⭐Star 按钮，感谢您的支持 :tada::tada::tada:
+当前版本为 _Version 5_
 
-当前版本为 _Version 5_，本分支中代码目前仅为前端部分（后续考虑合并后端）
+> [!IMPORTANT]
+> 目前校内充电桩已不紧缺，并且学校也在 "云游东南" 上线了查询服务。所以将此仓库归档，网站将继续运行
 
-此版本采用了**前后端分离**的架构，降低耦合度，便于未来功能的扩展和维护；服务端渲染改为**客户端渲染**（经典版页面出于兼容性考虑仍使用服务端渲染）
+![preview](README.assets/preview.png)
 
-前端所使用到的技术栈如下：
+## :building_construction: 架构
 
-<table style="text-align: center;">
-  <thead>
-    <tr>
-      <th>语言</th>
-      <th>框架</th>
-      <th>构建工具</th>
-      <th>UI 组件库</th>
-      <th>路由</th>
-      <th>状态管理</th>
-      <th>网络请求库</th>
-      <th>数据模拟</th>
-      <th>单元测试</th>
-    </tr>
+本项目采用前后端分离的架构，包含两个子应用：
 
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="https://www.typescriptlang.org/">TypeScript</a></td>
-      <td><a href="https://vuejs.org/">Vue.js</a></td>
-      <td><a href="https://vitejs.dev/">Vite</a></td>
-      <td><a href="https://vuetifyjs.com/">Vuetify</a></td>
-      <td><a href="https://router.vuejs.org/">Vue Router</a></td>
-      <td><a href="https://pinia.vuejs.org/">Pinia</a></td>
-      <td><a href="https://axios-http.com/">Axios</a></td>
-      <td><a href="http://mockjs.com/">Mock.js</a></td>
-      <td><a href="https://vitest.dev/">Vitest</a></td>
-    </tr>
-  </tbody>
-</table>
+| 应用     | 路径          | 技术栈                  | 功能                                               |
+| -------- | ------------- | ----------------------- | -------------------------------------------------- |
+| `web`    | `apps/web`    | Vue 3 + Vuetify + Pinia | 用户界面，充电桩状态查询、历史数据可视化、天气展示 |
+| `worker` | `apps/worker` | Cloudflare Workers      | 后端 API、数据采集调度、静态资源托管               |
 
-代码风格遵循 [Vue 风格指南](https://v2.cn.vuejs.org/v2/style-guide) 以及 Vue3 的 [组合式 API 风格](https://vuejs.org/guide/introduction.html#api-styles)，格式化工具使用 [Prettier](https://prettier.io/)
+### 数据流
 
----
+系统通过定时任务自动采集充电桩和天气数据，核心流程如下：
 
-:bulb: _以下内容更多面向开发者，如果您只是想使用查询功能，可直接从上方的[网址](https://chargers.injs.eu)进入_
+```mermaid
+flowchart TD
+    Cron["Cron"] --> Producer["Producer<br/>producer.ts"]
+    Producer --> Queue["Queue"]
 
----
+    Queue --> SYNC_CHARGER["SYNC_CHARGER"]
+    Queue --> SYNC_WEATHER["SYNC_WEATHER"]
 
-## :rocket: 快速开始
+    SYNC_CHARGER --> ZWC["供应商 API"]
+    SYNC_WEATHER --> QWeather["和风天气 API"]
 
-### 准备工作
+    ZWC --> KV_Status["KV - 充电桩状态实时快照"]
+    ZWC --> D1["D1 - 历史记录"]
 
-_注：需要使用 16.0 或更高版本的 [Node.js](https://nodejs.org/) 与 [Yarn](https://yarnpkg.com/) `^4.0.1`。_
+    QWeather --> KV_Weather["KV - 天气预报"]
+```
+
+### 部署架构
+
+Cloudflare Worker 同时承担 API 服务和静态资源托管：
+
+- `/api/*`、`/classic`、`/.well-known/*` 路由优先由 Worker 处理
+- 其余请求返回 `apps/web/dist` 中的静态文件，SPA 模式回退
+
+```plaintext
+Cloudflare Worker
+  ├── /api/*         -> Worker 逻辑（读取 KV/D1）
+  ├── /classic       -> SSR 渲染 HTML
+  ├── /.well-known/* -> Discovery 端点
+  └── /*             -> 静态资源 (web/dist)，SPA fallback
+```
+
+## :link: API 文档
+
+<https://chargers.dpdns.org/docs>
+
+## :cloud: 部署到 Cloudflare Workers
+
+### 1. 前端准备
 
 ```bash
-# 克隆到本地
-git clone git@github.com:Golevka2001/Where-Are-Available-Chargers.git && cd Where-Are-Available-Chargers
-
-# 检出分支
-git checkout dev
-
 # 安装依赖
-yarn install
+pnpm install  # 或其他包管理器
+
+# 准备环境变量，按实际情况填写（在后续构建时会注入到前端代码中）
+cp apps/web/.env.example apps/web/.env.production
 ```
 
-### 开发服务器，启动！
+### 2. 创建 KV、D1、Queue 资源
 
 ```bash
-yarn run dev
+cd apps/worker
 ```
 
-浏览器访问 <http://localhost:3000>
-
-### 开发 & 调试
-
-在 `src` 目录下进行组件、功能的开发
-
-目录说明请参考 [src 目录结构](#open_file_folder-src-目录结构)
-
-遵守 [开发规范](#triangular_ruler-开发规范) 以便于协作和后续的维护
-
-查看 [Todo List](#memo-todo-list) 以了解当前开发进度和规划，完成一部分工作后请及时更新，也可以向其中添加新的任务
-
-### 构建
+删除 [wrangler.jsonc](apps/worker/wrangler.jsonc) 中的 `kv_namespaces` 和 `d1_databases` 配置，然后执行以下命令：
 
 ```bash
-yarn run build
+wrangler kv namespace create seu-chargers-kv --update-config=true --binding=seu_chargers_kv
+wrangler d1 create seu-chargers-d1 --update-config=true --binding=seu_chargers_d1
+wrangler d1 execute seu-chargers-d1 --remote --file=./schema.sql
+wrangler queues create seu-chargers-queue
 ```
 
-构建后的文件位于 `dist` 目录下，请不要提交该目录下的文件到仓库
+命令将自动更新 [wrangler.jsonc](apps/worker/wrangler.jsonc) 中的配置。
 
-如需在本地预览构建后的应用，可以执行以下命令：
+### 3. 配置 Secrets
 
 ```bash
-yarn run preview
+wrangler secret put ZWC_API_URL # 供应商接口（中网充）
+wrangler secret put WEATHER_API_URL # 和风天气接口
+wrangler secret put WEATHER_API_KEY # 和风天气 API Key
 ```
 
-浏览器访问 <http://localhost:4173>
+如果没有在 Cloudflare 配置对 ZWC_API_URL 的代理和访问控制，则**不需要**填写以下 CF Access 的 Client ID 和 Client Secret：
 
-### 部署
+```bash
+wrangler secret put CF_ACCESS_CLIENT_ID
+wrangler secret put CF_ACCESS_CLIENT_SECRET
+```
 
-部署到生产环境时，`Mock` 将会被自动禁用，数据将从后端获取
+充电桩和天气数据的拉取频率由 cron 表达式控制，修改 [wrangler.jsonc](apps/worker/wrangler.jsonc) 中的 `triggers.crons` 即可。经典页面中「访问主站」的跳转地址在 `vars.MAIN_SITE_URL` 中配置。
 
-需要配置环境变量 `VITE_API_URL`，指向后端 API 的地址
+### 4. 部署 Worker
 
-## :open_file_folder: 目录结构
+回到项目根目录，执行：
 
-- `mock/`：模拟后端返回数据（仅用于开发环境，尽可能模拟各种情况）
-- `src/`
-  - `apis/`：网络请求、获取数据（目前包含 `充电桩状态` 和 `天气预报`）
-  - `assets/`：在构建时参与打包的静态资源
-  - `components/`
-    - `global/`：可能全局使用的组件
-    - `layouts/`：页面布局相关的组件
-    - `xxx-page/`：特定页面使用的组件
-  - `layouts/`：页面布局、框架
-  - `plugins/`：插件的引入和注册
-  - `router/`：路由配置
-  - `store/`：状态管理
-  - `types/`：类型定义
-  - `views/`：页面
+```bash
+pnpm deploy
+```
 
-## :triangular_ruler: 开发规范
+会构建前端（产物在 `apps/web/dist`）并部署 Worker
 
-### 提交相关
+### 5. 帮助
 
-- 提交代码到远程仓库前，请执行以下检查：
-  - **执行 `yarn run build` 检查构建是否成功【重要】**
-  - 执行 `yarn run lint` 检查代码风格
-  - 执行 `yarn run format` 格式化代码
-- Commit message 推荐遵循 [Angular 提交规范](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)，使用 `<Type> | <Subject>` 的格式，例如：
-  - `Feat | Add a progress linear`
-  - `Fix | Incorrect judgment in status page`
-  - `Docs | Update todo list in README`
+- 如果需要手动触发，可以到 `Queues` - `消息` - `发送消息`，内容类型选 JSON，正文填写：
+  - `{ "type": "SYNC_CHARGER" }` - 触发拉取充电桩状态数据
+  - `{ "type": "SYNC_WEATHER" }` - 触发拉取天气预报数据
+- 上游供应商 API 若为 IP 而非域名时，拉取时可能会被 Cloudflare 阻止。可以通过添加 DNS 解析来解决，为避免滥用，建议配置访问控制
 
-### UI 相关
+## :hammer_and_wrench: 开发
 
-- 尽可能使用 Vuetify 提供的 UI 组件，少造轮子
-- 优先使用 Vuetify 提供的工具类来定义样式（类似 Tailwind，查阅 Vuetify 文档的 `Styles and animations` 部分），更细粒度的样式直接在 HTML 的 `style` 属性中定义
-- 图标优先使用 [Material Design Icons](https://materialdesignicons.com/)，为减小体积，请在组件中按需从 `@mdi/js` 中引入，具体方式见 [Vuetify 文档](https://vuetifyjs.com/features/icon-fonts/#mdi-js-svg)
-- 适当拆分 Vue 组件，避免单个组件过于臃肿
-- 布局框架放在 `layouts` 目录下，而其中的组件（如：Bar、Footer）放在 `components/app` 目录下；页面（如：StatusPage、AboutPage）放在 `views` 目录下；页面中使用到的组件放在 `components` 目录下
+### 前端环境变量
 
-### 代码风格相关
+复制 `apps/web/.env.example` 为 `apps/web/.env.local`，按需填写：
 
-- 单文件组件、类型名：`PascalCase`；变量、函数、方法名：`camelCase`；TypeScript 文件名：`kebab-case`...
-- 组件的模板中适当添加注释，指明用途、划分边界
-- 推荐使用 Vue3 的组合式 API 和其他较新的语法
+| 变量                        | 默认值                               | 说明                                                                            |
+| --------------------------- | ------------------------------------ | ------------------------------------------------------------------------------- |
+| `VITE_USE_MOCK`             | `false`                              | 设为 `true` 启用前端 Mock 数据，无需启动后端                                    |
+| `VITE_API_URL`              | `/api`                               | 后端 API 地址。开发环境走 proxy 不需要填；跨域部署时填写完整地址                |
+| `VITE_TENCENT_MAP_KEY`      | —                                    | 腾讯位置服务 API Key（[申请](https://lbs.qq.com/dev/console/application/mine)） |
+| `VITE_TENCENT_MAP_APP_NAME` | —                                    | 腾讯位置服务 AppName                                                            |
+| `VITE_SURVEY_URL`           | —                                    | 反馈问卷地址                                                                    |
+| `VITE_CONTACT_EMAIL`        | —                                    | 联系邮箱                                                                        |
+| `VITE_CLASSIC_VER_URL`      | `https://chargers.dpdns.org/classic` | 旧版页面地址                                                                    |
+| `VITE_SITE_URL`             | `https://chargers.dpdns.org`         | 当前本站地址（分享菜单用）                                                      |
 
-### 依赖相关
+未填写的变量会使用 `src/config.ts` 中的默认值。开发环境下前端会自动缩短轮询间隔（5 秒刷新、2 秒检查后端更新），便于调试。
 
-- 添加新依赖时，注意区分在开发环境用（-D）还是生产环境用（-S）
-- 需要全局使用的插件统一在 `@/plugins/index.ts` 中引入并注册（如：Vuetify、Pinia 等）；而使用频率较低的插件推荐在组件中按需引入（如：V-Viewer 等）
-- 当前开发阶段暂时不锁版本，等基本功能完成后再添加 `package-lock.json`
+如果需要连接后端服务，处理跨域问题，可以在 `vite.config.ts` 中配置代理：
 
-## :memo: Todo List
+```ts
+server: {
+  proxy: {
+    '/api': {
+      target: '<backend-url>',
+      ...
+    },
+  },
+},
+```
 
-_注：并非按照优先级排序_
+### 后端环境变量
 
-- [x] 整体布局
+在 `apps/worker/wrangler.jsonc` 的 `vars` 中配置（明文）
 
-  - [x] 主题切换 & 自动检测
-  - [x] 模拟进度条
-  - [x] 分享菜单
-  - [x] 旧版本跳转
-  - [ ] 多语言支持【待定】
+| 变量            | 默认值                                                           | 说明                                                         |
+| --------------- | ---------------------------------------------------------------- | ------------------------------------------------------------ |
+| `USE_MOCK`      | —                                                                | 设为 `true` 时充电桩同步使用本地 mock 数据，不调用供应商 API |
+| `ZWC_API_URL`   | `https://zwc-backend.chargers.dpdns.org/getProductByDndx.action` | 供应商 API 地址                                              |
+| `MAIN_SITE_URL` | `/`                                                              | 经典页面「访问主站」的跳转地址                               |
 
-- [x] 状态页面
+需要通过 `wrangler secret put` 设置的敏感配置（见部署章节）：
 
-  - [x] 状态概览
-  - [x] 状态详情
-  - [x] 天气预报
-  - [x] 自动刷新
-  - [x] 数据过期提醒 & 刷新按钮
-  - [x] 位置描述 & 标号顺序提示
-  - [x] 跳转到地图页面
-  - [x] “仅供参考” 免责声明
-  - [x] 预留公告栏
+| 变量                      | 说明                                    |
+| ------------------------- | --------------------------------------- |
+| `WEATHER_API_URL`         | 和风天气 API 地址                       |
+| `WEATHER_API_KEY`         | 和风天气 API Key                        |
+| `CF_ACCESS_CLIENT_ID`     | （可选）Cloudflare Access Client ID     |
+| `CF_ACCESS_CLIENT_SECRET` | （可选）Cloudflare Access Client Secret |
 
-- [x] 位置图示页面
+通过以下命令可以在本地触发定时任务：
 
-- [x] 地图页面
+```bash
+curl "http://localhost:8787/cdn-cgi/handler/scheduled"
+```
 
-  - [x] 回到首页
-  - [x] 快速切换充电站
-  - [ ] 定位【待定】
+### 前后端联调
 
-- [x] 错误页面
+如果需要同时启动前后端进行联调，可以在两个终端分别执行：
 
-- [x] 关于页面
+```bash
+# 终端 1：启动后端（Cloudflare Workers 本地开发服务器，端口 8787）
+pnpm dev:worker
 
-- [ ] 文档页面
+# 终端 2：启动前端（端口 3000）
+pnpm dev:web
+```
 
-- [ ] 历史数据页面【待定】
+Vite 已内置 proxy 配置，开发时 `/api` 请求自动转发到 `http://localhost:8787`，无需额外设置。
 
-## :lady_beetle: Bugs
+### 代码规范
 
-- 在微信的 Webview 中，弹出抽屉（包括 `侧栏菜单` 和 `详细状态`）会导致页面立即滚动到顶部
-- 首次加载时，页面跳转会卡在 Loading，页面内容（如 `img`、`iframe`）不加载或不触发 `load` 事件
-- 问卷的 Placeholder 不换行，导致宽度不够时显示不全（应该是嵌入 iframe 的问题）
-
-## :book: API 文档
-
-临时文档： <https://app.swaggerhub.com/apis/Golevka2001/where-are-available-chargers-api/5.0.0>
+```bash
+pnpm lint:web     # 前端 lint
+pnpm lint:worker  # 后端 lint
+pnpm format:web   # 前端格式化
+pnpm format:worker # 后端格式化
+```
 
 ## :scroll: 使用许可
 
@@ -237,8 +211,7 @@ _注：并非按照优先级排序_
 
 [GNU AFFERO GENERAL PUBLIC LICENSE, Version 3](https://www.gnu.org/licenses/agpl-3.0.html)
 
-```
-
+```plaintext
 Copyright (C) 2022 - Present Gol3vka, Csimide, and other contributors
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -246,11 +219,10 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
-
 ```
 
-- `public/favicon.svg` 来自 [Google Fonts - Noto Emoji](https://github.com/googlefonts/noto-emoji)，该项目的 Emoji 图像按 [Apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0) 授权。
+- `apps/web/public/favicon.svg` 来自 [Google Fonts - Noto Emoji](https://github.com/googlefonts/noto-emoji)，该项目的 Emoji 图像按 [Apache license, version 2.0](http://www.apache.org/licenses/LICENSE-2.0) 授权。
 
-- `public/apple-touch-icon.png` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
+- `apps/web/public/apple-touch-icon.png` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
 
-- `public/img/illustration.webp` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。
+- `apps/web/public/img/illustration.webp` 采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可证。

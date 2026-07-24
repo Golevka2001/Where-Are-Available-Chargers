@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8" />
+  <title>Where Are Available Chargers API</title>
+  <!-- needed for adaptive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script src="https://cdn.redocly.com/redoc/v2.5.3/bundles/redoc.standalone.js" integrity="sha384-xiEssMQFSpSfLbzRZCGfxxIM5QDb2DTrU6vyoZdp2sV1L6pmOMy6MpTtUoLbpC96" crossorigin="anonymous"></script><style data-styled="true" data-styled-version="6.4.2">.kktglN{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.kktglN{width:100%;padding:40px 40px;}}/*!sc*/
+.kmAAAV{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.kmAAAV{width:100%;padding:0px 40px;}}/*!sc*/
+data-styled.g5[id="sc-hKVpXn"]{content:"kktglN,kmAAAV,"}/*!sc*/
+.jleRXN{padding:40px 0;}/*!sc*/
+.jleRXN:last-child{min-height:calc(100vh + 1px);}/*!sc*/
+.jleRXN>.jleRXN:last-child{min-height:initial;}/*!sc*/
+@media print,screen and (max-width: 75rem){.jleRXN{padding:0;}}/*!sc*/
+.grDwca{padding:40px 0;position:relative;}/*!sc*/
+.grDwca:last-child{min-height:calc(100vh + 1px);}/*!sc*/
+.grDwca>.grDwca:last-child{min-height:initial;}/*!sc*/
+@media print,screen and (max-width: 75rem){.grDwca{padding:0;}}/*!sc*/
+.grDwca:not(:last-of-type):after{position:absolute;bottom:0;width:100%;display:block;content:'';border-bottom:1px solid rgba(0, 0, 0, 0.2);}/*!sc*/
+data-styled.g6[id="sc-eCQgVK"]{content:"jleRXN,grDwca,"}/*!sc*/
+.fpMlmc{width:40%;color:#ffffff;background-color:#263238;padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.fpMlmc{width:100%;padding:40px 40px;}}/*!sc*/
+data-styled.g7[id="sc-jSppWd"]{content:"fpMlmc,"}/*!sc*/
+.bdQQyo{background-color:#263238;}/*!sc*/
+data-styled.g8[id="sc-gKkgUA"]{content:"bdQQyo,"}/*!sc*/
+.lhRBUS{display:flex;width:100%;padding:0;}/*!sc*/
+@media print,screen and (max-width: 75rem){.lhRBUS{flex-direction:column;}}/*!sc*/
+data-styled.g9[id="sc-iCECmn"]{content:"lhRBUS,"}/*!sc*/
+.eRMVDe{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#333333;}/*!sc*/
+data-styled.g10[id="sc-fuztkK"]{content:"eRMVDe,"}/*!sc*/
+.MOVBZ{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;margin:0 0 20px;}/*!sc*/
+data-styled.g11[id="sc-qdQOe"]{content:"MOVBZ,"}/*!sc*/
+.iSbGeC{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.27em;line-height:1.6em;color:#333333;}/*!sc*/
+data-styled.g12[id="sc-jrIDTr"]{content:"iSbGeC,"}/*!sc*/
+.iamDfj{color:#ffffff;}/*!sc*/
+data-styled.g13[id="sc-kEbgWM"]{content:"iamDfj,"}/*!sc*/
+.kcvrhp{border-bottom:1px solid rgba(38, 50, 56, 0.3);margin:1em 0 1em 0;color:rgba(38, 50, 56, 0.5);font-weight:normal;text-transform:uppercase;font-size:0.929em;line-height:20px;}/*!sc*/
+data-styled.g14[id="sc-iqkkDd"]{content:"kcvrhp,"}/*!sc*/
+.jmoZom{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.jmoZom:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+h1:hover>.jmoZom::before,h2:hover>.jmoZom::before,.jmoZom:hover::before{visibility:visible;}/*!sc*/
+data-styled.g15[id="sc-crPgjm"]{content:"jmoZom,"}/*!sc*/
+.kdgFPv{height:18px;width:18px;min-width:18px;vertical-align:middle;float:right;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.gngmNp{height:1.5em;width:1.5em;min-width:1.5em;vertical-align:middle;float:left;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.gngmNp polygon{fill:#1d8127;}/*!sc*/
+.bQKUih{height:20px;width:20px;min-width:20px;vertical-align:middle;float:right;transition:transform 0.2s ease-out;transform:rotateZ(0);}/*!sc*/
+.bQKUih polygon{fill:white;}/*!sc*/
+.hJoFRR{height:1.5em;width:1.5em;min-width:1.5em;vertical-align:middle;float:left;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.hJoFRR polygon{fill:#d41f1c;}/*!sc*/
+data-styled.g16[id="sc-dYjPD"]{content:"kdgFPv,gngmNp,bQKUih,hJoFRR,"}/*!sc*/
+.jFNAwF{border-left:1px solid #7c7cbb;box-sizing:border-box;position:relative;padding:10px 10px 10px 0;}/*!sc*/
+@media screen and (max-width: 50rem){.jFNAwF{display:block;overflow:hidden;}}/*!sc*/
+tr:first-of-type>.jFNAwF,tr.last>.jFNAwF{border-left-width:0;background-position:top left;background-repeat:no-repeat;background-size:1px 100%;}/*!sc*/
+tr:first-of-type>.jFNAwF{background-image:linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 22px,
+      #7c7cbb 22px,
+      #7c7cbb 100%
+    );}/*!sc*/
+tr.last>.jFNAwF{background-image:linear-gradient(
+      to bottom,
+      #7c7cbb 0%,
+      #7c7cbb 22px,
+      transparent 22px,
+      transparent 100%
+    );}/*!sc*/
+tr.last+tr>.jFNAwF{border-left-color:transparent;}/*!sc*/
+tr.last:first-child>.jFNAwF{background:none;border-left-color:transparent;}/*!sc*/
+data-styled.g19[id="sc-hCcPtG"]{content:"jFNAwF,"}/*!sc*/
+.lcdEEX{vertical-align:top;line-height:20px;white-space:nowrap;font-size:13px;font-family:Courier,monospace;}/*!sc*/
+.lcdEEX.deprecated{text-decoration:line-through;color:#707070;}/*!sc*/
+data-styled.g21[id="sc-fFCZOx"]{content:"lcdEEX,"}/*!sc*/
+.gLpZiQ{border-bottom:1px solid #9fb4be;padding:10px 0;width:75%;box-sizing:border-box;}/*!sc*/
+tr.expanded .gLpZiQ{border-bottom:none;}/*!sc*/
+@media screen and (max-width: 50rem){.gLpZiQ{padding:0 20px;border-bottom:none;border-left:1px solid #7c7cbb;}tr.last>.gLpZiQ{border-left:none;}}/*!sc*/
+data-styled.g22[id="sc-bjLslk"]{content:"gLpZiQ,"}/*!sc*/
+.kkMuqc{color:#7c7cbb;font-family:Courier,monospace;margin-right:10px;}/*!sc*/
+.kkMuqc::before{content:'';display:inline-block;vertical-align:middle;width:10px;height:1px;background:#7c7cbb;}/*!sc*/
+.kkMuqc::after{content:'';display:inline-block;vertical-align:middle;width:1px;background:#7c7cbb;height:7px;}/*!sc*/
+data-styled.g23[id="sc-ieCSdj"]{content:"kkMuqc,"}/*!sc*/
+.bsjUmE{border-collapse:separate;border-radius:3px;font-size:14px;border-spacing:0;width:100%;}/*!sc*/
+.bsjUmE >tr{vertical-align:middle;}/*!sc*/
+@media screen and (max-width: 50rem){.bsjUmE{display:block;}.bsjUmE >tr,.bsjUmE >tbody>tr{display:block;}}/*!sc*/
+@media screen and (max-width: 50rem) and (-ms-high-contrast:none){.bsjUmE td{float:left;width:100%;}}/*!sc*/
+.bsjUmE .sc-dILkzW,.bsjUmE .sc-dILkzW .sc-dILkzW .sc-dILkzW,.bsjUmE .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW{margin:1em;margin-right:0;background:#fafafa;}/*!sc*/
+.bsjUmE .sc-dILkzW .sc-dILkzW,.bsjUmE .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW,.bsjUmE .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW{background:#ffffff;}/*!sc*/
+data-styled.g25[id="sc-hHopjF"]{content:"bsjUmE,"}/*!sc*/
+.kibfTX >ul{list-style:none;padding:0;margin:0;margin:0 -5px;}/*!sc*/
+.kibfTX >ul >li{padding:5px 10px;display:inline-block;background-color:#11171a;border-bottom:1px solid rgba(0, 0, 0, 0.5);cursor:pointer;text-align:center;outline:none;color:#ccc;margin:0 5px 5px 5px;border:1px solid #07090b;border-radius:5px;min-width:60px;font-size:0.9em;font-weight:bold;}/*!sc*/
+.kibfTX >ul >li.react-tabs__tab--selected{color:#333333;background:#ffffff;}/*!sc*/
+.kibfTX >ul >li.react-tabs__tab--selected:focus{outline:auto;}/*!sc*/
+.kibfTX >ul >li:only-child{flex:none;min-width:100px;}/*!sc*/
+.kibfTX >ul >li.tab-success{color:#1d8127;}/*!sc*/
+.kibfTX >ul >li.tab-redirect{color:#ffa500;}/*!sc*/
+.kibfTX >ul >li.tab-info{color:#87ceeb;}/*!sc*/
+.kibfTX >ul >li.tab-error{color:#d41f1c;}/*!sc*/
+.kibfTX >.react-tabs__tab-panel{background:#11171a;}/*!sc*/
+.kibfTX >.react-tabs__tab-panel>div,.kibfTX >.react-tabs__tab-panel>pre{padding:20px;margin:0;}/*!sc*/
+.kibfTX >.react-tabs__tab-panel>div>pre{padding:0;}/*!sc*/
+data-styled.g31[id="sc-cxxQMU"]{content:"kibfTX,"}/*!sc*/
+.fiNpIH code[class*='language-'],.fiNpIH pre[class*='language-']{text-shadow:0 -0.1em 0.2em black;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;}/*!sc*/
+@media print{.fiNpIH code[class*='language-'],.fiNpIH pre[class*='language-']{text-shadow:none;}}/*!sc*/
+.fiNpIH pre[class*='language-']{padding:1em;margin:0.5em 0;overflow:auto;}/*!sc*/
+.fiNpIH .token.comment,.fiNpIH .token.prolog,.fiNpIH .token.doctype,.fiNpIH .token.cdata{color:hsl(30, 20%, 50%);}/*!sc*/
+.fiNpIH .token.punctuation{opacity:0.7;}/*!sc*/
+.fiNpIH .namespace{opacity:0.7;}/*!sc*/
+.fiNpIH .token.property,.fiNpIH .token.tag,.fiNpIH .token.number,.fiNpIH .token.constant,.fiNpIH .token.symbol{color:#4a8bb3;}/*!sc*/
+.fiNpIH .token.boolean{color:#e64441;}/*!sc*/
+.fiNpIH .token.selector,.fiNpIH .token.attr-name,.fiNpIH .token.string,.fiNpIH .token.char,.fiNpIH .token.builtin,.fiNpIH .token.inserted{color:#a0fbaa;}/*!sc*/
+.fiNpIH .token.selector+a,.fiNpIH .token.attr-name+a,.fiNpIH .token.string+a,.fiNpIH .token.char+a,.fiNpIH .token.builtin+a,.fiNpIH .token.inserted+a,.fiNpIH .token.selector+a:visited,.fiNpIH .token.attr-name+a:visited,.fiNpIH .token.string+a:visited,.fiNpIH .token.char+a:visited,.fiNpIH .token.builtin+a:visited,.fiNpIH .token.inserted+a:visited{color:#4ed2ba;text-decoration:underline;}/*!sc*/
+.fiNpIH .token.property.string{color:white;}/*!sc*/
+.fiNpIH .token.operator,.fiNpIH .token.entity,.fiNpIH .token.url,.fiNpIH .token.variable{color:hsl(40, 90%, 60%);}/*!sc*/
+.fiNpIH .token.atrule,.fiNpIH .token.attr-value,.fiNpIH .token.keyword{color:hsl(350, 40%, 70%);}/*!sc*/
+.fiNpIH .token.regex,.fiNpIH .token.important{color:#e90;}/*!sc*/
+.fiNpIH .token.important,.fiNpIH .token.bold{font-weight:bold;}/*!sc*/
+.fiNpIH .token.italic{font-style:italic;}/*!sc*/
+.fiNpIH .token.entity{cursor:help;}/*!sc*/
+.fiNpIH .token.deleted{color:red;}/*!sc*/
+data-styled.g33[id="sc-iJSMbW"]{content:"fiNpIH,"}/*!sc*/
+.dzKJV{opacity:0.7;transition:opacity 0.3s ease;text-align:right;}/*!sc*/
+.dzKJV:focus-within{opacity:1;}/*!sc*/
+.dzKJV >button{background-color:transparent;border:0;color:inherit;padding:2px 10px;font-family:Roboto,sans-serif;font-size:14px;line-height:1.5em;cursor:pointer;outline:0;}/*!sc*/
+.dzKJV >button :hover,.dzKJV >button :focus{background:rgba(255, 255, 255, 0.1);}/*!sc*/
+data-styled.g34[id="sc-giQkEn"]{content:"dzKJV,"}/*!sc*/
+.iOXjCz{position:relative;}/*!sc*/
+data-styled.g38[id="sc-kLEbxe"]{content:"iOXjCz,"}/*!sc*/
+.ewCFMV{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.ewCFMV p:last-child{margin-bottom:0;}/*!sc*/
+.ewCFMV h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.ewCFMV h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.ewCFMV code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.ewCFMV pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.ewCFMV pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.ewCFMV pre code:before,.ewCFMV pre code:after{content:none;}/*!sc*/
+.ewCFMV blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.ewCFMV img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.ewCFMV ul,.ewCFMV ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.ewCFMV ul ul,.ewCFMV ol ul,.ewCFMV ul ol,.ewCFMV ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.ewCFMV table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.ewCFMV table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.ewCFMV table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.ewCFMV table th,.ewCFMV table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.ewCFMV table th{text-align:left;font-weight:bold;}/*!sc*/
+.ewCFMV .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.ewCFMV .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.ewCFMV h1:hover>.share-link::before,.ewCFMV h2:hover>.share-link::before,.ewCFMV .share-link:hover::before{visibility:visible;}/*!sc*/
+.ewCFMV a{text-decoration:auto;color:#32329f;}/*!sc*/
+.ewCFMV a:visited{color:#32329f;}/*!sc*/
+.ewCFMV a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+.dNfUH{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.dNfUH p:last-child{margin-bottom:0;}/*!sc*/
+.dNfUH p:first-child{margin-top:0;}/*!sc*/
+.dNfUH p:last-child{margin-bottom:0;}/*!sc*/
+.dNfUH p{display:inline-block;}/*!sc*/
+.dNfUH h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.dNfUH h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.dNfUH code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.dNfUH pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.dNfUH pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.dNfUH pre code:before,.dNfUH pre code:after{content:none;}/*!sc*/
+.dNfUH blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.dNfUH img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.dNfUH ul,.dNfUH ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.dNfUH ul ul,.dNfUH ol ul,.dNfUH ul ol,.dNfUH ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.dNfUH table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.dNfUH table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.dNfUH table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.dNfUH table th,.dNfUH table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.dNfUH table th{text-align:left;font-weight:bold;}/*!sc*/
+.dNfUH .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.dNfUH .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.dNfUH h1:hover>.share-link::before,.dNfUH h2:hover>.share-link::before,.dNfUH .share-link:hover::before{visibility:visible;}/*!sc*/
+.dNfUH a{text-decoration:auto;color:#32329f;}/*!sc*/
+.dNfUH a:visited{color:#32329f;}/*!sc*/
+.dNfUH a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+.bAoMjv{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.bAoMjv p:last-child{margin-bottom:0;}/*!sc*/
+.bAoMjv p:first-child{margin-top:0;}/*!sc*/
+.bAoMjv p:last-child{margin-bottom:0;}/*!sc*/
+.bAoMjv h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.bAoMjv h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.bAoMjv code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.bAoMjv pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.bAoMjv pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.bAoMjv pre code:before,.bAoMjv pre code:after{content:none;}/*!sc*/
+.bAoMjv blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.bAoMjv img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.bAoMjv ul,.bAoMjv ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.bAoMjv ul ul,.bAoMjv ol ul,.bAoMjv ul ol,.bAoMjv ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.bAoMjv table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.bAoMjv table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.bAoMjv table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.bAoMjv table th,.bAoMjv table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.bAoMjv table th{text-align:left;font-weight:bold;}/*!sc*/
+.bAoMjv .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.bAoMjv .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.bAoMjv h1:hover>.share-link::before,.bAoMjv h2:hover>.share-link::before,.bAoMjv .share-link:hover::before{visibility:visible;}/*!sc*/
+.bAoMjv a{text-decoration:auto;color:#32329f;}/*!sc*/
+.bAoMjv a:visited{color:#32329f;}/*!sc*/
+.bAoMjv a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+data-styled.g43[id="sc-cBEgGa"]{content:"ewCFMV,dNfUH,bAoMjv,"}/*!sc*/
+.dDDioG{display:inline;}/*!sc*/
+data-styled.g44[id="sc-ciCrSJ"]{content:"dDDioG,"}/*!sc*/
+.feYhXE{position:relative;}/*!sc*/
+data-styled.g45[id="sc-jcgtOs"]{content:"feYhXE,"}/*!sc*/
+.hHzuQA:hover>.sc-giQkEn{opacity:1;}/*!sc*/
+data-styled.g50[id="sc-cTZdpT"]{content:"hHzuQA,"}/*!sc*/
+.jgTAJz{font-family:Courier,monospace;font-size:13px;white-space:pre;contain:content;overflow-x:auto;}/*!sc*/
+.jgTAJz .redoc-json code>.collapser{display:none;pointer-events:none;}/*!sc*/
+.jgTAJz .callback-function{color:gray;}/*!sc*/
+.jgTAJz .collapser:after{content:'-';cursor:pointer;}/*!sc*/
+.jgTAJz .collapsed>.collapser:after{content:'+';cursor:pointer;}/*!sc*/
+.jgTAJz .ellipsis:after{content:' … ';}/*!sc*/
+.jgTAJz .collapsible{margin-left:2em;}/*!sc*/
+.jgTAJz .hoverable{padding-top:1px;padding-bottom:1px;padding-left:2px;padding-right:2px;border-radius:2px;}/*!sc*/
+.jgTAJz .hovered{background-color:rgba(235, 238, 249, 1);}/*!sc*/
+.jgTAJz .collapser{background-color:transparent;border:0;color:#fff;font-family:Courier,monospace;font-size:13px;padding-right:6px;padding-left:6px;padding-top:0;padding-bottom:0;display:flex;align-items:center;justify-content:center;width:15px;height:15px;position:absolute;top:4px;left:-1.5em;cursor:default;user-select:none;-webkit-user-select:none;padding:2px;}/*!sc*/
+.jgTAJz .collapser:focus{outline-color:#fff;outline-style:dotted;outline-width:1px;}/*!sc*/
+.jgTAJz ul{list-style-type:none;padding:0px;margin:0px 0px 0px 26px;}/*!sc*/
+.jgTAJz li{position:relative;display:block;}/*!sc*/
+.jgTAJz .hoverable{display:inline-block;}/*!sc*/
+.jgTAJz .selected{outline-style:solid;outline-width:1px;outline-style:dotted;}/*!sc*/
+.jgTAJz .collapsed>.collapsible{display:none;}/*!sc*/
+.jgTAJz .ellipsis{display:none;}/*!sc*/
+.jgTAJz .collapsed>.ellipsis{display:inherit;}/*!sc*/
+data-styled.g51[id="sc-jNDflC"]{content:"jgTAJz,"}/*!sc*/
+.kgKexQ{padding:0.9em;background-color:rgba(38,50,56,0.4);margin:0 0 10px 0;display:block;font-family:Montserrat,sans-serif;font-size:0.929em;line-height:1.5em;}/*!sc*/
+data-styled.g52[id="sc-dPqFhK"]{content:"kgKexQ,"}/*!sc*/
+.BuCyN{font-family:Montserrat,sans-serif;font-size:12px;position:absolute;z-index:1;top:-11px;left:12px;font-weight:600;color:rgba(255,255,255,0.7);}/*!sc*/
+data-styled.g53[id="sc-bBzIOb"]{content:"BuCyN,"}/*!sc*/
+.bMFMGt{position:relative;}/*!sc*/
+data-styled.g54[id="sc-cNSlRw"]{content:"bMFMGt,"}/*!sc*/
+.jUCYlq{margin-top:15px;}/*!sc*/
+data-styled.g57[id="sc-hUheUT"]{content:"jUCYlq,"}/*!sc*/
+.jMRTsl{vertical-align:middle;font-size:13px;line-height:20px;}/*!sc*/
+data-styled.g59[id="sc-gSILEF"]{content:"jMRTsl,"}/*!sc*/
+.NncTE{color:rgba(102,102,102,0.9);}/*!sc*/
+data-styled.g60[id="sc-lbpDNm"]{content:"NncTE,"}/*!sc*/
+.kUjPnZ{color:#666;}/*!sc*/
+data-styled.g61[id="sc-iNyHtD"]{content:"kUjPnZ,"}/*!sc*/
+.dHYagA{color:#d41f1c;font-size:0.9em;font-weight:normal;margin-left:20px;line-height:1;}/*!sc*/
+data-styled.g63[id="sc-eIYgEQ"]{content:"dHYagA,"}/*!sc*/
+.OXDYs{border-radius:2px;word-break:break-word;background-color:rgba(51,51,51,0.05);color:rgba(51,51,51,0.9);padding:0 5px;border:1px solid rgba(51,51,51,0.1);font-family:Courier,monospace;}/*!sc*/
+.sc-lbFCLI+.sc-lbFCLI{margin-left:0;}/*!sc*/
+data-styled.g67[id="sc-lbFCLI"]{content:"OXDYs,"}/*!sc*/
+.cBgvIi{margin-top:0;margin-bottom:0.5em;}/*!sc*/
+data-styled.g93[id="sc-ctiVdb"]{content:"cBgvIi,"}/*!sc*/
+.iVyheB{overflow:hidden;}/*!sc*/
+data-styled.g96[id="sc-gILgRS"]{content:"iVyheB,"}/*!sc*/
+.juJQo{display:flex;flex-wrap:wrap;margin-left:-15px;}/*!sc*/
+data-styled.g97[id="sc-euUkyj"]{content:"juJQo,"}/*!sc*/
+.jjsIAS{width:9ex;display:inline-block;height:13px;line-height:13px;background-color:#333;border-radius:3px;background-repeat:no-repeat;background-position:6px 4px;font-size:7px;font-family:Verdana,sans-serif;color:white;text-transform:uppercase;text-align:center;font-weight:bold;vertical-align:middle;margin-right:6px;margin-top:2px;}/*!sc*/
+.jjsIAS.get{background-color:#2F8132;}/*!sc*/
+.jjsIAS.post{background-color:#186FAF;}/*!sc*/
+.jjsIAS.put{background-color:#95507c;}/*!sc*/
+.jjsIAS.options{background-color:#947014;}/*!sc*/
+.jjsIAS.patch{background-color:#bf581d;}/*!sc*/
+.jjsIAS.delete{background-color:#cc3333;}/*!sc*/
+.jjsIAS.basic{background-color:#707070;}/*!sc*/
+.jjsIAS.link{background-color:#07818F;}/*!sc*/
+.jjsIAS.head{background-color:#A23DAD;}/*!sc*/
+.jjsIAS.hook{background-color:#32329f;}/*!sc*/
+.jjsIAS.schema{background-color:#707070;}/*!sc*/
+data-styled.g101[id="sc-XpSrr"]{content:"jjsIAS,"}/*!sc*/
+.dqIuaF{margin:0;padding:0;}/*!sc*/
+.dqIuaF:first-child{padding-bottom:32px;}/*!sc*/
+.sc-ilnrqe .sc-ilnrqe{font-size:0.929em;}/*!sc*/
+.gTfiRs{margin:0;padding:0;display:none;}/*!sc*/
+.gTfiRs:first-child{padding-bottom:32px;}/*!sc*/
+.sc-ilnrqe .sc-ilnrqe{font-size:0.929em;}/*!sc*/
+data-styled.g102[id="sc-ilnrqe"]{content:"dqIuaF,gTfiRs,"}/*!sc*/
+.cQETmj{list-style:none inside none;overflow:hidden;text-overflow:ellipsis;padding:0;}/*!sc*/
+data-styled.g103[id="sc-uMZhz"]{content:"cQETmj,"}/*!sc*/
+.buxoPL{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;font-size:0.929em;text-transform:none;background-color:#fafafa;}/*!sc*/
+.buxoPL:hover{color:#32329f;background-color:#e1e1e1;}/*!sc*/
+.buxoPL .sc-dYjPD{height:1.5em;width:1.5em;}/*!sc*/
+.buxoPL .sc-dYjPD polygon{fill:#333333;}/*!sc*/
+.cGOuox{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;background-color:#fafafa;}/*!sc*/
+.cGOuox:hover{color:#32329f;background-color:#ededed;}/*!sc*/
+.cGOuox .sc-dYjPD{height:1.5em;width:1.5em;}/*!sc*/
+.cGOuox .sc-dYjPD polygon{fill:#333333;}/*!sc*/
+data-styled.g104[id="sc-bitxrY"]{content:"buxoPL,cGOuox,"}/*!sc*/
+.ehBKwY{display:inline-block;vertical-align:middle;width:calc(100% - 38px);overflow:hidden;text-overflow:ellipsis;}/*!sc*/
+data-styled.g105[id="sc-eHoOIp"]{content:"ehBKwY,"}/*!sc*/
+.gtBLyN{font-size:0.8em;margin-top:10px;text-align:center;position:fixed;width:260px;bottom:0;background:#fafafa;}/*!sc*/
+.gtBLyN a,.gtBLyN a:visited,.gtBLyN a:hover{color:#333333!important;padding:5px 0;border-top:1px solid #e1e1e1;text-decoration:none;display:flex;align-items:center;justify-content:center;}/*!sc*/
+.gtBLyN img{width:15px;margin-right:5px;}/*!sc*/
+@media screen and (max-width: 50rem){.gtBLyN{width:100%;}}/*!sc*/
+data-styled.g106[id="sc-hAkAFK"]{content:"gtBLyN,"}/*!sc*/
+.fYxpnv{cursor:pointer;position:relative;margin-bottom:5px;}/*!sc*/
+data-styled.g112[id="sc-fXwuWv"]{content:"fYxpnv,"}/*!sc*/
+.dsIRaZ{font-family:Courier,monospace;margin-left:10px;flex:1;overflow-x:hidden;text-overflow:ellipsis;}/*!sc*/
+data-styled.g113[id="sc-FpjRO"]{content:"dsIRaZ,"}/*!sc*/
+.jzaJhV{outline:0;color:inherit;width:100%;text-align:left;cursor:pointer;padding:10px 30px 10px 20px;border-radius:4px 4px 0 0;background-color:#11171a;display:flex;white-space:nowrap;align-items:center;border:1px solid transparent;border-bottom:0;transition:border-color 0.25s ease;}/*!sc*/
+.jzaJhV ..sc-FpjRO{color:#ffffff;}/*!sc*/
+.jzaJhV:focus{box-shadow:inset 0 2px 2px rgba(0, 0, 0, 0.45),0 2px 0 rgba(128, 128, 128, 0.25);}/*!sc*/
+data-styled.g114[id="sc-jWMFtl"]{content:"jzaJhV,"}/*!sc*/
+.hlSrtW{font-size:0.929em;line-height:20px;background-color:#2F8132;color:#ffffff;padding:3px 10px;text-transform:uppercase;font-family:Montserrat,sans-serif;margin:0;}/*!sc*/
+data-styled.g115[id="sc-eEFuoE"]{content:"hlSrtW,"}/*!sc*/
+.tUxhh{position:absolute;width:100%;z-index:100;background:#fafafa;color:#263238;box-sizing:border-box;box-shadow:0 0 6px rgba(0, 0, 0, 0.33);overflow:hidden;border-bottom-left-radius:4px;border-bottom-right-radius:4px;transition:all 0.25s ease;visibility:hidden;transform:translateY(-50%) scaleY(0);}/*!sc*/
+data-styled.g116[id="sc-fmtEmb"]{content:"tUxhh,"}/*!sc*/
+.bAnPPh{padding:10px;}/*!sc*/
+data-styled.g117[id="sc-ljIcGq"]{content:"bAnPPh,"}/*!sc*/
+.PEJyb{padding:5px;border:1px solid #ccc;background:#fff;word-break:break-all;color:#32329f;}/*!sc*/
+.PEJyb >span{color:#333333;}/*!sc*/
+data-styled.g118[id="sc-jlJOIR"]{content:"PEJyb,"}/*!sc*/
+.iSTZHA{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#1d8127;background-color:rgba(29,129,39,0.07);}/*!sc*/
+.iSTZHA:focus{outline:auto #1d8127;}/*!sc*/
+.fRVDqI{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#d41f1c;background-color:rgba(212,31,28,0.07);cursor:default;}/*!sc*/
+.fRVDqI:focus{outline:auto #d41f1c;}/*!sc*/
+.fRVDqI::before{content:"—";font-weight:bold;width:1.5em;text-align:center;display:inline-block;vertical-align:top;}/*!sc*/
+.fRVDqI:focus{outline:0;}/*!sc*/
+.cKkXxa{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#d41f1c;background-color:rgba(212,31,28,0.07);}/*!sc*/
+.cKkXxa:focus{outline:auto #d41f1c;}/*!sc*/
+data-styled.g121[id="sc-cbuLjy"]{content:"iSTZHA,fRVDqI,cKkXxa,"}/*!sc*/
+.cqDULz{vertical-align:top;}/*!sc*/
+data-styled.g124[id="sc-fXmTIC"]{content:"cqDULz,"}/*!sc*/
+.hgNHCh{font-size:1.3em;padding:0.2em 0;margin:3em 0 1.1em;color:#333333;font-weight:normal;}/*!sc*/
+data-styled.g125[id="sc-fINhYD"]{content:"hgNHCh,"}/*!sc*/
+.ktZmcf{margin-bottom:30px;}/*!sc*/
+data-styled.g130[id="sc-iFUzrA"]{content:"ktZmcf,"}/*!sc*/
+.kjuNaM{user-select:none;width:20px;height:20px;align-self:center;display:flex;flex-direction:column;color:#32329f;}/*!sc*/
+data-styled.g131[id="sc-iruNHB"]{content:"kjuNaM,"}/*!sc*/
+.cczbHe{width:260px;background-color:#fafafa;overflow:hidden;display:flex;flex-direction:column;backface-visibility:hidden;height:100vh;position:sticky;position:-webkit-sticky;top:0;}/*!sc*/
+@media screen and (max-width: 50rem){.cczbHe{position:fixed;z-index:20;width:100%;background:#fafafa;display:none;}}/*!sc*/
+@media print{.cczbHe{display:none;}}/*!sc*/
+data-styled.g132[id="sc-eVYbGh"]{content:"cczbHe,"}/*!sc*/
+.ddPveE{outline:none;user-select:none;background-color:#f2f2f2;color:#32329f;display:none;cursor:pointer;position:fixed;right:20px;z-index:100;border-radius:50%;box-shadow:0 0 20px rgba(0, 0, 0, 0.3);bottom:44px;width:60px;height:60px;padding:0 20px;}/*!sc*/
+@media screen and (max-width: 50rem){.ddPveE{display:flex;}}/*!sc*/
+.ddPveE svg{color:#0065FB;}/*!sc*/
+@media print{.ddPveE{display:none;}}/*!sc*/
+data-styled.g133[id="sc-kTmAaw"]{content:"ddPveE,"}/*!sc*/
+.jetsmW{font-family:Roboto,sans-serif;font-size:14px;font-weight:400;line-height:1.5em;color:#333333;display:flex;position:relative;text-align:left;-webkit-font-smoothing:antialiased;font-smoothing:antialiased;text-rendering:optimizeSpeed!important;tap-highlight-color:rgba(0, 0, 0, 0);text-size-adjust:100%;}/*!sc*/
+.jetsmW *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(255, 255, 255, 0);}/*!sc*/
+data-styled.g134[id="sc-dwkskT"]{content:"jetsmW,"}/*!sc*/
+.ldXCvc{z-index:1;position:relative;overflow:hidden;width:calc(100% - 260px);contain:layout;}/*!sc*/
+@media print,screen and (max-width: 50rem){.ldXCvc{width:100%;}}/*!sc*/
+data-styled.g135[id="sc-jtyQFi"]{content:"ldXCvc,"}/*!sc*/
+.bjzTxL{background:#263238;position:absolute;top:0;bottom:0;right:0;width:calc((100% - 260px) * 0.4);}/*!sc*/
+@media print,screen and (max-width: 75rem){.bjzTxL{display:none;}}/*!sc*/
+data-styled.g136[id="sc-ekVkVN"]{content:"bjzTxL,"}/*!sc*/
+.uMSfb{padding:5px 0;}/*!sc*/
+data-styled.g137[id="sc-kijJqc"]{content:"uMSfb,"}/*!sc*/
+.fTcICO{width:calc(100% - 40px);box-sizing:border-box;margin:0 20px;padding:5px 10px 5px 20px;border:0;border-bottom:1px solid #e1e1e1;font-family:Roboto,sans-serif;font-weight:bold;font-size:13px;color:#333333;background-color:transparent;outline:none;}/*!sc*/
+data-styled.g138[id="sc-cLhBAz"]{content:"fTcICO,"}/*!sc*/
+.kAmnlO{position:absolute;left:20px;height:1.8em;width:0.9em;}/*!sc*/
+.kAmnlO path{fill:#333333;}/*!sc*/
+data-styled.g139[id="sc-iIvZUO"]{content:"kAmnlO,"}/*!sc*/
+</style>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+</head>
+
+<body>
+  
+      <div id="redoc"><div class="sc-dwkskT jetsmW redoc-wrap"><div class="sc-eVYbGh cczbHe menu-content" style="top:0px;height:calc(100vh - 0px)"><div role="search" class="sc-kijJqc uMSfb"><svg class="sc-iIvZUO kAmnlO search-icon" version="1.1" viewBox="0 0 1000 1000" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><path d="M968.2,849.4L667.3,549c83.9-136.5,66.7-317.4-51.7-435.6C477.1-25,252.5-25,113.9,113.4c-138.5,138.3-138.5,362.6,0,501C219.2,730.1,413.2,743,547.6,666.5l301.9,301.4c43.6,43.6,76.9,14.9,104.2-12.4C981,928.3,1011.8,893,968.2,849.4z M524.5,522c-88.9,88.7-233,88.7-321.8,0c-88.9-88.7-88.9-232.6,0-321.3c88.9-88.7,233-88.7,321.8,0C613.4,289.4,613.4,433.3,524.5,522z"></path></svg><input placeholder="Search..." aria-label="Search" type="text" class="sc-cLhBAz fTcICO search-input" value=""/></div><div class="sc-kLEbxe iOXjCz scrollbar-container undefined"><ul role="menu" class="sc-ilnrqe dqIuaF"><li tabindex="0" depth="1" data-item-id="section/CORS" role="menuitem" aria-label="CORS" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="CORS" class="sc-eHoOIp ehBKwY">CORS</span></label></li><li tabindex="0" depth="1" data-item-id="section/ID" role="menuitem" aria-label="校区 ID" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="校区 ID" class="sc-eHoOIp ehBKwY">校区 ID</span></label></li><li tabindex="0" depth="1" data-item-id="section/插座状态" role="menuitem" aria-label="插座状态" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="插座状态" class="sc-eHoOIp ehBKwY">插座状态</span></label></li><li tabindex="0" depth="1" data-item-id="section/内容协商" role="menuitem" aria-label="内容协商" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="内容协商" class="sc-eHoOIp ehBKwY">内容协商</span></label></li><li tabindex="0" depth="1" data-item-id="tag/Campus" role="menuitem" aria-label="Campus" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="Campus" class="sc-eHoOIp ehBKwY">Campus</span><svg class="sc-dYjPD kdgFPv" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilnrqe gTfiRs"><li tabindex="0" depth="2" data-item-id="tag/Campus/operation/getCampuses" role="menuitem" aria-label="获取校区列表" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">获取校区列表</span></label></li></ul></li><li tabindex="0" depth="1" data-item-id="tag/Charger" role="menuitem" aria-label="Charger" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="Charger" class="sc-eHoOIp ehBKwY">Charger</span><svg class="sc-dYjPD kdgFPv" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilnrqe gTfiRs"><li tabindex="0" depth="2" data-item-id="tag/Charger/operation/getStatus" role="menuitem" aria-label="查询校区充电桩实时状态" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">查询校区充电桩实时状态</span></label></li></ul></li><li tabindex="0" depth="1" data-item-id="tag/Weather" role="menuitem" aria-label="Weather" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="Weather" class="sc-eHoOIp ehBKwY">Weather</span><svg class="sc-dYjPD kdgFPv" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilnrqe gTfiRs"><li tabindex="0" depth="2" data-item-id="tag/Weather/operation/getWeather" role="menuitem" aria-label="查询校区天气信息" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">查询校区天气信息</span></label></li></ul></li><li tabindex="0" depth="1" data-item-id="tag/Discovery" role="menuitem" aria-label="Discovery" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="Discovery" class="sc-eHoOIp ehBKwY">Discovery</span><svg class="sc-dYjPD kdgFPv" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilnrqe gTfiRs"><li tabindex="0" depth="2" data-item-id="tag/Discovery/operation/getApiCatalog" role="menuitem" aria-label="API 目录（RFC 9727）" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">API 目录（RFC 9727）</span></label></li><li tabindex="0" depth="2" data-item-id="tag/Discovery/operation/getAgentSkills" role="menuitem" aria-label="Agent Skills 发现索引" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">Agent Skills 发现索引</span></label></li></ul></li><li tabindex="0" depth="1" data-item-id="tag/History" role="menuitem" aria-label="History" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="History" class="sc-eHoOIp ehBKwY">History</span><svg class="sc-dYjPD kdgFPv" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilnrqe gTfiRs"><li tabindex="0" depth="2" data-item-id="tag/History/operation/getHistory" role="menuitem" aria-label="查询校区充电桩历史记录" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">查询校区充电桩历史记录</span></label></li></ul></li><li tabindex="0" depth="1" data-item-id="tag/View" role="menuitem" aria-label="View" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="View" class="sc-eHoOIp ehBKwY">View</span><svg class="sc-dYjPD kdgFPv" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilnrqe gTfiRs"><li tabindex="0" depth="2" data-item-id="tag/View/operation/getClassical" role="menuitem" aria-label="经典视图（SSR HTML）" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">经典视图（SSR HTML）</span></label></li></ul></li></ul><div class="sc-hAkAFK gtBLyN"><a target="_blank" rel="noopener noreferrer" href="https://redocly.com/redoc/">API docs by Redocly</a></div></div></div><div class="sc-kTmAaw ddPveE"><div class="sc-iruNHB kjuNaM"><svg class="" style="transform:translate(2px, -4px) rotate(180deg);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
+          m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
+          -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
+          0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,
+          -174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,
+          -174.68583 0.6895,0 26.281,25.03215 56.8701,
+          55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864
+          -231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,
+          -104.0616 -231.873,-231.248 z
+        " fill="currentColor"></path></g></svg><svg class="" style="transform:translate(2px, 4px);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
+          m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
+          -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
+          0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,
+          -174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,
+          -174.68583 0.6895,0 26.281,25.03215 56.8701,
+          55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864
+          -231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,
+          -104.0616 -231.873,-231.248 z
+        " fill="currentColor"></path></g></svg></div></div><div class="sc-jtyQFi ldXCvc api-content"><div class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN api-info"><h1 class="sc-fuztkK sc-ctiVdb eRMVDe cBgvIi">Where Are Available Chargers API<!-- --> <span>(<!-- -->5.2.0<!-- -->)</span></h1><p>Download OpenAPI specification<!-- -->:</p><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><div class="sc-gILgRS iVyheB"><div class="sc-euUkyj juJQo"> <!-- --> <!-- --> </div></div></div><div data-role="redoc-summary" html="" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"></div><div data-role="redoc-description" html="&lt;p&gt;东南大学充电桩实时状态查询服务。提供三个校区（九龙湖、四牌楼、丁家桥）的充电桩实时状态、天气和历史记录查询。&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>东南大学充电桩实时状态查询服务。提供三个校区（九龙湖、四牌楼、丁家桥）的充电桩实时状态、天气和历史记录查询。</p>
+</div></div></div></div><div id="section/CORS" data-section-id="section/CORS" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-jrIDTr iSbGeC"><a class="sc-crPgjm jmoZom" href="#section/CORS" aria-label="section/CORS"></a>CORS</h2></div></div><div class="sc-hKVpXn kmAAAV"><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV redoc-markdown " html="&lt;p&gt;所有 API 端点均支持跨域请求（&lt;code&gt;Access-Control-Allow-Origin: *&lt;/code&gt;），
+并响应 &lt;code&gt;OPTIONS&lt;/code&gt; 预检请求（返回 &lt;code&gt;204&lt;/code&gt;）。&lt;/p&gt;
+"><p>所有 API 端点均支持跨域请求（<code>Access-Control-Allow-Origin: *</code>），
+并响应 <code>OPTIONS</code> 预检请求（返回 <code>204</code>）。</p>
+</div></div></div><div id="section/ID" data-section-id="section/ID" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-jrIDTr iSbGeC"><a class="sc-crPgjm jmoZom" href="#section/ID" aria-label="section/ID"></a>校区 ID</h2></div></div><div class="sc-hKVpXn kmAAAV"><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV redoc-markdown " html="&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ID&lt;/th&gt;
+&lt;th&gt;校区&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;jiulonghu&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;九龙湖&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;sipailou&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;四牌楼&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;dingjiaqiao&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;丁家桥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>校区</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>jiulonghu</code></td>
+<td>九龙湖</td>
+</tr>
+<tr>
+<td><code>sipailou</code></td>
+<td>四牌楼</td>
+</tr>
+<tr>
+<td><code>dingjiaqiao</code></td>
+<td>丁家桥</td>
+</tr>
+</tbody></table>
+</div></div></div><div id="section/插座状态" data-section-id="section/插座状态" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-jrIDTr iSbGeC"><a class="sc-crPgjm jmoZom" href="#section/插座状态" aria-label="section/插座状态"></a>插座状态</h2></div></div><div class="sc-hKVpXn kmAAAV"><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV redoc-markdown " html="&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;值&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;占用（使用中）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;空闲&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;2&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;故障&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+"><table>
+<thead>
+<tr>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0</code></td>
+<td>占用（使用中）</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>空闲</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>故障</td>
+</tr>
+</tbody></table>
+</div></div></div><div id="section/内容协商" data-section-id="section/内容协商" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-jrIDTr iSbGeC"><a class="sc-crPgjm jmoZom" href="#section/内容协商" aria-label="section/内容协商"></a>内容协商</h2></div></div><div class="sc-hKVpXn kmAAAV"><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV redoc-markdown " html="&lt;p&gt;首页（&lt;code&gt;/&lt;/code&gt;）支持 &lt;code&gt;Accept: text/markdown&lt;/code&gt; 请求头，
+返回 Markdown 格式的站点摘要（包含所有 API 端点列表和页面链接）。&lt;/p&gt;
+"><p>首页（<code>/</code>）支持 <code>Accept: text/markdown</code> 请求头，
+返回 Markdown 格式的站点摘要（包含所有 API 端点列表和页面链接）。</p>
+</div></div></div><div id="tag/Campus" data-section-id="tag/Campus" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Campus" aria-label="tag/Campus"></a>Campus</h2></div></div></div><div id="tag/Campus/operation/getCampuses" data-section-id="tag/Campus/operation/getCampuses" class="sc-eCQgVK grDwca"><div data-section-id="operation/getCampuses" id="operation/getCampuses" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Campus/operation/getCampuses" aria-label="tag/Campus/operation/getCampuses"></a>获取校区列表<!-- --> </h2><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;校区列表&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>校区列表</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/api/campuses</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;本地开发&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>本地开发</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8787</span>/api/campuses</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;生产环境&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>生产环境</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://chargers.dpdns.org</span>/api/campuses</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_jjiq_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_jjiq_0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_jjiq_0" aria-labelledby="tab_R_jjiq_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"code"</span>: <span class="token number">200</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"campuses"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"id"</span>: <span class="token string">&quot;jiulonghu&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"name"</span>: <span class="token string">&quot;九龙湖&quot;</span></div></li></ul><span class="token punctuation">}</span>,</div></li><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"id"</span>: <span class="token string">&quot;sipailou&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"name"</span>: <span class="token string">&quot;四牌楼&quot;</span></div></li></ul><span class="token punctuation">}</span>,</div></li><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"id"</span>: <span class="token string">&quot;dingjiaqiao&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"name"</span>: <span class="token string">&quot;丁家桥&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div></div><div id="tag/Charger" data-section-id="tag/Charger" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Charger" aria-label="tag/Charger"></a>Charger</h2></div></div></div><div id="tag/Charger/operation/getStatus" data-section-id="tag/Charger/operation/getStatus" class="sc-eCQgVK grDwca"><div data-section-id="operation/getStatus" id="operation/getStatus" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Charger/operation/getStatus" aria-label="tag/Charger/operation/getStatus"></a>查询校区充电桩实时状态<!-- --> </h2><div><h5 class="sc-iqkkDd kcvrhp">path<!-- --> Parameters</h5><table class="sc-hHopjF bsjUmE"><tbody><tr class="last "><td kind="field" title="campusId" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">campusId</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span></div><div><span class="sc-gSILEF jMRTsl"> <!-- -->Enum<!-- -->:</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;jiulonghu&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;sipailou&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;dingjiaqiao&quot;</span> </div> <div><div html="&lt;p&gt;校区 ID&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>校区 ID</p>
+</div></div></div></td></tr></tbody></table></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;充电桩状态&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>充电桩状态</p>
+</div></button></div><div><button class="sc-cbuLjy fRVDqI" disabled=""><strong class="sc-fXmTIC cqDULz">400<!-- --> </strong><div html="&lt;p&gt;无效的校区 ID&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>无效的校区 ID</p>
+</div></button></div><div><button class="sc-cbuLjy fRVDqI" disabled=""><strong class="sc-fXmTIC cqDULz">404<!-- --> </strong><div html="&lt;p&gt;该校区暂无数据&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>该校区暂无数据</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/api/get_status/{campusId}</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;本地开发&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>本地开发</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8787</span>/api/get_status/{campusId}</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;生产环境&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>生产环境</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://chargers.dpdns.org</span>/api/get_status/{campusId}</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_jjja_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_jjja_0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_jjja_0" aria-labelledby="tab_R_jjja_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"code"</span>: <span class="token number">200</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"last_update_time"</span>: <span class="token number">1720000000000</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"fault_info"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"status"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"total_count"</span>: <span class="token number">120</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"available_count"</span>: <span class="token number">45</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"stations"</span>: <button class="collapser" aria-label="expand"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"name"</span>: <span class="token string">&quot;教学楼充电站&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"description"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"total_count"</span>: <span class="token number">0</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"available_count"</span>: <span class="token number">0</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"lat"</span>: <span class="token number">0.1</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"lng"</span>: <span class="token number">0.1</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"addr"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"chargers"</span>: <button class="collapser" aria-label="expand"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"name"</span>: <span class="token string">&quot;#1&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"description"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"fault_info"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"total_count"</span>: <span class="token number">10</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"available_count"</span>: <span class="token number">3</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"sockets"</span>: <button class="collapser" aria-label="expand"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><span class="token number">0</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div></div><div id="tag/Weather" data-section-id="tag/Weather" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Weather" aria-label="tag/Weather"></a>Weather</h2></div></div></div><div id="tag/Weather/operation/getWeather" data-section-id="tag/Weather/operation/getWeather" class="sc-eCQgVK grDwca"><div data-section-id="operation/getWeather" id="operation/getWeather" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Weather/operation/getWeather" aria-label="tag/Weather/operation/getWeather"></a>查询校区天气信息<!-- --> </h2><div><h5 class="sc-iqkkDd kcvrhp">path<!-- --> Parameters</h5><table class="sc-hHopjF bsjUmE"><tbody><tr class="last "><td kind="field" title="campusId" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">campusId</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span></div><div><span class="sc-gSILEF jMRTsl"> <!-- -->Enum<!-- -->:</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;jiulonghu&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;sipailou&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;dingjiaqiao&quot;</span> </div> <div><div html="&lt;p&gt;校区 ID&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>校区 ID</p>
+</div></div></div></td></tr></tbody></table></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;天气信息&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>天气信息</p>
+</div></button></div><div><button class="sc-cbuLjy fRVDqI" disabled=""><strong class="sc-fXmTIC cqDULz">400<!-- --> </strong><div html="&lt;p&gt;无效的校区 ID&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>无效的校区 ID</p>
+</div></button></div><div><button class="sc-cbuLjy fRVDqI" disabled=""><strong class="sc-fXmTIC cqDULz">404<!-- --> </strong><div html="&lt;p&gt;该校区暂无数据&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>该校区暂无数据</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/api/weather/{campusId}</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;本地开发&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>本地开发</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8787</span>/api/weather/{campusId}</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;生产环境&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>生产环境</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://chargers.dpdns.org</span>/api/weather/{campusId}</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_jjjq_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_jjjq_0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_jjjq_0" aria-labelledby="tab_R_jjjq_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"status"</span>: <span class="token string">&quot;ok&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"timestamp"</span>: <span class="token number">0</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"hourly"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"description"</span>: <span class="token string">&quot;未来6小时多云转晴&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"skycon"</span>: <button class="collapser" aria-label="expand"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"datetime"</span>: <span class="token string">&quot;2019-08-24T14:15:22Z&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"value"</span>: <span class="token string">&quot;CLEAR_DAY&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div></div><div id="tag/Discovery" data-section-id="tag/Discovery" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Discovery" aria-label="tag/Discovery"></a>Discovery</h2></div></div></div><div id="tag/Discovery/operation/getApiCatalog" data-section-id="tag/Discovery/operation/getApiCatalog" class="sc-eCQgVK grDwca"><div data-section-id="operation/getApiCatalog" id="operation/getApiCatalog" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Discovery/operation/getApiCatalog" aria-label="tag/Discovery/operation/getApiCatalog"></a>API 目录（RFC 9727）<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;返回 RFC 9727 格式的 Linkset，列出所有可用 API 端点。
+可通过首页 &lt;code&gt;Link&lt;/code&gt; 响应头中的 &lt;code&gt;rel=&amp;quot;api-catalog&amp;quot;&lt;/code&gt; 发现。&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>返回 RFC 9727 格式的 Linkset，列出所有可用 API 端点。
+可通过首页 <code>Link</code> 响应头中的 <code>rel=&quot;api-catalog&quot;</code> 发现。</p>
+</div></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;API 目录&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>API 目录</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/.well-known/api-catalog</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;本地开发&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>本地开发</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8787</span>/.well-known/api-catalog</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;生产环境&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>生产环境</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://chargers.dpdns.org</span>/.well-known/api-catalog</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_175ka_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_175ka_0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_175ka_0" aria-labelledby="tab_R_175ka_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/linkset+json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"linkset"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><span class="token punctuation">{ }</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div></div><div id="tag/Discovery/operation/getAgentSkills" data-section-id="tag/Discovery/operation/getAgentSkills" class="sc-eCQgVK grDwca"><div data-section-id="operation/getAgentSkills" id="operation/getAgentSkills" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Discovery/operation/getAgentSkills" aria-label="tag/Discovery/operation/getAgentSkills"></a>Agent Skills 发现索引<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;返回 Agent Skills 发现文档（v0.2.0），列出所有可用的技能描述文件。
+可通过首页 &lt;code&gt;Link&lt;/code&gt; 响应头中的 &lt;code&gt;rel=&amp;quot;describedby&amp;quot;&lt;/code&gt; 发现。&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>返回 Agent Skills 发现文档（v0.2.0），列出所有可用的技能描述文件。
+可通过首页 <code>Link</code> 响应头中的 <code>rel=&quot;describedby&quot;</code> 发现。</p>
+</div></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;Agent Skills 索引&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Agent Skills 索引</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/.well-known/agent-skills/index.json</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;本地开发&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>本地开发</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8787</span>/.well-known/agent-skills/index.json</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;生产环境&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>生产环境</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://chargers.dpdns.org</span>/.well-known/agent-skills/index.json</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_176ka_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_176ka_0" tabindex="0" data-rttab="true">200</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_176ka_0" aria-labelledby="tab_R_176ka_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"$schema"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"skills"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"name"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"type"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"description"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"url"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"digest"</span>: <span class="token string">&quot;string&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">]</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"links"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"rel"</span>: <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"href"</span>: <span class="token string">&quot;string&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div></div></div></div><div id="tag/History" data-section-id="tag/History" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/History" aria-label="tag/History"></a>History</h2></div></div></div><div id="tag/History/operation/getHistory" data-section-id="tag/History/operation/getHistory" class="sc-eCQgVK grDwca"><div data-section-id="operation/getHistory" id="operation/getHistory" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/History/operation/getHistory" aria-label="tag/History/operation/getHistory"></a>查询校区充电桩历史记录<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;支持两种查询方式（二选一）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;预设范围：使用 &lt;code&gt;range&lt;/code&gt; 参数&lt;/li&gt;
+&lt;li&gt;自定义时间段：使用 &lt;code&gt;start&lt;/code&gt; 和 &lt;code&gt;end&lt;/code&gt; 参数（Unix 毫秒时间戳）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最大查询范围为 7 天。若自定义时间段超过 7 天，开始时间会被自动截断。
+预设范围对应的秒数：&lt;code&gt;1h&lt;/code&gt; = 3600s，&lt;code&gt;6h&lt;/code&gt; = 21600s，&lt;code&gt;24h&lt;/code&gt; = 86400s，&lt;code&gt;7d&lt;/code&gt; = 604800s。&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>支持两种查询方式（二选一）：</p>
+<ul>
+<li>预设范围：使用 <code>range</code> 参数</li>
+<li>自定义时间段：使用 <code>start</code> 和 <code>end</code> 参数（Unix 毫秒时间戳）</li>
+</ul>
+<p>最大查询范围为 7 天。若自定义时间段超过 7 天，开始时间会被自动截断。
+预设范围对应的秒数：<code>1h</code> = 3600s，<code>6h</code> = 21600s，<code>24h</code> = 86400s，<code>7d</code> = 604800s。</p>
+</div></div><div><h5 class="sc-iqkkDd kcvrhp">path<!-- --> Parameters</h5><table class="sc-hHopjF bsjUmE"><tbody><tr class="last "><td kind="field" title="campusId" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">campusId</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span></div><div><span class="sc-gSILEF jMRTsl"> <!-- -->Enum<!-- -->:</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;jiulonghu&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;sipailou&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;dingjiaqiao&quot;</span> </div> <div><div html="&lt;p&gt;校区 ID&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>校区 ID</p>
+</div></div></div></td></tr></tbody></table></div><div><h5 class="sc-iqkkDd kcvrhp">query<!-- --> Parameters</h5><table class="sc-hHopjF bsjUmE"><tbody><tr class=""><td kind="field" title="range" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">range</span></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span></div><div><span class="sc-gSILEF jMRTsl"> <!-- -->Default:<!-- --> </span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;24h&quot;</span></div><div><span class="sc-gSILEF jMRTsl"> <!-- -->Enum<!-- -->:</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;1h&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;6h&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;24h&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;7d&quot;</span> </div> <div><div html="&lt;p&gt;预设时间范围（与 start/end 互斥）&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>预设时间范围（与 start/end 互斥）</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="start" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">start</span></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">integer</span></div> <div><div html="&lt;p&gt;自定义开始时间（Unix 毫秒时间戳，需与 end 同时使用）&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>自定义开始时间（Unix 毫秒时间戳，需与 end 同时使用）</p>
+</div></div></div></td></tr><tr class="last "><td kind="field" title="end" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">end</span></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">integer</span></div> <div><div html="&lt;p&gt;自定义结束时间（Unix 毫秒时间戳，需与 start 同时使用）&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>自定义结束时间（Unix 毫秒时间戳，需与 start 同时使用）</p>
+</div></div></div></td></tr></tbody></table></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;历史记录&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>历史记录</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">400<!-- --> </strong><div html="&lt;p&gt;无效的参数&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>无效的参数</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/api/history/{campusId}</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;本地开发&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>本地开发</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8787</span>/api/history/{campusId}</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;生产环境&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>生产环境</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://chargers.dpdns.org</span>/api/history/{campusId}</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_jjkq_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_jjkq_0" tabindex="0" data-rttab="true">200</li><li class="tab-error" role="tab" id="tab_R_jjkq_1" aria-selected="false" aria-disabled="false" aria-controls="panel_R_jjkq_1" data-rttab="true">400</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_jjkq_0" aria-labelledby="tab_R_jjkq_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"code"</span>: <span class="token number">200</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"campus_id"</span>: <span class="token string">&quot;jiulonghu&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"data"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"timestamp"</span>: <span class="token number">0</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"total_count"</span>: <span class="token number">0</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"available_count"</span>: <span class="token number">0</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"fault_count"</span>: <span class="token number">0</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_jjkq_1" aria-labelledby="tab_R_jjkq_1"></div></div></div></div></div></div><div id="tag/View" data-section-id="tag/View" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/View" aria-label="tag/View"></a>View</h2></div></div></div><div id="tag/View/operation/getClassical" data-section-id="tag/View/operation/getClassical" class="sc-eCQgVK grDwca"><div data-section-id="operation/getClassical" id="operation/getClassical" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/View/operation/getClassical" aria-label="tag/View/operation/getClassical"></a>经典视图（SSR HTML）<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;返回渲染好的 HTML 页面，展示所有校区充电桩状态&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>返回渲染好的 HTML 页面，展示所有校区充电桩状态</p>
+</div></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;HTML 页面&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>HTML 页面</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/classic</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;本地开发&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>本地开发</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8787</span>/classic</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;生产环境&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>生产环境</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://chargers.dpdns.org</span>/classic</div></div></div></div></div></div></div></div></div><div class="sc-ekVkVN bjzTxL"></div></div></div>
+      <script>
+      const __redoc_state = {"menu":{"activeItemIdx":-1},"spec":{"data":{"openapi":"3.2.0","info":{"title":"Where Are Available Chargers API","description":"东南大学充电桩实时状态查询服务。提供三个校区（九龙湖、四牌楼、丁家桥）的充电桩实时状态、天气和历史记录查询。\n\n## CORS\n\n所有 API 端点均支持跨域请求（`Access-Control-Allow-Origin: *`），\n并响应 `OPTIONS` 预检请求（返回 `204`）。\n\n## 校区 ID\n| ID | 校区 |\n|---|---|\n| `jiulonghu` | 九龙湖 |\n| `sipailou` | 四牌楼 |\n| `dingjiaqiao` | 丁家桥 |\n\n## 插座状态\n| 值 | 含义 |\n|---|---|\n| `0` | 占用（使用中） |\n| `1` | 空闲 |\n| `2` | 故障 |\n\n## 内容协商\n\n首页（`/`）支持 `Accept: text/markdown` 请求头，\n返回 Markdown 格式的站点摘要（包含所有 API 端点列表和页面链接）。\n","version":"5.2.0","contact":{"name":"Gol3vka & Csimide"}},"servers":[{"url":"http://localhost:8787","description":"本地开发"},{"url":"https://chargers.dpdns.org","description":"生产环境"}],"paths":{"/api/campuses":{"get":{"summary":"获取校区列表","operationId":"getCampuses","tags":["Campus"],"responses":{"200":{"description":"校区列表","content":{"application/json":{"schema":{"type":"object","properties":{"code":{"type":"integer","example":200},"campuses":{"type":"array","items":{"$ref":"#/components/schemas/CampusListItem"}}}},"example":{"code":200,"campuses":[{"id":"jiulonghu","name":"九龙湖"},{"id":"sipailou","name":"四牌楼"},{"id":"dingjiaqiao","name":"丁家桥"}]}}}}}}},"/api/get_status/{campusId}":{"get":{"summary":"查询校区充电桩实时状态","operationId":"getStatus","tags":["Charger"],"parameters":[{"$ref":"#/components/parameters/CampusId"}],"responses":{"200":{"description":"充电桩状态","content":{"application/json":{"schema":{"$ref":"#/components/schemas/StatusResponse"}}}},"400":{"description":"无效的校区 ID"},"404":{"description":"该校区暂无数据"}}}},"/api/weather/{campusId}":{"get":{"summary":"查询校区天气信息","operationId":"getWeather","tags":["Weather"],"parameters":[{"$ref":"#/components/parameters/CampusId"}],"responses":{"200":{"description":"天气信息","content":{"application/json":{"schema":{"$ref":"#/components/schemas/WeatherResponse"}}}},"400":{"description":"无效的校区 ID"},"404":{"description":"该校区暂无数据"}}}},"/.well-known/api-catalog":{"get":{"summary":"API 目录（RFC 9727）","operationId":"getApiCatalog","tags":["Discovery"],"description":"返回 RFC 9727 格式的 Linkset，列出所有可用 API 端点。\n可通过首页 `Link` 响应头中的 `rel=\"api-catalog\"` 发现。\n","responses":{"200":{"description":"API 目录","content":{"application/linkset+json":{"schema":{"type":"object","properties":{"linkset":{"type":"array","items":{"type":"object"}}}}}}}}}},"/.well-known/agent-skills/index.json":{"get":{"summary":"Agent Skills 发现索引","operationId":"getAgentSkills","tags":["Discovery"],"description":"返回 Agent Skills 发现文档（v0.2.0），列出所有可用的技能描述文件。\n可通过首页 `Link` 响应头中的 `rel=\"describedby\"` 发现。\n","responses":{"200":{"description":"Agent Skills 索引","content":{"application/json":{"schema":{"type":"object","properties":{"$schema":{"type":"string"},"skills":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"type":{"type":"string"},"description":{"type":"string"},"url":{"type":"string"},"digest":{"type":"string"}}}},"links":{"type":"array","items":{"type":"object","properties":{"rel":{"type":"string"},"href":{"type":"string"}}}}}}}}}}}},"/api/history/{campusId}":{"get":{"summary":"查询校区充电桩历史记录","operationId":"getHistory","tags":["History"],"description":"支持两种查询方式（二选一）：\n- 预设范围：使用 `range` 参数\n- 自定义时间段：使用 `start` 和 `end` 参数（Unix 毫秒时间戳）\n\n最大查询范围为 7 天。若自定义时间段超过 7 天，开始时间会被自动截断。\n预设范围对应的秒数：`1h` = 3600s，`6h` = 21600s，`24h` = 86400s，`7d` = 604800s。\n","parameters":[{"$ref":"#/components/parameters/CampusId"},{"name":"range","in":"query","description":"预设时间范围（与 start/end 互斥）","schema":{"type":"string","enum":["1h","6h","24h","7d"],"default":"24h"}},{"name":"start","in":"query","description":"自定义开始时间（Unix 毫秒时间戳，需与 end 同时使用）","schema":{"type":"integer"}},{"name":"end","in":"query","description":"自定义结束时间（Unix 毫秒时间戳，需与 start 同时使用）","schema":{"type":"integer"}}],"responses":{"200":{"description":"历史记录","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HistoryResponse"}}}},"400":{"description":"无效的参数","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorResponse"}}}}}}},"/classic":{"get":{"summary":"经典视图（SSR HTML）","operationId":"getClassical","tags":["View"],"description":"返回渲染好的 HTML 页面，展示所有校区充电桩状态","responses":{"200":{"description":"HTML 页面","content":{"text/html":{"schema":{"type":"string"}}}}}}}},"components":{"parameters":{"CampusId":{"name":"campusId","in":"path","required":true,"description":"校区 ID","schema":{"type":"string","enum":["jiulonghu","sipailou","dingjiaqiao"]}}},"schemas":{"ErrorResponse":{"type":"object","properties":{"code":{"type":"integer","example":400},"message":{"type":"string","example":"Invalid start/end parameters"}}},"CampusListItem":{"type":"object","properties":{"id":{"type":"string","enum":["jiulonghu","sipailou","dingjiaqiao"]},"name":{"type":"string","example":"九龙湖"}}},"StatusResponse":{"type":"object","properties":{"code":{"type":"integer","example":200},"last_update_time":{"type":"integer","description":"最后更新时间（Unix 毫秒时间戳）","example":1720000000000},"fault_info":{"type":"string","nullable":true,"description":"全局故障信息（如有）"},"status":{"$ref":"#/components/schemas/StatusDetail"}}},"StatusDetail":{"type":"object","properties":{"total_count":{"type":"integer","description":"总充电桩数","example":120},"available_count":{"type":"integer","description":"空闲充电桩数","example":45},"stations":{"type":"array","items":{"$ref":"#/components/schemas/StationStatus"}}}},"StationStatus":{"type":"object","properties":{"name":{"type":"string","example":"教学楼充电站"},"description":{"type":"string","nullable":true},"total_count":{"type":"integer"},"available_count":{"type":"integer"},"lat":{"type":"number","format":"double","nullable":true},"lng":{"type":"number","format":"double","nullable":true},"addr":{"type":"string","nullable":true},"chargers":{"type":"array","items":{"$ref":"#/components/schemas/ChargerStatus"}}}},"ChargerStatus":{"type":"object","properties":{"name":{"type":"string","example":"#1"},"description":{"type":"string","nullable":true},"fault_info":{"type":"string","nullable":true},"total_count":{"type":"integer","description":"插座总数（固定为 10）","example":10},"available_count":{"type":"integer","description":"空闲插座数","example":3},"sockets":{"type":"array","description":"插座状态数组（0=占用, 1=空闲, 2=故障）","items":{"type":"integer","enum":[0,1,2]}}}},"HistoryResponse":{"type":"object","properties":{"code":{"type":"integer","example":200},"campus_id":{"type":"string","example":"jiulonghu"},"data":{"type":"array","items":{"type":"object","properties":{"timestamp":{"type":"integer","description":"快照时间（Unix 毫秒时间戳）"},"total_count":{"type":"integer"},"available_count":{"type":"integer"},"fault_count":{"type":"integer"}}}}}},"WeatherResponse":{"type":"object","properties":{"status":{"type":"string","example":"ok"},"timestamp":{"type":"integer","description":"获取时间（Unix 秒时间戳）"},"hourly":{"type":"object","properties":{"description":{"type":"string","description":"未来 6 小时天气概述","example":"未来6小时多云转晴"},"skycon":{"type":"array","items":{"type":"object","properties":{"datetime":{"type":"string","format":"date-time"},"value":{"type":"string","description":"天气图标值","enum":["CLEAR_DAY","CLEAR_NIGHT","PARTLY_CLOUDY_DAY","PARTLY_CLOUDY_NIGHT","CLOUDY","LIGHT_RAIN","MODERATE_RAIN","HEAVY_RAIN","STORM_RAIN","LIGHT_SNOW","MODERATE_SNOW","HEAVY_SNOW","FOG","LIGHT_HAZE","MODERATE_HAZE","HEAVY_HAZE","DUST","WIND"]}}}}}}}}}}}},"searchIndex":{"store":["section/CORS","section/ID","section/插座状态","section/内容协商","tag/Campus","tag/Campus/operation/getCampuses","tag/Charger","tag/Charger/operation/getStatus","tag/Weather","tag/Weather/operation/getWeather","tag/Discovery","tag/Discovery/operation/getApiCatalog","tag/Discovery/operation/getAgentSkills","tag/History","tag/History/operation/getHistory","tag/View","tag/View/operation/getClassical"],"index":{"version":"2.3.9","fields":["title","description"],"fieldVectors":[["title/0",[0,2.782]],["description/0",[1,0.143,2,1.295,3,2.321,4,2.321,5,2.321]],["title/1",[1,0.073,6,1.651]],["description/1",[1,0.162,6,1.067,7,1.343,8,1.343,9,1.343]],["title/2",[1,0.097]],["description/2",[1,0.164,10,1.343,11,1.343,12,1.343]],["title/3",[1,0.097]],["description/3",[1,0.148,2,1.226,13,2.198,14,2.198,15,2.198]],["title/4",[16,2.782]],["description/4",[]],["title/5",[1,0.097]],["description/5",[17,3.818]],["title/6",[18,2.782]],["description/6",[]],["title/7",[1,0.097]],["description/7",[19,3.818]],["title/8",[20,2.782]],["description/8",[]],["title/9",[1,0.097]],["description/9",[21,3.818]],["title/10",[22,2.782]],["description/10",[]],["title/11",[2,0.925,23,1.318,24,1.318]],["description/11",[1,0.143,2,1.012,23,1.441,24,1.441,25,1.813,26,1.441,27,1.813,28,1.813]],["title/12",[1,0.058,29,1.318,30,1.318]],["description/12",[1,0.136,26,1.658,29,1.658,30,1.658,31,2.087,32,2.087,33,2.087]],["title/13",[34,2.782]],["description/13",[]],["title/14",[1,0.097]],["description/14",[1,0.152,35,1.125,36,1.125,37,1.125,38,1.125,39,1.865,40,1.125,41,1.125,42,1.125,43,1.125,44,1.125,45,1.125]],["title/15",[46,2.782]],["description/15",[]],["title/16",[47,2.078,48,1.651]],["description/16",[1,0.135,48,2.376,49,2.991]]],"invertedIndex":[["",{"_index":1,"title":{"1":{},"2":{},"3":{},"5":{},"7":{},"9":{},"12":{},"14":{}},"description":{"0":{},"1":{},"2":{},"3":{},"11":{},"12":{},"14":{},"16":{}}}],["0",{"_index":10,"title":{},"description":{"2":{}}}],["1",{"_index":11,"title":{},"description":{"2":{}}}],["1h",{"_index":40,"title":{},"description":{"14":{}}}],["2",{"_index":12,"title":{},"description":{"2":{}}}],["204",{"_index":5,"title":{},"description":{"0":{}}}],["21600s，`24h",{"_index":42,"title":{},"description":{"14":{}}}],["3600s，`6h",{"_index":41,"title":{},"description":{"14":{}}}],["604800",{"_index":44,"title":{},"description":{"14":{}}}],["7",{"_index":39,"title":{},"description":{"14":{}}}],["86400s，`7d",{"_index":43,"title":{},"description":{"14":{}}}],["9727",{"_index":24,"title":{"11":{}},"description":{"11":{}}}],["accept",{"_index":13,"title":{},"description":{"3":{}}}],["access-control-allow-origin",{"_index":3,"title":{},"description":{"0":{}}}],["agent",{"_index":29,"title":{"12":{}},"description":{"12":{}}}],["api",{"_index":2,"title":{"11":{}},"description":{"0":{},"3":{},"11":{}}}],["api/campus",{"_index":17,"title":{},"description":{"5":{}}}],["api/get_status/{campusid",{"_index":19,"title":{},"description":{"7":{}}}],["api/history/{campusid",{"_index":45,"title":{},"description":{"14":{}}}],["api/weather/{campusid",{"_index":21,"title":{},"description":{"9":{}}}],["campu",{"_index":16,"title":{"4":{}},"description":{}}],["charger",{"_index":18,"title":{"6":{}},"description":{}}],["classic",{"_index":49,"title":{},"description":{"16":{}}}],["cor",{"_index":0,"title":{"0":{}},"description":{}}],["dingjiaqiao",{"_index":9,"title":{},"description":{"1":{}}}],["discoveri",{"_index":22,"title":{"10":{}},"description":{}}],["end",{"_index":37,"title":{},"description":{"14":{}}}],["histori",{"_index":34,"title":{"13":{}},"description":{}}],["html",{"_index":48,"title":{"16":{}},"description":{"16":{}}}],["id",{"_index":6,"title":{"1":{}},"description":{"1":{}}}],["jiulonghu",{"_index":7,"title":{},"description":{"1":{}}}],["link",{"_index":26,"title":{},"description":{"11":{},"12":{}}}],["linkset",{"_index":25,"title":{},"description":{"11":{}}}],["markdown",{"_index":15,"title":{},"description":{"3":{}}}],["option",{"_index":4,"title":{},"description":{"0":{}}}],["rang",{"_index":35,"title":{},"description":{"14":{}}}],["rel=\"api-catalog",{"_index":27,"title":{},"description":{"11":{}}}],["rel=\"describedbi",{"_index":32,"title":{},"description":{"12":{}}}],["rfc",{"_index":23,"title":{"11":{}},"description":{"11":{}}}],["sipail",{"_index":8,"title":{},"description":{"1":{}}}],["skill",{"_index":30,"title":{"12":{}},"description":{"12":{}}}],["ssr",{"_index":47,"title":{"16":{}},"description":{}}],["start",{"_index":36,"title":{},"description":{"14":{}}}],["text/markdown",{"_index":14,"title":{},"description":{"3":{}}}],["unix",{"_index":38,"title":{},"description":{"14":{}}}],["v0.2.0",{"_index":31,"title":{},"description":{"12":{}}}],["view",{"_index":46,"title":{"15":{}},"description":{}}],["weather",{"_index":20,"title":{"8":{}},"description":{}}],["well-known/agent-skills/index.json",{"_index":33,"title":{},"description":{"12":{}}}],["well-known/api-catalog",{"_index":28,"title":{},"description":{"11":{}}}]],"pipeline":[]}},"options":{}};
+
+      var container = document.getElementById('redoc');
+      Redoc.hydrate(__redoc_state, container);
+
+      </script>
+</body>
+
+</html>

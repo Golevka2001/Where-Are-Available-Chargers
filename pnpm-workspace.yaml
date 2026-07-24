@@ -1,0 +1,21 @@
+packages:
+  - apps/*
+
+allowBuilds:
+  esbuild: true
+  sharp: true
+  workerd: true
+
+minimumReleaseAgeExclude:
+  - '@cloudflare/workers-types@5.20260710.1 || 5.20260715.1 || 5.20260723.1'
+  - miniflare@4.20260708.1 || 4.20260710.0
+  - prettier@3.9.5
+  - wrangler@4.110.0 || 4.111.0
+  - pinia@4.0.2
+  - vue-router@5.2.0
+  - less@4.8.0
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd

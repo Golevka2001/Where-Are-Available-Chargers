@@ -1,0 +1,20 @@
+# 是否使用 mock 数据
+# true - 使用 mock 数据，不需要填写以下接口
+# false - 从以下接口获取数据
+# 生产环境请确保此值为 false
+USE_MOCK=true
+
+# 中网充供应商接口（湖、牌、桥 3 个校区共用）
+ZWC_API_URL=https://zwc-backend.chargers.dpdns.org/getProductByDndx.action
+
+# 如果在 Cloudflare 配置了对 ZWC_API_URL 的代理和访问控制，则需要填写以下 CF Access 的 Client ID 和 Client Secret
+# CF_ACCESS_CLIENT_ID=<your_cf_access_client_id>
+# CF_ACCESS_CLIENT_SECRET=<your_cf_access_client_secret>
+
+# 和风天气接口
+# https://console.qweather.com
+WEATHER_API_URL=https://<your_qweather_domain>.re.qweatherapi.com/v7/weather/24h
+WEATHER_API_KEY=<your_qweather_api_key>
+
+# 天气同步间隔（分钟）
+WEATHER_SYNC_INTERVAL=30
