@@ -1,0 +1,496 @@
+openapi: 3.2.0
+info:
+  title: Where Are Available Chargers API
+  description: |
+    东南大学充电桩实时状态查询服务。提供三个校区（九龙湖、四牌楼、丁家桥）的充电桩实时状态、天气和历史记录查询。
+
+    ## CORS
+
+    所有 API 端点均支持跨域请求（`Access-Control-Allow-Origin: *`），
+    并响应 `OPTIONS` 预检请求（返回 `204`）。
+
+    ## 校区 ID
+    | ID | 校区 |
+    |---|---|
+    | `jiulonghu` | 九龙湖 |
+    | `sipailou` | 四牌楼 |
+    | `dingjiaqiao` | 丁家桥 |
+
+    ## 插座状态
+    | 值 | 含义 |
+    |---|---|
+    | `0` | 占用（使用中） |
+    | `1` | 空闲 |
+    | `2` | 故障 |
+
+    ## 内容协商
+
+    首页（`/`）支持 `Accept: text/markdown` 请求头，
+    返回 Markdown 格式的站点摘要（包含所有 API 端点列表和页面链接）。
+
+    ## Agent Discovery
+
+    - `Link` 响应头（RFC 8288）指向 API Catalog、Agent Skills、OAuth Protected Resource、MCP Server Card
+    - `/.well-known/api-catalog` — RFC 9727 API 目录
+    - `/.well-known/agent-skills/index.json` — Agent Skills 发现索引
+    - `/.well-known/oauth-authorization-server` — OAuth 2.0 Discovery (RFC 8414)
+    - `/.well-known/oauth-protected-resource` — Protected Resource Metadata (RFC 9728)
+    - `/.well-known/mcp/server-card.json` — MCP Server Card (SEP-1649)
+    - WebMCP support via `navigator.modelContext.provideContext()`
+  version: 5.2.0
+  contact:
+    name: Gol3vka & Csimide
+
+servers:
+  - url: http://localhost:8787
+    description: 本地开发
+  - url: https://chargers.dpdns.org
+    description: 生产环境
+
+paths:
+  /api/campuses:
+    get:
+      summary: 获取校区列表
+      operationId: getCampuses
+      tags: [Campus]
+      responses:
+        '200':
+          description: 校区列表
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  campuses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CampusListItem'
+              example:
+                code: 200
+                campuses:
+                  - id: jiulonghu
+                    name: 九龙湖
+                  - id: sipailou
+                    name: 四牌楼
+                  - id: dingjiaqiao
+                    name: 丁家桥
+
+  /api/get_status/{campusId}:
+    get:
+      summary: 查询校区充电桩实时状态
+      operationId: getStatus
+      tags: [Charger]
+      parameters:
+        - $ref: '#/components/parameters/CampusId'
+      responses:
+        '200':
+          description: 充电桩状态
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '400':
+          description: 无效的校区 ID
+        '404':
+          description: 该校区暂无数据
+
+  /api/weather/{campusId}:
+    get:
+      summary: 查询校区天气信息
+      operationId: getWeather
+      tags: [Weather]
+      parameters:
+        - $ref: '#/components/parameters/CampusId'
+      responses:
+        '200':
+          description: 天气信息
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+        '400':
+          description: 无效的校区 ID
+        '404':
+          description: 该校区暂无数据
+
+  /.well-known/api-catalog:
+    get:
+      summary: API 目录（RFC 9727）
+      operationId: getApiCatalog
+      tags: [Discovery]
+      description: |
+        返回 RFC 9727 格式的 Linkset，列出所有可用 API 端点。
+        可通过首页 `Link` 响应头中的 `rel="api-catalog"` 发现。
+      responses:
+        '200':
+          description: API 目录
+          content:
+            application/linkset+json:
+              schema:
+                type: object
+                properties:
+                  linkset:
+                    type: array
+                    items:
+                      type: object
+
+  /.well-known/agent-skills/index.json:
+    get:
+      summary: Agent Skills 发现索引
+      operationId: getAgentSkills
+      tags: [Discovery]
+      description: |
+        返回 Agent Skills 发现文档（v0.2.0），列出所有可用的技能描述文件。
+        可通过首页 `Link` 响应头中的 `rel="describedby"` 发现。
+      responses:
+        '200':
+          description: Agent Skills 索引
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  $schema:
+                    type: string
+                  skills:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        type:
+                          type: string
+                        description:
+                          type: string
+                        url:
+                          type: string
+                        digest:
+                          type: string
+                  links:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        rel:
+                          type: string
+                        href:
+                          type: string
+
+  /.well-known/openid-configuration:
+    get:
+      summary: OAuth 2.0 / OIDC Discovery Metadata
+      operationId: getOAuthDiscovery
+      tags: [Discovery]
+      description: |
+        返回 OAuth 2.0 Authorization Server Metadata (RFC 8414) 和 OpenID Connect Discovery 文档。
+        可通过首页 `Link` 响应头中的 `rel="oauth-authorization-server"` 发现。
+      responses:
+        '200':
+          description: OAuth Discovery Metadata
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /.well-known/oauth-authorization-server:
+    get:
+      summary: OAuth 2.0 Authorization Server Metadata
+      operationId: getOAuthAuthorizationServer
+      tags: [Discovery]
+      description: |
+        返回 OAuth 2.0 Authorization Server Metadata (RFC 8414)。
+        可通过首页 `Link` 响应头中的 `rel="oauth-authorization-server"` 发现。
+      responses:
+        '200':
+          description: OAuth Authorization Server Metadata
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /.well-known/oauth-protected-resource:
+    get:
+      summary: OAuth 2.0 Protected Resource Metadata
+      operationId: getOAuthProtectedResource
+      tags: [Discovery]
+      description: |
+        返回 OAuth 2.0 Protected Resource Metadata (RFC 9728)。
+        可通过首页 `Link` 响应头中的 `rel="oauth-protected-resource"` 发现。
+      responses:
+        '200':
+          description: Protected Resource Metadata
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /.well-known/mcp/server-card.json:
+    get:
+      summary: MCP Server Card
+      operationId: getMcpServerCard
+      tags: [Discovery]
+      description: |
+        返回 MCP Server Card (SEP-1649)，列出可用的 MCP 工具。
+        可通过首页 `Link` 响应头中的 `rel="mcp-server-card"` 发现。
+      responses:
+        '200':
+          description: MCP Server Card
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/history/{campusId}:
+    get:
+      summary: 查询校区充电桩历史记录
+      operationId: getHistory
+      tags: [History]
+      description: |
+        支持两种查询方式（二选一）：
+        - 预设范围：使用 `range` 参数
+        - 自定义时间段：使用 `start` 和 `end` 参数（Unix 毫秒时间戳）
+
+        最大查询范围为 7 天。若自定义时间段超过 7 天，开始时间会被自动截断。
+        预设范围对应的秒数：`1h` = 3600s，`6h` = 21600s，`24h` = 86400s，`7d` = 604800s。
+      parameters:
+        - $ref: '#/components/parameters/CampusId'
+        - name: range
+          in: query
+          description: 预设时间范围（与 start/end 互斥）
+          schema:
+            type: string
+            enum: ['1h', '6h', '24h', '7d']
+            default: '24h'
+        - name: start
+          in: query
+          description: 自定义开始时间（Unix 毫秒时间戳，需与 end 同时使用）
+          schema:
+            type: integer
+        - name: end
+          in: query
+          description: 自定义结束时间（Unix 毫秒时间戳，需与 start 同时使用）
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 历史记录
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryResponse'
+        '400':
+          description: 无效的参数
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /classic:
+    get:
+      summary: 经典视图（SSR HTML）
+      operationId: getClassical
+      tags: [View]
+      description: 返回渲染好的 HTML 页面，展示所有校区充电桩状态
+      responses:
+        '200':
+          description: HTML 页面
+          content:
+            text/html:
+              schema:
+                type: string
+
+components:
+  parameters:
+    CampusId:
+      name: campusId
+      in: path
+      required: true
+      description: 校区 ID
+      schema:
+        type: string
+        enum: [jiulonghu, sipailou, dingjiaqiao]
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: Invalid start/end parameters
+
+    CampusListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          enum: [jiulonghu, sipailou, dingjiaqiao]
+        name:
+          type: string
+          example: 九龙湖
+
+    StatusResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        last_update_time:
+          type: integer
+          description: 最后更新时间（Unix 毫秒时间戳）
+          example: 1720000000000
+        fault_info:
+          type: string
+          nullable: true
+          description: 全局故障信息（如有）
+        status:
+          $ref: '#/components/schemas/StatusDetail'
+
+    StatusDetail:
+      type: object
+      properties:
+        total_count:
+          type: integer
+          description: 总充电桩数
+          example: 120
+        available_count:
+          type: integer
+          description: 空闲充电桩数
+          example: 45
+        stations:
+          type: array
+          items:
+            $ref: '#/components/schemas/StationStatus'
+
+    StationStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 教学楼充电站
+        description:
+          type: string
+          nullable: true
+        total_count:
+          type: integer
+        available_count:
+          type: integer
+        lat:
+          type: number
+          format: double
+          nullable: true
+        lng:
+          type: number
+          format: double
+          nullable: true
+        addr:
+          type: string
+          nullable: true
+        chargers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargerStatus'
+
+    ChargerStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          example: '#1'
+        description:
+          type: string
+          nullable: true
+        fault_info:
+          type: string
+          nullable: true
+        total_count:
+          type: integer
+          description: 插座总数（固定为 10）
+          example: 10
+        available_count:
+          type: integer
+          description: 空闲插座数
+          example: 3
+        sockets:
+          type: array
+          description: 插座状态数组（0=占用, 1=空闲, 2=故障）
+          items:
+            type: integer
+            enum: [0, 1, 2]
+
+    HistoryResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        campus_id:
+          type: string
+          example: jiulonghu
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: integer
+                description: 快照时间（Unix 毫秒时间戳）
+              total_count:
+                type: integer
+              available_count:
+                type: integer
+              fault_count:
+                type: integer
+
+    WeatherResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        timestamp:
+          type: integer
+          description: 获取时间（Unix 秒时间戳）
+        hourly:
+          type: object
+          properties:
+            description:
+              type: string
+              description: 未来 6 小时天气概述
+              example: 未来6小时多云转晴
+            skycon:
+              type: array
+              items:
+                type: object
+                properties:
+                  datetime:
+                    type: string
+                    format: date-time
+                  value:
+                    type: string
+                    description: 天气图标值
+                    enum:
+                      - CLEAR_DAY
+                      - CLEAR_NIGHT
+                      - PARTLY_CLOUDY_DAY
+                      - PARTLY_CLOUDY_NIGHT
+                      - CLOUDY
+                      - LIGHT_RAIN
+                      - MODERATE_RAIN
+                      - HEAVY_RAIN
+                      - STORM_RAIN
+                      - LIGHT_SNOW
+                      - MODERATE_SNOW
+                      - HEAVY_SNOW
+                      - FOG
+                      - LIGHT_HAZE
+                      - MODERATE_HAZE
+                      - HEAVY_HAZE
+                      - DUST
+                      - WIND

@@ -1,0 +1,85 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "where-are-available-chargers-worker",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-07-10",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"cache": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"placement": {
+		"mode": "smart"
+	},
+	"assets": {
+		"directory": "../web/dist",
+		"binding": "ASSETS",
+		"not_found_handling": "single-page-application",
+		"run_worker_first": [
+			"/api/*",
+			"/classic",
+			"/classic/*",
+			"/.well-known/*"
+		]
+	},
+	"vars": {
+		"MAIN_SITE_URL": "/",
+		"ZWC_API_URL": "https://zwc-backend.chargers.dpdns.org/getProductByDndx.action"
+	},
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1,
+		"logs": {
+			"enabled": true,
+			"head_sampling_rate": 1,
+			"persist": true,
+			"invocation_logs": true
+		},
+		"traces": {
+			"enabled": true,
+			"persist": true,
+			"head_sampling_rate": 1
+		}
+	},
+	"triggers": {
+		"crons": [
+			"*/10 * * * *"
+		]
+	},
+	"queues": {
+		"producers": [
+			{
+				"queue": "seu-chargers-queue",
+				"binding": "seu_chargers_queue"
+			}
+		],
+		"consumers": [
+			{
+				"queue": "seu-chargers-queue"
+			}
+		]
+	},
+	"kv_namespaces": [
+		{
+			"binding": "seu_chargers_kv",
+			"id": "938fca0a0b404dbe8b45b51b461ade83"
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "seu_chargers_d1",
+			"database_name": "seu-chargers-d1",
+			"database_id": "7db9578f-9af8-4d0c-8483-76b2d01e3e04"
+		}
+	],
+	"routes": [
+		{
+			"pattern": "chargers.dpdns.org",
+			"custom_domain": true,
+			"enabled": true,
+			"previews_enabled": false
+		}
+	]
+}
